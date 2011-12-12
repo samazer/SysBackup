@@ -1,0 +1,539 @@
+#!/usr/bin/php
+<?php /* -*- mode: php; mode: mmm; coding: utf-8-unix; -*- */
+/**
+ *
+ * Remote Exec
+ *
+ * <p>Utility to execute simple file system operations on a remote
+ * server using the localexec script through ssh.
+ *
+ * <p>This is really the test script for the sys-remote-filesys.inc
+ *    module and remote_filesystem_c class.
+ *
+ */
+
+
+
+include "lib/general-tee.inc";
+include "lib/sys-remote-filesys.inc";
+
+
+$binary  = "/usr/bin/ssh";
+$options = "";
+
+
+class remote_exec_c extends teelog_c
+{
+   var $progname;
+   var $command;
+   var $params;
+
+   var $remsys;
+
+
+   function params_show()
+   {
+      $cmdl = "";
+      foreach ( $this->params as $p )
+         $cmdl = $cmdl
+               . ($cmdl > "" ? ", " : "")
+               . $p
+               ;
+
+      $this->tee( TEELOG_TXTWARNING . "received {$this->command}( {$cmdl} )" );
+   }
+
+
+   function params_showneeded( $plist )
+   {
+      $list = "";
+      foreach ( $plist as $p )
+         $list = $list
+               . ($list > "" ? ", " : "")
+               . $p
+               ;
+
+      $this->tee( TEELOG_TXTWARNING . "was expecting {$this->command}( {$list} )" );
+   }
+
+
+
+   function params_required( $plist )
+   {
+      if ( count( $this->params ) == count( $plist ) )
+         return false;
+
+      $this->params_showneeded( $plist );
+      $this->params_show();
+      $this->fatal( "invalid parameter count for the '{$this->command}' command" );
+   }
+
+
+
+   function fatal_file_error()
+   {
+      $this->fatal( $this->remsys->last_error() );
+   }
+
+
+
+   function result( $r )
+   {
+      if ( is_bool($r) )
+      {
+         $this->tee( LOCALEXEC_TXTRESULT . ($r ? "true" : "false") );
+         return false;
+      }
+
+      $this->tee( LOCALEXEC_TXTRESULT . $r );
+      return false;
+   }
+
+
+
+   function exec()
+   {
+      switch ( $this->command )
+      {
+         case "disk_free_space":
+            $this->params_required( array( "path" ) );
+
+            if ( ($r = $this->remsys->rdisk_free_space( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+         case "disk_total_space":
+            $this->params_required( array( "path" ) );
+
+            if ( ($r = $this->remsys->rdisk_total_space( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+
+         case "realpath":
+            $this->params_required( array( "path" ) );
+
+            if ( ($r = $this->remsys->rrealpath( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+         case "readlink":
+            $this->params_required( array( "path" ) );
+
+            if ( ($r = $this->remsys->rreadlink( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+
+
+         case "filesize":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = $this->remsys->rfilesize( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+         case "filetype":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = $this->remsys->rfiletype( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+         case "fileatime":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = $this->remsys->rfileatime( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+         case "filectime":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = $this->remsys->rfilectime( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+         case "filemtime":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = $this->remsys->rfilemtime( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+         case "fileperms":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = $this->remsys->rfileperms( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+         case "linkinfo":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = $this->remsys->rlinkinfo( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+
+
+         case "filegroup":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = $this->remsys->rfilegroup( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+         case "fileowner":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = $this->remsys->rfileowner( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+
+
+         case "readfile":
+         case "file_get_contents":
+         case "file":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = $this->remsys->rreadfile( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->tee( trim($r) );
+            break;
+
+
+
+         case "file_exists":
+            $this->params_required( array( "path/filename" ) );
+            $this->result( $this->remsys->rfile_exists( $this->params[0] ));
+            break;
+
+         case "is_dir":
+            $this->params_required( array( "path/filename" ) );
+            $this->result( $this->remsys->ris_dir( $this->params[0] ));
+            break;
+
+         case "is_file":
+            $this->params_required( array( "path/filename" ) );
+            $this->result( $this->remsys->ris_file( $this->params[0] ));
+            break;
+
+         case "is_link":
+            $this->params_required( array( "path/filename" ) );
+            $this->result( $this->remsys->ris_link( $this->params[0] ));
+            break;
+
+         case "is_readable":
+            $this->params_required( array( "path/filename" ) );
+            $this->result( $this->remsys->ris_readable( $this->params[0] ));
+            break;
+
+         case "is_writable":
+         case "is_writeable":
+            $this->params_required( array( "path/filename" ) );
+            $this->result( $this->remsys->ris_writable( $this->params[0] ));
+            break;
+
+         case "is_executable":
+            $this->params_required( array( "path/filename" ) );
+            $this->result( $this->remsys->ris_executable( $this->params[0] ));
+            break;
+
+
+
+         case "chgrp":
+            $this->params_required( array( "filename", "group" ) );
+            $this->result( $this->remsys->rchgrp( $this->params[0], $this->params[1] ));
+            break;
+
+         case "chmod":
+            $this->params_required( array( "filename", "mode" ) );
+            $this->result( $this->remsys->rchmod( $this->params[0], $this->params[1] ));
+            break;
+
+         case "chown":
+            $this->params_required( array( "filename", "user" ) );
+            $this->result( $this->remsys->rchown( $this->params[0], $this->params[1] ));
+            break;
+
+         case "lchgrp":
+            $this->params_required( array( "filename", "group" ) );
+            $this->result( $this->remsys->rlchgrp( $this->params[0], $this->params[1] ));
+            break;
+
+         case "lchown":
+            $this->params_required( array( "filename", "user" ) );
+            $this->result( $this->remsys->rlchown( $this->params[0], $this->params[1] ));
+            break;
+
+
+
+         case "glob":
+            $this->params_required( array( "cwd", "pattern", "flags" ) );
+
+            if ( ($r = $this->remsys->rglob( $this->params[0], 
+                                             $this->params[1], 
+                                             $this->params[2] )) === false )
+               $this->fatal_file_error();
+
+            foreach ( $r as $v )
+               $this->tee( $v );
+
+            break;
+
+
+
+         case "stat":
+         case "lstat":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( $this->command == "stat" )
+               $r = $this->remsys->rstat( $this->params[0] );
+            else $r = $this->remsys->rlstat( $this->params[0] );
+
+            if ( $r === false )
+               $this->fatal_file_error();
+
+            foreach ( $r as $i => $v )
+               if ( is_string( $i ) )
+                  $this->tee( "{$i}: {$v}" );
+            break;
+
+
+
+         case "copy":
+            $this->params_required( array( "source", "dest" ) );
+            if ( ($r = $this->remsys->rcopy( $this->params[0], $this->params[1] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( true );
+            break;
+
+         case "rename":
+            $this->params_required( array( "source", "dest" ) );
+            if ( ($r = $this->remsys->rrename( $this->params[0], $this->params[1] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( true );
+            break;
+
+
+
+         case "link":
+            $this->params_required( array( "target", "link" ) );
+            if ( ($r = $this->remsys->rlink( $this->params[0], $this->params[1] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( true );
+            break;
+
+         case "symlink":
+            $this->params_required( array( "target", "link" ) );
+            if ( ($r = $this->remsys->rsymlink( $this->params[0], $this->params[1] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( true );
+            break;
+
+
+
+         case "mkdir":
+            $this->params_required( array( "path" ) );
+            if ( ($r = $this->remsys->rmkdir( $this->params[0], 0777, true )) === false )
+               $this->fatal_file_error();
+
+            $this->result( true );
+            break;
+
+         case "rmdir":
+            $this->params_required( array( "path" ) );
+            if ( ($r = $this->remsys->rrmdir( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( true );
+            break;
+
+         case "unlink":
+            $this->params_required( array( "path/filename" ) );
+            if ( ($r = $this->remsys->runlink( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( true );
+            break;
+
+
+         default:
+            $this->fatal( "unknown command: {$this->command}" );
+      }
+   }
+
+
+
+   function help()
+   {
+      $help_info = array( "disk_free_space"  => array( "path" ),
+                          "disk_total_space" => array( "path" ),
+                          "realpath"         => array( "path" ),
+                          "readlink"         => array( "path" ),
+                          "filesize"         => array( "path/filename" ),
+                          "filetype"         => array( "path/filename" ),
+                          "fileatime"        => array( "path/filename" ),
+                          "filectime"        => array( "path/filename" ),
+                          "filemtime"        => array( "path/filename" ),
+                          "fileperms"        => array( "path/filename" ),
+                          "linkinfo"         => array( "path/filename" ),
+
+                          "filegroup"        => array( "path/filename" ),
+                          "fileowner"        => array( "path/filename" ),
+
+                          "readfile"         => array( "path/filename" ),
+
+                          "file_exists"      => array( "path/filename" ),
+                          "is_dir"           => array( "path/filename" ),
+                          "is_file"          => array( "path/filename" ),
+                          "is_link"          => array( "path/filename" ),
+                          "is_readable"      => array( "path/filename" ),
+
+                          "is_writable"      => array( "path/filename" ),
+                          "is_executable"    => array( "path/filename" ),
+
+                          "chgrp"            => array( "filename", "group" ),
+                          "chmod"            => array( "filename", "mode" ),
+                          "chown"            => array( "filename", "user" ),
+                          "lchgrp"           => array( "filename", "group" ),
+                          "lchown"           => array( "filename", "user" ),
+
+                          "glob"             => array( "cwd", "pattern", "flags" ),
+
+                          "stat"             => array( "path/filename" ),
+                          "lstat"            => array( "path/filename" ),
+
+                          "copy"             => array( "source", "dest" ),
+                          "rename"           => array( "source", "dest" ),
+                          "link"             => array( "target", "link" ),
+                          "symlink"          => array( "target", "link" ),
+
+                          "mkdir"            => array( "path" ),
+                          "rmdir"            => array( "path" ),
+                          "unlink"           => array( "path/filename" ),
+                        );
+
+      $hdr = <<< EOT
+
+Remote Exec Utility. This utility will execute 
+standard PHP filesystem functions on a remote 
+server, through SSH, using a corresponding 
+localexec script. Returns values are written 
+to stdout as text.
+
+Usage: remexec <key> <user@server> <command> <param> [...<param>]
+
+Where each <command> is essentially a call to the 
+equivalent PHP function. See the standard PHP docs
+at http://www.php.net/manual/en/ref.filesystem.php
+for detailed function descriptions.
+
+Following is a list of <command>s and their para-
+meters. Note that some commands, such as mkdir() 
+and glob(), assume parameters that are not the 
+same as the documented PHP defaults. See the 
+source code for details.
+
+EOT;
+
+      $this->tee( $hdr );
+      foreach( $help_info as $cmd => $plist )
+      {
+         $list = "";
+         foreach ( $plist as $p )
+            $list = $list
+                  . ($list > "" ? ", " : "")
+                  . $p
+                  ;
+
+         $this->tee( "{$cmd}( {$list} )" );
+      }
+
+      $this->tee("");
+      $this->tee("");
+   }
+
+
+   function __construct( $argv )
+   {
+      global $binary, $key, $options, $user, $server;
+
+      if ( count( $argv ) == 1 )
+      {
+         $this->help();
+         exit(0);
+      }
+
+      if ( count( $argv ) >= 3 )
+      {
+         $x      = explode( "@", $argv[2] );
+         $key    = $argv[1];
+         $user   = $x[0];
+         $server = $x[1];
+      }
+
+      $this->progname = $argv[0];
+      $this->command  = "";
+
+      if ( count( $argv ) >= 4 )
+      {
+         $this->command  = $argv[3];
+
+         $this->params   = array();
+         for ( $i = 4; $i < count( $argv ); $i++ )
+             $this->params[] = stripcslashes(urldecode( $argv[$i] ));
+      }
+
+      if ( ($this->command == "")
+        || ($this->command == "help")
+        || ($this->command == "-h")
+        || ($this->command == "--help") )
+      {
+         $this->help();
+         exit(0);
+      }
+
+      $this->remsys = new remote_filesystem_c( $this, $binary, $key, $options, $user, $server );
+      $this->exec();
+   }
+}
+
+
+
+$exec_obj = new remote_exec_c( $argv );
+return 0;
+

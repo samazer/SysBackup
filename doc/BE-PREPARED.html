@@ -1,0 +1,327 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+<title>BE PREPARED!!</title>
+</head>
+
+<body>
+<h1>BE PREPARED!!</h1>
+
+<blockquote><small>Note: The most up-to-date copy of this file is available in the <a
+href="http://www.azertech.net/content/category/3/49/29/"
+target="_blank"
+>SysBackup Documentation and FAQ pages</a> on the <a
+href="http://www.azertech.net/"
+target="_blank"
+>AzerTech.net</a> web site.</small></blockquote>
+
+
+
+<p><table cellpadding='0' cellspacing='0' align=right><tr><td align='right'>
+
+<img
+align='right'
+width='250px'
+src="images/multi-function-tool.jpg"
+><br />
+
+<a
+href="http://www.azertech.net/content/category/3/49/29/"
+target="_blank"
+>Docs & FAQ Pages<a><br />
+
+<a
+href="http://azer.ca/sysbackup-sfd"
+target="_blank"
+>Download SysBackup</a><br />
+
+<a
+href="http://azer.ca/sysbackup-sf"
+target="_blank"
+>SysBackup on SourceForge</a><br />
+
+<a
+href="http://azer.ca/sysbackup-gh"
+target="_blank"
+>SysBackup on GitHub</a><br />
+
+<a
+href="http://azer.ca/sysbackup-oh"
+target="_blank"
+>SysBackup on Ohloh</a><br />
+
+<a
+href="INSTALL.html"
+target="_blank"
+>Installation Instructions</a><br />
+
+<a
+href="http://www.azertech.net/content/view/70/29/"
+target="_blank"
+>Be Prepared!</a><br />
+
+
+</td></tr></table>It's always a good idea to make some kind of backup
+- having copies of data is better than not having copies - but any
+experienced system administrator will tell you that backups are not,
+by themselves, very useful. Blindly running a backup utility is not
+the same as being prepared for the day-to-day issues that your
+organization will face over a period of years.
+
+<p><img
+src="images/main-use-case.png"
+>
+
+<p>The goal of any serious backup process is to <b><i>be
+prepared</i></b>.  An experienced system administrator wants to make
+sure that any piece of equipment (server or workstation) is setup so
+that users will be able to get what they need, when they need it, for
+different types of <b><i>restore operations</i></b>. This often means
+being able to go back in time and:
+
+<ul>
+  
+  <li>find copies of files that users have accidentally changed or
+  deleted (sometimes undetected for days, weeks or months,)
+
+  <li>help users recover from long-term data value degradation caused
+  by malware and software bugs,
+  
+  <li>restore a service or services that have been damaged by software
+  upgrades,
+  
+  <li>migrate a server to a new host,
+
+  <li>comply with regulations concerning long-term storage of data
+
+  <li>and respond to regulatory agency requests for otherwise expired
+  information.
+
+  </ul>
+
+<p>Therefore it is critically important that you take the time and
+ make the effort to follow a business process to ensure that you are
+ properly responding to your mandate as a system administrator.
+
+<h2>How?</h2>
+
+<p><img src="images/image014.png" width='400px' align='right' >Start
+by implementing a business process - a set of realistic steps that you
+will be able to schedule and complete - that result in a workable
+Disaster Recovery Plan. Then test the plan to verify that following
+that plan will give you the results that you need. Put the plan into
+action and, from time to time, review the plan again. Things will
+change over time and you will adjust the plan to maintain the
+readiness that you need.
+
+<p>It's a simple cycle; all you need to do is go through it from time to time. Here's how:
+
+<ol>
+
+<li>Make a list of all the services that are being used on your server.
+
+  <p>This sounds simple enough - and it should be in many cases - but
+  it can get complicated. It can get really complicated in cases where
+  you are working with a legacy system that has been running for many
+  years. 
+
+  <p>In difficult cases you can get some help by polling your user
+   community and carefully reviewing your logs from time to time. In
+   fact this may be the only way that you can be sure that your
+   backups and test procedures actually cover all the functionality
+   that your users are using.
+
+<li>Make a list of all the different types of data requests that you
+might get from your user community and any applicable regulatory
+agencies. For example:
+
+  <blockquote>
+
+<small>
+  <p>Most governments require accounting data to be available for some
+  years after the filing of tax returns. Accounting data is worthless
+  if you don't have the software required to read the data and produce
+  any required reports. Therefore, to honor your mandate as system
+  administrator you must include in your backup procedure:
+
+  <ol>
+    
+    <li>Backups of the accounting system data. You will need, at the
+    very least, a copy of the data as it stands after the accounting
+    department has closed out each year.
+    
+    <li>Backups of the version of the accounting software that is able
+    to read and report on the data.
+    
+    <li>Backups of the operating system software that is compatible
+    with the accounting software.
+    
+    </ol>
+
+  <p>To succeed it is necessary to ensure that all of the above steps
+  are taken each year. This is separate from steps that the accounting
+  department might take (such as converting the data from past years
+  so that it is compatible with the current versions of the accounting
+  software on current systems.) Remember that the efforts of the
+  accounting staff might appear to succeed but might, in fact, not
+  succeed. The accountants would then be forced to call the system
+  administrators - often years later - for help when they get stuck.
+
+</small>
+    </blockquote>
+    
+
+<li>Based on the results of your research in steps 1 and 2 above:
+design a <b>restore</b> procedure for your server. Once you have a
+detailed plan for restoring your server after a disaster it should be
+possible to prepare the corresponding backup plan.
+
+<li>Design a complete set of test plans for your server. Make sure you
+   include tests covering:
+
+  <ol>
+    
+    <li>your ability to get all the services working again after a
+    major disaster
+    
+    <li>your ability to properly respond to all the requests that you
+    might get for data from the server.
+    
+    </ol>
+
+    <p>Remember to go back to your restore plan and update it if,
+    during the design and documentation of your test plans, you
+    discover a problem with the restore or the backup procedures.
+
+<p>At this point the documentation you have produced is effectively
+your Disaster Recovery Plan. It's very nice that you have a plan - but
+you need to know if it's going to work and, if it's not going to work,
+you need to fix it.
+
+<li>Execute the backup procedure that you designed in step#3 above. 
+
+<li>Pretend that the entire server was lost. Build a new server
+(usually a virtual server running on an isolated test network,) and
+execute your restore procedure.
+
+<li>Finally: execute the test plans against the restored
+server. Verify that you are able to restore all services and respond
+to all possible data requests using only an Operating System
+installation CD and your last backupset and your backup rotations.
+
+</ol>
+
+<p>Evaluate your results and, if anything is not entirely perfect,
+update your restore and backup procedures (and your test plans
+whenever necessary.)
+
+<p>It is important to keep repeating the above process until you are
+certain that you have successfully completed a backup-restore-test
+cycle without incident. This is the only way to be sure that the
+disaster recovery plan is valid.
+
+<p>Note that once everything is working perfectly you will get at
+least one good backup. After that the user community will start
+finding new ways to use the services so that, over time, the value of
+the backups you are generating will go down. At some point things will
+have changed so much that the backups will seem useless!  To avoid any
+problems it is necessary to execute the above procedure every few
+months or whenever major changes are made to the server.
+
+<p>Of course disaster planning and recovery has different meanings in
+different contexts. As a system administrator you might want to add
+your hardware maintenance schedule and other issues to the
+documentation that you are building. Having a more complete document,
+covering more of the issues that you face as a system administrator,
+allows you to ensure a higher degree of long-term excellence in
+everything you do.
+
+
+<h2>Day-to-day Issues</h2>
+
+<p>Most day-to-day file recovery issues can be managed by keeping a
+fine-grained set of user and daemon backups in a lengthy rotation.
+
+<ul>
+
+<li>Keep daily backups for a number of days (according to your needs,)
+
+<li>weekly backups for a number of weeks
+
+<li>and monthly backups for a number of months.
+
+</ul>
+
+<p>If the backups are granular enough you will be able to pull
+the information that your user community requests from time to time
+without too much trouble.
+
+<h3>Rotations, Granularity, Disk space & User Satisfaction</h3>
+
+<p>To save disk space many system administrators try to use
+incrementatl backups. In practice the incremental technique might save
+some disk space but it adds cost and complexity to many types of
+restore operations.
+
+<p>SysBackup tries to avoid these issues through the use of hardlinks
+between identical files. Hardlinks can save a great deal of disk space
+in cases where the contents of a folder are rarely modified. The
+savings can be especially great in cases where there are a large
+number of backupset rotations being stored over long periods of
+time.
+
+<p>On the other hand hardlinks are largely useless in cases where
+the backupsets are not granular.
+
+<p>Another problem with backupsets that contain lots of huge tarballs
+(ie: are not granular) is that they tend to be expensive to work
+with. This is not only because it takes so long to find small files in
+larger tarballs - it's also because larger tarballs tend to contain
+files belonging to more than one user, service or daemon. They can be
+difficult to distribute to users in response to help requests because
+they might violate some privacy or other restriction. Therefore, when
+tarballs are not granular enough, an administrator might fail to find
+the requested files or might even just outright refuse to look for
+them.
+
+<p>Granular backupsets do not have these problems. Not only is it
+easier to hardlink more tarballs between backupsets but the smaller
+tarballs tend to be much easier to distribute to users. This is
+because they tend to contain only files associated with a given user
+or service - so they often have few, if any, privacy or other
+restrictions associated with them. The person who owns the data within
+them can almost always just ask for a copy without causing any
+difficulty for the administrator who must approve the request. In
+these cases there is one other added bonus: The administrator need not
+look for any files within the tarball. It is easier to just give the
+entire tarball to the user and let the user do the looking! This can
+save a huge amount of time while giving the user community a great
+deal of confidence in their I.T. infrastructure.
+
+<hr>
+<address><table align='right' cellpadding='0' cellspacing='0'><tr><td><a
+href="http://www.gnu.org/licenses/agpl.html"
+target="_blank"
+><img
+align='right'
+height='40px'
+src='gnu-license-files/agpl-v3-logo.svg'
+></a></td><td width='20px'>&nbsp;</td><td><a
+href="http://www.gnu.org/copyleft/fdl.html"
+target="_blank"
+><img
+align='right'
+height='40px'
+src='gnu-license-files/gfdl-logo.svg'
+></a></td></tr></table>Copyright &copy; 2011 by <a
+title="Click here to view Sam Azer's public About page"
+href="http://azertech.net/about">Sam Azer</a>&lt;<a
+title="Click here to email Sam Azer"
+href="mailto:sam@azertech.net?subject=SysBackup">sam@azertech.net</a>&gt;,
+All rights reserved.<br>
+</address>
+
+
+<!-- hhmts start -->Last modified: Mon Dec 12 17:03:30 EST 2011 <!-- hhmts end -->
+</body> </html>

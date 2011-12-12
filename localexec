@@ -1,0 +1,535 @@
+#!/usr/bin/php
+<?php /* -*- mode: php; mode: mmm; coding: utf-8-unix; -*- */
+/**
+ *
+ * LocalExec
+ *
+ * <p>Utility to execute simple operations on behalf of remote scripts and
+ * return a text-based response code.
+ *
+ * <p>System maintenance scripts that operate from a remote server
+ * often use SSH to perform operations on remote file systems that
+ * can't be mounted. In such cases it is often necessary to get
+ * detailed information about the contents of the remote file
+ * system. This utility performs the desired operations and returns
+ * the results in a format that can be scanned.
+ *
+ */
+
+
+
+define( "LOCALEXEC_TXTRESULT", "Result: " );
+
+
+require_once "lib/general-tee.inc";
+
+
+
+class localexec_c extends teelog_c
+{
+   var $progname;
+   var $command;
+   var $params;
+
+
+   function params_show()
+   {
+      $cmdl = "";
+      foreach ( $this->params as $p )
+         $cmdl = $cmdl
+               . ($cmdl > "" ? ", " : "")
+               . $p
+               ;
+
+      $this->tee( TEELOG_TXTWARNING . "received {$this->command}( {$cmdl} )" );
+   }
+
+
+   function params_showneeded( $plist )
+   {
+      $list = "";
+      foreach ( $plist as $p )
+         $list = $list
+               . ($list > "" ? ", " : "")
+               . $p
+               ;
+
+      $this->tee( TEELOG_TXTWARNING . "was expecting {$this->command}( {$list} )" );
+   }
+
+
+
+   function params_required( $plist )
+   {
+      if ( count( $this->params ) == count( $plist ) )
+         return false;
+
+      $this->params_showneeded( $plist );
+      $this->params_show();
+      $this->fatal( "invalid parameter count for the '{$this->command}' command" );
+   }
+
+
+
+   function fatal_file_error()
+   {
+      $r = error_get_last();
+      $this->fatal( $r['message'] );
+   }
+
+
+
+   function result( $r )
+   {
+      if ( is_bool($r) )
+      {
+         $this->tee( LOCALEXEC_TXTRESULT . ($r ? "true" : "false") );
+         return false;
+      }
+
+      $this->tee( LOCALEXEC_TXTRESULT . urlencode( $r ) );
+      return false;
+   }
+
+
+
+   function exec()
+   {
+      switch ( $this->command )
+      {
+         case "disk_free_space":
+            $this->params_required( array( "path" ) );
+
+            if ( ($r = @disk_free_space( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+         case "disk_total_space":
+            $this->params_required( array( "path" ) );
+
+            if ( ($r = @disk_total_space( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+
+         case "realpath":
+            $this->params_required( array( "path" ) );
+
+            if ( ($r = @realpath( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+         case "readlink":
+            $this->params_required( array( "path" ) );
+
+            if ( ($r = @readlink( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+
+
+         case "filesize":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = @filesize( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+         case "filetype":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = @filetype( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+         case "fileatime":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = @fileatime( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+         case "filectime":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = @filectime( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+         case "filemtime":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = @filemtime( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+         case "fileperms":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = @fileperms( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+         case "linkinfo":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = @linkinfo( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+
+
+         case "filegroup":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = @filegroup( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            if ( function_exists( "posix_getgrgid" ) )
+            {
+               $i = posix_getgrgid( $r );
+               $this->result( $i["name"] );
+	    } 
+              else $this->result( $r );
+
+            break;
+
+         case "fileowner":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = @fileowner( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            if ( function_exists( "posix_getpwuid" ) )
+               $this->result( posix_getpwuid( $r ) );
+            else $this->result( $r );
+
+            break;
+
+
+
+         case "readfile":
+         case "file_get_contents":
+         case "file":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = @is_readable( $this->params[0] )) === false )
+               $this->fatal( "can't read file" );
+
+            $this->tee( LOCALEXEC_TXTRESULT . filesize( $this->params[0] ) );
+            readfile( $this->params[0] );
+            break;
+
+
+
+         case "file_exists":
+            $this->params_required( array( "path/filename" ) );
+            $this->result( @file_exists( $this->params[0] ));
+            break;
+
+         case "is_dir":
+            $this->params_required( array( "path/filename" ) );
+            $this->result( @is_dir( $this->params[0] ));
+            break;
+
+         case "is_file":
+            $this->params_required( array( "path/filename" ) );
+            $this->result( @is_file( $this->params[0] ));
+            break;
+
+         case "is_link":
+            $this->params_required( array( "path/filename" ) );
+            $this->result( @is_link( $this->params[0] ));
+            break;
+
+         case "is_readable":
+            $this->params_required( array( "path/filename" ) );
+            $this->result( @is_readable( $this->params[0] ));
+            break;
+
+         case "is_writable":
+         case "is_writeable":
+            $this->params_required( array( "path/filename" ) );
+            $this->result( @is_writable( $this->params[0] ));
+            break;
+
+         case "is_executable":
+            $this->params_required( array( "path/filename" ) );
+            $this->result( @is_executable( $this->params[0] ));
+            break;
+
+
+
+         case "chgrp":
+            $this->params_required( array( "filename", "group" ) );
+            $this->result( @chgrp( $this->params[0], $this->params[1] ));
+            break;
+
+         case "chmod":
+            $this->params_required( array( "filename", "mode" ) );
+            $this->result( @chmod( $this->params[0], $this->params[1] ));
+            break;
+
+         case "chown":
+            $this->params_required( array( "filename", "user" ) );
+            $this->result( @chown( $this->params[0], $this->params[1] ));
+            break;
+
+         case "lchgrp":
+            $this->params_required( array( "filename", "group" ) );
+            $this->result( @lchgrp( $this->params[0], $this->params[1] ));
+            break;
+
+         case "lchown":
+            $this->params_required( array( "filename", "user" ) );
+            $this->result( @lchown( $this->params[0], $this->params[1] ));
+            break;
+
+
+
+         case "glob":
+            $this->params_required( array( "cwd", "pattern", "flags" ) );
+
+            if ( ($r = @chdir( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            if ( ($r = @glob( $this->params[1], $this->params[2] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( count( $r ) );
+            foreach ( $r as $v )
+               $this->tee( $v );
+
+            break;
+
+
+
+         case "stat":
+         case "lstat":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( $this->command === "stat" )
+               $r = @stat( $this->params[0] );
+            else $r = @lstat( $this->params[0] );
+
+            if ( $r === false )
+               $this->fatal_file_error();
+
+            $this->result( count( $r ) );
+            foreach ( $r as $k => $v )
+               $this->tee( "{$k}: " . $v );
+
+            break;
+
+
+
+         case "copy":
+            $this->params_required( array( "source", "dest" ) );
+            if ( ($r = @copy( $this->params[0], $this->params[1] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( true );
+            break;
+
+         case "rename":
+            $this->params_required( array( "source", "dest" ) );
+            if ( ($r = @rename( $this->params[0], $this->params[1] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( true );
+            break;
+
+
+
+         case "link":
+            $this->params_required( array( "target", "link" ) );
+            if ( ($r = @link( $this->params[0], $this->params[1] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( true );
+            break;
+
+         case "symlink":
+            $this->params_required( array( "target", "link" ) );
+            if ( ($r = @symlink( $this->params[0], $this->params[1] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( true );
+            break;
+
+
+
+         case "mkdir":
+            $this->params_required( array( "path" ) );
+            if ( ($r = @mkdir( $this->params[0], 0777, true )) === false )
+               $this->fatal_file_error();
+
+            $this->result( true );
+            break;
+
+         case "rmdir":
+            $this->params_required( array( "path" ) );
+            if ( ($r = @rmdir( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( true );
+            break;
+
+         case "unlink":
+            $this->params_required( array( "path/filename" ) );
+            if ( ($r = @unlink( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( true );
+            break;
+
+
+         default:
+            $this->fatal( "unknown command: {$this->command}" );
+      }
+   }
+
+
+
+   function help()
+   {
+      $help_info = array( "disk_free_space"  => array( "path" ),
+                          "disk_total_space" => array( "path" ),
+                          "realpath"         => array( "path" ),
+                          "readlink"         => array( "path" ),
+                          "filesize"         => array( "path/filename" ),
+                          "filetype"         => array( "path/filename" ),
+                          "fileatime"        => array( "path/filename" ),
+                          "filectime"        => array( "path/filename" ),
+                          "filemtime"        => array( "path/filename" ),
+                          "fileperms"        => array( "path/filename" ),
+                          "linkinfo"         => array( "path/filename" ),
+
+                          "filegroup"        => array( "path/filename" ),
+                          "fileowner"        => array( "path/filename" ),
+
+                          "readfile"         => array( "path/filename" ),
+
+                          "file_exists"      => array( "path/filename" ),
+                          "is_dir"           => array( "path/filename" ),
+                          "is_file"          => array( "path/filename" ),
+                          "is_link"          => array( "path/filename" ),
+                          "is_readable"      => array( "path/filename" ),
+
+                          "is_writable"      => array( "path/filename" ),
+                          "is_executable"    => array( "path/filename" ),
+
+                          "chgrp"            => array( "filename", "group" ),
+                          "chmod"            => array( "filename", "mode" ),
+                          "chown"            => array( "filename", "user" ),
+                          "lchgrp"           => array( "filename", "group" ),
+                          "lchown"           => array( "filename", "user" ),
+
+                          "glob"             => array( "cwd", "pattern", "flags" ),
+
+                          "stat"             => array( "path/filename" ),
+                          "lstat"            => array( "path/filename" ),
+
+                          "copy"             => array( "source", "dest" ),
+                          "rename"           => array( "source", "dest" ),
+                          "link"             => array( "target", "link" ),
+                          "symlink"          => array( "target", "link" ),
+
+                          "mkdir"            => array( "path" ),
+                          "rmdir"            => array( "path" ),
+                          "unlink"           => array( "path/filename" ),
+                        );
+
+      $hdr = <<< EOT
+
+LocalExec Utility. This utility will execute 
+standard PHP filesystem functions and return 
+output that can be scanned by the calling 
+process.
+
+Usage: localexec <command> <param> [...<param>]
+
+Where each <command> is essentially a call to the 
+equivalent PHP function. See the standard PHP docs
+at http://www.php.net/manual/en/ref.filesystem.php
+for detailed function descriptions.
+
+Following is a list of <command>s and their para-
+meters. Note that some commands, such as mkdir() 
+and glob(), assume parameters that are not the 
+same as the documented PHP defaults. See the 
+source code for details.
+
+EOT;
+
+      $this->tee( $hdr );
+      foreach( $help_info as $cmd => $plist )
+      {
+         $list = "";
+         foreach ( $plist as $p )
+            $list = $list
+                  . ($list > "" ? ", " : "")
+                  . $p
+                  ;
+
+         $this->tee( "{$cmd}( {$list} )" );
+      }
+
+      $this->tee("");
+      $this->tee("");
+   }
+
+
+   function __construct( $argv )
+   {
+      if ( count( $argv ) == 1 )
+      {
+         $this->help();
+         exit(0);
+      }
+
+      $this->progname = $argv[0];
+      $this->command  = $argv[1];
+      $this->params   = array();
+      for ( $i = 2; $i < count( $argv ); $i++ )
+          $this->params[] = stripcslashes(urldecode( $argv[$i] ));
+
+      if ( ($this->command == "help")
+        || ($this->command == "-h")
+        || ($this->command == "--help") )
+      {
+         $this->help();
+         exit(0);
+      }
+
+      $this->exec();
+   }
+}
+
+
+
+$exec_obj = new localexec_c( $argv );
+return 0;
+

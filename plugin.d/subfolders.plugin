@@ -1,0 +1,252 @@
+<?php /* -*- mode: php; mode: mmm; coding: utf-8-unix; -*- */
+/**
+ *
+ * Subdirectory Plugin
+ *
+ * This plugin provides the ability to recurse into a folder and
+ * produce compressed copies of the files found and tarballs of the
+ * folders found at an arbitrary level.
+ *
+ * This plugin is requires a few parameters to function properly;
+ * additional plugins extend it to provide simplified interfaces for
+ * common cases.
+ *
+ * <p><b>Copyright</b>
+ *
+ * <p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.
+ *
+ * <p>This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * <p>This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * <p>You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * @author Sam Azer <sam@azertech.net>
+ * @version 0.01 (alpha)
+ * @package server-maint
+ * @subpackage lib-sys
+ * @license http://www.gnu.org/licenses/gpl.html GPL
+ * @copyright 2011 by Sam Azer, All rights reserved
+ * @link http://www.azertech.net/
+ * @link http://www.samazer.net/about
+ *
+ */
+
+
+//require_once "lib/general-plugins.inc";
+
+
+
+class subfolders_plugin_c extends plugin_base_c
+{
+   var $job_info;
+
+   function __construct( &$application_object )
+   {
+      parent::__construct( $application_object );
+
+      $this->plugin_name        = "subfolders";
+      $this->plugin_title       = "Subfolder scan and backup plugin";
+      $this->plugin_version     = "0.01a";
+      $this->plugin_description = "Compresses files and folders at arbitrary depths within a folder tree";
+
+      $this->plugin_enabled     = false;
+      $this->plugin_rootreqd    = false;  // true if root permissions required
+
+      $this->plugin_type        = "genbackup";
+      $this->plugin_unique      = false;
+
+      $this->job_info = array();
+   }
+
+
+   /**
+    *
+    * Plugin Help
+    *
+    * Emit a help message for the plugin
+    *
+    */
+   function plugin_help()  
+   {
+      $this->app->tee( "(help for this plugin is not available yet)" );
+   }
+
+
+   /**
+    *
+    * Required Options
+    *
+    * Programmers helper: returns an array of 
+    *        Option => array( Required_flag, Help Text ), ...
+    *
+    */
+   function required_options()
+   {
+      return array( "depth"   => array( true, "number of levels to recurse into in the folder tree"),
+                    "include" => array( true, "array of home directories to include"),
+                    "exclude" => array( true, "array of home directories to exclude" ),
+                    );
+   }
+
+
+   /**
+    *
+    * Plugin Load
+    *
+    * This method is called for ALL PLUGINS just before the
+    * app_after_init() method is called (ie: almost at the end of the
+    * init process.)
+    *
+    */
+   function load()
+   {
+      // nothing to do in this case
+   }
+
+
+   /**
+    *
+    * Plugin Unload
+    *
+    * This method is called for ALL PLUGINS just after the
+    * app_after_events() method is called (ie: almost at the end of
+    * app execution.)
+    *
+    */
+   function unload()
+   {
+      // nothing to do in this case
+   }
+
+
+   /**
+    *
+    * Job Prepare
+    *
+    * This method is called for EACH JOB just after the
+    * app_before_events() method is called (ie: just before any events
+    * are triggered, before any jobs start. This is a good time to
+    * emit any error messages that might be generated during job
+    * execution.)
+    *
+    */
+   function job_prepare( $configuration )
+   {
+      // nothing to do in this case
+   }
+
+
+   /**
+    *
+    * Job Cleanup
+    *
+    * This method is called for EACH JOB after all the jobs have been
+    * exec'd and before the app_after_events() method is called. This
+    * is a good time to perform any cleanup operations that might be
+    * needed before the plugin is unloaded.
+    *
+    */
+   function job_cleanup( $configuration )
+   {
+      // nothing to do in this case
+   }
+
+
+   function dir_backup( $current_dir, $exclude_list, $options = array() )
+   {
+      if ( !is_dir( $current_dir ) )
+      {
+         $this->app->warning( "'{$current_dir}' is not a folder" );
+         return true; // error
+      }
+
+      if ( !is_readable( $current_dir ) )
+      {
+         $this->app->warning( "unable to read from '{$current_dir}'" );
+         return true; // error
+      }
+
+      chdir( $current_dir );
+      $all_found = glob( "*" );
+
+      if ( !count( $all_found ) )
+      {
+         $this->app->warning( "'{$current_dir}' is empty" );
+         return true; // error
+      }
+
+      sort($all_found); // for convenience when reading reports
+
+      foreach ( $all_found as $user_dir )
+      {
+         $work_dir = dir_fn($current_dir, $user_dir);
+
+         $archive = str_replace( "/", "-", $work_dir );
+
+         if ( substr( $archive, 0, 1 ) == "-" )
+            $archive = substr( $archive, 1 );
+
+         $exclude_flag = false;
+         foreach ( $exclude_list as $ex )
+            if ( strpos( $work_dir, $ex ) !== false )
+            {
+               $exclude_flag = true;
+               break;
+            }
+
+         if ( !$exclude_flag )
+            if ( is_dir( $work_dir ) )
+            {
+               $archive = $archive . $this->app->tar->tarball_ext();
+               $this->app->vfs_tarball_folder( $archive, $work_dir, $options );
+            }
+              else 
+            {
+               $archive = $archive . $this->app->tar->compressor_ext();
+               $this->app->vfs_compress_file( $archive, $work_dir, $options );
+            }
+      }
+   }
+
+
+   /**
+    *
+    * Job Exec
+    *
+    * This method is called for EACH JOB during the event to which the
+    * job was assigned. Jobs are sorted by Job Index string and
+    * executed in sorted order.
+    *
+    */
+   function job_exec( $configuration )
+   {
+      $this->job_info = $configuration;
+
+      $problems_found = false;
+      $required_options = $this->required_options();
+      foreach ( $required_options as $opt => $info )
+         $$opt = $this->job_info[$opt];
+
+      if ( isset($this->job_info["subfolder"]) )
+         if ( $this->app->vfs_subfolder( $this->job_info["subfolder"] ) != false )
+            $this->app->fatal( "unable to select {$this->job_info['subfolder']} subfolder" );
+          
+      foreach ( $this->job_info["include"] as $home => $opts )
+         $this->dir_backup( $home, $this->job_info["exclude"] );
+
+      // no problem detected
+      return false;
+   }
+}
+
+
+$this->add_plugin( new subfolders_plugin_c( $this ) );
+

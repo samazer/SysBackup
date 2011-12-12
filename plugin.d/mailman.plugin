@@ -1,0 +1,257 @@
+<?php /* -*- mode: php; mode: mmm; coding: utf-8-unix; -*- */
+/**
+ *
+ * Mailman Plugin
+ *
+ *
+ * <p><b>Copyright</b>
+ *
+ * <p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.
+ *
+ * <p>This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * <p>This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * <p>You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * @author Sam Azer <sam@azertech.net>
+ * @version 0.01 (alpha)
+ * @package server-maint
+ * @subpackage sysbackup
+ * @license http://www.gnu.org/licenses/agpl.html AGPL
+ * @copyright 2011 by Sam Azer, All rights reserved
+ * @link http://www.azertech.net/
+ * @link http://www.samazer.net/about
+ *
+ */
+
+
+define( "MAILMAN_COMMAND_FOLDER",  "/usr/lib/mailman/bin" );
+define( "MAILMAN_COMMAND_ADMINS",  "/usr/lib/mailman/bin/list_admins --all" );
+define( "MAILMAN_COMMAND_MEMBERS", "/usr/lib/mailman/bin/list_members --fullnames --preserve %LIST%" );
+define( "MAILMAN_COMMAND_CONFIG",  "/usr/lib/mailman/bin/config_list -o - %LIST%" );
+
+
+
+
+class mailman_plugin_c extends plugin_base_c
+{
+   var $job_info;
+
+
+   function __construct( &$application_object )
+   {
+      parent::__construct( $application_object );
+
+      $this->plugin_name        = "mailman";
+      $this->plugin_title       = "Mailman Mailing List Server";
+      $this->plugin_version     = "0.01a";
+      $this->plugin_description = "This plugin produces backups of a Mailman Installation";
+
+      $this->plugin_enabled     = true;
+      $this->plugin_rootreqd    = true;  // true if root permissions required
+
+      $this->plugin_type        = "genbackup";
+      $this->plugin_unique      = false;
+
+      $this->job_info           = array();
+   }
+
+
+   /**
+    *
+    * Plugin Help
+    *
+    * Emit a help message for the plugin
+    *
+    */
+   function plugin_help()  
+   {
+      $this->app->tee( "(help for this plugin is not available yet)" );
+   }
+
+
+   /**
+    *
+    * Required Options
+    *
+    * Programmers helper: returns an array of 
+    *        Option => array( Required_flag, Help Text ), ...
+    *
+    */
+   function required_options()
+   {
+      return array();
+   }
+
+
+   /**
+    *
+    * Plugin Load
+    *
+    * This method is called for ALL PLUGINS just before the
+    * app_after_init() method is called (ie: almost at the end of the
+    * init process.)
+    *
+    */
+
+
+   function load()
+   {
+      // nothing to do in this case
+   }
+
+
+   /**
+    *
+    * Plugin Unload
+    *
+    * This method is called for ALL PLUGINS just after the
+    * app_after_events() method is called (ie: almost at the end of
+    * app execution.)
+    *
+    */
+   function unload()
+   {
+      // nothing to do in this case
+   }
+
+
+   /**
+    *
+    * Job Prepare
+    *
+    * This method is called for EACH JOB just after the
+    * app_before_events() method is called (ie: just before any events
+    * are triggered, before any jobs start. This is a good time to
+    * emit any error messages that might be generated during job
+    * execution.)
+    *
+    */
+   function job_prepare( $configuration )
+   {
+      // nothing to do in this case
+   }
+
+
+   /**
+    *
+    * Job Cleanup
+    *
+    * This method is called for EACH JOB after all the jobs have been
+    * exec'd and before the app_after_events() method is called. This
+    * is a good time to perform any cleanup operations that might be
+    * needed before the plugin is unloaded.
+    *
+    */
+   function job_cleanup( $configuration )
+   {
+      // nothing to do in this case
+   }
+
+
+   function list_lists()
+   {
+      $out = array();
+      if ( ($r = sysexec( $out, MAILMAN_COMMAND_ADMINS )) !== false )
+         $this->app->fatal( "unable to run the mailman owners program" );
+
+      if ( ( ($out["proc_close"] == -1) && ($out["exitcode"] ==  0) )
+        || ( ($out["proc_close"] ==  0) && ($out["exitcode"] == -1) )
+        || ( ($out["stderr"]     == "") && ($out["exitcode"] == -1) )
+         )
+      {
+         $listinfo = explode( "\n", trim($out["stdout"]) );
+
+         $lists = array();
+         foreach( $listinfo as $line )
+         {
+            $p = strpos( $line, "," );
+            $info[0] = substr( $line, 0, $p );
+            $info[1] = substr( $line, $p+1 );
+
+            $list_name = explode( ":", $info[0] );
+            $list_admins = explode( ":", $info[1] );
+            $list_admins = explode( ",", trim( $list_admins[1] ) );
+
+            foreach( $list_admins as $adm )
+              $lists[trim($list_name[1])][] = trim($adm);
+         }
+
+         return $lists;
+      }
+
+      $this->app->fatal( "error extracting list of mailman lists" );
+   }
+
+
+
+   /**
+    *
+    * Job Exec
+    *
+    * This method is called for EACH JOB during the event to which the
+    * job was assigned. Jobs are sorted by Job Index string and
+    * executed in sorted order.
+    *
+    */
+   function job_exec( $configuration )
+   {
+      $this->job_info = $configuration;
+
+
+      if ( !file_exists( MAILMAN_COMMAND_FOLDER ) )
+      {
+         if ( $this->app->verbose )
+            $this->app->warning( MAILMAN_COMMAND_FOLDER . " not found" );
+
+         return false;
+      }
+
+
+      if ( isset($this->job_info["subfolder"]) )
+         if ( $this->app->vfs_subfolder( $this->job_info["subfolder"] ) != false )
+            $this->app->fatal( "unable to select {$this->job_info['subfolder']} subfolder" );
+          
+
+      $lists = $this->list_lists();
+
+      foreach ( $lists as $list => $admins )
+      {
+         if ( $this->app->verbose )
+            $this->app->tee( "    list '{$list}'" );
+
+         $admin_str = "";
+         foreach ( $admins as $adm )
+            $admin_str = $admin_str
+                       . ($admin_str > "" ? "\n" : "")
+                       . $adm
+                       ;
+
+         $admin_str = $admin_str . "\n";
+         $file_ext  = $this->app->tar->compressor_ext();
+
+         $this->app->vfs_compress_string( "mailman/{$list}/admins.txt" . $file_ext, $admin_str );
+
+         $cmd = str_replace( "%LIST%", $list, MAILMAN_COMMAND_MEMBERS );
+         $this->app->vfs_compress_command( $cmd, "mailman/{$list}/members.txt" . $file_ext );
+
+         $cmd = str_replace( "%LIST%", $list, MAILMAN_COMMAND_CONFIG );
+         $this->app->vfs_compress_command( $cmd, "mailman/{$list}/config.txt" . $file_ext );
+      }
+
+      // not expecting any problems here
+      return false;
+   }
+}
+
+
+$this->add_plugin( new mailman_plugin_c( $this ) );
+

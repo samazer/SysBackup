@@ -1,0 +1,179 @@
+<?php /* -*- mode: php; mode: mmm; coding: utf-8-unix; -*- */
+/**
+ *
+ * Dummy Plugin
+ *
+ *
+ * <p><b>Copyright</b>
+ *
+ * <p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.
+ *
+ * <p>This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * <p>This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * <p>You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * @author Sam Azer <sam@azertech.net>
+ * @version 0.01 (alpha)
+ * @package server-maint
+ * @subpackage sysbackup
+ * @license http://www.gnu.org/licenses/agpl.html AGPL
+ * @copyright 2011 by Sam Azer, All rights reserved
+ * @link http://www.azertech.net/
+ * @link http://www.samazer.net/about
+ *
+ */
+
+
+//require_once "lib/general-plugins.inc";
+
+
+class dummy_plugin_c extends plugin_base_c
+{
+   var $job_info;
+
+
+   function __construct( &$application_object )
+   {
+      parent::__construct( $application_object );
+
+      $this->plugin_name        = "dummy";
+      $this->plugin_title       = "Sample do-nothing Plugin";
+      $this->plugin_version     = "0.01a";
+      $this->plugin_description = "This is a placeholder plugin that does nothing";
+
+      $this->plugin_enabled     = false;
+      $this->plugin_rootreqd    = false;  // true if root permissions required
+
+      $this->plugin_type        = "genbackup";
+      $this->plugin_unique      = false;
+
+      $this->job_info = array();
+   }
+
+
+   /**
+    *
+    * Plugin Help
+    *
+    * Emit a help message for the plugin
+    *
+    */
+   function plugin_help()  
+   {
+      $this->app->tee( "(help for this plugin is not available yet)" );
+   }
+
+
+   /**
+    *
+    * Required Options
+    *
+    * Programmers helper: returns an array of 
+    *        Option => array( Required_flag, Help Text ), ...
+    *
+    */
+   function required_options()
+   {
+      return array();
+   }
+
+
+   /**
+    *
+    * Plugin Load
+    *
+    * This method is called for ALL PLUGINS just before the
+    * app_after_init() method is called (ie: almost at the end of the
+    * init process.)
+    *
+    */
+   function load()
+   {
+      // nothing to do in this case
+   }
+
+
+   /**
+    *
+    * Plugin Unload
+    *
+    * This method is called for ALL PLUGINS just after the
+    * app_after_events() method is called (ie: almost at the end of
+    * app execution.)
+    *
+    */
+   function unload()
+   {
+      // nothing to do in this case
+   }
+
+
+   /**
+    *
+    * Job Prepare
+    *
+    * This method is called for EACH JOB just after the
+    * app_before_events() method is called (ie: just before any events
+    * are triggered, before any jobs start. This is a good time to
+    * emit any error messages that might be generated during job
+    * execution.)
+    *
+    */
+   function job_prepare( $configuration )
+   {
+      // nothing to do in this case
+   }
+
+
+   /**
+    *
+    * Job Cleanup
+    *
+    * This method is called for EACH JOB after all the jobs have been
+    * exec'd and before the app_after_events() method is called. This
+    * is a good time to perform any cleanup operations that might be
+    * needed before the plugin is unloaded.
+    *
+    */
+   function job_cleanup( $configuration )
+   {
+      // nothing to do in this case
+   }
+
+
+   /**
+    *
+    * Job Exec
+    *
+    * This method is called for EACH JOB during the event to which the
+    * job was assigned. Jobs are sorted by Job Index string and
+    * executed in sorted order.
+    *
+    */
+   function job_exec( $configuration )
+   {
+      $this->job_info = $configuration;
+
+      if ( $this->app->vfs_subfolder( "etc" ) != false )
+         $this->app->fatal( "unable to select etc subfolder" );
+          
+      if ( $this->app->vfs_compress_file( $target, $temp_fn ) != false )
+         $this->app->fatal( "unable to compress file {$temp_fn} into {$target}" );
+
+      // no problem detected
+      return false;
+   }
+}
+
+
+$this->add_plugin( new dummy_plugin_c( $this ) );
+

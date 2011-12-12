@@ -1,0 +1,79 @@
+<?php /* -*- mode: php; mode: mmm; coding: utf-8-unix; -*- */
+/**
+ *
+ * Mail Directory Plugin
+ *
+ * A plugin that expects to find multiple files in a mail folder -
+ * each one belonging to a different user. In practice this plugin is
+ * essentially identical in behavior to the homedirs plugin.
+ *
+ * <p>include Directories
+ *
+ * <p>Edit this list to match the locations of user mail-spool-type
+ * directories on your server. These are directories that contain one
+ * file for every user on your server.
+ *
+ * <p>A separate compressed file will be created for each user (file)
+ * found unless that file is listed in the exclude array. This is
+ * intended to make it easier to extract files for a particular user
+ * when performing restore operations.
+ *
+ *
+ * <p><b>Copyright</b>
+ *
+ * <p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.
+ *
+ * <p>This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * <p>This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * <p>You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * @author Sam Azer <sam@azertech.net>
+ * @version 0.01 (alpha)
+ * @package server-maint
+ * @subpackage sysbackup
+ * @license http://www.gnu.org/licenses/agpl.html AGPL
+ * @copyright 2011 by Sam Azer, All rights reserved
+ * @link http://www.azertech.net/
+ * @link http://www.samazer.net/about
+ *
+ */
+
+
+
+require_once "homedirs.plugin";
+
+
+
+class maildirs_plugin_c extends homedirs_plugin_c
+{
+   function __construct( &$application_object )
+   {
+      parent::__construct( $application_object );
+
+      $this->plugin_name        = "maildirs";
+      $this->plugin_title       = "Mail Folders";
+      $this->plugin_version     = "0.01a";
+      $this->plugin_description = "This plugin produces backups of Mail Folders consisting of one file per user.";
+
+      $this->plugin_enabled     = true;
+      $this->plugin_rootreqd    = true;  // true if root permissions required
+
+      $this->plugin_type        = "genbackup";
+      $this->plugin_unique      = false;
+
+      $this->job_info = array();
+   }
+}
+
+
+$this->add_plugin( new maildirs_plugin_c( $this ) );
+

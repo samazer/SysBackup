@@ -1,0 +1,283 @@
+<?php /* -*- mode: php; mode: mmm; coding: utf-8-unix; -*- */
+/**
+ *
+ * Home Directories Plugin
+ *
+ * WARNING: If you specify a folder as a home dir this plugin will NOT
+ * PRODUCE A TARBALL FOR THAT FOLDER IF IT IS EMPTY. THEREFORE
+ * REMEMBER, WHEN RESTORING A BACKUP, TO MANUALLY CREATE THE FOLDER in
+ * case you need it.
+ *
+ *
+ * <p><b>Copyright</b>
+ *
+ * <p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.
+ *
+ * <p>This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * <p>This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * <p>You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * @author Sam Azer <sam@azertech.net>
+ * @version 0.01 (alpha)
+ * @package server-maint
+ * @subpackage sysbackup
+ * @license http://www.gnu.org/licenses/agpl.html AGPL
+ * @copyright 2011 by Sam Azer, All rights reserved
+ * @link http://www.azertech.net/
+ * @link http://www.samazer.net/about
+ *
+ */
+
+
+//require_once "lib/general-plugins.inc";
+
+
+
+class homedirs_plugin_c extends plugin_base_c
+{
+   var $job_info;
+
+   function __construct( &$application_object )
+   {
+      parent::__construct( $application_object );
+
+      $this->plugin_name        = "homedirs";
+      $this->plugin_title       = "System Home Directories";
+      $this->plugin_version     = "0.01a";
+      $this->plugin_description = "This plugin produces backups of User Home Directories";
+
+      $this->plugin_enabled     = true;
+      $this->plugin_rootreqd    = true;  // true if root permissions required
+
+      $this->plugin_type        = "genbackup";
+      $this->plugin_unique      = false;
+
+      $this->job_info = array();
+   }
+
+
+   /**
+    *
+    * Plugin Help
+    *
+    * Emit a help message for the plugin
+    *
+    */
+   function plugin_help()  
+   {
+      $this->app->tee( "(help for this plugin is not available yet)" );
+   }
+
+
+   /**
+    *
+    * Required Options
+    *
+    * Programmers helper: returns an array of 
+    *        Option => array( Required_flag, Help Text ), ...
+    *
+    */
+   function required_options()
+   {
+      return array( "include" => array( true, "array of home directories to include"),
+                    "exclude" => array( true, "array of home directories to exclude" ),
+                    );
+   }
+
+
+   /**
+    *
+    * Plugin Load
+    *
+    * This method is called for ALL PLUGINS just before the
+    * app_after_init() method is called (ie: almost at the end of the
+    * init process.)
+    *
+    */
+   function load()
+   {
+      // nothing to do in this case
+   }
+
+
+   /**
+    *
+    * Plugin Unload
+    *
+    * This method is called for ALL PLUGINS just after the
+    * app_after_events() method is called (ie: almost at the end of
+    * app execution.)
+    *
+    */
+   function unload()
+   {
+      // nothing to do in this case
+   }
+
+
+   /**
+    *
+    * Job Prepare
+    *
+    * This method is called for EACH JOB just after the
+    * app_before_events() method is called (ie: just before any events
+    * are triggered, before any jobs start. This is a good time to
+    * emit any error messages that might be generated during job
+    * execution.)
+    *
+    */
+   function job_prepare( $configuration )
+   {
+      // nothing to do in this case
+   }
+
+
+   /**
+    *
+    * Job Cleanup
+    *
+    * This method is called for EACH JOB after all the jobs have been
+    * exec'd and before the app_after_events() method is called. This
+    * is a good time to perform any cleanup operations that might be
+    * needed before the plugin is unloaded.
+    *
+    */
+   function job_cleanup( $configuration )
+   {
+      // nothing to do in this case
+   }
+
+
+   function dir_backup( $current_dir, $exclude_list, $options = array() )
+   {
+      $errors_detected = false;
+
+      if ( !is_readable( $current_dir ) )
+      {
+         $this->app->warning( "unable to read from '{$current_dir}'" );
+         return true; // error
+      }
+
+      chdir( $current_dir );
+      $all_found = array_merge( glob( ".*" ), glob( "*" ) );
+
+      $unwanted = array();
+      for ( $i = 0; $i < count( $all_found ); $i ++ )
+         if ( ($all_found[$i] == ".") || ($all_found[$i] == "..") )
+            $unwanted[] = $i;
+
+      $unwanted = array_reverse( $unwanted );
+      foreach ( $unwanted as $i )
+         unset( $all_found[$i] );
+
+      if ( !count( $all_found ) )
+      {
+         if ( $this->app->verbose )
+            $this->app->warning( "'{$current_dir}' is empty" );
+
+         // not an error but...
+         // in some cases this can result in a missing folder
+         return false; 
+      }
+
+      sort($all_found); // for convenience when reading reports
+
+      foreach ( $all_found as $user_dir )
+      {
+         $work_dir = dir_fn($current_dir, $user_dir);
+
+         $exclude_flag = false;
+         foreach ( $exclude_list as $ex )
+            if ( strpos( $work_dir, $ex ) !== false )
+            {
+               $exclude_flag = true;
+               break;
+            }
+
+         if ( !$exclude_flag )
+         {
+            if ( !is_readable( $work_dir ) )
+            {
+               $this->app->warning( "unable to read from '{$work_dir}'" );
+               $errors_detected = true;
+               continue;
+            }
+
+            if ( is_dir( $work_dir ) )
+            {
+               $archive = $work_dir . $this->app->tar->tarball_ext();
+               if ( $this->app->vfs_tarball_folder( $archive, $work_dir, $options ) )
+                  $errors_detected = true;
+            }
+              else 
+            {
+               $archive = $work_dir . $this->app->tar->compressor_ext();
+               if ( $this->app->vfs_compress_file( $archive, $work_dir, $options ) )
+                  $errors_detected = true;
+            }
+         }
+      }
+
+      return $errors_detected;
+   }
+
+
+   /**
+    *
+    * Job Exec
+    *
+    * This method is called for EACH JOB during the event to which the
+    * job was assigned. Jobs are sorted by Job Index string and
+    * executed in sorted order.
+    *
+    */
+   function job_exec( $configuration )
+   {
+      $this->job_info = $configuration;
+
+      $problems_found = false;
+      $required_options = $this->required_options();
+      foreach ( $required_options as $opt => $info )
+         $$opt = $this->job_info[$opt];
+
+      if ( isset($this->job_info["subfolder"]) )
+         if ( $this->app->vfs_subfolder( $this->job_info["subfolder"] ) != false )
+            $this->app->fatal( "unable to select {$this->job_info['subfolder']} subfolder" );
+          
+      foreach ( $this->job_info["include"] as $home => $options )
+      {
+         // merge the job exclude option with the
+         // folder exclude option.
+
+         $exclude = array();
+         if ( isset( $this->job_info["exclude"] ) )
+            $exclude = $this->job_info["exclude"];
+
+         if ( isset( $options["exclude"] ) )
+            $exclude = array_merge( $exclude, $options["exclude"] ); 
+
+         $opts = $options;
+         $opts["exclude"] = $exclude;
+
+         $this->dir_backup( $home, $exclude, $opts );
+      }
+
+      // no problem detected
+      return false;
+   }
+}
+
+
+
+
+$this->add_plugin( new homedirs_plugin_c( $this ) );
+
