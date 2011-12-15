@@ -7,6 +7,8 @@
      [1]SysBackup Documentation and FAQ pages on the [2]AzerTech.net web
      site.
 
+   [main-use-case.png]
+
                           [multi-function-tool.jpg]
 
                                                        [3]Docs & FAQ Pages
@@ -23,8 +25,6 @@
    useful. Blindly running a backup utility is not the same as being
    prepared for the day-to-day issues that your organization will face
    over a period of years.
-
-   [main-use-case.png]
 
    The goal of any serious backup process is to be prepared. An
    experienced system administrator wants to make sure that any piece of
@@ -209,7 +209,7 @@ Day-to-day Issues
     Copyright © 2011 by [12]Sam Azer<[13]sam@azertech.net>, All rights
     reserved.
 
-   Last modified: Wed Dec 14 23:06:56 EST 2011
+   Last modified: Thu Dec 15 00:46:21 EST 2011
 
 References
 

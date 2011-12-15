@@ -51,11 +51,6 @@ Installation Assumptions
        of your backups. These will be written to a NAS server, nas. The
        hostname for your physical host is dom0.azertech.net and the
        hostname for your network storage is nas.azertech.net.
-
-     NOTE: you do not need to copy a backupset to a remote storage server
-     if you mount the remote storage onto your local filesystem. If you
-     use NFS or Samba for this purpose you should simply generate your
-     backup directly into your mounted filesystem from the start.
      * You want to install SysBackup Version 3.01a into your /opt/ system
        folder. The resulting installation folder name is
        /opt/sysbackup-v3.01a.
@@ -607,7 +602,7 @@ Going Further
     Copyright © 2011 by [23]Sam Azer<[24]sam@azertech.net>, All rights
     reserved.
 
-   Last modified: Wed Dec 14 23:44:19 EST 2011
+   Last modified: Thu Dec 15 00:43:25 EST 2011
 
 References
 
