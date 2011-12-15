@@ -267,7 +267,7 @@ define( "EXT_BACKUP_LAST", ".last" );
 define( "EXT_BACKUP_PREV", ".prev" );
 
 
-set_include_path( getcwd() . ":" . get_include_path() );
+set_include_path( realpath(dirname($argv[0])) . ":" . get_include_path() );
 include "app/sysbackup.inc";
 
 

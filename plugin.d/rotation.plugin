@@ -117,7 +117,7 @@ class backup_rotation_plugin_c extends plugin_base_c
    {
       parent::__construct( $application_object );
 
-      $this->plugin_name        = "bkuprotation";
+      $this->plugin_name        = "rotation";
       $this->plugin_title       = "Backup Rotation";
       $this->plugin_version     = "0.01a";
       $this->plugin_description = "plugin to keep a rotation of daily, weekly and monthly backups";

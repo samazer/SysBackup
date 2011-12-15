@@ -1,0 +1,26 @@
+SysBackup v3.013alpha:
+
+   2011.12.14 SA:
+
+      * Bug#503: Fixed a bug in the code that added the sysbackup
+        script path to the include path list.
+
+      * updated the script that converts the ./doc/*.html files into
+        their corresponding ./* text files.
+
+      * made some minor changes to the documentation for clarity.
+
+      * removed some unnecessary links to doc files in the base script
+        folder and added comments in the text versions of those files
+        to encourage the reader to look in the ./doc/ folder. Removed
+        the LICENSE link to the doc/gnu-license-files/agpl.txt file
+        and replaced it with a copy the same file.
+
+      * updated the script that creates the sysbackup-distrib folder,
+        copies the AFORMs library into the lib folder and updates the
+        local copy of the github repo. (This is necessary because
+        sysbackup is actually part of a collection of old server-maint
+        scripts and is separate from the AFORMs library folder. The
+        two need to be combined to produce the packages that get
+        pushed to github and sourceforge.)
+
