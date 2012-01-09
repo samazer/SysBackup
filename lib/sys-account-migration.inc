@@ -23,7 +23,7 @@
  * @author Sam Azer <sam@azertech.net>
  * @version 1.0
  * @package aforms
- * @subpackage lib-general
+ * @subpackage lib-sys
  * @license http://www.gnu.org/licenses/agpl.html AGPL
  * @copyright 2009-2011 by Sam Azer, All rights reserved
  * @link http://www.azertech.net/
@@ -51,7 +51,7 @@ include "lib/sys-account-info.inc";
  * commands. When executed the commands will reconstruct the original
  * user and group information.
  *
- * @package server-maint
+ * @package aforms
  * @subpackage lib-sys
  *
  */

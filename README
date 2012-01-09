@@ -7,6 +7,9 @@
      [1]SysBackup Documentation and FAQ pages on the [2]AzerTech.net web
      site.
 
+   Remember to check the notes in the headers of the various scripts
+   (especially sysbackup, remexec and localexec for helpful information.
+
    This is a short introduction to SysBackup, a swiss-army-knife-type
    utility that helps simplify and organize the nightly backup tasks. It
    allows the system administrator to quickly and easily script jobs that
@@ -148,7 +151,7 @@ Be Prepared!
     Copyright © 2011 by [12]Sam Azer<[13]sam@azertech.net>, All rights
     reserved.
 
-   Last modified: Thu Dec 15 00:21:12 EST 2011
+   Last modified: Sun Jan 8 21:51:39 EST 2012
 
 References
 

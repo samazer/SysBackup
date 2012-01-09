@@ -119,6 +119,12 @@ define( "NPDEF", NAMEDPARAM_DEFAULT  );
 require_once "general-tee.inc";
 
 
+/**
+ * Named Parameter Management class
+ *
+ * @package aforms
+ * @subpackage lib-general
+ */
 class named_parameters_base_c 
 {
    /**
@@ -498,6 +504,12 @@ class named_parameters_base_c
 
 
 
+/**
+ * Named Parameter Management class
+ *
+ * @package aforms
+ * @subpackage lib-general
+ */
 class named_parameters_c extends named_parameters_base_c
 {
    var $current_category;

@@ -23,7 +23,7 @@
  *
  * @author Sam Azer <sam@azertech.net>
  * @version 0.01 (alpha)
- * @package server-maint
+ * @package sysbackup
  * @subpackage sysbackup
  * @license http://www.gnu.org/licenses/agpl.html AGPL
  * @copyright 2011 by Sam Azer, All rights reserved
@@ -34,13 +34,266 @@
 
 
 
-class backupvfs_sshremote_c extends backupvfs_baseio_c
+/**
+ *
+ * SSH I/O support
+ *
+ * This class extends the Base VFS I/O class and overrides the methods
+ * that access the filesystem. The new methods use the remote file I/O
+ * class to perform the desired operations on the remote system
+ * through SSH.
+ *
+ */
+class backupvfs_sshremote_io_c extends backupvfs_baseio_c
 {
-   static $required_options = array(
-                                    );
-
-
    var $remote;         // an object of type remote_fileio_c
+
+   function __construct( &$application_object, $options )
+   {
+      parent::__construct( $application_object );
+
+      $this->remote       = new remote_fileio_c( $this->app, $options );
+      $this->hostname     = $this->remote->remote_server;
+      $this->keeplocal    = true;
+   }
+
+
+   function get_keeplocal()
+   {
+      // remote storage always keeps files
+      return true; 
+   }
+
+
+   function job_reset()    { $this->backupset->job_reset();  }
+   function step_reset()   { $this->backupset->step_reset(); }
+   function all_reset()    { $this->backupset->job_reset();
+                             $this->backupset->step_reset(); }
+
+   function get_stats()    { return $this->backupset->get_stats();  }
+
+
+  /**
+   *
+   * Fatal File Error
+   *
+   * This method tries to produce a meaningful error message in the
+   * event of an error on the filesystem.
+   *
+   */
+   function _vfs_fatal_file_error( $msg, $source = false, $target = false  )
+   {
+      if ( $source !== false )
+         $this->warning( "source file is {$source}" );
+
+      if ( $target !== false )
+         $this->warning( "target file is {$target}" );
+
+      $r = $this->remote->last_error();
+      if ( $r )
+         $this->warning( "remote filesystem error message: {$r}" );
+
+      $this->fatal( $msg );
+   }
+
+
+   /**
+    *
+    * Check if a file exists
+    *
+    * This is one of the basic operations that needs to be done on a
+    * VFS in order to get the previously written hashlist. Each VFS
+    * which extends this class will have to override this method to
+    * provide this functionality on the target filesystem. 
+    *
+    * For convenience sake the base class implements the functionality
+    * required for a simple disk-based filesystem.
+    *
+    */
+   function _vfs_file_exists( $fn )
+   {
+      return $this->remote->file_exists( $fn );
+   }
+
+
+   /**
+    *
+    * return the contents of a small file
+    *
+    */
+   function _vfs_file_get_contents( $fn )
+   {
+      return $this->remote->readfile( $fn );
+   }
+
+
+   /**
+    *
+    * unlink/delete a small file
+    *
+    */
+   function _vfs_unlink( $fn )
+   {
+      return $this->remote->unlink( $fn );
+   }
+
+
+   /**
+    *
+    * hardlink to an existing file
+    *
+    */
+   function _vfs_link( $target, $source )
+   {
+      return $this->remote->link( $target, $source );
+   }
+
+
+   /**
+    *
+    * return the contents of a small file
+    *
+    */
+   function _vfs_rename( $from, $to )
+   {
+      return $this->remote->rename( $from, $to );
+   }
+
+
+   /**
+    *
+    * Write text to a small file
+    *
+    */
+   function _vfs_file_put_contents( $fn, $content )
+   {
+      return $this->remote->file_put_contents( $fn, $content );
+   }
+
+
+   /**
+    *
+    * Change the permissions of a file
+    *
+    */
+   function _vfs_chmod( $fn, $mask )
+   {
+      return $this->remote->chmod( $fn, $mask );
+   }
+
+
+   /**
+    *
+    * Change the permissions of a file
+    *
+    */
+   function _vfs_mkdir( $dir )
+   {
+      return $this->remote->mkdir( $dir );
+   }
+
+
+   /**
+    *
+    * determine if write permission is available
+    *
+    */
+   function _vfs_is_writable( $dir )
+   {
+      return $this->remote->is_writable( $dir );
+   }
+
+
+   /**
+    *
+    * determine the amount of free space available
+    *
+    */
+   function _vfs_disk_free_space( $dir )
+   {
+      return $this->remote->disk_free_space( $dir );
+   }
+
+
+   /**
+    *
+    * return the size of a file
+    *
+    */
+   function _vfs_filesize( $fn )
+   {
+      return $this->remote->filesize( $fn );
+   }
+
+
+   /**
+    *
+    * determine the total amount of disk space available
+    *
+    */
+   function _vfs_disk_total_space( $dir )
+   {
+      return $this->remote->disk_total_space( $dir );
+   }
+
+
+   /**
+    *
+    * calculate an sha1 hash for a file
+    *
+    */
+   function _vfs_sha1_file( $fn )
+   {
+      return $this->remote->sha1_file( $fn );
+   }
+
+
+   /**
+    *
+    * Determine, using brute force, if it is possible to hardlink
+    * between these two folders
+    *
+    */
+   function _vfs_can_hardlink( $target_dir, $source_dir )
+   {
+      return $this->remote->can_hardlink( $target_dir, $source_dir );
+   }
+
+
+   /**
+    *
+    * List items in a folder that have expired
+    *
+    */
+   function _vfs_list_expired_items( $path, $max )
+   {
+      return $this->remote->list_expired_items( $path, $max );
+   }
+
+
+   /**
+    *
+    * Remove items in a folder that have expired
+    *
+    */
+   function _vfs_remove_expired_items( $path, $max, $debug = true )
+   {
+      return $this->remote->remove_expired_items( $path, $max, $debug );
+   }
+}
+
+
+
+
+/**
+ *
+ * SSH VFS
+ *
+ * This class extends the I/O class to provide the remote backupset VFS logic.
+ *
+ */
+class backupvfs_sshremote_c extends backupvfs_sshremote_io_c 
+{
    var $remconf_file;   // name of file that contains remote configuration info
 
    var $named_parameters;
@@ -50,18 +303,7 @@ class backupvfs_sshremote_c extends backupvfs_baseio_c
 
    function __construct( &$application_object, $options )
    {
-      parent::__construct( $application_object );
-
-      $this->named_parameters = new named_parameters_c( "systemlibs", "sys-remote-fileio" );
-
-      $np_method = $this->np_default_method = "remote-exec";
-      $np_index  = $this->np_default_index  = "remconf";
-
-      $this->named_parameters->register( $np_method, $np_index, array( 
-          "enabled"      => array( 1, NPREQ, "plugin_enabled", "true if the plugin is enabled" ),
-          "usehardlinks" => array( 1, NPREQ, "usehardlinks",   "true if remote server supports hardlinks" ),
-          "remconf_file" => array( 1, "path/name of the configuration file on remote system" ),
-                                                 ));
+      parent::__construct( $application_object, $options );
 
       $this->plugin_enabled     = false;
 
@@ -73,10 +315,16 @@ class backupvfs_sshremote_c extends backupvfs_baseio_c
       $this->plugin_version     = "0.01a";
       $this->plugin_description = "Plugin to copy the backupset to a remote server via SSH/RemoteExec";
 
-      $this->remote = new remote_fileio_c( $this->app, $options );
+      $this->named_parameters = new named_parameters_c( "systemlibs", "sys-remote-fileio" );
 
-      $this->hostname     = $this->remote->remote_server;
-      $this->keeplocal    = true;
+      $np_method = $this->np_default_method = "remote-exec";
+      $np_index  = $this->np_default_index  = "remconf";
+
+      $this->named_parameters->register( $np_method, $np_index, array( 
+          "enabled"      => array( 1, NPREQ, "plugin_enabled", "true if the plugin is enabled" ),
+          "usehardlinks" => array( 1, NPREQ, "usehardlinks",   "true if remote server supports hardlinks" ),
+          "remconf_file" => array( 1, "path/name of the configuration file on remote system" ),
+                                                 ));
 
       $this->named_parameters->set_optional(   $this->np_default_method, 
                                                $this->np_default_index, 
@@ -92,6 +340,26 @@ class backupvfs_sshremote_c extends backupvfs_baseio_c
                                                $options );
    }
 
+
+
+   function dump_config()
+   {
+      parent::dump_config();
+
+      $this->named_parameters->display_properties( $this, 
+                                                   $this->np_default_method, 
+                                                   $this->np_default_index ); 
+
+      $this->remote->dump_config( $this );
+      $this->app->tee("");
+   }
+
+
+
+   function plugin_help()  
+   {
+      $this->tee( "(help for this plugin is not available yet)" );
+   }
 
 
    /**
@@ -116,38 +384,6 @@ class backupvfs_sshremote_c extends backupvfs_baseio_c
    }
 
 
-   function _vfs_keeplocal()
-   {
-      // remote storage always keeps files
-      return true; 
-   }
-
-   function _vfs_usehardlinks()
-   {
-      // remote storage always keeps files
-      return $this->usehardlinks;
-   }
-
-
-
-   function dump_config()
-   {
-      parent::dump_config();
-
-      $this->named_parameters->display_properties( $this, 
-                                                   $this->np_default_method, 
-                                                   $this->np_default_index ); 
-
-      $this->remote->dump_config( $this );
-      $this->app->tee("");
-   }
-
-
-   function plugin_help()  
-   {
-      $this->tee( "(help for this plugin is not available yet)" );
-   }
-
 
    function set_debugsysexec( $flg = -1 )
    {
@@ -162,210 +398,52 @@ class backupvfs_sshremote_c extends backupvfs_baseio_c
    }
 
 
-   /**
-    *
-    * Get Last Hashlist
-    *
-    * For the local hashlist we just need to check the backup root
-    * path for the name/path of the last backup (which is in a file
-    * called FN_PATH_BACKUP_LAST.) If the date for that file is the
-    * same as the date for today we need to ignore it and get the
-    * previous backup instead (in FN_PATH_BACKUP_PREV.)
-    *
-    * The procedure is identical for the remote hashlist except that
-    * there are no convenient or portable ways of checking files on
-    * remote filesystems. One way to proceed is to copy any possible
-    * files from the remote root to a temp dir on the local
-    * system. From there the procedure is the same as for a local
-    * hashlist.
-    *
-    */
-   function _get_last_hashlist( $last_name )
+
+   function load_remote_configuration_file()
    {
-      $last_backup = dir_fn( $this->path_backup, $last_name );
+      $remconf_desc = "{$this->remote->ssh_localexec_userid}@{$this->remote->remote_server}:{$this->remconf_file}";
 
-      if ( $this->app->verbose )
-         $this->tee( "looking for hashlist in {$last_backup}" );
+      if ( $this->app->verbose() )
+         $this->tee( "loading {$remconf_desc}" );
 
-      if ( $this->remote->rfile_exists( $last_backup ) )
-      {
-         $last_backup_name = trim($this->remote->rreadfile( $last_backup ));
+      if ( ($this->remote->is_readable( $this->remconf_file ) == false)
+        || ($conf = $this->remote->file_get_contents( $this->remconf_file )) === false )
+         $this->fatal( "can't read remote configuration file \"{$remconf_desc}\"" );
 
-         if ( $this->app->verbose )
-            $this->tee( "last backup file contains {$last_backup_name}" );
+      $conf_lines = explode( "\n", $conf );
+      $found_conf = array();
+      $looking_for_list = array( "path_temp", "path_daily", "path_weekly", "path_monthly" );
 
-         if ( $this->app->verbose )
+      $looking_for_text = "";
+      foreach ( $looking_for_list as $t )
+         $looking_for_text = $looking_for_text
+                           . ($looking_for_text > "" ? ", " : "")
+                           . "{$t}=path"
+                           ;
+
+      foreach ( $looking_for_list as $looking_for )
+         foreach ( $conf_lines as $txt_line )
          {
-            $this->tee( "Current Backup Name is {$this->current_backup}" );
-            $this->tee( "Last Backup Name is {$last_backup_name}" );
-         }
-
-         if ( $last_backup_name != $this->current_backup )
-         {
-            $fn = dir_fn( $this->path_backup . "/" . $last_backup_name, 
-                                                     $this->app->sys_hostname . EXT_HASHLIST );
-
-            if ( $this->app->verbose )
-               $this->tee( "looking for hashlist {$fn}" );
-
-            if ( $this->remote->ris_file( $fn ) )
+            $assign = explode( "=", $txt_line );
+            if ( strtolower(trim($assign[0])) == $looking_for )
             {
-               $this->prev_backup       = $last_backup_name;
-               $this->prev_path         = dir_fn( $this->path_backup, $last_backup_name );
-
-               $tmp_file = tempnam( $this->app->sys_local->path_temp, "sysbackup-" );
-               if ( $this->remote->scp_from_remote( $fn, $tmp_file ) )
-                  $this->fatal( "unable to read '{$fn}'" );
-
-               $this->prev_hashlist     = $this->read_hashlist( $tmp_file );
-               $this->prev_hashlist_rev = $this->reverse_hashlist( $this->prev_hashlist );
-
-               if ( unlink( $tmp_file ) === false )
-                  $this->fatal( "unable to unlink tmp file '{$prev_backup_fn}" );
-
-               if ( $this->app->verbose )
-                  $this->tee( "got hashlist {$fn}" );
-
-               return true;
-            } 
-              else 
-            {
-               $this->warning( "hashlist not found in '{$last_backup_name}'" );
-               return false;
+               $found_conf[$looking_for] = str_replace( "%HOST%", 
+                                                        $this->app->get_hostname(),
+                                                        trim( $assign[1] ) );
+               break;
             }
          }
+
+      if ( count( $found_conf ) != count( $looking_for_list ) )
+      {
+         $this->warning( "Need all of ({$looking_for_text})" );
+         $this->fatal( "Missing info in {$remconf_desc}" );
       }
 
-      return false;
+      // found it all - load local vars
+      foreach( $found_conf as $p => $v )
+         $this->$p = $v;
    }
-
-
-   function save_last_backup_name()
-   {
-      // get the local file names for the current & prev backup info
-      $last_backup_name = $this->app->sys_hostname . EXT_BACKUP_LAST;
-      $prev_backup_name = $this->app->sys_hostname . EXT_BACKUP_PREV;
-
-      $last_backup_fn   = dir_fn( $this->path_backup, $last_backup_name );
-      $prev_backup_fn   = dir_fn( $this->path_backup, $prev_backup_name );
-
-      // check if a backup was made before the current backup
-      if ( $this->remote->rfile_exists( $last_backup_fn ) )
-      {
-         // Yes, so was it a failed version of this one 
-         //      or was it as previous successful run?
-         $prev_backupset_name = trim($this->remote->rreadfile( $last_backup_fn ));
-         if ( $prev_backupset_name != $this->current_backup )
-         {
-            // it was a previous successful run, so keep it as the prev. backup
-            if ( $this->remote->rfile_exists( $prev_backup_fn ) )
-               if ( $this->remote->runlink( $prev_backup_fn ) === false )
-                  $this->fatal( "unable to unlink prev. backup file: {$prev_backup_fn}" );
-
-            if ( $this->remote->rrename( $last_backup_fn, $prev_backup_fn ) === false )
-               $this->fatal( "unable to rename last backup file: {$last_backup_fn} to {$prev_backup_name}" );
-         }
-      }
-
-      // keep track of the backup that was just completed
-      $tmp_file = tempnam( $this->app->sys_local->path_temp, "sysbackup-" );
-      if ( file_put_contents( $tmp_file, $this->current_backup ) === false )
-         $this->fatal( "unable to write to temp file {$this->app->sys_hostname}:{$tmp_file}" );
-
-      if ( $this->remote->scp_to_remote( $tmp_file, $last_backup_fn ) !== false )
-         $this->fatal( "unable to copy {$this->app->sys_hostname}:{$l} to "
-                     . "{$remote_sys}:{$r}" );
-
-      if ( $this->remote->rchmod( $last_backup_fn, $this->app->sys_umaskfiles ) === false )
-         $this->fatal( "unable to change mode on file: {$last_backup_fn}" );
-
-      if ( unlink( $tmp_file ) === false )
-         $this->fatal( "unable to unlink temp file {$this->app->sys_hostname}:{$tmp_file}" );
-
-      // if we get here we're doing okay
-      return false;
-   }
-
-
-
-   function _vfs_hardlink( $linktarget, $linksource )
-   {
-      if ( $this->remote->rfile_exists( $linksource ) )
-         if ( $this->remote->runlink( $linksource ) === false )
-            $this->fatal( "unable to remove expired file {$linksource}" );
-
-      if ( $this->app->verbose )
-      {
-         $s = str_replace( $this->path_backup, "", $linksource );
-         $t = str_replace( $this->path_backup, "", $linktarget );
-
-         $this->tee( "hardlinking {$s} to {$t}" );
-      }
-
-      if ( $this->remote->rlink( $linktarget, $linksource ) === false )
-      {
-         // something seriously wrong here... multiple partitions?
-         $this->fatal( "unable to link {$linksource} to {$linktarget}" );
-      }
-
-      return false;
-   }
-
-
-   function _folder_check( $folders )
-   {
-      $problems_found = false;
-      foreach ( $folders as $folder )
-      {
-         if ( !$this->remote->rfile_exists( $folder[0] ) )
-         {
-            $problems_found = true;
-            $this->warning( "The {$folder[1]} folder ({$folder[0]}) was not found" );
-         }
-           else
-         {
-            if ( !$this->remote->ris_writable( $folder[0] ) )
-            {
-               $problems_found = true;
-               $this->warning( "The {$folder[1]} folder ({$folder[0]}) is not writable" );
-            }
-
-            if ( $folder[3] && (($free_space = (int)$this->remote->rdisk_free_space( $folder[0] )) < $folder[2]) )
-            {
-               $this->warning( "not enough free disk space in the {$folder[1]} folder ({$folder[0]})" );
-               $this->warning( "found " . si_suffix( $free_space ) . ", need " . si_suffix( $folder[2] ));
-               $problems_found = true;
-            }
-         }
-      }
-
-      if ( $problems_found )
-         $this->fatal( "problems found - please correct and try again" );
-
-
-      if ( $this->remote->rfile_exists($this->current_path) == true )
-      {
-         if ( $this->remote->rchmod( $this->current_path, $this->app->sys_umaskfolders ) === false )
-            $this->fatal( "unable to change mode on subfolder: {$this->current_path}" );
-
-        /**
-         *
-         * Most likely the contents of the current backupset, if
-         * that's what we're writing now, are the result of a
-         * previously failed attempt. As such it's probably best to
-         * just overwrite it.
-         *
-         */
-         return false; // no problem
-      }
-
-      if ( $this->remote->rmkdir( $this->current_path, $this->app->sys_umaskfolders, true ) === false )
-         $this->fatal( "unable to create the local backup folder: {$this->current_path}" );
-
-      if ( $this->remote->rchmod( $this->current_path, $this->app->sys_umaskfolders ) === false )
-         $this->fatal( "unable to change mode on subfolder: {$this->current_path}" );
-   }
-
 
 
 
@@ -373,166 +451,54 @@ class backupvfs_sshremote_c extends backupvfs_baseio_c
    {
       $this->set_debugsysexec(  $this->app->set_debugsysexec() );
 
-      $remconf_desc = "{$this->remote->ssh_localexec_userid}@{$this->remote->remote_server}:{$this->remconf_file}";
+      $this->backupset_name = $backupset_name;
 
-      if ( $this->app->verbose )
-         $this->tee( "loading {$remconf_desc}" );
+      $this->load_remote_configuration_file();
 
-      if ( ($this->remote->ris_readable( $this->remconf_file ) == false)
-        || ($conf = $this->remote->rreadfile( $this->remconf_file )) === false )
-         $this->fatal( "can't read remote configuration file \"{$remconf_desc}\"" );
+      $problems_found = $this->vfs_warn_disk_space( true );
+      if ( !$this->app->get_keeplocal() && $problems_found )
+         $this->fatal( "problems found - please correct and try again" );
 
-      $conf_lines = explode( "\n", $conf );
-      $found_conf = array();
-      foreach ( array( "path_temp", "path_backup", "path_rotation" ) as $looking_for )
-         foreach ( $conf_lines as $txt_line )
-         {
-            $assign = explode( "=", $txt_line );
-            if ( strtolower(trim($assign[0])) == $looking_for )
-            {
-               $found_conf[$looking_for] = str_replace( "%HOST%", 
-                                                        $this->app->sys_hostname, 
-                                                        trim( $assign[1] ) );
-               break;
-            }
-         }
+      return $this->vfs_createbackupset_folder( $this->path_daily );
+   }
 
-      if ( count( $found_conf ) != 3 )
+
+
+   function vfs_prune_expired_backups()
+   {
+      $description    = $this->get_hostname() . " daily";
+      $path_to_prune  = $this->get_path_daily();
+      $max_items      = $this->get_rotations_daily();
+
+      return $this->_vfs_prune_expired_backups( $description, $path_to_prune, $max_items );
+   }
+
+
+
+   function remote_copyfile( $rel_ref, $sha1, $size )
+   {
+      $local_ref  = dir_fn( $this->app->get_path_backupset(), $rel_ref );
+      $remote_ref = dir_fn( $this->get_path_backupset(),      $rel_ref );
+
+      // find out if the file should be hardlinked somewhere?
+      if ( ($where = $this->backupset->should_hardlink( $sha1 )) == false )
       {
-         $this->warning( "Need all of path_temp=path, path_backup=path & path_rotation=path" );
-         $this->fatal( "Missing info in {$remconf_desc}" );
+         // nope - simple copy only
+         $l = $this->vfs_displayref( $local_ref );
+         $r = $this->vfs_displayref( $remote_ref );
+
+         if ( $this->app->verbose() )
+            $this->tee( "scp {$l} to {$r}" );
+
+         if ( $this->remote->scp_to_remote( $local_ref, $remote_ref ) !== false )
+            $this->fatal( "unable to copy {$l} to {$r}" );
+
+         if ( $this->remote->chmod( $remote_ref, $this->get_umaskfiles() ) === false )
+            $this->fatal( "unable to change mode on file {$r}" );
       }
 
-      // found it all - load local vars
-      foreach( $found_conf as $p => $v )
-         $this->$p = $v;
-
-      return $this->_vfs_folder_check( $backupset_name );
-   }
-
-
-   function vfs_start()
-   {
-      return $this->get_last_hashlist();
-   }
-
-
-   function vfs_end()
-   {
-      $hash_fn = $this->app->sys_hostname . EXT_HASHLIST;
-      $hard_fn = $this->app->sys_hostname . EXT_HARDLINKED;
-
-      if ( $this->app->verbose )
-         $this->tee( "writing hashlist {$hash_fn}" );
-
-      $tmp_file = tempnam( $this->app->sys_local->path_temp, "sysbackup-" );
-      $this->write_hashlist( $tmp_file, $this->current_hashlist );
-      $target = dir_fn( $this->current_path, $hash_fn );
-      if ( $this->remote->scp_to_remote( $tmp_file, $target ) !== false )
-         $this->fatal( "unable to copy {$this->app->sys_hostname}:{$tmp_file} to {$remote_sys}:{$target}" );
-      if ( unlink( $tmp_file ) === false )
-         $this->fatal( "unable to unlink temp file {$this->app->sys_hostname}:{$tmp_file}" );
-
-      if ( $this->app->verbose )
-         $this->tee( "writing hardlinked file list {$hard_fn}" );
-
-      $tmp_file = tempnam( $this->app->sys_local->path_temp, "sysbackup-" );
-      $this->write_hashlist( $tmp_file, $this->current_hardlinked );
-      $target = dir_fn( $this->current_path, $hard_fn );
-      if ( $this->remote->scp_to_remote( $tmp_file, $target ) !== false )
-         $this->fatal( "unable to copy {$this->app->sys_hostname}:{$tmp_file} to {$remote_sys}:{$target}" );
-      if ( unlink( $tmp_file ) === false )
-         $this->fatal( "unable to unlink temp file {$this->app->sys_hostname}:{$tmp_file}" );
-
-      if ( $this->app->verbose )
-         $this->tee( "writing last/prev backup names" );
-
-      $this->save_last_backup_name();
-
-      // always returns no error result
-      return false; 
-   }
-
-
-   function vfs_subfolder( $folder_name )
-   {
-      $fn = dir_fn($this->current_path . "/" . $folder_name);
-      if ( $this->remote->rfile_exists( $fn ) )
-         return false;
-
-      if ( $this->remote->rmkdir( $fn, $this->app->sys_umaskfolders, true ) === false )
-         $this->fatal( "unable to create subfolder: {$fn}" );
-
-      if ( $this->remote->rchmod( $fn, $this->app->sys_umaskfolders ) === false )
-         $this->fatal( "unable to change mode on subfolder: {$fn}" );
-
+      $this->backupset->_register( $where, $rel_ref, $sha1, $size );
       return false;
-   }
-
-
-
-   function remote_canhardlink( $sha1 )
-   {
-      if ( $this->app->verbose )
-      {
-         $f = ($this->_vfs_keeplocal() && $this->_vfs_usehardlinks())
-            ? "true" : "false";
-
-         $this->tee( "Checking if file can be hardlinked; basic flags say {$f}" );
-
-         $f = ( isset( $this->prev_hashlist_rev[$sha1]    )
-             || isset( $this->current_hashlist_rev[$sha1] ) )
-            ? "true" : "false";
-
-         $this->app->tee( "found a file on with the same hash? {$f}" );
-
-         $f = ($this->_vfs_keeplocal()
-            && $this->_vfs_usehardlinks()
-            && ( isset( $this->prev_hashlist_rev[$sha1]    )
-              || isset( $this->current_hashlist_rev[$sha1] ) 
-                 ))
-            ? "true" : "false";
-
-         $this->app->tee( "overall result: {$f}" );
-      }
-
-      // can we use a hardlink for this file?
-      return $this->_vfs_keeplocal()
-          && $this->_vfs_usehardlinks()
-          && ( isset( $this->prev_hashlist_rev[$sha1]    )
-            || isset( $this->current_hashlist_rev[$sha1] ) 
-             )
-             ;
-   }
-
-
-
-   function remote_copyfile( $target, $sha1, $size )
-   {
-      $rel_ref    = dir_fn( $this->app->current_subfolder       . "/" . $target );
-      $local_ref  = dir_fn( $this->app->sys_local->current_path . "/" . $rel_ref );
-      $remote_ref = dir_fn( $this->current_path                 . "/" . $rel_ref );
-
-      $remote_sys = $this->remote->remote_ref(1);
-
-      // use a hardlink if possible
-      if ( $this->remote_canhardlink( $sha1 ) )
-         return $this->_vfs_addfile( $target, $sha1, $size );
-
-      $l = str_replace( $this->app->sys_local->path_backup, "", $local_ref );
-      $r = str_replace( $this->path_backup, "", $remote_ref );
-
-      if ( $this->app->verbose )
-         $this->tee( "scp {$l} to {$r}" );
-
-      if ( $this->remote->scp_to_remote( $local_ref, $remote_ref ) !== false )
-         $this->fatal( "unable to copy {$this->app->sys_hostname}:{$l} to "
-                     . "{$remote_sys}:{$r}" );
-
-      if ( $this->remote->rchmod( $remote_ref, $this->app->sys_umaskfiles ) === false )
-         $this->fatal( "unable to change mode on file: {$remote_sys}:{$r}" );
-
-      return $this->_vfs_addfile( $target, $sha1, $size );
    }
 }
 

@@ -64,7 +64,7 @@
  *
  * @author Sam Azer <sam@azertech.net>
  * @version 0.01 (alpha)
- * @package server-maint
+ * @package sysbackup
  * @subpackage sysbackup
  * @license http://www.gnu.org/licenses/agpl.html AGPL
  * @copyright 2011 by Sam Azer, All rights reserved
@@ -76,10 +76,17 @@
 
 
 include "lib/general-plugins.inc";
+include "app/sysbackup-plugins.inc";
 include "app/sysbackup-vfs.inc";
 
 
 
+/**
+ *
+ * @package sysbackup
+ * @subpackage sysbackup
+ *
+ */
 class system_backup_app_c extends backupvfs_main_c
 {
    function approve_job( $config_file, $job_info )
@@ -139,55 +146,58 @@ class system_backup_app_c extends backupvfs_main_c
 
    function app_before_init()
    {
-      $this->setup_local();
-
       // see: sysbackup-vfs.inc: vfs_init()
       $this->vfs_init();
+
+      $argv = &$GLOBALS["argv"];
+
+      $this->hostname_short( $this->get_hostid() );
+      $this->application_name( basename( $argv[0] ) );
+
+      $this->teefn( dir_fn( $this->get_path_backupset(), 
+                            $this->get_hostname() . EXT_OUTPUTCAPTURE ) );
+  
+
+      $cmdl = "";
+      foreach( $argv as $arg )
+         $cmdl = $cmdl
+               . ($cmdl ? " " : "")
+               . $arg
+               ;
+
+      $this->log( "[init] \"{$cmdl}\"" );
    }
 
 
    function app_title()
    {
-      $this->tee( $this->app_title . " " . $this->app_version );
+      $t = $this->app_title . " " . $this->app_version;
 
-      if ( $this->verbose )
-         $this->tee( "Backupset Name is {$this->backupset}" );
+      $this->log( $t );
+      $this->tee( $t );
    }
 
 
    function app_after_init()
    {
       parent::app_after_init();
+
+      $t = "Backupset Name is " . $this->get_backupset_name();
+      $this->log( $t );
+      if ( $this->verbose() )
+         $this->tee( $t );
    }
 
 
    function after_loading_jobs()
    {
-      $this->add_job( "[internal]", 
-          array( "id"          => "xfer-queued",
-                 "description" => "Transfer the new backupset to remote storage",
-                 "enabled"     => true,
-
-                 "event"       => "auxops",
-                 "jobindex"    => "5000.RemoteXfer",
-
-                 "plugin"      => "internal",
-                 "method"      => "remote_xferfiles",
-                ));
+      $this->add_standard_internal_jobs();
    }
 
 
    function app_before_events()
    {
-      if ( $this->sys_minfreespace )
-         if ( disk_free_space( $this->sys_pathtemp ) < $this->sys_minfreespace )
-            $this->warning( "Free space on {$this->sys_pathtemp} is less than the minimum "
-                          . "required " . si_suffix($this->minfreespace) );
-
-      if ( $this->sys_minbackupsize )
-         if ( disk_free_space( $this->sys_pathbackups ) < $this->sys_minbackupsize )
-            $this->warning( "Free space on {$this->sys_pathbackups} is less than the "
-                          . "minimum required " . si_suffix($this->minbackupsize) );
+      $this->warn_disk_space( true );
 
       // see: sysbackup-vfs.inc: vfs_start()
       $this->vfs_start();
@@ -219,16 +229,9 @@ class system_backup_app_c extends backupvfs_main_c
       // see: sysbackup-vfs.inc: vfs_subfolder()
       $this->vfs_subfolder( "" );
 
-      if ( $this->sys_minfreespace )
-         if ( disk_free_space( $this->sys_pathtemp ) < $this->sys_minfreespace )
-            $this->warning( "Free space on {$this->sys_pathtemp} is now "
-                          . "below " . si_suffix($this->sys_minfreespace) );
+      $this->warn_disk_space( false );
 
-      if ( $this->sys_minbackupsize )
-         if ( disk_free_space( $this->sys_pathbackups ) < $this->sys_minbackupsize )
-            $this->warning( "Free space on {$this->sys_pathbackups} is now "
-                          . "below " . si_suffix($this->sys_minbackupsize) );
-
+      $this->log( "@{$event}: {$job_info['jobindex']} {$job_info['plugin']}({$job_info['id']})" );
       $this->job_reset();
    }
 
@@ -237,6 +240,8 @@ class system_backup_app_c extends backupvfs_main_c
    {
       if ( $this->notquiet() )
          $this->show_stats( "job" );
+
+      $this->log_stats( "job" );
    }
 
 

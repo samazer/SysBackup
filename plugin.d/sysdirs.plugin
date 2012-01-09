@@ -22,8 +22,8 @@
  *
  * @author Sam Azer <sam@azertech.net>
  * @version 0.01 (alpha)
- * @package server-maint
- * @subpackage sysbackup
+ * @package sysbackup
+ * @subpackage plugin
  * @license http://www.gnu.org/licenses/agpl.html AGPL
  * @copyright 2011 by Sam Azer, All rights reserved
  * @link http://www.azertech.net/
@@ -36,10 +36,14 @@
 
 
 
-class sysdirs_plugin_c extends plugin_base_c
+/**
+ *
+ * @package sysbackup
+ * @subpackage plugin
+ *
+ */
+class sysdirs_plugin_c extends sysbackup_plugin_base_c
 {
-   var $job_info;
-
    function __construct( &$application_object )
    {
       parent::__construct( $application_object );
@@ -54,8 +58,6 @@ class sysdirs_plugin_c extends plugin_base_c
 
       $this->plugin_type        = "genbackup";
       $this->plugin_unique      = false;
-
-      $this->job_info = array();
    }
 
 
@@ -68,7 +70,7 @@ class sysdirs_plugin_c extends plugin_base_c
     */
    function plugin_help()  
    {
-      $this->app->tee( "(help for this plugin is not available yet)" );
+      $this->tee( "(help for this plugin is not available yet)" );
    }
 
 
@@ -160,15 +162,15 @@ class sysdirs_plugin_c extends plugin_base_c
             if ( isset($options["required"]) && !$options["required"] )
                return false;
 
-            $this->app->warning( "unable to read from '{$current_dir}'" );
+            $this->warning( "unable to read from '{$current_dir}'" );
             return true; // error
          }
 
-         $archive = $current_dir . $this->app->tar->tarball_ext();
+         $archive = $current_dir . $this->tarball_ext();
 
          $options["exclude"] = $exclude_list;
          chdir( $current_dir );
-         return $this->app->vfs_tarball_folder( $archive, $current_dir, $options );
+         return $this->vfs_tarball_folder( $archive, $current_dir, $options );
       }
         else 
       {
@@ -177,13 +179,12 @@ class sysdirs_plugin_c extends plugin_base_c
             if ( isset($options["required"]) && !$options["required"] )
                return false;
 
-            $this->app->warning( "unable to read from '{$current_dir}'" );
+            $this->warning( "unable to read from '{$current_dir}'" );
             return true; // error
          }
 
-         $archive = $current_dir . $this->app->tar->compressor_ext();
-
-         return $this->app->vfs_compress_file( $archive, $current_dir, $options );
+         $archive = $current_dir . $this->compressor_ext();
+         return $this->vfs_compress_file( $archive, $current_dir, $options );
       }
    }
 
@@ -199,23 +200,21 @@ class sysdirs_plugin_c extends plugin_base_c
     */
    function job_exec( $configuration )
    {
-      $this->job_info = $configuration;
+      // let the parent method take care of common operations
+      if ( ($r = parent::job_exec( $configuration )) !== false )
+         return $r;
+
 
       $required_options = $this->required_options();
       foreach ( $required_options as $opt => $info )
          $$opt = $this->job_info[$opt];
 
 
-      if ( isset($this->job_info["subfolder"]) )
-         if ( $this->app->vfs_subfolder( $this->job_info["subfolder"] ) != false )
-            $this->app->fatal( "unable to select {$this->job_info['subfolder']} subfolder" );
-          
-
       $problems_detected = false;
       foreach ( $this->job_info["include"] as $sysdir => $opts )
       {
          if ( !is_array( $opts ) )
-            $this->app->fatal( "sysdir({$this->job_info['id']}): Options for dir({$sysdir}) not in array format" );
+            $this->fatal( "sysdir({$this->job_info['id']}): Options for dir({$sysdir}) not in array format" );
 
          $exclude = array();
          if ( isset( $this->job_info["exclude"] ) )
@@ -227,12 +226,12 @@ class sysdirs_plugin_c extends plugin_base_c
          if ( $this->sysdir_backup( $sysdir, $exclude, $opts ) !== false )
          {
             $problems_detected = true;
-            $this->app->warning( "sysdir({$this->job_info['id']}): an error was detected" );
+            $this->warning( "sysdir({$this->job_info['id']}): an error was detected" );
          }
       }
 
       if ( $problems_detected )
-         $this->app->warning( "sysdir({$this->job_info['id']}): errors were detected" );
+         $this->warning( "sysdir({$this->job_info['id']}): errors were detected" );
 
       // don't complain ripple any warnings up
       return false;

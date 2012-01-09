@@ -11,7 +11,7 @@
  *
  * @author Sam Azer <sam@azertech.net>
  * @version 0.01 (alpha)
- * @package server-maint
+ * @package aforms
  * @subpackage lib-sys
  * @license http://www.gnu.org/licenses/gpl.html GPL
  * @copyright 2011 by Sam Azer, All rights reserved
@@ -26,20 +26,24 @@ require_once "general-log.inc";
 
 
 
+/**
+ *
+ * @package aforms
+ * @subpackage lib-sys
+ *
+ */
 class teelog_c extends applog_c
 {
    var $quiet_flag = false;   // flag true if output should be muted
-   var $teefile    = false;   // full path and file name of output log file
-
-   // resource for the open log file or integer value indicating status:
-   var $teefp      = -1;      // -1 = not used, -2 = closed
+   var $teefile;              // logfile object for the output file
 
 
    function __construct( $fn = "" )
    {
       parent::__construct();
 
-      $this->teefile      = $fn;
+      $this->teefile = new logfile_c($fn);
+      $this->quiet_flag = false;
    }
 
 
@@ -67,18 +71,26 @@ class teelog_c extends applog_c
    }
 
 
+   private function _check_teefile()
+   {
+      if ( is_object( $this->teefile ) )
+         return;
+
+      die( "\n\nobject of type teelog_c() not properly constructed;\n"
+         . "did you forget to call the parent constructor in your application?\n\n" );
+   }
+
+
    function teefn( $fn = false )
    {
-      if ( $fn )
-         $this->teefile = $fn;
-
-      return $this->teefile;
+      $this->_check_teefile();
+      return $this->teefile->name($fn);
    }
 
 
    /**
     *
-    * Tee status text to the screen and to a log file
+    * Tee status text to the screen and to a display log file
     *
     * This method should be used by all other methods to generate
     * status text. The text will be displayed to the console and also
@@ -89,54 +101,34 @@ class teelog_c extends applog_c
     */
    function tee( $msg, $eol = "\n" )
    {
-      // undo close operation
-      if ( $msg === true )
+      // output an array of text messages one-by-one
+      if ( is_array( $msg ) )
       {
-         $this->teefp = -1;
-         return;
+         foreach ( $msg as $m )
+            echo "{$m}\n";
+
+         return $this->teefile->append( $msg, "\n" );
       }
 
-      // close the output file if the msg is boolean false
-      if ( $msg === false )
-      {
-         // only if it's already open
-         if ( is_resource($this->teefp) )
-            if ( fclose( $this->teefp ) === false )
-               throw new Exceptin( TEELOG_TXTFATAL . "unable to close the log file" );
+      echo "{$msg}{$eol}"; // emit a message
 
-         // close the output file
-         $this->teefp = -2;
-         return false;
-      }
-
-      // emit a message
-      echo "{$msg}{$eol}";
-
-      // closed until reopened
-      if ( $this->teefp === -2 )
-         return;
-
-      // don't try to write to the log file until the path/fn is set
-      if ( !$this->teefile )
-         return;
-
-      // try to open if it's never been opened
-      if ( $this->teefp === -1 )
-         if ( ($this->teefp = fopen( $this->teefile, "w" )) === false )
-            throw new Exception( TEELOG_TXTFATAL . "unable to open the log file for writing ({$this->teefile})" );
-
-      // save a copy of the text to the log file
-      if ( fwrite( $this->teefp, $msg . $eol ) === false )
-         throw new Exception( TEELOG_TXTFATAL . "unable to write to the log file" );
-
-      // flush often as incomplete log files might be copied
-      fflush( $this->teefp );
+      $this->_check_teefile();
+      $this->teefile->append( $msg, $eol );
    }
 
 
    function fatal( $msg, $stop_flag = true )
    {
-      $this->tee( TEELOG_TXTFATAL . "{$msg}" );
+      capture_begin();
+
+      // output an array of text messages one-by-one
+      if ( is_array( $msg ) )
+      {
+         foreach ( $msg as $m )
+            $this->tee( TEELOG_TXTFATAL . "{$m}" );
+
+      } 
+        else $this->tee( TEELOG_TXTFATAL . "{$msg}" );
 
       $posix_uid   = $this->sys_user->uid();
       $posix_gid   = $this->sys_user->gid();
@@ -155,9 +147,17 @@ class teelog_c extends applog_c
       $this->tee( TEELOG_TXTFATAL . "current user:group is {$posix_user}:{$posix_group} ({$posix_uid}:{$posix_gid}), cwd is {$cwd}" );
 
       $this->tee( TEELOG_TXTFATAL . "Backtrace follows:" );
-      debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+
+      backtrace();
+
       $this->tee( TEELOG_TXTFATAL . "stopped " . date( "Y.m.d H:i:s" ) 
                                   . " after " . $this->all_time(true) . " seconds" );
+
+      $r = capture_end();
+
+      $this->log( explode( "\n", $r ) );
+
+      echo $r;
 
       if ( $stop_flag )
          throw new Exception( $msg );
@@ -166,7 +166,10 @@ class teelog_c extends applog_c
 
    function warning( $msg )
    {
-      $this->tee( TEELOG_TXTWARNING . "{$msg}" );
+      $msg = TEELOG_TXTWARNING . "{$msg}";
+
+      $this->log( $msg );
+      $this->tee( $msg );
    }
 }
 

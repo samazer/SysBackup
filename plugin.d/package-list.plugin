@@ -23,8 +23,8 @@
  *
  * @author Sam Azer <sam@azertech.net>
  * @version 0.01 (alpha)
- * @package server-maint
- * @subpackage sysbackup
+ * @package sysbackup
+ * @subpackage plugin
  * @license http://www.gnu.org/licenses/agpl.html AGPL
  * @copyright 2011 by Sam Azer, All rights reserved
  * @link http://www.azertech.net/
@@ -44,8 +44,13 @@ require_once "lib/sys-packagelist.inc";
 define( "EXT_SYS_PACKAGE_LIST", ".packagelist.gz" );
 
 
-
-class packagelist_plugin_c extends plugin_base_c
+/**
+ *
+ * @package sysbackup
+ * @subpackage plugin
+ *
+ */
+class packagelist_plugin_c extends sysbackup_plugin_base_c
 {
    var $job_info;
 
@@ -170,20 +175,18 @@ class packagelist_plugin_c extends plugin_base_c
     */
    function job_exec( $configuration )
    {
-      $this->job_info = $configuration;
+      // let the parent method take care of common operations
+      if ( ($r = parent::job_exec( $configuration )) !== false )
+         return $r;
 
       if ( ($temp_fn = package_list()) === false )
          $this->warning( "Unable to produce package list" );
 
       // at this point the package list is in $temp_fn
-      $target = $this->app->sys_hostname . EXT_SYS_PACKAGE_LIST;
+      $target = $this->app->get_hostname() . EXT_SYS_PACKAGE_LIST;
 
-      if ( isset($this->job_info["subfolder"]) )
-         if ( $this->app->vfs_subfolder( $this->job_info["subfolder"] ) != false )
-            $this->app->fatal( "unable to select {$this->job_info['subfolder']} subfolder" );
-          
-      if ( $this->app->vfs_compress_file( $target, $temp_fn ) != false )
-         $this->app->fatal( "unable to compress file {$temp_fn} into {$target}" );
+      if ( $this->vfs_compress_file( $target, $temp_fn ) != false )
+         $this->fatal( "unable to compress file {$temp_fn} into {$target}" );
 
       // no problem detected
       return false;

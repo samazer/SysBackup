@@ -34,6 +34,18 @@
  */
 
 
+/**
+ * stopwatch class
+ *
+ * @author Sam Azer <sam@azertech.net>
+ * @version 0.01 (alpha)
+ * @package aforms
+ * @subpackage lib-general
+ * @license http://www.gnu.org/licenses/agpl.html AGPL
+ * @copyright 2011 by Sam Azer, All rights reserved
+ * @link http://www.azertech.net/
+ * @link http://www.samazer.net/about
+ */
 class stopwatch_c
 {
 

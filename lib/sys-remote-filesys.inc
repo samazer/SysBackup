@@ -30,7 +30,7 @@
  * @author Sam Azer <sam@azertech.net>
  * @version 0.01 (alpha)
  * @package aforms
- * @subpackage lib-general
+ * @subpackage lib-sys
  * @license http://www.gnu.org/licenses/agpl.html AGPL
  * @copyright 2011 by Sam Azer, All rights reserved
  * @link http://www.azertech.net/
@@ -48,6 +48,12 @@ require_once "lib/sys-remote-filesys.inc";
 
 
 
+/**
+ *
+ * @package aforms
+ * @subpackage lib-sys
+ *
+ */
 class remote_filesystem_c
 {
    var $ssh_binary;
@@ -244,204 +250,253 @@ class remote_filesystem_c
       if ( strtoupper($output["stdout"]) == strtoupper(LOCALEXEC_TXTRESULT . "false\n") )
          return false;
 
-      return false;
+      $msg = array( "localexec call "
+                  . "{$this->ssh_localexec_userid}@{$this->remote_server}:{$func}"
+                  . "(" . trim("{$p1} {$p2} {$p3}") . ")",
+                    "unable to scan return value: " 
+                  . phpval2str( $output['stdout'] ),
+                    "NOTE: remember to check /var/log/secure on {$this->remote_server}",
+                  );
+
+      $this->teelog->fatal( $msg );
    }
 
 
 
-   function rdisk_free_space( $path )
+   function disk_free_space( $path )
    {
       return $this->_exec_val( "disk_free_space", $path );
    }
 
-   function rdisk_total_space( $path )
+   function disk_total_space( $path )
    {
       return $this->_exec_val( "disk_total_space", $path );
    }
 
-   function rrealpath( $path )
+   function realpath( $path )
    {
       return $this->_exec_val( "realpath", $path );
    }
 
-   function rreadlink( $path )
+   function readlink( $path )
    {
       return $this->_exec_val( "readlink", $path );
    }
 
-   function rfilesize( $filespec )
+   function filesize( $filespec )
    {
       return $this->_exec_val( "filesize", $filespec );
    }
 
-   function rfiletype( $filespec )
+   function filetype( $filespec )
    {
       return $this->_exec_val( "filetype", $filespec );
    }
 
-   function rfileatime( $filespec )
+   function fileatime( $filespec )
    {
       return $this->_exec_val( "fileatime", $filespec );
    }
 
-   function rfilectime( $filespec )
+   function filectime( $filespec )
    {
       return $this->_exec_val( "filectime", $filespec );
    }
 
-   function rfilemtime( $filespec )
+   function filemtime( $filespec )
    {
       return $this->_exec_val( "filemtime", $filespec );
    }
 
-   function rfileperms( $filespec )
+   function fileperms( $filespec )
    {
       return $this->_exec_val( "fileperms", $filespec );
    }
 
-   function rlinkinfo( $filespec )
+   function linkinfo( $filespec )
    {
       return $this->_exec_val( "linkinfo", $filespec );
    }
 
-   function rfilegroup( $filespec )
+   function filegroup( $filespec )
    {
       return $this->_exec_val( "filegroup", $filespec );
    }
 
-   function rfileowner( $filespec )
+   function fileowner( $filespec )
    {
       return $this->_exec_val( "fileowner", $filespec );
    }
 
-   function rreadfile( $filespec )
+   function readfile( $filespec )
+   {
+      return $this->_exec_text( "readfile", $filespec );
+   }
+
+   function file_get_contents( $filespec )
    {
       return $this->_exec_text( "readfile", $filespec );
    }
 
 
-
-   function rfile_exists( $filespec )
+   function file_exists( $filespec )
    {
       return $this->_exec_bool( "file_exists", $filespec );
    }
 
-   function ris_dir( $filespec )
+   function is_dir( $filespec )
    {
       return $this->_exec_bool( "is_dir", $filespec );
    }
 
-   function ris_file( $filespec )
+   function is_file( $filespec )
    {
       return $this->_exec_bool( "is_file", $filespec );
    }
 
-   function ris_link( $filespec )
+   function is_link( $filespec )
    {
       return $this->_exec1p1bool( "is_link", $filespec );
    }
 
-   function ris_readable( $filespec )
+   function is_readable( $filespec )
    {
       return $this->_exec_bool( "is_readable", $filespec );
    }
 
-   function ris_writable( $filespec )
+   function is_writable( $filespec )
    {
       return $this->_exec_bool( "is_writable", $filespec );
    }
 
-   function ris_executable( $filespec )
+   function is_executable( $filespec )
    {
       return $this->_exec_bool( "is_executable", $filespec );
    }
 
 
 
-   function rchgrp( $filename, $group )
+   function chgrp( $filename, $group )
    {
       return $this->_exec_bool( "chgrp", $filename, $group );
    }
 
-   function rchmod( $filename, $mode )
+   function chmod( $filename, $mode )
    {
       return $this->_exec_bool( "chmod", $filename, $mode );
    }
 
-   function rchown( $filename, $user )
+   function chown( $filename, $user )
    {
       return $this->_exec_bool( "chown", $filename, $user );
    }
 
-   function rlchgrp( $filename, $group )
+   function lchgrp( $filename, $group )
    {
       return $this->_exec_bool( "lchgrp", $filename, $group );
    }
 
-   function rlchown( $filename, $user )
+   function lchown( $filename, $user )
    {
       return $this->_exec_bool( "lchown", $filename, $user );
    }
 
 
-   function rglob( $cwd, $pattern, $flags )
+   function glob( $cwd, $pattern, $flags )
    {
       return $this->_exec_vallist( "glob", $cwd, $pattern, $flags );
    }
 
 
-   function rstat( $filespec )
+   function stat( $filespec )
    {
       return $this->_exec_valarray( "stat", $filespec );
    }
 
 
-   function rlstat( $filespec )
+   function lstat( $filespec )
    {
       return $this->_exec_valarray( "lstat", $filespec );
    }
 
 
-   function rcopy( $source, $dest )
+   function copy( $source, $dest )
    {
       return $this->_exec_bool( "copy", $source, $dest );
    }
 
 
-   function rrename( $source, $dest )
+   function rename( $source, $dest )
    {
       return $this->_exec_bool( "rename", $source, $dest );
    }
 
 
-   function rlink( $target, $link )
+   function link( $target, $link )
    {
       return $this->_exec_bool( "link", $target, $link );
    }
 
 
-   function rsymlink( $target, $link )
+   function symlink( $target, $link )
    {
       return $this->_exec_bool( "symlink", $target, $link );
    }
 
 
-   function rmkdir( $path )
+   function mkdir( $path )
    {
       return $this->_exec_bool( "mkdir", $path );
    }
 
 
-   function rrmdir( $path )
+   function rmdir( $path )
    {
       return $this->_exec_bool( "rmdir", $path );
    }
 
 
-   function runlink( $filespec )
+   function unlink( $filespec )
    {
       return $this->_exec_bool( "unlink", $filespec );
    }
+
+
+   function sha1_file( $filespec )
+   {
+      return $this->_exec_val( "sha1_file", $filespec );
+   }
+
+
+   function can_hardlink( $target, $source )
+   {
+      return $this->_exec_bool( "can_hardlink", $target, $source );
+   }
+
+
+   function list_expired_items( $path, $max_items )
+   {
+      if ( ($r = $this->_exec_text( "list_expired_items", $path, $max_items )) == "" )
+         return array();
+
+      $work = explode( "\n", $r );
+      $r = array();
+      foreach( $work as $t )
+      {
+         $i = explode( ",", $t );
+         $r[trim(urldecode($i[0]))] = array( (int)trim($i[1]), (int)trim($i[2]) );
+      }
+
+      return $r;
+   }
+
+
+   function remove_expired_items( $path, $max_items, $debug = true )
+   {
+      return $this->_exec_val( "remove_expired_items", $path, $max_items, $debug );
+   }
+
+
 }
 
 

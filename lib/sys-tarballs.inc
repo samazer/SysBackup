@@ -45,7 +45,7 @@
  * @author Sam Azer <sam@azertech.net>
  * @version 0.01 (alpha)
  * @package aforms
- * @subpackage lib-general
+ * @subpackage lib-sys
  * @license http://www.gnu.org/licenses/agpl.html AGPL
  * @copyright 2001-2011 by Sam Azer, All rights reserved
  * @link http://www.azertech.net/
@@ -234,6 +234,12 @@ require_once "general-sysexec.inc";
 
 
 
+/**
+ *
+ * @package aforms
+ * @subpackage lib-sys
+ *
+ */
 class mktarball_util_c 
 {
    var $tar_name     = "tar";

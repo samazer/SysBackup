@@ -1,0 +1,7 @@
+*~
+phpdoc.ini
+doc/phpdoc
+lib/phpdoc
+lib/phpdoc.ini
+gendocs.sh
+lib/gendocs.sh

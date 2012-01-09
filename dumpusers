@@ -1,0 +1,111 @@
+#!/usr/bin/php
+<?php /* -*- mode: php; coding: utf-8-unix; -*- */
+/**
+ *
+ * Dump Users
+ *
+ * <p>Utilities to help with migration of a server
+ *
+ * <p>This script should read the password & group files in the
+ * specified directory and emit a number of UserMod commands
+ * that, when executed on a new server, will effectively
+ * recreate identical account information.
+ *
+ * <p><b>Usage</b>
+ * 
+ * <code>dumpusers [dir] >recreate-users.sh</code>
+ *
+ * <p>The <i>dir</i> parameter tells the script where to look for
+ * copies of the /etc/passwd, /etc/shadow, /etc/group,
+ * etc. files. Often this is a directory on the new server containing
+ * a copy of the /etc/ directory from the original server. If the
+ * script is run without any parameters it will attempt to read the
+ * original files in the /etc/ directory.
+ *
+ * <p><b>Output</b>
+ *
+ * <p>The output from the script is itself a script. It should be
+ * saved to a convenient file and reviewed for accuracy. If all goes
+ * well the script will recreate all the users and groups from the
+ * original server on the new server (not including the system users
+ * and groups which are most often not needed.) Output from the script
+ * looks something like the following sample:
+ *
+ * <pre>
+ *
+ * #
+ * # Account dump from /etc/ on dev3
+ * #
+ *
+ * # fredjones
+ * groupadd --gid 1000 fredjones
+ * useradd --gid 1000  --uid 1000  --home-dir "/home/fredjones"  --comment "fredjones"  \
+ *         --groups "cdrom,pulse"  --password "..."  --shell "/bin/bash" -M fredjones
+ *
+ * # fredsmith
+ * groupadd --gid 1001 fredsmith
+ * useradd --gid 1001  --uid 1001  --home-dir "/home/fredsmith"  --comment "fredsmith"  \
+ *         --password "..."  --shell "/bin/bash" -M fredsmith
+ *
+ * </pre>
+ *
+ * <p><b>Warning</b>
+ *
+ * <p>This script does not take into consideration several bits and
+ * pieces of information that are legal in the various password, group
+ * and shadow files. Review carefully the output from the script and,
+ * if necessary, take the time to either modify the output manually or
+ * update the script to properly handle the information that is not
+ * currently handled.
+ *
+ * <p><b>Copyright</b>
+ *
+ * <p>Copyright (c) 2009-2010 by Sam Azer, All Rights Reserved.
+ *
+ * <p>This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * <p>This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * <p>You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * @author Sam Azer <sam@azertech.net>
+ * @version 1.0
+ * @package sysbackup
+ * @subpackage sys-utils
+ * @license http://www.gnu.org/licenses/gpl.html GPL
+ * @copyright 2009-2010 by Sam Azer, All rights reserved
+ * @link http://www.azertech.net/
+ * @link http://www.samazer.net/about
+ *
+ *
+ */
+
+/**
+ *
+ * Do everything.
+ *
+ * <p>This script is very short because all of the work is done by the
+ * account_migration class in the sys-account-migration.inc library
+ * file. The contructor for the account_migration_c object loads the
+ * account information. The migration_commands() method generates the
+ * necessary migration script. Aside from those three lines (include,
+ * construct and migrate,) there are only two lines of code to
+ * determine if the caller has provided the path to the directory to
+ * scan. If not the default path of /etc/ is used.
+ *
+ */
+include "lib/sys-account-migration.inc";
+
+if ( !isset($argv[1]) || $argv[1] == "" )
+   $argv[1] = "/etc/";
+
+$accounts = new account_migration_c( $argv[1] );
+$accounts->migration_commands();
+

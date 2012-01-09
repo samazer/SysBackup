@@ -28,8 +28,8 @@
  *
  * @author Sam Azer <sam@azertech.net>
  * @version 0.01 (alpha)
- * @package server-maint
- * @subpackage sysbackup
+ * @package sysbackup
+ * @subpackage plugin
  * @license http://www.gnu.org/licenses/agpl.html AGPL
  * @copyright 2011 by Sam Azer, All rights reserved
  * @link http://www.azertech.net/
@@ -42,10 +42,14 @@
 
 
 
-class homedirs_plugin_c extends plugin_base_c
+/**
+ *
+ * @package sysbackup
+ * @subpackage plugin
+ *
+ */
+class homedirs_plugin_c extends sysbackup_plugin_base_c
 {
-   var $job_info;
-
    function __construct( &$application_object )
    {
       parent::__construct( $application_object );
@@ -60,8 +64,6 @@ class homedirs_plugin_c extends plugin_base_c
 
       $this->plugin_type        = "genbackup";
       $this->plugin_unique      = false;
-
-      $this->job_info = array();
    }
 
 
@@ -74,7 +76,7 @@ class homedirs_plugin_c extends plugin_base_c
     */
    function plugin_help()  
    {
-      $this->app->tee( "(help for this plugin is not available yet)" );
+      $this->tee( "(help for this plugin is not available yet)" );
    }
 
 
@@ -163,7 +165,7 @@ class homedirs_plugin_c extends plugin_base_c
 
       if ( !is_readable( $current_dir ) )
       {
-         $this->app->warning( "unable to read from '{$current_dir}'" );
+         $this->warning( "unable to read from '{$current_dir}'" );
          return true; // error
       }
 
@@ -181,8 +183,8 @@ class homedirs_plugin_c extends plugin_base_c
 
       if ( !count( $all_found ) )
       {
-         if ( $this->app->verbose )
-            $this->app->warning( "'{$current_dir}' is empty" );
+         if ( $this->verbose() )
+            $this->warning( "'{$current_dir}' is empty" );
 
          // not an error but...
          // in some cases this can result in a missing folder
@@ -207,21 +209,21 @@ class homedirs_plugin_c extends plugin_base_c
          {
             if ( !is_readable( $work_dir ) )
             {
-               $this->app->warning( "unable to read from '{$work_dir}'" );
+               $this->warning( "unable to read from '{$work_dir}'" );
                $errors_detected = true;
                continue;
             }
 
             if ( is_dir( $work_dir ) )
             {
-               $archive = $work_dir . $this->app->tar->tarball_ext();
-               if ( $this->app->vfs_tarball_folder( $archive, $work_dir, $options ) )
+               $archive = $work_dir . $this->tarball_ext();
+               if ( $this->vfs_tarball_folder( $archive, $work_dir, $options ) )
                   $errors_detected = true;
             }
               else 
             {
-               $archive = $work_dir . $this->app->tar->compressor_ext();
-               if ( $this->app->vfs_compress_file( $archive, $work_dir, $options ) )
+               $archive = $work_dir . $this->compressed_file_ext();
+               if ( $this->vfs_compress_file( $archive, $work_dir, $options ) )
                   $errors_detected = true;
             }
          }
@@ -242,17 +244,15 @@ class homedirs_plugin_c extends plugin_base_c
     */
    function job_exec( $configuration )
    {
-      $this->job_info = $configuration;
+      // let the parent method take care of common operations
+      if ( ($r = parent::job_exec( $configuration )) !== false )
+         return $r;
 
       $problems_found = false;
       $required_options = $this->required_options();
       foreach ( $required_options as $opt => $info )
          $$opt = $this->job_info[$opt];
 
-      if ( isset($this->job_info["subfolder"]) )
-         if ( $this->app->vfs_subfolder( $this->job_info["subfolder"] ) != false )
-            $this->app->fatal( "unable to select {$this->job_info['subfolder']} subfolder" );
-          
       foreach ( $this->job_info["include"] as $home => $options )
       {
          // merge the job exclude option with the

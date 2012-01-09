@@ -38,8 +38,8 @@
  *
  * @author Sam Azer <sam@azertech.net>
  * @version 0.01 (alpha)
- * @package server-maint
- * @subpackage sysbackup
+ * @package sysbackup
+ * @subpackage plugin
  * @license http://www.gnu.org/licenses/agpl.html AGPL
  * @copyright 2011 by Sam Azer, All rights reserved
  * @link http://www.azertech.net/
@@ -53,6 +53,12 @@ require_once "homedirs.plugin";
 
 
 
+/**
+ *
+ * @package sysbackup
+ * @subpackage plugin
+ *
+ */
 class maildirs_plugin_c extends homedirs_plugin_c
 {
    function __construct( &$application_object )

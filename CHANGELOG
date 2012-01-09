@@ -1,3 +1,29 @@
+-*- mode: text; coding: utf-8-unix; -*- 
+
+
+(next)
+
+      * bug#498: added the dump users plugin and associated job
+        configuration. Very easy to complete because the code was
+        written long ago for the mail server.
+
+      * installed a define for the name of the internal plugin.
+
+      * added the exec method for the internal plugin which can exec a
+        system command
+
+      * bug#502: fixed a bug where the system would cycle through the
+        transfer queue even when there are no remote servers
+        registered.
+
+      * bug#487: added some log messages to keep track of sysbackup
+        usage.
+
+      * removed the sysbackup-specific internal plugin code from the
+        General Plugins library - moved it into the sysbackup
+        override.
+
+
 SysBackup v3.015alpha:
 
    2011.12.14 SA:

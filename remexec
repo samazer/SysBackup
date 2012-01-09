@@ -10,6 +10,33 @@
  * <p>This is really the test script for the sys-remote-filesys.inc
  *    module and remote_filesystem_c class.
  *
+ *
+ * <p><b>Copyright</b>
+ *
+ * <p>Copyright (c) 2009-2010 by Sam Azer, All Rights Reserved.
+ *
+ * <p>This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * <p>This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * <p>You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * @author Sam Azer <sam@azertech.net>
+ * @version 0.01a
+ * @package sysbackup
+ * @subpackage sys-test
+ * @license http://www.gnu.org/licenses/gpl.html GPL
+ * @copyright 2011 by Sam Azer, All rights reserved
+ * @link http://www.azertech.net/
+ * @link http://www.samazer.net/about
+ *
  */
 
 
@@ -22,6 +49,12 @@ $binary  = "/usr/bin/ssh";
 $options = "";
 
 
+/**
+ *
+ * @package sysbackup
+ * @subpackage sys-test
+ *
+ */
 class remote_exec_c extends teelog_c
 {
    var $progname;
@@ -98,7 +131,7 @@ class remote_exec_c extends teelog_c
          case "disk_free_space":
             $this->params_required( array( "path" ) );
 
-            if ( ($r = $this->remsys->rdisk_free_space( $this->params[0] )) === false )
+            if ( ($r = $this->remsys->disk_free_space( $this->params[0] )) === false )
                $this->fatal_file_error();
 
             $this->result( $r );
@@ -107,7 +140,17 @@ class remote_exec_c extends teelog_c
          case "disk_total_space":
             $this->params_required( array( "path" ) );
 
-            if ( ($r = $this->remsys->rdisk_total_space( $this->params[0] )) === false )
+            if ( ($r = $this->remsys->disk_total_space( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+
+         case "sha1_file":
+            $this->params_required( array( "path" ) );
+
+            if ( ($r = $this->remsys->sha1_file( $this->params[0] )) === false )
                $this->fatal_file_error();
 
             $this->result( $r );
@@ -117,7 +160,7 @@ class remote_exec_c extends teelog_c
          case "realpath":
             $this->params_required( array( "path" ) );
 
-            if ( ($r = $this->remsys->rrealpath( $this->params[0] )) === false )
+            if ( ($r = $this->remsys->realpath( $this->params[0] )) === false )
                $this->fatal_file_error();
 
             $this->result( $r );
@@ -126,7 +169,7 @@ class remote_exec_c extends teelog_c
          case "readlink":
             $this->params_required( array( "path" ) );
 
-            if ( ($r = $this->remsys->rreadlink( $this->params[0] )) === false )
+            if ( ($r = $this->remsys->readlink( $this->params[0] )) === false )
                $this->fatal_file_error();
 
             $this->result( $r );
@@ -137,7 +180,7 @@ class remote_exec_c extends teelog_c
          case "filesize":
             $this->params_required( array( "path/filename" ) );
 
-            if ( ($r = $this->remsys->rfilesize( $this->params[0] )) === false )
+            if ( ($r = $this->remsys->filesize( $this->params[0] )) === false )
                $this->fatal_file_error();
 
             $this->result( $r );
@@ -146,7 +189,7 @@ class remote_exec_c extends teelog_c
          case "filetype":
             $this->params_required( array( "path/filename" ) );
 
-            if ( ($r = $this->remsys->rfiletype( $this->params[0] )) === false )
+            if ( ($r = $this->remsys->filetype( $this->params[0] )) === false )
                $this->fatal_file_error();
 
             $this->result( $r );
@@ -155,7 +198,7 @@ class remote_exec_c extends teelog_c
          case "fileatime":
             $this->params_required( array( "path/filename" ) );
 
-            if ( ($r = $this->remsys->rfileatime( $this->params[0] )) === false )
+            if ( ($r = $this->remsys->fileatime( $this->params[0] )) === false )
                $this->fatal_file_error();
 
             $this->result( $r );
@@ -164,7 +207,7 @@ class remote_exec_c extends teelog_c
          case "filectime":
             $this->params_required( array( "path/filename" ) );
 
-            if ( ($r = $this->remsys->rfilectime( $this->params[0] )) === false )
+            if ( ($r = $this->remsys->filectime( $this->params[0] )) === false )
                $this->fatal_file_error();
 
             $this->result( $r );
@@ -173,7 +216,7 @@ class remote_exec_c extends teelog_c
          case "filemtime":
             $this->params_required( array( "path/filename" ) );
 
-            if ( ($r = $this->remsys->rfilemtime( $this->params[0] )) === false )
+            if ( ($r = $this->remsys->filemtime( $this->params[0] )) === false )
                $this->fatal_file_error();
 
             $this->result( $r );
@@ -182,7 +225,7 @@ class remote_exec_c extends teelog_c
          case "fileperms":
             $this->params_required( array( "path/filename" ) );
 
-            if ( ($r = $this->remsys->rfileperms( $this->params[0] )) === false )
+            if ( ($r = $this->remsys->fileperms( $this->params[0] )) === false )
                $this->fatal_file_error();
 
             $this->result( $r );
@@ -191,7 +234,7 @@ class remote_exec_c extends teelog_c
          case "linkinfo":
             $this->params_required( array( "path/filename" ) );
 
-            if ( ($r = $this->remsys->rlinkinfo( $this->params[0] )) === false )
+            if ( ($r = $this->remsys->linkinfo( $this->params[0] )) === false )
                $this->fatal_file_error();
 
             $this->result( $r );
@@ -202,7 +245,7 @@ class remote_exec_c extends teelog_c
          case "filegroup":
             $this->params_required( array( "path/filename" ) );
 
-            if ( ($r = $this->remsys->rfilegroup( $this->params[0] )) === false )
+            if ( ($r = $this->remsys->filegroup( $this->params[0] )) === false )
                $this->fatal_file_error();
 
             $this->result( $r );
@@ -211,7 +254,7 @@ class remote_exec_c extends teelog_c
          case "fileowner":
             $this->params_required( array( "path/filename" ) );
 
-            if ( ($r = $this->remsys->rfileowner( $this->params[0] )) === false )
+            if ( ($r = $this->remsys->fileowner( $this->params[0] )) === false )
                $this->fatal_file_error();
 
             $this->result( $r );
@@ -224,7 +267,7 @@ class remote_exec_c extends teelog_c
          case "file":
             $this->params_required( array( "path/filename" ) );
 
-            if ( ($r = $this->remsys->rreadfile( $this->params[0] )) === false )
+            if ( ($r = $this->remsys->readfile( $this->params[0] )) === false )
                $this->fatal_file_error();
 
             $this->tee( trim($r) );
@@ -234,65 +277,65 @@ class remote_exec_c extends teelog_c
 
          case "file_exists":
             $this->params_required( array( "path/filename" ) );
-            $this->result( $this->remsys->rfile_exists( $this->params[0] ));
+            $this->result( $this->remsys->file_exists( $this->params[0] ));
             break;
 
          case "is_dir":
             $this->params_required( array( "path/filename" ) );
-            $this->result( $this->remsys->ris_dir( $this->params[0] ));
+            $this->result( $this->remsys->is_dir( $this->params[0] ));
             break;
 
          case "is_file":
             $this->params_required( array( "path/filename" ) );
-            $this->result( $this->remsys->ris_file( $this->params[0] ));
+            $this->result( $this->remsys->is_file( $this->params[0] ));
             break;
 
          case "is_link":
             $this->params_required( array( "path/filename" ) );
-            $this->result( $this->remsys->ris_link( $this->params[0] ));
+            $this->result( $this->remsys->is_link( $this->params[0] ));
             break;
 
          case "is_readable":
             $this->params_required( array( "path/filename" ) );
-            $this->result( $this->remsys->ris_readable( $this->params[0] ));
+            $this->result( $this->remsys->is_readable( $this->params[0] ));
             break;
 
          case "is_writable":
          case "is_writeable":
             $this->params_required( array( "path/filename" ) );
-            $this->result( $this->remsys->ris_writable( $this->params[0] ));
+            $this->result( $this->remsys->is_writable( $this->params[0] ));
             break;
 
          case "is_executable":
             $this->params_required( array( "path/filename" ) );
-            $this->result( $this->remsys->ris_executable( $this->params[0] ));
+            $this->result( $this->remsys->is_executable( $this->params[0] ));
             break;
 
 
 
          case "chgrp":
             $this->params_required( array( "filename", "group" ) );
-            $this->result( $this->remsys->rchgrp( $this->params[0], $this->params[1] ));
+            $this->result( $this->remsys->chgrp( $this->params[0], $this->params[1] ));
             break;
 
          case "chmod":
             $this->params_required( array( "filename", "mode" ) );
-            $this->result( $this->remsys->rchmod( $this->params[0], $this->params[1] ));
+            $this->result( $this->remsys->chmod( $this->params[0], $this->params[1] ));
             break;
 
          case "chown":
             $this->params_required( array( "filename", "user" ) );
-            $this->result( $this->remsys->rchown( $this->params[0], $this->params[1] ));
+            $this->result( $this->remsys->chown( $this->params[0], $this->params[1] ));
             break;
 
          case "lchgrp":
             $this->params_required( array( "filename", "group" ) );
-            $this->result( $this->remsys->rlchgrp( $this->params[0], $this->params[1] ));
+            $this->result( $this->remsys->lchgrp( $this->params[0], $this->params[1] ));
             break;
 
          case "lchown":
             $this->params_required( array( "filename", "user" ) );
-            $this->result( $this->remsys->rlchown( $this->params[0], $this->params[1] ));
+            $this->result( $this->remsys->lchown( $this->params[0], $this->params[1] ));
             break;
 
 
@@ -300,7 +343,7 @@ class remote_exec_c extends teelog_c
          case "glob":
             $this->params_required( array( "cwd", "pattern", "flags" ) );
 
-            if ( ($r = $this->remsys->rglob( $this->params[0], 
+            if ( ($r = $this->remsys->glob( $this->params[0], 
                                              $this->params[1], 
                                              $this->params[2] )) === false )
                $this->fatal_file_error();
@@ -317,8 +360,8 @@ class remote_exec_c extends teelog_c
             $this->params_required( array( "path/filename" ) );
 
             if ( $this->command == "stat" )
-               $r = $this->remsys->rstat( $this->params[0] );
-            else $r = $this->remsys->rlstat( $this->params[0] );
+               $r = $this->remsys->stat( $this->params[0] );
+            else $r = $this->remsys->lstat( $this->params[0] );
 
             if ( $r === false )
                $this->fatal_file_error();
@@ -332,7 +375,7 @@ class remote_exec_c extends teelog_c
 
          case "copy":
             $this->params_required( array( "source", "dest" ) );
-            if ( ($r = $this->remsys->rcopy( $this->params[0], $this->params[1] )) === false )
+            if ( ($r = $this->remsys->copy( $this->params[0], $this->params[1] )) === false )
                $this->fatal_file_error();
 
             $this->result( true );
@@ -340,17 +383,22 @@ class remote_exec_c extends teelog_c
 
          case "rename":
             $this->params_required( array( "source", "dest" ) );
-            if ( ($r = $this->remsys->rrename( $this->params[0], $this->params[1] )) === false )
+            if ( ($r = $this->remsys->rename( $this->params[0], $this->params[1] )) === false )
                $this->fatal_file_error();
 
             $this->result( true );
+            break;
+
+         case "can_hardlink":
+            $this->params_required( array( "target", "link" ) );
+            $this->result( $this->remsys->can_hardlink($this->params[0], $this->params[1]) );
             break;
 
 
 
          case "link":
             $this->params_required( array( "target", "link" ) );
-            if ( ($r = $this->remsys->rlink( $this->params[0], $this->params[1] )) === false )
+            if ( ($r = $this->remsys->link( $this->params[0], $this->params[1] )) === false )
                $this->fatal_file_error();
 
             $this->result( true );
@@ -358,17 +406,37 @@ class remote_exec_c extends teelog_c
 
          case "symlink":
             $this->params_required( array( "target", "link" ) );
-            if ( ($r = $this->remsys->rsymlink( $this->params[0], $this->params[1] )) === false )
+            if ( ($r = $this->remsys->symlink( $this->params[0], $this->params[1] )) === false )
                $this->fatal_file_error();
 
             $this->result( true );
             break;
 
+         case "list_expired_items":
+            $this->params_required( array( "path", "max_items" ) );
+
+            if ( ($r = $this->remsys->list_expired_items($this->params[0], $this->params[1])) === false )
+               $this->fatal_file_error();
+
+            var_dump( $r );
+            exit();
+            break;
+
+         case "remove_expired_items":
+            $this->params_required( array( "path", "max_items", "debug" ) );
+
+            if ( ($r = $this->remsys->remove_expired_items($this->params[0], $this->params[1], $this->params[2])) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
+
 
 
          case "mkdir":
             $this->params_required( array( "path" ) );
-            if ( ($r = $this->remsys->rmkdir( $this->params[0], 0777, true )) === false )
+            if ( ($r = $this->remsys->mkdir( $this->params[0], 0777, true )) === false )
                $this->fatal_file_error();
 
             $this->result( true );
@@ -376,7 +444,7 @@ class remote_exec_c extends teelog_c
 
          case "rmdir":
             $this->params_required( array( "path" ) );
-            if ( ($r = $this->remsys->rrmdir( $this->params[0] )) === false )
+            if ( ($r = $this->remsys->rmdir( $this->params[0] )) === false )
                $this->fatal_file_error();
 
             $this->result( true );
@@ -384,7 +452,7 @@ class remote_exec_c extends teelog_c
 
          case "unlink":
             $this->params_required( array( "path/filename" ) );
-            if ( ($r = $this->remsys->runlink( $this->params[0] )) === false )
+            if ( ($r = $this->remsys->unlink( $this->params[0] )) === false )
                $this->fatal_file_error();
 
             $this->result( true );
@@ -488,8 +556,16 @@ EOT;
    }
 
 
-   function __construct( $argv )
+   function __construct( $fn = "" )
    {
+      parent::__construct( $fn );
+   }
+
+
+   function main( $argv )
+   {
+      parent::__construct();
+
       global $binary, $key, $options, $user, $server;
 
       if ( count( $argv ) == 1 )
@@ -534,6 +610,7 @@ EOT;
 
 
 
-$exec_obj = new remote_exec_c( $argv );
+$exec_obj = new remote_exec_c();
+$exec_obj->main( $argv );
 return 0;
 

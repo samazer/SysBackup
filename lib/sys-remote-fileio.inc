@@ -29,7 +29,7 @@
  * @author Sam Azer <sam@azertech.net>
  * @version 0.01 (alpha)
  * @package aforms
- * @subpackage lib-general
+ * @subpackage lib-sys
  * @license http://www.gnu.org/licenses/agpl.html AGPL
  * @copyright 2011 by Sam Azer, All rights reserved
  * @link http://www.azertech.net/
@@ -52,6 +52,12 @@ define( "REMFILEIO_DEFAULTSCPOPTIONS", "-B -p -q" );
 
 
 
+/**
+ *
+ * @package aforms
+ * @subpackage lib-sys
+ *
+ */
 class remote_fileio_c extends remote_filesystem_c
 {
    var $scp_binary;
@@ -179,6 +185,28 @@ class remote_fileio_c extends remote_filesystem_c
    function scp_from_remote( $source, $dest )
    {
       return $this->_scp( "{$this->scp_cmd} '{$this->scp_filecopy_userid}@{$this->remote_server}:{$source}' '{$dest}'" );
+   }
+
+
+   function file_put_contents( $fn, $content )
+   {
+      if ( ($t = get_temp_filename( "remote-" )) === false )
+         $this->teelog->fatal( "unable to get a temp file name" );
+
+      if ( file_put_contents( $t, $content ) === false )
+         $this->teelog->fatal( "unable to write content to temp file ({$t})" );
+
+      $r = $this->scp_to_remote( $t, $fn );
+
+      if ( unlink( $t ) === false )
+         $this->teelog->fatal( "unable to unlink temp file ({$t})" );
+
+      // scp return false on success, file_put_contents() returns #bytes written
+      if ( $r == false )
+         return strlen( $content );
+
+      // file_put_contents() returns false on failure
+      return false;
    }
 }
 

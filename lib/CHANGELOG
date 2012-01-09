@@ -1,0 +1,103 @@
+-*- mode: text; coding: utf-8-unix; -*- 
+
+AFORMs library:
+
+      * Added the disk_usage() function which calls /usr/bin/du and
+        returns the total number of bytes (apparent) used by a
+        particular folder (or file - but filesize() is better for
+        files.)
+
+      * Added remove_expired_items() function that keeps the most
+        recent $max_items in a folder and deletes the remaining
+        (folders or files & folders.)
+
+      * improved the error message returned by some of the
+        remote_filesystem_c() functions in sys-remote-filesystem.inc
+        for cases where there is an SSH permissions problem. The error
+        message now specifies that it comes from a module that is
+        talking to a remote server (big detail!) and suggests that the
+        user should check the secure log.
+
+      * Factored out the file code from the log and tee classes in
+        general-log and general-tee - put it into a class called
+        logfile_c(). This new class has the ability to buffer any
+        output it receives before the log file is open. This is
+        important because the plugin framework can't know how to open
+        the log file until after it is initialized but the typical app
+        needs to emit some output before it can load the configuration
+        file. The code for the logfile_c() class is a bit convoluted
+        but everything else is now much simpler.
+
+      * added get_temp_dir() and get_temp_filename() to
+        general-utils.inc.
+
+      * added rfile_get_contents() as an alias for rreadfile() because
+        I keep forgetting the name rreadfile().
+
+      * added rfile_put_contents() to the sys-remote-fileio.inc
+        module. The content is written to a temp file then copied
+        using SCP to the remote system.
+
+      * added two functions to General SysUtils:
+
+        - subfolder_sizes() calls du and returns the results in an
+          array.
+
+        - can_hardlink() uses brute force to determine if it is
+          possible to hardlink a file from one folder to another.
+
+      * Override the app_help() method to implement a custom help
+        message for the app. Moved the exit() call from the option
+        handler to the app_help() method so that the exit behavior can
+        be changed by the application. Note also that app_help() does
+        not log the fact that the application has stopped. This is
+        probably okay in most cases as the app with either not log
+        anything when called for help or it will log the fact that it
+        produced a help screen before stopping.
+
+      * fixed some obvious problems with the logger: the log file was
+        being opened in write mode instead of the desired append mode
+        and the file was not being locked on write. There was no trap
+        for infinite loops caused by disk full conditions. These
+        problems have been fixed. Also added the process ID to the log
+        prefix so that it will be possible to identify which log entry
+        belongs to which running process in the event that more than
+        one process is logging to the same file.
+
+      * added ability to sequentially output an array of lines of text
+        to the log() and tee() methods.
+
+      * bug#487 fatal errors are now logged to the application log as
+        well as the display log.
+
+      * removed sysbackup-specific code from the General Plugins
+        library. Created the appropriate override in the sysbackup
+        modules.
+
+      * started tinkering with phpdt - very nice!
+        http://pear.php.net/package/Testing_DocTest
+        http://code.google.com/p/testing-doctest/
+        http://code.google.com/p/testing-doctest/wiki/Documentation
+
+      * tinkering again with PhpDocumentor - quirky but useful:
+        http://www.phpdoc.org/
+        http://manual.phpdoc.org/HTMLSmartyConverter/HandS/phpDocumentor/tutorial_phpDocumentor.quickstart.pkg.html
+
+      * added some comments and some string/array functions:
+
+        - single_spaces() - converts multiple spaces to single 
+                            spaces
+
+        - find_prefixed_value() find a key:value and returns the 
+                            value
+
+        - find_array_element_text() find a key => value in an array 
+                            and return the key
+
+   2011.12.14 SA:
+
+      * added support for PHP v5.3.2 in lib/general-tee.inc
+
+      * bug#494 added a check for plugins named 'internal' and error
+        out if found.
+

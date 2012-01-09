@@ -1,7 +1,12 @@
 <?php /* -*- mode: php; mode: mmm; coding: utf-8-unix; -*- */
 /**
  *
- * Dummy Plugin
+ * dump users plugin
+ *
+ * Utility that can be helpful when migrating accounts from one server
+ * to the next. Emits a shell script that, when executed on the target
+ * system, creates the user accounts that existed on the backed-up
+ * system.
  *
  *
  * <p><b>Copyright</b>
@@ -33,7 +38,7 @@
  */
 
 
-//require_once "lib/general-plugins.inc";
+require_once "lib/sys-account-migration.inc";
 
 
 /**
@@ -42,19 +47,19 @@
  * @subpackage plugin
  *
  */
-class dummy_plugin_c extends sysbackup_plugin_base_c
+class dumpusers_plugin_c extends sysbackup_plugin_base_c
 {
    function __construct( &$application_object )
    {
       parent::__construct( $application_object );
 
-      $this->plugin_name        = "dummy";
-      $this->plugin_title       = "Sample do-nothing Plugin";
+      $this->plugin_name        = "dumpusers";
+      $this->plugin_title       = "Dump Users";
       $this->plugin_version     = "0.01a";
-      $this->plugin_description = "This is a placeholder plugin that does nothing";
+      $this->plugin_description = "This plugin produces a script that can re-create the user accounts found on the backed-up system";
 
-      $this->plugin_enabled     = false;
-      $this->plugin_rootreqd    = false;  // true if root permissions required
+      $this->plugin_enabled     = true;
+      $this->plugin_rootreqd    = true;  // true if root permissions required
 
       $this->plugin_type        = "genbackup";
       $this->plugin_unique      = false;
@@ -166,13 +171,47 @@ class dummy_plugin_c extends sysbackup_plugin_base_c
       if ( ($r = parent::job_exec( $configuration )) !== false )
          return $r;
 
-      $this->warning( "this job doesn't actually do anything!" );
+      $hostname = $this->app->get_hostname();
+      $stamp    = date("r");
+      $r        = <<< EOT
+#!/bin/sh
+# 
+# recreate users .sh
+#
+# This script is based on the password and group files in the /etc/ folder of 
+# {$hostname} as at {$stamp}. 
+# The account create and modify commands below, when executed on a new server, 
+# will effectively recreate (almost) identical account information.
+#
+# Copies of the original password, group and shadow files should be found in 
+# the etc.tgz tarball which should be created along with this script. This 
+# script should be reviewed for accuracy. If all goes well this script should 
+# be able to recreate all the users and groups from the original server on the 
+# new server (not including the system users and groups which are most often 
+# not needed.) 
+#
+# Warning
+#
+# This script does not take into consideration some rarely used bits and pieces 
+# of information that are legal in the various password, group and shadow files. 
+# Review this script carefully and, if necessary, take the time to either modify 
+# the script or manually manage the password and group information that is not 
+# currently handled by the script.
+#
+#
+EOT;
 
-      // no problem detected
-      return false;
+      $accounts = new account_migration_c( "/etc/" );
+
+      capture_begin();
+      $accounts->migration_commands();
+      $r .= capture_end();
+
+      $sh_fn = "recreate_users.sh" . $this->compressed_file_ext();
+      $this->vfs_compress_string( $sh_fn, $r );
    }
 }
 
 
-$this->add_plugin( new dummy_plugin_c( $this ) );
+$this->add_plugin( new dumpusers_plugin_c( $this ) );
 

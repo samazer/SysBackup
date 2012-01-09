@@ -145,7 +145,7 @@
  * @author Sam Azer <sam@azertech.net>
  * @version 0.01 (alpha)
  * @package aforms
- * @subpackage lib-general
+ * @subpackage lib-sys
  * @license http://www.gnu.org/licenses/agpl.html AGPL
  * @copyright 2011 by Sam Azer, All rights reserved
  * @link http://www.azertech.net/
@@ -154,6 +154,15 @@
  */
 
 
+/**
+ * Filter buffer size
+ *
+ * The size of the buffer into which output from the main command will
+ * be written. When copying output from the main command and writing
+ * it to the filter, the sysfilter() function will get this number of
+ * bytes per call (maximum.)
+ *
+ */
 define( "FILTERBUFFER_SIZE", 128*1024 );
 
 

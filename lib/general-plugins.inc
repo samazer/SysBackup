@@ -69,7 +69,7 @@
  * @author Sam Azer <sam@azertech.net>
  * @version 0.01 (alpha)
  * @package aforms
- * @subpackage lib-general
+ * @subpackage lib-sys
  * @license http://www.gnu.org/licenses/agpl.html AGPL
  * @copyright 2011 by Sam Azer, All rights reserved
  * @link http://www.azertech.net/
@@ -81,6 +81,8 @@
 
 define( "PLUGGABLEAPP_PLUGIN_FILEEXT", ".plugin" );
 define( "PLUGGABLEAPP_CONFIG_FILEEXT", ".conf" );
+define( "PLUGGABLEAPP_PLUGIN_INTERNAL", "internal" );
+
 
 
 require_once "general-tee.inc";
@@ -89,7 +91,62 @@ require_once "general-sysexec.inc";
 require_once "general-namedparameters.inc";
 
 
-class plugin_base_c
+/**
+ * 
+ * Plugin APP class
+ *
+ * A small utility to take care of a reference to the main application.
+ *
+ */
+class plugin_appreference_c
+{
+   var $app;          // reference to the main app object (ie: to access the log and error objects)
+
+   function __construct( &$application_object )
+   {
+      $this->app = &$application_object;
+   }
+
+
+   function _message_prefix_text()
+   {
+      return $this->plugin_shortref() . ": ";
+   }
+
+
+   function log( $msg, $eol = "\n" )
+   {
+      $this->app->log( $this->_message_prefix_text() . $msg, $eol );
+   }
+
+
+   function tee( $msg, $eol = "\n" )
+   {
+      $this->app->tee( $this->_message_prefix_text() . $msg, $eol );
+   }
+
+
+   function warning( $msg )
+   {
+      $this->app->warning( $this->_message_prefix_text() . $msg );
+   }
+
+
+   function fatal( $msg, $stop_flag = true )
+   {
+      $this->app->fatal( $this->_message_prefix_text() . $msg, $stop_flag );
+   }
+}
+
+
+
+/**
+ *
+ * @package aforms
+ * @subpackage lib-sys
+ *
+ */
+class plugin_base_c extends plugin_appreference_c
 {
    var $plugin_name;         //
    var $plugin_title;        //
@@ -100,8 +157,6 @@ class plugin_base_c
 
    var $plugin_type;         // a type string to identify special plugins
    var $plugin_unique;       // true if only one plugin of this type is allowed
-
-   var $app;                 // a reference to the application that loaded the plugin
 
    var $debug_sysexec;       // true to show exec/sysexec/sysfilter commands
 
@@ -140,6 +195,17 @@ class plugin_base_c
    function plugin_instance()
    {
       return $this->plugin_title . " " . $this->plugin_version;
+   }
+
+
+  /**
+   *
+   * A shorter version of the instance string
+   *
+   */
+   function plugin_shortref()
+   {
+      return $this->plugin_name;
    }
 
 
@@ -286,6 +352,8 @@ class plugin_base_c
 
    function __construct( &$application_object )
    {
+      parent::__construct( $application_object );
+
       $this->debug_sysexec      = false;
 
       $this->plugin_name        = "dummy";
@@ -294,14 +362,18 @@ class plugin_base_c
       $this->plugin_description = "dummy plugin sample";
       $this->plugin_enabled     = false;
       $this->plugin_unique      = false;
-
-      $this->app = &$application_object;
    }
 }
 
 
 
 
+/**
+ *
+ * @package aforms
+ * @subpackage lib-sys
+ *
+ */
 class plugin_framework_c extends teelog_c
 {
    var $app_title;
@@ -312,7 +384,7 @@ class plugin_framework_c extends teelog_c
 
    var $admin_email;
 
-   var $verbose = false;  // flag true if debug info requested
+   var $verbose_flag  = false; // flag true if debug info requested
    var $app_exec_flag = false; // true triggers events. See the --no-exec and --exec options
    var $app_exec_option = false; // true if the --no-exec or --exec option specified
 
@@ -353,6 +425,7 @@ class plugin_framework_c extends teelog_c
    function app_help()
    {
       $this->tee( "(help not available yet)" );
+      exit(0);
    }
 
 
@@ -481,12 +554,12 @@ class plugin_framework_c extends teelog_c
    }
 
 
-   function set_verbose( $flg = -1 )
+   function verbose( $flg = -1 )
    {
       if ( $flg === -1 )
-         return $this->verbose;
+         return $this->verbose_flag;
 
-      return $this->verbose = $flg;
+      return $this->verbose_flag = $flg;
    }
 
 
@@ -507,7 +580,7 @@ class plugin_framework_c extends teelog_c
       {
          case "-v":
          case "--verbose":
-            $this->set_verbose(true);
+            $this->verbose(true);
             return true;
 
          case "-dx":
@@ -550,7 +623,7 @@ class plugin_framework_c extends teelog_c
          case "-h":
          case "--help":
             $this->app_help();
-            exit(0);
+            return true;
 
          case "--dump-config":
             $this->tee("");
@@ -596,6 +669,27 @@ class plugin_framework_c extends teelog_c
    }
 
 
+   /**
+    *
+    * Internal Plugin
+    *
+    * Job information that references the Internal Plugin are sent to
+    * this function.
+    *
+    * Note that the name of the internal plugin is assigned to the
+    * PLUGGABLEAPP_PLUGIN_INTERNAL define. It is currently 'internal'
+    *
+    * Internal jobs all have a method name. Some of the methods
+    * require additional parameters.
+    *
+    */
+
+   function plugin_internal( $job )
+   {
+      $this->fatal( "the internal plugin has not been enabled" );
+   }
+
+
    function add_plugin_disabled( &$obj )
    {
       $name   = $obj->plugin_name;
@@ -616,6 +710,11 @@ class plugin_framework_c extends teelog_c
       $name   = $obj->plugin_name;
       $type   = $obj->plugin_type;
       $unique = $obj->plugin_unique;
+
+
+      if ( $name === PLUGGABLEAPP_PLUGIN_INTERNAL )
+         $this->fatal( "plugins with the name '" . PLUGGABLEAPP_PLUGIN_INTERNAL . "' are not allowed" );
+
 
       if ( $obj->plugin_enabled )
       {
@@ -660,7 +759,7 @@ class plugin_framework_c extends teelog_c
 
    function load_app_config()
    {
-      if ( $this->verbose )
+      if ( $this->verbose() )
          $this->tee( "loading app config \"{$this->app_conffile}\"" );
 
       if ( !is_readable( $this->app_conffile ) )
@@ -672,7 +771,7 @@ class plugin_framework_c extends teelog_c
 
    function load_plugins()
    {
-      if ( $this->verbose )
+      if ( $this->verbose() )
          $this->tee( "loading plugins from \"{$this->app_plugindir}\"" );
 
       if ( !file_exists( $this->app_plugindir ) )
@@ -686,7 +785,7 @@ class plugin_framework_c extends teelog_c
       {
          $plugin_file = str_replace( "//", "/", $this->app_plugindir . "/" . $file );
 
-         if ( $this->verbose )
+         if ( $this->verbose() )
            $this->tee( "  loading plugin: {$file}" );
 
          include $plugin_file;
@@ -697,7 +796,7 @@ class plugin_framework_c extends teelog_c
       {
          $c = $c . " plugin(s) not loaded for unknown reason(s)";
 
-         if ( $this->verbose )
+         if ( $this->verbose() )
             $this->fatal( $c );
          else $this->warning( $c );
       }
@@ -741,7 +840,7 @@ class plugin_framework_c extends teelog_c
 
       if ( isset( $job_info["plugin"] ) 
         && ($job_info["plugin"] > "") 
-        && ($job_info["plugin"] != "internal") 
+        && ($job_info["plugin"] != PLUGGABLEAPP_PLUGIN_INTERNAL) 
          )
          if ( isset( $this->plugin[$plugin] ) )
          {
@@ -762,7 +861,7 @@ class plugin_framework_c extends teelog_c
 
       if ( $job_info["enabled"] )
       {
-         if ( ($plugin != "internal") && !isset( $this->plugin[$plugin] ) )
+         if ( ($plugin != PLUGGABLEAPP_PLUGIN_INTERNAL) && !isset( $this->plugin[$plugin] ) )
             $this->fatal( "job id '{$id}' in '{$config_file}' refers to "
                         . "plugin '{$plugin}' which is not loaded" );
 
@@ -798,7 +897,7 @@ class plugin_framework_c extends teelog_c
 
             $this->events[$event][$jobindex] = $job_info;
 
-            if ( $this->verbose )
+            if ( $this->verbose() )
                $this->tee( "    Adding {$id} to {$event}:{$jobindex} running {$plugin}" );
 
             return false;
@@ -811,7 +910,7 @@ class plugin_framework_c extends teelog_c
 
       $this->disabled_jobs[] = $dis;
 
-      if ( $this->verbose )
+      if ( $this->verbose() )
          $this->tee( "    Skipping job " . $dis );
 
       return false;
@@ -820,7 +919,7 @@ class plugin_framework_c extends teelog_c
 
    function load_jobs()
    {
-      if ( $this->verbose )
+      if ( $this->verbose() )
          $this->tee( "loading jobs from \"{$this->app_confdir}\"" );
 
       if ( chdir( $this->app_confdir ) === false )
@@ -832,7 +931,7 @@ class plugin_framework_c extends teelog_c
       {
          $config_file = str_replace( "//", "/", $this->app_confdir . "/" . $file );
 
-         if ( $this->verbose )
+         if ( $this->verbose() )
            $this->tee( "  loading job: {$config_file}" );
 
          include $config_file;
@@ -877,9 +976,7 @@ class plugin_framework_c extends teelog_c
 
       $this->default_flag_args();
 
-      $this->app_title();
-
-      if ( $this->verbose )
+      if ( $this->verbose() )
          $this->tee( "initializing..." );
 
       $this->before_loading_plugins();
@@ -897,7 +994,7 @@ class plugin_framework_c extends teelog_c
       // tell all the plugins that they've been loaded
       if ( $this->app_exec_flag )
       {
-         if ( $this->verbose )
+         if ( $this->verbose() )
             $this->tee( "...loading plugins at " . $this->all_time(true) . " seconds" );
 
          foreach ( $this->plugins as $p )
@@ -906,7 +1003,7 @@ class plugin_framework_c extends teelog_c
 
       $this->app_after_init();
 
-      if ( $this->verbose )
+      if ( $this->verbose() )
          $this->tee( "...finished initializing" );
    }
 
@@ -937,20 +1034,20 @@ class plugin_framework_c extends teelog_c
 
    function trigger_events()
    {
-      if ( $this->verbose )
+      if ( $this->verbose() )
          $this->tee( "preparing jobs at " . $this->all_time(true) . " seconds" );
 
       foreach ( $this->events as $evt => $jobs )
       {
          ksort( $jobs );
          foreach ( $jobs as $job => $info )
-            if ( $info['plugin'] != "internal" )
+            if ( $info['plugin'] != PLUGGABLEAPP_PLUGIN_INTERNAL )
                $this->plugin[$info['plugin']]->job_prepare( $info );
       }
 
       foreach ( $this->events as $ev => $jobs )
       {
-         if ( $this->verbose )
+         if ( $this->verbose() )
             $this->tee( "Triggering Event \"{$this->event_descriptions[$ev]}\" ({$ev})" );
 
          $this->current_event = $ev;
@@ -959,7 +1056,7 @@ class plugin_framework_c extends teelog_c
 
          foreach ( $jobs as $idx => $job )
          {
-            if ( $this->verbose )
+            if ( $this->verbose() )
                $this->tee( "  Starting job \"{$idx}\"" );
 
             $this->current_jobindex = $idx;
@@ -967,22 +1064,22 @@ class plugin_framework_c extends teelog_c
 
             $this->app_before_job( $ev, $job );
 
-            if ( $job['plugin'] != "internal" )
+            if ( $job['plugin'] != PLUGGABLEAPP_PLUGIN_INTERNAL )
                $this->plugin[$job['plugin']]->job_exec( $job );
-            else $this->$job['method']();
+            else $this->plugin_internal($job);
 
             $this->app_after_job( $ev, $job );
          }
       }
 
-      if ( $this->verbose )
+      if ( $this->verbose() )
          $this->tee( "job cleanup starts at " . $this->all_time(true) . " seconds" );
 
       foreach ( $this->events as $evt => $jobs )
       {
          ksort( $jobs );
          foreach ( $jobs as $job => $info )
-            if ( $info['plugin'] != "internal" )
+            if ( $info['plugin'] != PLUGGABLEAPP_PLUGIN_INTERNAL )
                $this->plugin[$info['plugin']]->job_cleanup( $info );
       }
    }
@@ -992,9 +1089,11 @@ class plugin_framework_c extends teelog_c
    {
       $this->all_start(true);
 
+      $this->app_title();
+
       $this->app_init();
 
-      if ( $this->verbose )
+      if ( $this->verbose() )
          $this->tee( "Execution begins at " . $this->all_time(true) . " seconds" );
 
       $this->app_before_events();
@@ -1007,7 +1106,7 @@ class plugin_framework_c extends teelog_c
              $this->app_after_events();
 
              // tell all the plugins that they're about to be unloaded
-             if ( $this->verbose )
+             if ( $this->verbose() )
                 $this->tee( "unloading plugins at " . $this->all_time(true) . " seconds" );
 
              foreach ( $this->plugins as $p )
@@ -1018,7 +1117,7 @@ class plugin_framework_c extends teelog_c
 
       $this->all_stop(true);
 
-      if ( $this->verbose )
+      if ( $this->verbose() )
          $this->tee( "...exec ends after " . $this->all_time(true) . " seconds" );
    }
 

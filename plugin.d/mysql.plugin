@@ -23,8 +23,8 @@
  *
  * @author Sam Azer <sam@azertech.net>
  * @version 0.01 (alpha)
- * @package server-maint
- * @subpackage sysbackup
+ * @package sysbackup
+ * @subpackage plugin
  * @license http://www.gnu.org/licenses/agpl.html AGPL
  * @copyright 2011 by Sam Azer, All rights reserved
  * @link http://www.azertech.net/
@@ -36,9 +36,25 @@
 //require_once "lib/general-plugins.inc";
 
 
-class mysql_plugin_c extends plugin_base_c
+/**
+ *
+ * @package sysbackup
+ * @subpackage plugin
+ *
+ */
+class mysql_plugin_c extends sysbackup_plugin_base_c
 {
-   var $job_info;
+   var $userid;        // the userid to use for backup operations
+   var $password;      // the password associated with the specified user id
+   var $hostname;      // the mysql server hostname
+   var $port;          // the port number to use on the host
+   var $mysql_bin;     // the mysql command line utility binary
+   var $mysql_opt;     // options to pass to the mysql command
+   var $mysqldump_bin; // the mysql dump utility binary
+   var $mysqldump_opt; // options to pass to the mysqldump command
+   var $lockdb;        // true to use the lockdbopt options in the mysqldump command
+   var $lockdbopt;     // option to pass to mysqldump to lock the database during the dump operation
+
 
 
    function __construct( &$application_object )
@@ -55,8 +71,6 @@ class mysql_plugin_c extends plugin_base_c
 
       $this->plugin_type        = "genbackup";
       $this->plugin_unique      = false;
-
-      $this->job_info = array();
    }
 
 
@@ -69,7 +83,7 @@ class mysql_plugin_c extends plugin_base_c
     */
    function plugin_help()  
    {
-      $this->app->tee( "(help for this plugin is not available yet)" );
+      $this->tee( "(help for this plugin is not available yet)" );
    }
 
 
@@ -134,16 +148,18 @@ class mysql_plugin_c extends plugin_base_c
       $problems_found = false;
       $required_options = $this->required_options();
       foreach ( $required_options as $opt => $info )
-         $$opt = $this->job_info[$opt];
+         $$opt = $this->job_info[$opt] ? $this->job_info[$opt] : NULL;
+
 
       // no hostname
       if ( $hostname == "" )
       {
-         if ( $this->app->verbose )
-            $this->app->warning( "job skipped due to blank mysql hostname" );
+         if ( $this->verbose() )
+            $this->warning( "job skipped due to blank mysql hostname" );
 
          return false;
       }
+
 
       // get a list of databases to backup
       $cmd = $mysql_bin
@@ -177,9 +193,8 @@ class mysql_plugin_c extends plugin_base_c
       }
 
       // an error was detected
-      $this->app->warning( "unable to get database list from {$userid}@{$hostname}:{$port}" );
-      $this->app->fatal( "{$mysql_bin} reports: " . trim($out['stderr']) );
-
+      $this->warning( "unable to get database list from {$userid}@{$hostname}:{$port}" );
+      $this->fatal( "{$mysql_bin} reports: " . trim($out['stderr']) );
    }
 
 
@@ -228,24 +243,21 @@ class mysql_plugin_c extends plugin_base_c
     */
    function job_exec( $configuration )
    {
-      $this->job_info = $configuration;
+      // let the parent method take care of common operations
+      if ( ($r = parent::job_exec( $configuration )) !== false )
+         return $r;
 
       $problems_found = false;
       $required_options = $this->required_options();
       foreach ( $required_options as $opt => $info )
-         $$opt = $this->job_info[$opt];
+         $$opt = isset($this->job_info[$opt]) ? $this->job_info[$opt] : NULL;
 
       // no hostname
       if ( $hostname == "" )
          return false;
 
-      $database_list = $this->get_database_list( $configuration );
-
-
-      if ( isset($this->job_info["subfolder"]) )
-         if ( $this->app->vfs_subfolder( $this->job_info["subfolder"] ) != false )
-            $this->app->fatal( "unable to select {$this->job_info['subfolder']} subfolder" );
-          
+      if ( ($database_list = $this->get_database_list( $configuration )) === false )
+         return false;
 
       $problems_detected = false;
       foreach ( $database_list as $dbname )
@@ -265,12 +277,12 @@ class mysql_plugin_c extends plugin_base_c
               ;
 
          $problem_detected = false;
-         $db_fn = "{$hostname}/{$dbname}.sql" . $this->app->tar->compressor_ext();
-         $this->app->vfs_compress_command( $cmd, $db_fn );
+         $db_fn = "{$hostname}/{$dbname}.sql" . $this->compressor_ext();
+         $this->vfs_compress_command( $cmd, $db_fn );
       }
 
       if ( $problems_detected )
-         $this->app->warning( "MySQL backup errors detected" );
+         $this->warning( "MySQL backup errors detected" );
 
       // problems? perhaps, but keep going.
       return $problems_detected;

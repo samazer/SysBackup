@@ -32,21 +32,148 @@
  */
 
 
-   function dir_fn( $dir, $fn = false )
+  /**
+   *
+   * single_chars( $txt, $chr )
+   *
+   * Reduces multiple occurences of a character to single and returns the
+   * resulting text
+   *
+   * @param string $txt a string containing sequences of $chr characters
+   * @return string the same string with each group of $chr characters reduced to one
+   *
+   * <code>
+   *
+   * echo single_chars( "blah----blah--blah-blah",   "-" ), "\n";
+   * echo single_chars( "blah-blah--blah---blah",    "-" ), "\n";
+   * echo single_chars( "blah----blah--blah---blah", "-" ), "\n";
+   *
+   * // expects:
+   * // blah-blah-blah-blah
+   * // blah-blah-blah-blah
+   * // blah-blah-blah-blah
+   *
+   * </code>
+   */
+   function single_chars( $txt, $chr )
    {
-      if ( $fn === false )
-         return str_replace( "//", "/", $dir );
+      while ( ($r = str_replace( $chr . $chr, $chr, $txt )) != $txt )
+         $txt = $r;
 
-      return str_replace( "//", "/", $dir . "/" . $fn );
+      return $r;
    }
 
 
+
+
+
+  /**
+   *
+   * single_spaces( txt )
+   *
+   * Reduces multiple spaces to single spaces and returns the
+   * resulting text
+   *
+   * @param string $txt a string containing sequences of multiple spaces
+   * @return string the same string with each group of spaces reduced to one space
+   *
+   * <code>
+   *
+   * echo single_chars( "blah    blah  blah blah",   " " ), "\n";
+   * echo single_chars( "blah blah  blah   blah",    " " ), "\n";
+   * echo single_chars( "blah    blah  blah   blah", " " ), "\n";
+   *
+   * // expects:
+   * // blah blah blah blah
+   * // blah blah blah blah
+   * // blah blah blah blah
+   *
+   * </code>
+   */
+   function single_spaces( $txt )
+   {
+      return single_chars( $txt, " " );
+   }
+
+
+
+  /**
+   *
+   * dir_fn() concatenate a directory and a file name
+   *
+   * Add a filename to a directory name separated by a forward
+   * slash. Returns the concatenated string with double-forward-slash
+   * characters reduced to single forward slashes.
+   *
+   * @param string $dir a folder path with or without a trailing slash
+   * @param string $fn  a file name with or without a leading slash
+   * @return string the dir and fn concatenated with extra slashes removed
+   *
+   * <code>
+   *
+   * echo dir_fn( "/my/folder/", "/myfile" ), "\n";
+   * echo dir_fn( "/my/folder",  "myfile"  ), "\n";
+   * echo dir_fn( "//my//folder//",    "//myfile"  ), "\n";
+   * echo dir_fn( "",    "myfile"  ), "\n";
+   * echo dir_fn( "myfile", ""  ), "\n";
+   * echo dir_fn( "folder", "file"  ), "\n";
+   *
+   * // expects:
+   * // /my/folder/myfile
+   * // /my/folder/myfile
+   * // /my/folder/myfile
+   * // myfile
+   * // myfile
+   * // folder/file
+   *
+   * </code>
+   *
+   *
+   */
+   function dir_fn( $dir, $fn = false )
+   {
+      return single_chars( $dir . ($dir && $fn ? "/" : "") . $fn, "/" );
+   }
+
+
+  /**
+   *
+   * Begin to capture output via the PHP output buffer code. The
+   * Capture Begin function simply calls the PHP ob_start() function.
+   *
+   * @param none
+   * @return none
+   *
+   */
    function capture_begin()
    {
       ob_start();
    }
 
 
+  /**
+   *
+   * End the capture of output text and return the captured text. Also
+   * calls the ob_end_clean() method to flush the PHP output buffer.
+   *
+   * @param none
+   * @return string the text that was captured between the begin and end calls.
+   *
+   * <code>
+   *
+   * capture_begin();
+   * echo "hello, world\n";
+   * echo "hello, world\n";
+   * echo "hello, world\n";
+   * echo capture_end();
+   *
+   * // expects:
+   * // hello, world
+   * // hello, world
+   * // hello, world
+   *
+   * </code>
+   */
    function capture_end()
    {
       $r = ob_get_contents();
@@ -214,5 +341,87 @@
       return array_keys($results);
    }
 
+
+
+   /**
+    *
+    * find_prefixed_value( $haystack, $needle );
+    *
+    * In a string containing useful information such as: "eth0 Link
+    * encap:Ethernet HWaddr 00:19:5b:82:9a:8f" we want to find "link
+    * encap:" and return the text that follows (Ethernet HW...) or
+    * false if we fail.
+    *
+    */
+   function find_prefixed_value( $haystack, $needle )
+   {
+      if ( ($p = stripos( $haystack, $needle )) !== false )
+         return substr( $haystack, $p + strlen($needle) );
+
+      return false;
+   }
+
+
+
+   /**
+    *
+    * find_array_element_text( $list, $needle );
+    *
+    * In an array of strings, return the key associated with a value
+    * in which the needle is found (or false if nothing is found.)
+    *
+    */
+   function find_array_element_text( $list, $needle )
+   {
+      foreach ( $list as $key => $val )
+         if ( stripos( $val, $needle ) !== false )
+            return $key;
+
+      return false;
+   }
+
+
+
+  /**
+   *
+   * get_temp_dir()
+   *
+   * Returns a working temp folder path
+   *
+   */
+   function get_temp_dir()
+   {
+      if ( function_exists('sys_get_temp_dir') )
+         if ( ($tmp = sys_get_temp_dir()) > "" )
+            if ( file_exists( $tmp ) && is_writable( $tmp ) )
+               return $tmp;
+
+      $known_envs = array( "TMP", "TEMP", "TMPDIR", "TEMPDIR" );
+      foreach ( $known_envs as $env )
+         if ( ($tmp = getenv($env)) > "" )
+           if ( file_exists( $tmp ) && is_writable( $tmp ) )
+               return $tmp;
+
+      $known_tmps = array( "/tmp", "/var/tmp" );
+      foreach ( $known_tmps as $tmp )
+         if ( file_exists( $tmp ) && is_writable( $tmp ) )
+            return $tmp;
+
+      return false;
+   }
+
+
+  /**
+   *
+   * get_temp_filename()
+   *
+   * Returns a temp file name
+   *
+   */
+   function get_temp_filename( $prefix )
+   {
+      $dir = get_temp_dir();
+      return tempnam( $dir, $prefix );
+   }
 
 

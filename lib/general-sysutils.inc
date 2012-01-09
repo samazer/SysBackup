@@ -23,7 +23,7 @@
  * @author Sam Azer <sam@azertech.net>
  * @version 0.01 (alpha)
  * @package aforms
- * @subpackage lib-general
+ * @subpackage lib-sys
  * @license http://www.gnu.org/licenses/agpl.html AGPL
  * @copyright 2011 by Sam Azer, All rights reserved
  * @link http://www.azertech.net/
@@ -53,7 +53,7 @@ define( "FN_SYS_DEBIAN_VERSION", "/etc/debian_version" );
  *
  * A class that tries to determine in which distro it is running.
  *
- * @package server-maint
+ * @package aforms
  * @subpackage lib-sys
  *
  */
@@ -152,7 +152,7 @@ class linux_distro_c
  * and group. This info can later be used, for example, when producing
  * error messages.
  *
- * @package server-maint
+ * @package aforms
  * @subpackage lib-sys
  *
  */
@@ -275,6 +275,284 @@ class effective_user_c
     *
     */
    function name()  { return $this->posix_gecos[0]; }
+}
+
+
+
+
+/**
+ *
+ * can_hardlink( $target_dir, $source_dir )
+ *
+ * Brute-force check to see if it is possible to create a hardlink
+ * between files in two directories.
+ *
+ * returns false if either folder does not have read/write
+ * access. This can be either because the path is not valid or because
+ * the permissions do not allow access for any reason.
+ *
+ * returns true if the canonical paths of source_dir and
+ * target_dir are identical.
+ *
+ * Otherwise creates a temporary file in the target dir and attempts
+ * to hardlink to it from the source dir. Returns true if the attempt
+ * is successful and false if not. Temporary files are, of course,
+ * removed before returning the result.
+ *
+ * @param string $target_dir path to the target directory
+ * @param string $source_dir path to the source directory
+ * @return bool true if it is possible to hardlink files between the source and target directories
+ *
+ */
+
+function can_hardlink( $target_dir, $source_dir )
+{
+   // get the canonical path or false if not a valid folder
+   if ( !($rp_t = realpath( $target_dir )) )
+      return false;
+
+   if ( !($rp_s = realpath( $source_dir )) )
+      return false;
+
+   if ( !is_writable( $rp_t ) )
+      return false;
+
+   if ( !is_writable( $rp_s ) )
+      return false;
+
+   if ( $rp_t == $rp_s )
+      return true;
+
+   $t = tempnam( $rp_t, "linktest-" );
+   $s = dir_fn( $rp_s, basename( $t ) );
+
+   if ( ($r = @link( $t, $s )) === true )
+   {
+      unlink( $t );
+      unlink( $s );
+      return true;
+   }
+
+   unlink( $t );
+   return $r;
+}
+
+
+
+/**
+ *
+ * subfolder_sizes( $dir )
+ *
+ * Returns an array of relative paths to subfolders containing the
+ * following information:
+ *
+ * - At Index 0: The last date/time of a change in any of the files or
+ *   subfolders within the subfolder.
+ *
+ * - At Index 1: The total number of disk usage bytes used within the
+ *   subfolder
+ *
+ * The DU command is used to compile the information. It returns a
+ * single line of results for each subfolder and, at the end, a
+ * summary line for the specified $dir showing the last date/time of a
+ * change to a file within the folder tree and the total size of the
+ * folder tree. Because the $dir is removed from the return results
+ * the summary information is usually available at index "" (ie:
+ * $r[""] contains a summary record) if $dir is passed with a trailing
+ * slash.
+ *
+ * Returns false if an error occurs.
+ *
+ * @param string $dir the folder to scan
+ * @param string $depth the # of subfolder levels to report in results
+ * @param string $du_opts optional options passed to the DU utility
+ * @param string $du_bin  optional path to the DU binary
+ * @returns array an array of subfolders found, each with associated size and lastmod time info
+ *
+ */
+function subfolder_sizes( $dir, $depth=1, $du_opts = "", $du_bin = false )
+{
+   if ( $du_bin === false )
+      $du_bin  = "/usr/bin/du";
+
+   $cmd = "{$du_bin} --time --block-size=1 --max-depth={$depth} {$du_opts} {$dir}";
+   if ( ($du_out = shell_exec($cmd)) === NULL )
+      return false;
+
+   $du_out = explode( "\n", trim($du_out) );
+
+   $r = array();
+   foreach ( $du_out as $info )
+   {
+      $x = explode( "\t", $info );
+      $r[str_replace( $dir, "", $x[2])] = array( strtotime($x[1]), (int)$x[0] );
+   }
+
+   return $r;
+}
+
+
+/**
+ *
+ * Disk Usage
+ *
+ * Find out how much disk space is being used by the specified file_ref (usually a folder)
+ *
+ * @param string $ref absolute or relative reference to a folder or file
+ * @return int disk usage in bytes
+
+ */
+function disk_usage( $ref )
+{
+   if ( ($r = subfolder_sizes( $ref, 0 )) === false )
+      return false;
+
+   return $r[""][1];
+}
+
+
+
+/**
+ *
+ * List folder Items
+ *
+ * (utility Used by the functions below)
+ *
+ */
+function _list_folder_items( $folder, $folders_only = true )
+{
+   if ( !file_exists( $folder ) )
+      return false;
+
+   if ( chdir( $folder ) === false )
+      return false;
+
+   if ( ($list = glob( "*", $folders_only ? GLOB_ONLYDIR : 0 )) === false )
+      return false;
+
+   $items = array();
+   sort($list);
+   foreach( $list as $idx => $item )
+   {
+      if ( ($t = filemtime($item)) === false )
+         return false;
+
+      /* note that items can share a date/time stamp if they were
+         programmatically generated.
+       */
+      $items[$t + $idx] = $item;
+   }
+
+   ksort($items);
+   return $items;
+}
+
+
+/**
+ *
+ * Remove Expired Items
+ *
+ * Procedure:
+ *
+ * (1) Get a list of the items in the specified folder.
+ * (2) Subtract the most recent $max_items items from the list
+ * (3) Delete the remaining items from the list, if any.
+ *
+ * To accomplish this the simple solution is to take a list of the
+ * items found in a particular folder and sort them by date. This
+ * would put the oldest items at the top of the list and the most
+ * recent items at the bottom of the list. 
+ *
+ * It then becomes a small matter to check the size of the list to
+ * determine if it's $max_items or less and return if that test is
+ * true. Otherwise the top item in the list can be deleted and the
+ * test repeated until the test is true.
+ *
+ * Returns the number of items removed, zero if none removed or false
+ * on error.
+ *
+ * This function executes "rm -Rf ..." commands and is often used by
+ * scripts that run as root. It's hard to imagine a more frightening
+ * place for bugs to be found. Therefore, by default, the debug var is
+ * true and the commands are displayed but nothing is actually
+ * deleted.
+ *
+ * @param string $folder the folder to scan
+ * @param string $max_items the # of items to keep
+ * @param bool $debug true to display "rm -Rf ..." commands, false to actually execute them (after extensive testing!!)
+ * @param bool $folders_only true to scan folders only - false to scan folders and files
+ * @returns int number of folders that were deleted
+ *
+ */
+function remove_expired_items( $folder, $max_items, $debug = true, $folders_only = true )
+{
+   if ( ($items = _list_folder_items( $folder, $folders_only )) === false )
+      return false;
+
+   if ( count( $items ) <= $max_items )
+      return 0; // nothing to delete
+
+   $total_deleted = 0;
+   while( count($items) > $max_items )
+   {
+      $i = each( $items );
+
+      $ref = dir_fn( $folder, $i['value'] );
+      $cmd = "rm -Rf \"{$ref}\"";
+
+      if ( $debug )
+         echo "DEBUG: '{$cmd}'\n";
+      else if ( ($r = shell_exec( $cmd )) > "" )
+              throw new Exception( "Unexpected output from command '{$cmd}': {$r}" );
+
+      $total_deleted++;
+      unset( $items[$i["key"]] );
+      reset( $items );
+   }
+
+   return $total_deleted;
+}
+
+
+
+/**
+ *
+ * List Expired Items
+ *
+ * Procedure:
+ *
+ * (1) Get a list of the items in the specified folder.
+ * (2) Subtract the most recent $max_items items from the list
+ * (3) List the remaining items from the list, if any.
+ *
+ * @param string $folder the folder to scan
+ * @param string $max_items the # of items to keep
+ * @param bool $folders_only true to scan folders only - false to scan folders and files
+ * @returns array array of expired folder time stamps & sizes by name, ie: $expired["name"] => array( time stamp, disk usage );
+ *
+ */
+function list_expired_items( $folder, $max_items, $folders_only = true )
+{
+   if ( ($items = _list_folder_items( $folder, $folders_only )) === false )
+      return false;
+
+   if ( count( $items ) <= $max_items )
+      return array(); // nothing to delete
+
+   $expired = array();
+   while( count($items) > $max_items )
+   {
+      $i = each( $items );
+      unset( $items[$i["key"]] );
+      reset( $items );
+
+      $filename = $i["value"];
+      $stamp    = $i["key"];
+      $size     = disk_usage( $filename );
+      $expired[$filename] = array( $stamp, $size );
+   }
+
+   return $expired;
 }
 
 

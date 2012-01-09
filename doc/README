@@ -1,0 +1,15 @@
+-*- mode: text; coding: utf-8-unix; -*- 
+
+This folder contains a few note files. Automatically generated
+documentation is in the phpdoc folder.
+
+Please note that PHP Documentor will not parse many of the files
+in this package unless it has been patched. For information on how
+to make the necessary changes see the FAQ:
+
+PhpDocumentor 'not a PHP file' issues
+
+in the FAQ section on AzerTech.net
+under Software Development
+http://www.azertech.net/content/view/53/29/
+

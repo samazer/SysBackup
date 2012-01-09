@@ -4,19 +4,79 @@
  *
  * System Backup utility
  *
+ * <p>-------------------------------------------------------------------
+ * 
+ * <p><b>GENERAL NOTES</b>
+ *
+ * <p>The current code has been completely re-organized and is no
+ * longer compatible with the code in sysbackup-v3015a or prior
+ * versions. Please note that this is still alpha quality code (ie:
+ * it's not feature complete) and there's a chance that there might be
+ * some more changes. Specifically any plugins that were written
+ * during the past month or so might have to be updated and your
+ * /etc/sysbackup/sysbackup.conf file will need to be edited with
+ * care. Finally the /etc/sysbackup-nas.conf file on your remote NAS
+ * server needs some minor editing.
+ *
+ * <p><b>Redhat/Fedora distros</b>
+ *
+ * <p>PHP on Redhat (and also on Ubuntu) is distributed as a large
+ * number of small packages. At this time I do not have a list of the
+ * packages required to run sysbackup. If you get strange error
+ * messages about functions not found it's a safe bet that you need to
+ * install a PHP package. Note also that this code has been tested on
+ * fairly recent versions of PHP5 and probably won't work on anything
+ * less than v5.3.
+ *
+ * <p><b>Time Zone setting</b>
+ *
+ * <p>If you forget to set your local time zone in your PHP ini file
+ * you will get a warning from PHP. Unfortunately this warning
+ * prevents the remote exec / local exec tools from functioning
+ * correctly. The code has been updated to look in the INI file for a
+ * setting and, if none is found, use New York (Eastern Standard Time)
+ * by default. This avoids the warning message but might result in
+ * incorrect times being logged.
+ *
+ * <p><b>Log Files</b>
+ *
+ * <p>If you sudo touch /var/log/remote-exec.log and sudo chmod 666
+ * /var/log/remote-exec.log you will be able to check the log file for
+ * usage and error messages. Otherwise logging is disabled. Don't
+ * forget to update your logrotate settings if you use this feature.
+ *
+ * <p><b>ABOUT PHPDocumentor</b>
+ *
+ * Please note that PHP Documentor will not parse many of the files
+ * in this package unless it has been patched. For information on how
+ * to make the necessary changes see the FAQ:
+ * 
+ * PhpDocumentor 'not a PHP file' issues
+ * 
+ * in the FAQ section on AzerTech.net
+ * under Software Development
+ * http://www.azertech.net/content/view/53/29/
+ * 
+ * <p>-------------------------------------------------------------------
+ * 
  * <p><b>Original Goals:</b>
  *
  * <p>The basic goal of this script has always been to take a picture
- * of the server every night. This picture must be complete enough
- * that it can be used to build a new server in the event of a
- * disaster or during migration (equipment upgrades, for obvious
- * reasons, are usually scheduled to occur more frequently than
- * disasters!)
+ * of the server every night - in a way that makes it easy to find any
+ * file that might be needed. In addition this picture must be
+ * complete enough that it can be used to build a new server in the
+ * event of a disaster or during migration. Not surprisingly it often
+ * happens that equipment upgrades are usually scheduled to occur more
+ * frequently than disasters!
  *
- * <p>To make this possible it must be easy for the system admin to list
- * all the items that need to be backed-up. The script should be smart
- * enough to check if the item exists on the current server and make a
- * backup of it - or not bother if it doesn't exist.
+ * <p>To make this possible it must be easy for the system admin to
+ * list all the items that need to be backed-up. The script should be
+ * smart enough to check if the item exists on the current server and
+ * make a backup of it - or not bother if it doesn't exist. This is
+ * because there may be more than one server with similar but not
+ * identical configuration. To save time the backup script must be
+ * smart enough to live in one repo but run on the various similar
+ * servers.
  * 
  * <p>The backups should be saved in a rotation on the current
  * server. The script must also be able to save a rotation on one or
@@ -25,15 +85,13 @@
  * available (long term rotations are often helpful in cases where a
  * problem causes damage that is not readily apparent.)
  *
- * <p>If two tar files are identical between backups the script should be
- * able to detect the situation and replace the second copy with a
+ * <p>If two tar files are identical between backups the script should
+ * be able to detect the situation and replace the second copy with a
  * hard link to the previous identical copy.
  *
  * <p><b>Current Status</b>
  *
- * <ul>
- *
- * <li>GOOD
+ * <p><b>GOOD</b>
  *
  *    <ul>
  *
@@ -53,7 +111,7 @@
  *
  *    </ul>
  *
- * <li>BAD
+ * <p><b>BAD</b>
  *
  *    <ul>
  *
@@ -87,7 +145,7 @@
  *
  *    </ul>
  *
- * <li>UGLY
+ * <p><b>UGLY</b>
  *
  *    <ul>
  *
@@ -112,8 +170,6 @@
  *    <li>
  *
  *    </ul>
- *
- * </ul>
  *
  * <p><b>Installation</b>
  *
@@ -165,9 +221,9 @@
  * it to grow a little from time to time. It has been used on BNT
  * servers and servers belonging to various customers.
  *
- * <p>The code was first published in the Bell Integrator Build &
- * Run server maintenance manual in 2002. The ability to write
- * nightly backups to an off-site server was added later.
+ * <p>The code was first published in the Bell Integrator Build & Run
+ * server maintenance manual in 2002. The ability to write nightly
+ * backups to an off-site server was added a few years later.
  * 
  * <p>The rewrite as a PHP script was prompted by the complexity of
  * the daily.sh script running on mail2.bnt.ca. There are too many
@@ -187,22 +243,23 @@
  *
  * <p>Copyright (c) 2001-2011 by Sam Azer, All Rights Reserved.
  *
- * <p>This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ * <p>This program is free software: you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
  * <p>This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
  *
- * <p>You should have received a copy of the GNU Affero General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ * <p>You should have received a copy of the GNU Affero General Public
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/>
  *
  * @author Sam Azer <sam@azertech.net>
  * @version 3.01 (alpha)
- * @package server-maint
+ * @package sysbackup
  * @subpackage sysbackup
  * @license http://www.gnu.org/licenses/agpl.html AGPL
  * @copyright 2001-2011 by Sam Azer, All rights reserved
@@ -275,12 +332,23 @@ $sysbackup = new system_backup_app_c();
 
 try
 {
+   // buffer a dash into the log file to separate 
+   // the output from different runs
+   $sysbackup->log( "-" );
+
+   // run main() to get everything done
    $sysbackup->main();
+
+   // log the return from main()
+   $sysbackup->log( "[done]" );
 }
   catch( Exception $e )
 {
    $msg = $e->getMessage();
-   echo "Caught exception: {$msg}\n";
+   $msg = "Caught exception: {$msg}\n";
+   $sysbackup->log( $msg );
+   $sysbackup->tee( $msg );
+   $sysbackup->log( "[stopped]" );
 }
 
 

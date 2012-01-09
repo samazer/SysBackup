@@ -14,6 +14,33 @@
  * system. This utility performs the desired operations and returns
  * the results in a format that can be scanned.
  *
+ *
+ * <p><b>Copyright</b>
+ *
+ * <p>Copyright (c) 2009-2010 by Sam Azer, All Rights Reserved.
+ *
+ * <p>This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * <p>This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * <p>You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * @author Sam Azer <sam@azertech.net>
+ * @version 0.01a
+ * @package sysbackup
+ * @subpackage sys-test
+ * @license http://www.gnu.org/licenses/gpl.html GPL
+ * @copyright 2011 by Sam Azer, All rights reserved
+ * @link http://www.azertech.net/
+ * @link http://www.samazer.net/about
+ *
  */
 
 
@@ -25,6 +52,12 @@ require_once "lib/general-tee.inc";
 
 
 
+/**
+ *
+ * @package sysbackup
+ * @subpackage sys-test
+ *
+ */
 class localexec_c extends teelog_c
 {
    var $progname;
@@ -199,6 +232,15 @@ class localexec_c extends teelog_c
             $this->result( $r );
             break;
 
+         case "sha1_file":
+            $this->params_required( array( "path/filename" ) );
+
+            if ( ($r = @sha1_file( $this->params[0] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
+            break;
+
 
 
          case "filegroup":
@@ -211,7 +253,7 @@ class localexec_c extends teelog_c
             {
                $i = posix_getgrgid( $r );
                $this->result( $i["name"] );
-	    } 
+            } 
               else $this->result( $r );
 
             break;
@@ -280,6 +322,11 @@ class localexec_c extends teelog_c
             $this->result( @is_executable( $this->params[0] ));
             break;
 
+         case "can_hardlink":
+            $this->params_required( array( "target_path", "source_path" ) );
+            $this->result( can_hardlink( $this->params[0], $this->params[1] ));
+            break;
+
 
 
          case "chgrp":
@@ -322,6 +369,29 @@ class localexec_c extends teelog_c
             foreach ( $r as $v )
                $this->tee( $v );
 
+            break;
+
+
+
+         case "list_expired_items":
+            $this->params_required( array( "path", "max" ) );
+
+            if ( ($r = list_expired_items( $this->params[0], $this->params[1] )) === false )
+               $this->fatal_file_error();
+
+            foreach ( $r as $f => $i )
+               $this->tee( urlencode($f) . ", " . $i[0] . ", " . $i[1] );
+
+            break;
+
+
+         case "remove_expired_items":
+            $this->params_required( array( "path", "max", "debug_flag" ) );
+
+            if ( ($r = remove_expired_items( $this->params[0], $this->params[1], $this->params[2] )) === false )
+               $this->fatal_file_error();
+
+            $this->result( $r );
             break;
 
 
@@ -426,11 +496,14 @@ class localexec_c extends teelog_c
                           "filemtime"        => array( "path/filename" ),
                           "fileperms"        => array( "path/filename" ),
                           "linkinfo"         => array( "path/filename" ),
+                          "sha1_file"        => array( "path/filename" ),
 
                           "filegroup"        => array( "path/filename" ),
                           "fileowner"        => array( "path/filename" ),
 
                           "readfile"         => array( "path/filename" ),
+
+                          "can_hardlink"     => array( "target_dir", "source_dir" ),
 
                           "file_exists"      => array( "path/filename" ),
                           "is_dir"           => array( "path/filename" ),
@@ -448,6 +521,9 @@ class localexec_c extends teelog_c
                           "lchown"           => array( "filename", "user" ),
 
                           "glob"             => array( "cwd", "pattern", "flags" ),
+
+                          "list_expired_items"=>array( "path", "max" ),
+                          "remove_expired_items"=>array("path","max", "debug" ),
 
                           "stat"             => array( "path/filename" ),
                           "lstat"            => array( "path/filename" ),
@@ -504,17 +580,34 @@ EOT;
 
    function __construct( $argv )
    {
+      parent::__construct();
+
       if ( count( $argv ) == 1 )
       {
          $this->help();
          exit(0);
       }
 
+      $log_fn = "/var/log/remote-exec.log";
+
+      if ( file_exists( $log_fn ) && is_writable( $log_fn ) )
+         $this->logfn( $log_fn );
+      else $this->logfile_disabled( true );
+
+
       $this->progname = $argv[0];
       $this->command  = $argv[1];
       $this->params   = array();
       for ( $i = 2; $i < count( $argv ); $i++ )
           $this->params[] = stripcslashes(urldecode( $argv[$i] ));
+
+      $ptext = "";
+      foreach( $this->params as $p )
+         $ptext = $ptext
+                . ($ptext ? " " : "")
+                . $p;
+
+      $this->log( basename($this->progname) . " {$this->command} {$ptext}" );
 
       if ( ($this->command == "help")
         || ($this->command == "-h")
@@ -529,6 +622,11 @@ EOT;
 }
 
 
+
+// use a default TZ if none specified in the INI file
+// to avoid a warning from PHP5
+if ( ini_get('date.timezone') == "" )
+   date_default_timezone_set('America/New_York');
 
 $exec_obj = new localexec_c( $argv );
 return 0;

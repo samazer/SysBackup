@@ -22,7 +22,7 @@
  *
  * @author Sam Azer <sam@azertech.net>
  * @version 0.01 (alpha)
- * @package server-maint
+ * @package sysbackup
  * @subpackage sysbackup
  * @license http://www.gnu.org/licenses/agpl.html AGPL
  * @copyright 2011 by Sam Azer, All rights reserved
@@ -33,48 +33,126 @@
 
 
 
-class backupvfs_baseio_c extends plugin_base_c
+define( "BACKUPVFS_INCOMPLETE_FILENAME", "INCOMPLETE" );
+define( "BACKUPVFS_INCOMPLETE_TEXT",     "This backupset is incomplete." );
+
+
+
+class backupvfs_baseio_c extends backupvfs_fileio_c
 {
-   var $hostname;                 // name of the target host for this object
-   var $keeplocal;                // true if a full backup is being saved to this filesystem
-                                  // false if the tarballs are created, copied elsewhere, 
-                                  // then deleted from this filesystem (if it's local.)
+   var $hostname;               // long host name used for naming of backup sets
+   var $hostid;                 // short host name used for naming of backup sets
 
-   var $path_temp;                // path to the temp. workspace on the remote system
-   var $path_backup;              // path to the base backupset folder on the remote system
-   var $path_rotation;            // path to the base rotation storage folder on the remote system
+   var $path_temp;              // path to the temp. workspace on the virtual file system
+   var $path_daily;             // path to the base backupset folder on the virtual file system
+   var $path_weekly;            // path to the weekly rotation storage folder on the virtual file system
+   var $path_monthly;           // path to the weekly rotation storage folder on the virtual file system
 
-   var $prev_backup;              // Name of the most recent backupset (before the current backup)
-   var $prev_path;                // path to the previous backupset
-   var $prev_hashlist;            // 
-   var $prev_hashlist_rev;        // 
-   var $prev_sizelist;            // 
-   var $prev_hardlinked;          // 
+   var $usehardlinks;           // true to try to save disk space by hardlinking identical files
+   var $keeplocal;              // true to keep a full copy of the backup on the local filesystem
+                                // false if the tarballs are created, copied elsewhere, then deleted from this filesystem
 
-   var $current_backup;           // Name of the current backupset. Overwrites if already found.
-   var $current_path;             // path to the current backupset
-   var $current_hashlist;         // 
-   var $current_hashlist_rev;     // 
-   var $current_sizelist;         // 
-   var $current_hardlinked;       // 
+   var $umaskfolders;           // default umask to use for created directories
+   var $umaskfiles;             // default umask to use for created files
 
-   var $current_start;            // stats for the current backup
-   var $current_tarball_count;    // 
-   var $current_tarball_size;     // 
-   var $current_hardlinked_count; //
-   var $current_hardlinked_size;  // 
+   var $backupset;              // the backupset object for this VFS
+   var $backupset_name;         // name of the current backupset
+   var $path_backupset;         // path to the current backupset
+   var $path_backupset_folder;  // path to the current folder within the backupset
+   var $current_subfolder;      // name of the currently selected subfolder
 
-   var $step_start;               // stats for the current step in the overall backup
-   var $step_tarball_count;       //
-   var $step_tarball_size;        //
-   var $step_hardlinked_count;    //
-   var $step_hardlinked_size;     //
+   var $minbackupsize;          // Minimum free space needed to hold one full backup (if desired)
+   var $minfreespace;           // Minimum free space needed for operations. 
+                                // This is usually the maximum size of the biggest 
+                                // individual tarball in the backup set.
 
-   var $job_start;                // stats for the current job in the overall backup
-   var $job_tarball_count;        //
-   var $job_tarball_size;         //
-   var $job_hardlinked_count;     //
-   var $job_hardlinked_size;      //
+   var $rotation_enabled;       // flag true if rotations are enabled for this vfs
+   var $rotation_dayofweek;     // day of the week to rotate daily backups
+   var $rotation_dayofmonth;    // day of the month to rotate monthly backups
+   var $rotation_total_daily;   // total number of daily backups in the daily rotation
+   var $rotation_total_weekly;  // total number of weekly backups in the weekly rotation
+   var $rotation_total_monthly; // total number of monthly backups in the monthly rotation
+
+
+
+   function set_hostname( $nam, $id )  { $this->hostname = $nam; 
+                                         $this->hostid   = $id;                 }
+
+   function get_hostname()             { return $this->hostname;                }
+   function get_hostid()               { return $this->hostid;                  } 
+
+   function get_path_temp()            { return $this->path_temp;               }
+   function get_path_daily()           { return $this->path_daily;              }
+   function get_path_weekly()          { return $this->path_weekly;             }
+   function get_path_monthly()         { return $this->path_monthly;            }
+   function get_path_backupset()       { return $this->path_backupset;          }
+   function get_current_subfolder()    { return $this->current_subfolder;       }
+   function get_backupset_name()       { return $this->backupset_name;          }
+
+
+   function job_reset()    { $this->backupset->job_reset();  }
+   function step_reset()   { $this->backupset->step_reset(); }
+
+   function get_stats()    { return $this->backupset->get_stats();  }
+
+
+   function filesize( $rel_ref )      { return $this->backupset->filesize( $rel_ref ); }
+   function filehash( $rel_ref )      { return $this->backupset->filehash( $rel_ref ); }
+   function is_hardlinked( $rel_ref ) { return $this->backupset->is_hardlinked( $rel_ref ); }
+
+
+   function get_paths()
+   {
+      $id = $this->get_hostid();
+      return array( "[{$id}:temp]"    => $this->path_temp,
+                    "[{$id}:daily]"   => $this->path_daily,
+                    "[{$id}:weekly]"  => $this->path_weekly,
+                    "[{$id}:monthly]" => $this->path_monthly,
+                    "[{$id}:current]" => $this->path_backupset,
+                    "[{$id}:prev]"    => $this->backupset->get_prev_path(),
+                  );
+   }
+
+
+   /**
+    *
+    * Keep Local?
+    *
+    * Each VFS can be configured to disable local storage of backups.
+    *
+    */
+   function get_keeplocal()            { return $this->keeplocal;               }
+
+   /**
+    *
+    * Use Hardlinks?
+    *
+    * Each VFS can be configured to disable the use of HardLinks
+    * between backupsets (even between backupsets in the daily
+    * rotation.)
+    *
+    */
+   function get_usehardlinks()         { return $this->usehardlinks;            }
+
+
+   function get_minfreespace()         { return $this->minfreespace;            }
+   function get_minbackupsize()        { return $this->minbackupsize;           }
+   function get_umaskfolders()         { return $this->umaskfolders;            }
+   function get_umaskfiles()           { return $this->umaskfiles;              }
+
+
+   function get_rotation_enabled()     { return $this->rotation_enabled;        }
+   function get_rotation_dayofweek()   { return $this->rotation_dayofweek;      }
+   function get_rotation_dayofmonth()  { return $this->rotation_dayofmonth;     }
+   function get_rotations_daily()      { return $this->rotation_total_daily;    }
+   function get_rotations_weekly()     { return $this->rotation_total_weekly;   }
+   function get_rotations_monthly()    { return $this->rotation_total_monthly;  }
+
+
+   function plugin_shortref()
+   {
+      return $this->get_hostid();
+   }
 
 
    function __construct( &$application_object )
@@ -89,118 +167,35 @@ class backupvfs_baseio_c extends plugin_base_c
       $this->plugin_unique            = false;
 
       $this->app                      = &$application_object;
-      $this->keeplocal                = false;
       $this->hostname                 = "";
+      $this->hostid                   = "";
 
       $this->path_temp                = "";
-      $this->path_backup              = "";  // full path to the backup root folder
-      $this->path_rotation            = "";
+      $this->path_daily               = "";
+      $this->path_weekly              = "";
+      $this->path_monthly             = "";
+      $this->path_backupset           = "";
+      $this->path_backupset_folder    = "";
+      $this->current_subfolder        = "";
 
-      $this->prev_backup              = "";  // name of the prev. backup, ie: dev.azer.ca-20111120
-      $this->prev_path                = "";
-      $this->prev_hashlist            = array();
-      $this->prev_hashlist_rev        = array();
-      $this->prev_sizelist            = array();
-      $this->prev_hardlinked          = array();
+      $this->backupset                = new backupvfs_backupset_c( $application_object, $this );
+      $this->backupset_name           = "";
 
-      $this->current_backup           = "";  // name of the current backup, ie: dev.azer.ca-20111123
-      $this->current_path             = "";  // full path to the current backup
+      $this->usehardlinks             = true;
+      $this->keeplocal                = true;
 
-      $this->current_start            = microtime(true);
-      $this->current_tarball_count    = 0;
-      $this->current_tarball_size     = 0;
-      $this->current_hardlinked_count = 0;
-      $this->current_hardlinked_size  = 0;
+      $this->umaskfolders             = 511; // octal 777
+      $this->umaskfiles               = 438; // octal 666
 
-      $this->step_start               = microtime(true);
-      $this->step_tarball_count       = 0;
-      $this->step_tarball_size        = 0;
-      $this->step_hardlinked_count    = 0;
-      $this->step_hardlinked_size     = 0;
+      $this->minfreespace             = 0;
+      $this->minbackupsize            = 0;
 
-      $this->job_start                = microtime(true);
-      $this->job_tarball_count        = 0;
-      $this->job_tarball_size         = 0;
-      $this->job_hardlinked_count     = 0;
-      $this->job_hardlinked_size      = 0;
-
-      $this->current_hashlist         = array();
-      $this->current_hashlist_rev     = array();
-      $this->current_hardlinked       = array();
-      $this->current_sizelist         = array();
-   }
-
-
-   function tee( $msg, $eol = "\n" )
-   {
-      $this->app->tee( "on " . $this->plugin_shortref() . ": " . $msg, $eol );
-   }
-
-
-   function warning( $msg )
-   {
-      $this->app->warning( "on " . $this->plugin_shortref() . ": " . $msg );
-   }
-
-
-   function fatal( $msg, $stop_flag = true )
-   {
-      $this->app->fatal( "on " . $this->plugin_shortref() . ": " . $msg, $stop_flag );
-   }
-
-
-   function all_reset()
-   {
-      $this->step_reset();
-      $this->job_reset();
-
-      $this->current_start               = microtime(true);
-      $this->current_tarball_count       = 0;
-      $this->current_tarball_size        = 0;
-      $this->current_hardlinked_count    = 0;
-      $this->current_hardlinked_size     = 0;
-   }
-
-
-   function step_reset()
-   {
-      $this->step_start               = microtime(true);
-      $this->step_tarball_count       = 0;
-      $this->step_tarball_size        = 0;
-      $this->step_hardlinked_count    = 0;
-      $this->step_hardlinked_size     = 0;
-   }
-
-
-   function job_reset()
-   {
-      $this->job_start               = microtime(true);
-      $this->job_tarball_count       = 0;
-      $this->job_tarball_size        = 0;
-      $this->job_hardlinked_count    = 0;
-      $this->job_hardlinked_size     = 0;
-   }
-
-
-   function get_stats()
-   {
-      return array( "current_tarball_count"    => $this->current_tarball_count,
-                    "current_tarball_size"     => $this->current_tarball_size,
-                    "current_hardlinked_count" => $this->current_hardlinked_count,
-                    "current_hardlinked_size"  => $this->current_hardlinked_size,
-
-                    "step_start"               => $this->step_start,
-                    "step_tarball_count"       => $this->step_tarball_count,
-                    "step_tarball_size"        => $this->step_tarball_size,
-                    "step_hardlinked_count"    => $this->step_hardlinked_count,
-                    "step_hardlinked_size"     => $this->step_hardlinked_size,
-
-                    "job_start"                => $this->job_start,
-                    "job_tarball_count"        => $this->job_tarball_count,
-                    "job_tarball_size"         => $this->job_tarball_size,
-                    "job_hardlinked_count"     => $this->job_hardlinked_count,
-                    "job_hardlinked_size"      => $this->job_hardlinked_size,
-                   );
+      $this->rotation_enabled         =  false;// flag true if rotations are enabled for this vfs
+      $this->rotation_dayofweek       =  0;    // day of the week to rotate daily backups
+      $this->rotation_dayofmonth      =  1;    // day of the month to rotate monthly backups
+      $this->rotation_total_daily     =  7;    // total number of daily backups in the daily rotation
+      $this->rotation_total_weekly    = 12;    // total number of weekly backups in the weekly rotation
+      $this->rotation_total_monthly   = 36;    // total number of monthly backups in the monthly rotation
    }
 
 
@@ -210,10 +205,11 @@ class backupvfs_baseio_c extends plugin_base_c
                               "tarball_count",    "tarball_size", 
                               "hardlinked_count", "hardlinked_size" );
 
+      $stats = $this->get_stats();
       foreach ( $myvars as $v )
       {
          $n = "{$type}_{$v}";
-         $$v = $this->$n;
+         $$v = $stats[$n];
       }
 
       $total_time = microtime(true) - $start;
@@ -252,8 +248,16 @@ class backupvfs_baseio_c extends plugin_base_c
       $req = array( "hostname"      => array( 3, false, false, "Name of the target host for this object" ),
                     "keeplocal"     => array( 3, false, false, "Flag true if saving a full backup on this filesystem" ),
                     "path_temp"     => array( 3, false, false, "Path to the temp work space" ),
-                    "path_backup"   => array( 3, false, false, "Path to the backupsets on this filesystem" ),
-                    "path_rotation" => array( 3, false, false, "Path to any backupset rotations on this filesystem" ),
+                    "path_daily"    => array( 3, false, false, "Path to the backupsets on this filesystem" ),
+                    "path_weekly"   => array( 3, false, false, "Path to the weekly backupset rotations on this filesystem" ),
+                    "path_monthly"  => array( 3, false, false, "Path to the monthly backupset rotations on this filesystem" ),
+                    "rotation_enabled" => array( 3, false, false, "flag true if rotations are enabled for this vfs" ),
+
+                    "rotation_dayofweek"    => array( 3, false, false, "day of the week to rotate daily backups" ),
+                    "rotation_dayofmonth"   => array( 3, false, false, "day of the month to rotate monthly backups" ),
+                    "rotation_total_daily"  => array( 3, false, false, "total number of daily backups in the daily rotation" ),
+                    "rotation_total_weekly" => array( 3, false, false, "total number of weekly backups in the weekly rotation" ),
+                    "rotation_total_monthly"=> array( 3, false, false, "total number of monthly backups in the monthly rotation" ),
                     );
 
       $this->app->named_parameters->__dump_properties( $this, $req );
@@ -265,6 +269,7 @@ class backupvfs_baseio_c extends plugin_base_c
    {
       $this->app->tee( "(help for this plugin is not available yet)" );
    }
+
 
 
    /**
@@ -298,27 +303,38 @@ class backupvfs_baseio_c extends plugin_base_c
    }
 
 
-   function vfs_init( $backupset_name  = false )
+   function vfs_init( $backupset_name )
    {
-      $this->_std_vfsplugin_method_warning( "dummy vfs init operation" );
+      $this->backupset_name = $backupset_name;
+
+      if ( $this->vfs_warn_disk_space( true ) )
+         $this->fatal( "problems found - please correct and try again" );
+
+      return $this->vfs_createbackupset_folder( $this->path_daily );
    }
 
 
    function vfs_start()
    {
-      $this->_std_vfsplugin_method_warning( "dummy vfs start operation" );
+      $this->_mark_backupset_incomplete();
+
+      return $this->backupset->get_last_hashlist( $this->path_daily );
    }
 
 
    function vfs_end()
    {
-      $this->_std_vfsplugin_method_warning( "dummy vfs end operation" );
-   }
+      $this->backupset->current_hashlist->save_all();
 
+      if ( $this->app->verbose() )
+         $this->tee( "writing last/prev backup names on " . $this->hostid() );
 
-   function vfs_subfolder( $folder_name )
-   {
-      $this->_std_vfsplugin_method_warning( "dummy vfs subfolder operation" );
+      $this->backupset->save_last_backup_name( $this->path_daily );
+
+      $this->_unmark_backupset_incomplete();
+
+      // always returns no error result
+      return false; 
    }
 
 
@@ -344,279 +360,5 @@ class backupvfs_baseio_c extends plugin_base_c
    {
       $this->_std_vfsplugin_method_warning( "dummy vfs tarball folder operation" );
    }
-
-
-   function write_hashlist( $hashfn, $hashlist )
-   {
-      if ( ($fp = fopen( $hashfn, "w" )) === false )
-         $this->app->fatal("unable to open the hashlist file for writing");
-
-      if ( is_array( $hashlist ) && count( $hashlist ) )
-         foreach ( $hashlist as $fn => $sha1 )
-         {
-            $out = str_replace( "=", "%3d", $fn )
-                 . "="
-                 . $sha1
-                 . "\n"
-                 ;
-
-            if ( fwrite( $fp, $out ) === false )
-               $this->app->fatal("unable to write to the hash file {$hashfn}");
-         }
-
-      if ( fclose( $fp ) === false )
-         $this->app->fatal("unable to close the hashlist file");
-
-      if ( chmod( $hashfn, $this->app->sys_umaskfiles ) === false )
-         $this->app->fatal( "unable to change mode on file: {$hashfn}" );
-   }
-
-
-   function read_hashlist( $fn )
-   {
-      if ( !is_file( $fn ) )
-         $this->fatal( "unable to find {$fn}" );
-
-      $text = explode( "\n", file_get_contents( $fn ) );
-
-      $hashlist = array();
-      foreach ( $text as $x )
-      {
-         if ( !$x )
-            continue;
-
-         $x = explode( "=", $x );
-         $hashlist[str_replace( "%3d", "=", $x[0] )] = $x[1];
-      }
-
-      return $hashlist;
-   }
-
-
-   function reverse_hashlist( $hashlist )
-   {
-      $hashlist_rev = array();
-      foreach ( $hashlist as $fn => $sha1 )
-      {
-        /**
-         * more than one file might have the same hash but we only
-         * care about one of them (any one) because we assume that
-         * hardlinks will always work fine in the backupset folder
-         * (It's the same partition for all files in that folder.)
-         *
-         * NOTE that this can fail miserably if rotations are saved to
-         * a different partition and the system writes a symlink to a
-         * previous backupset. This is an error. It's better to turn
-         * off the linking feature completely in the case where
-         * multiple partitions are being used.
-         */
-         if ( isset($hashlist_rev[$sha1]) )
-            continue;
-
-         $hashlist_rev[$sha1] = $fn;
-      }
-
-      return $hashlist_rev;
-   }
-
-
-
-   function _get_last_hashlist( $fn )
-   {
-      $this->_std_vfsplugin_method_warning( "dummy vfs get_last_hashlist operation" );
-   }
-
-
-
-   function get_last_hashlist()
-   {
-      // don't bother to look unless we're using hardlinks
-      if ( !$this->_vfs_keeplocal()
-        || !$this->_vfs_usehardlinks()
-         )
-         return false; // not using hardlinks - no need for hashlists
-
-      if ( $this->_get_last_hashlist( $this->app->sys_hostname . EXT_BACKUP_LAST ) )
-         return true;
-
-      if ( $this->_get_last_hashlist( $this->app->sys_hostname . EXT_BACKUP_PREV ) )
-         return true;
-
-      // no problems
-      return false;
-   }
-
-
-   function _folder_check( $folders )
-   {
-      /**
-       * classes that extend the VFS base should check the folders and
-       * available space on their file systems and throw an exception
-       * if there is a problem.
-       *
-       */
-      $this->_std_vfsplugin_method_warning( "dummy vfs folder check operation" );
-   }
-
-
-   function _vfs_folder_check( $backupset_name )
-   {
-      // sanity check
-      // make sure the local backup folders exist and are writable
-      $folders = array( 0 => array( $this->path_temp,                // folder to verify
-                                    "temp working",                  // folder name
-                                    $this->app->sys_minfreespace,    // min space req'd
-                                    true ),                          // check the free space
-
-                        1 => array( $this->path_backup,              // folder to verify
-                                    "backup",                        // folder name
-                                    $this->app->sys_minbackupsize,   // min space req'd
-                                    $this->keeplocal ),              // check the free space
-
-                        2 => array( $this->path_rotation,            // folder to verify
-                                    "rotations",                     // folder name
-                                    $this->app->sys_minbackupsize,   // min space req'd
-                                    false ),                         // check the free space
-                      );
-
-
-      $this->current_backup = $backupset_name;
-      $this->current_path = dir_fn($this->path_backup . "/" . $backupset_name);
-
-      $this->_folder_check( $folders );
-   }
-
-
-
-   function _vfs_hardlink( $linktarget, $linksource )
-   {
-      /**
-       * classes that extend the VFS base should create a hardlink at
-       * $linksource that links to $linktarget. It is acceptible to
-       * throw an exception if the hardlink fails; otherwise return
-       * true for error and the caller will throw an exception.
-       *
-       */
-
-      $this->_std_vfsplugin_method_warning( "dummy vfs hardlink operation" );
-   }
-
-
-   function _vfs_keeplocal()
-   {
-      $this->_std_vfsplugin_method_warning( "dummy vfs return keeplocal flag" );
-   }
-
-
-   function _vfs_usehardlinks()
-   {
-      $this->_std_vfsplugin_method_warning( "dummy vfs return usehardlinks flag" );
-   }
-
-
-   function _vfs_addfile( $target, $sha1, $size )
-   {
-      $rel_ref = dir_fn( $this->app->current_subfolder . "/" . $target );
-      $abs_ref = dir_fn( $this->current_path . "/" . $rel_ref );
-
-      $this->current_tarball_count     += 1;
-      $this->current_tarball_size      += $size;
-
-      $this->step_tarball_count        += 1;
-      $this->step_tarball_size         += $size;
-
-      $this->job_tarball_count         += 1;
-      $this->job_tarball_size          += $size;
-
-      $this->current_sizelist[$rel_ref] = $size;
-      $this->current_hashlist[$rel_ref] = $sha1;
-      
-      // don't try to update the reverse hashlist here because
-      // we need to query it in the next step
-
-      /*
-       * check for identical tarballs in a previous backup set
-       */
-      if ( $this->_vfs_keeplocal()
-        && $this->_vfs_usehardlinks()
-        && isset($this->prev_hashlist_rev[$sha1]) )
-      {
-         /*
-          * Okay, so we've just created a tarball that's identical to
-          * a tarball that was created as part of the last run. Since
-          * we're working here on the daily backups we can assume
-          * (sorry - but, more often than not it's true,) we can
-          * assume that the filesystem on which the previous backup
-          * was written is the same as the filesystem for the current
-          * local backup. In this case we can go ahead and remove the
-          * new tarball and hardlink to the previous one.
-          */
-         $linktarget = dir_fn( $this->prev_path, $this->prev_hashlist_rev[$sha1] );
-         $linksource = $abs_ref;
-
-         if ( ($this->_vfs_hardlink( $linktarget, $linksource )) !== false )
-            $this->app->fatal( "unable to link {$linksource} to {$linktarget}" );
-
-         /*
-          * keep track of the fact that a hardlink was created so that
-          * a future utility can scan the hardlinked files to
-          * determine if any of them have experienced a disk
-          * error. This is because it's possible that the same tarball
-          * will be hardlinked over and over for years.
-          */
-         $this->current_hardlinked_count    += 1;
-         $this->current_hardlinked_size     += $size;
-         $this->current_hardlinked[$rel_ref] = $sha1;
-
-         $this->step_hardlinked_count       += 1;
-         $this->step_hardlinked_size        += $size;
-
-         $this->job_hardlinked_count        += 1;
-         $this->job_hardlinked_size         += $size;
-      }
-        else /**
-              * check for any identical tarballs in the current backup set
-              *
-              */
-             if ( isset( $this->current_hashlist_rev[$sha1] ) )
-             {
-                /**
-                 * Okay, so we've just created a tarball that's identical to
-                 * a different tarball. In this case we can go ahead and remove the
-                 * new tarball and hardlink to the existing one.
-                 */
-                $linktarget = dir_fn( $this->current_path, $this->current_hashlist_rev[$sha1] );
-                $linksource = $abs_ref;
-
-                if ( ($this->_vfs_hardlink( $linktarget, $linksource )) !== false )
-                   $this->app->fatal( "unable to link {$linksource} to {$linktarget}" );
-
-                /*
-                 * keep track of the fact that a hardlink was created so that
-                 * a future utility can scan the hardlinked files to
-                 * determine if any of them have experienced a disk
-                 * error. This is because it's possible that the same tarball
-                 * will be hardlinked over and over for years.
-                 */
-                $this->current_hardlinked_count    += 1;
-                $this->current_hardlinked_size     += $size;
-                $this->current_hardlinked[$rel_ref] = $sha1;
-
-                $this->step_hardlinked_count       += 1;
-                $this->step_hardlinked_size        += $size;
-
-                $this->job_hardlinked_count        += 1;
-                $this->job_hardlinked_size         += $size;
-             }
-
-      // remember to keep track of the new tarball
-      if ( !isset( $this->current_hashlist_rev[$sha1] ) )
-         $this->current_hashlist_rev[$sha1] = $rel_ref;
-
-      return false;
-   }
 }
-
-
-
 
