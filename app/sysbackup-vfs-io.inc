@@ -48,7 +48,7 @@
  * to store backupsets.
  *
  */
-class backupvfs_lowlevel_fileio_c extends plugin_base_c
+class backupvfs_fileio_c extends plugin_base_c
 {
   /**
    *
@@ -277,11 +277,9 @@ class backupvfs_lowlevel_fileio_c extends plugin_base_c
    {
       return remove_expired_items( $path, $max, $debug, $folders_only );
    }
-}
 
 
-
-/**
+/******************************************************************************
  *
  * fileio methods likely to be used by all virtual file systems
  *
@@ -289,20 +287,7 @@ class backupvfs_lowlevel_fileio_c extends plugin_base_c
  * expected to be generally useful - but can be overridden for each
  * different type of filesystem as needed.
  *
- */
-class backupvfs_fileio_c extends backupvfs_lowlevel_fileio_c
-{
-  /**
-   *
-   * Minimal constructor
-   *
-   * Not much to do here
-   *
-   */
-   function __construct( &$application_object )
-   {
-      parent::__construct( $application_object );
-   }
+ ******************************************************************************/
 
 
   /**

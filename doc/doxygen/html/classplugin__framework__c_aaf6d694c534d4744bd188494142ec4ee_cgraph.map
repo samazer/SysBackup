@@ -1,0 +1,16 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classstopwatch__c.html#a9183c847d07c84c8ce85f1ddff07860c" title="stopwatch_c::all_time" alt="" coords="469,32,619,61"/>
+<area shape="rect" id="node9" href="$classplugin__framework__c.html#a0d46d3ed0cde3a9c861a3cc6193dc1bf" title="app_after_job" alt="" coords="164,85,263,115"/>
+<area shape="rect" id="node11" href="$classplugin__framework__c.html#a6a5cb636b101a0ff19cf51847f3a64a1" title="app_before_job" alt="" coords="159,139,268,168"/>
+<area shape="rect" id="node13" href="$classplugin__framework__c.html#a8ac56db75b755b78c9c32acbc02648b3" title="plugin_internal" alt="" coords="161,192,265,221"/>
+<area shape="rect" id="node28" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="teelog_c::tee" alt="" coords="496,299,592,328"/>
+<area shape="rect" id="node31" href="$classplugin__framework__c.html#af9090086ab2ddab18780d7fa67c9d0c4" title="verbose" alt="" coords="180,296,247,325"/>
+<area shape="rect" id="node5" href="$classstopwatch__c.html#a6a93ed38a9b39db92205c955936b17eb" title="stopwatch_c::all_start" alt="" coords="668,5,817,35"/>
+<area shape="rect" id="node7" href="$classstopwatch__c.html#a14fa9b6e7d9cba61c9dea86f727b84a2" title="stopwatch_c::all_stop" alt="" coords="668,59,817,88"/>
+<area shape="rect" id="node15" href="$classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f" title="teelog_c::fatal" alt="" coords="317,192,421,221"/>
+<area shape="rect" id="node18" href="$general-log_8inc.html#a7a402c7c20b6fb9c2be97d73dd430327" title="backtrace" alt="" coords="505,85,583,115"/>
+<area shape="rect" id="node20" href="$general-utils_8inc.html#a77dd67e2e529e733ba6618dee1c1f09c" title="capture_begin" alt="" coords="493,139,595,168"/>
+<area shape="rect" id="node22" href="$general-utils_8inc.html#a67ba34c0b7537f53f68538230a6cb316" title="capture_end" alt="" coords="497,192,591,221"/>
+<area shape="rect" id="node24" href="$classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75" title="applog_c::log" alt="" coords="495,245,593,275"/>
+<area shape="rect" id="node26" href="$classapplog__c.html#a5ab616f7683c2f3e63af6086ae3b70f9" title="applog_c::log_prefix" alt="" coords="673,245,812,275"/>
+</map>

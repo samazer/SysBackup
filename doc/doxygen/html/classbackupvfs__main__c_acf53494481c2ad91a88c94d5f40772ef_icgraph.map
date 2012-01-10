@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classsystem__backup__app__c.html#a0d46d3ed0cde3a9c861a3cc6193dc1bf" title="system_backup_app_c::app_after_job" alt="" coords="128,5,371,35"/>
+<area shape="rect" id="node5" href="$classbackupvfs__main__c.html#a812adbc765506dbbde552028680a5e07" title="summary_stats" alt="" coords="193,59,305,88"/>
+<area shape="rect" id="node7" href="$classsystem__backup__app__c.html#aa242a7643866355933b7090dbb669dd6" title="system_backup_app_c::app_after_events" alt="" coords="419,32,683,61"/>
+<area shape="rect" id="node9" href="$classbackupvfs__main__c.html#a3b1ef57bf4048f7998413a8b882bfc1d" title="remote_xferfiles" alt="" coords="493,85,608,115"/>
+<area shape="rect" id="node11" href="$classbackupvfs__main__c.html#a8ac56db75b755b78c9c32acbc02648b3" title="plugin_internal" alt="" coords="732,85,836,115"/>
+</map>

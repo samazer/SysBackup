@@ -1,0 +1,6 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classaccount__info__c.html#a05e9928ac11500783b010eeb7429b50d" title="read_group" alt="" coords="155,5,240,35"/>
+<area shape="rect" id="node5" href="$classaccount__info__c.html#afd3166e181156776f1ae57b1767447a4" title="read_gshadow" alt="" coords="144,59,251,88"/>
+<area shape="rect" id="node7" href="$classaccount__info__c.html#a157c78a4f62df07bdd1136a758203ff0" title="read_passwd" alt="" coords="148,112,247,141"/>
+<area shape="rect" id="node9" href="$classaccount__info__c.html#a201c25a19997ad24ceee960ae69cf015" title="read_shadow" alt="" coords="148,165,247,195"/>
+</map>

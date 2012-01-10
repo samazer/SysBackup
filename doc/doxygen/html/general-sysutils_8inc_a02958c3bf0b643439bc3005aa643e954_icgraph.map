@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$general-sysutils_8inc.html#afdf5bfb4e7162d411c1ba5aef80208cf" title="disk_usage" alt="" coords="168,112,256,141"/>
+<area shape="rect" id="node5" href="$general-sysutils_8inc.html#ac8c969cd307ea955528ab54a4c307a0f" title="list_expired_items" alt="" coords="305,112,431,141"/>
+<area shape="rect" id="node7" href="$classbackupvfs__fileio__c.html#a29da45ee871140adbdf0b0da1ebd2423" title="backupvfs_fileio_c::_vfs_list_expired_items" alt="" coords="480,85,755,115"/>
+<area shape="rect" id="node19" href="$classlocalexec__c.html#ac72ad9f570c48e1d61faf54bb6067ffd" title="localexec_c::exec" alt="" coords="555,139,680,168"/>
+<area shape="rect" id="node9" href="$classbackupvfs__fileio__c.html#a6d122a7b0f70f6cdf2960be140a568e0" title="backupvfs_fileio_c::_vfs_prune_expired_backups" alt="" coords="803,85,1109,115"/>
+<area shape="rect" id="node11" href="$classbackupvfs__sshremote__c.html#a45a78f43a940f17654c557802f7bbe21" title="backupvfs_sshremote_c::vfs_prune_expired_backups" alt="" coords="1183,5,1516,35"/>
+<area shape="rect" id="node13" href="$classbackupvfs__sshremote__rotation__c.html#a45a78f43a940f17654c557802f7bbe21" title="backupvfs_sshremote_rotation_c::vfs_prune_expired_backups" alt="" coords="1157,59,1541,88"/>
+<area shape="rect" id="node15" href="$classbackupvfs__localio__c.html#a45a78f43a940f17654c557802f7bbe21" title="backupvfs_localio_c::vfs_prune_expired_backups" alt="" coords="1195,112,1504,141"/>
+<area shape="rect" id="node17" href="$classbackupvfs__localio__rotation__c.html#a45a78f43a940f17654c557802f7bbe21" title="backupvfs_localio_rotation_c::vfs_prune_expired_backups" alt="" coords="1169,165,1529,195"/>
+<area shape="rect" id="node21" href="$classlocalexec__c.html#a3222532b78daa37e60441c2c04f64546" title="localexec_c::__construct" alt="" coords="873,139,1039,168"/>
+</map>

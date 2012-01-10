@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$general-net_8inc.html#a54f43bbc6eea79da24f11e0a63f6dd13" title="_ifconfig" alt="" coords="157,59,227,88"/>
+<area shape="rect" id="node9" href="$general-net_8inc.html#afa478d916d0cbc82734bf61c2361aee3" title="network_device_stats" alt="" coords="117,112,267,141"/>
+<area shape="rect" id="node5" href="$general-utils_8inc.html#a8b92df50cbd5c7e370493b2c1b6b1df5" title="find_array_element_text" alt="" coords="316,5,476,35"/>
+<area shape="rect" id="node7" href="$general-utils_8inc.html#a61dfcba50bbd6472fa0eebaf0558fce0" title="find_prefixed_value" alt="" coords="329,59,463,88"/>
+<area shape="rect" id="node11" href="$general-utils_8inc.html#a2e5646f0918034344409641031950b56" title="single_spaces" alt="" coords="344,112,448,141"/>
+<area shape="rect" id="node13" href="$general-utils_8inc.html#a0055ef7f48b70fd8f1c75cc5304b34bb" title="single_chars" alt="" coords="527,112,620,141"/>
+</map>

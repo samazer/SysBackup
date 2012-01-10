@@ -1,0 +1,15 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classbackupvfs__main__c.html#a64e895a87cdacf6fdc6ec7bedefdad2b" title="_verbose_report" alt="" coords="139,85,253,115"/>
+<area shape="rect" id="node11" href="$classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f" title="teelog_c::fatal" alt="" coords="144,219,248,248"/>
+<area shape="rect" id="node5" href="$classbackupvfs__main__c.html#a12f97e2e68b1c7d0fda82dfe3b0585ec" title="get_current_subfolder" alt="" coords="324,5,471,35"/>
+<area shape="rect" id="node7" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="teelog_c::tee" alt="" coords="349,112,445,141"/>
+<area shape="rect" id="node9" href="$classplugin__framework__c.html#af9090086ab2ddab18780d7fa67c9d0c4" title="plugin_framework_c::verbose" alt="" coords="301,59,493,88"/>
+<area shape="rect" id="node13" href="$classstopwatch__c.html#a9183c847d07c84c8ce85f1ddff07860c" title="stopwatch_c::all_time" alt="" coords="323,165,472,195"/>
+<area shape="rect" id="node19" href="$general-log_8inc.html#a7a402c7c20b6fb9c2be97d73dd430327" title="backtrace" alt="" coords="359,219,436,248"/>
+<area shape="rect" id="node21" href="$general-utils_8inc.html#a77dd67e2e529e733ba6618dee1c1f09c" title="capture_begin" alt="" coords="347,272,448,301"/>
+<area shape="rect" id="node23" href="$general-utils_8inc.html#a67ba34c0b7537f53f68538230a6cb316" title="capture_end" alt="" coords="351,325,444,355"/>
+<area shape="rect" id="node25" href="$classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75" title="applog_c::log" alt="" coords="348,379,447,408"/>
+<area shape="rect" id="node15" href="$classstopwatch__c.html#a6a93ed38a9b39db92205c955936b17eb" title="stopwatch_c::all_start" alt="" coords="543,139,692,168"/>
+<area shape="rect" id="node17" href="$classstopwatch__c.html#a14fa9b6e7d9cba61c9dea86f727b84a2" title="stopwatch_c::all_stop" alt="" coords="543,192,692,221"/>
+<area shape="rect" id="node27" href="$classapplog__c.html#a5ab616f7683c2f3e63af6086ae3b70f9" title="applog_c::log_prefix" alt="" coords="548,379,687,408"/>
+</map>

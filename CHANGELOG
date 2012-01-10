@@ -1,7 +1,22 @@
 -*- mode: text; coding: utf-8-unix; -*- 
 
 
-(next)
+SysBackup v3.016alpha
+
+      * major improvements, some bugs found and fixed, full rotation
+        implementation completed. switched from phpdoc to doxygen (but
+        did not update all the comments - lots of work to do there.)
+
+      * bug#491: rotations now work properly. ie: if the
+        weekly/monthly backupset is being written to a different
+        partition the logic exists to make use of hardlinks on that
+        partition. Also the backupsets are now being pruned. This
+        logic applies to the sshremote NAS storage as well as the
+        local storage.
+
+      * bug#506: backupsets are marked as INCOMPLETE during
+        processing. The INCOMPLETE flag is removed when the backupset
+        is fully written.
 
       * bug#498: added the dump users plugin and associated job
         configuration. Very easy to complete because the code was

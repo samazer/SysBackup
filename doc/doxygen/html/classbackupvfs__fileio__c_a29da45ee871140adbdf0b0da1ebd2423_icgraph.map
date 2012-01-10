@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classbackupvfs__fileio__c.html#a6d122a7b0f70f6cdf2960be140a568e0" title="_vfs_prune_expired_backups" alt="" coords="215,85,404,115"/>
+<area shape="rect" id="node5" href="$classbackupvfs__sshremote__c.html#a45a78f43a940f17654c557802f7bbe21" title="backupvfs_sshremote_c::vfs_prune_expired_backups" alt="" coords="479,5,812,35"/>
+<area shape="rect" id="node7" href="$classbackupvfs__sshremote__rotation__c.html#a45a78f43a940f17654c557802f7bbe21" title="backupvfs_sshremote_rotation_c::vfs_prune_expired_backups" alt="" coords="453,59,837,88"/>
+<area shape="rect" id="node9" href="$classbackupvfs__localio__c.html#a45a78f43a940f17654c557802f7bbe21" title="backupvfs_localio_c::vfs_prune_expired_backups" alt="" coords="491,112,800,141"/>
+<area shape="rect" id="node11" href="$classbackupvfs__localio__rotation__c.html#a45a78f43a940f17654c557802f7bbe21" title="backupvfs_localio_rotation_c::vfs_prune_expired_backups" alt="" coords="465,165,825,195"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node2" href="$classplugin__base__c.html" title="{plugin_base_c\n|+ $plugin_name\l+ $plugin_title\l+ $plugin_description\l+ $plugin_version\l+ $plugin_enabled\l+ $plugin_type\l+ $plugin_unique\l+ $debug_sysexec\l|+ plugin_enabled()\l+ plugin_instance()\l+ plugin_shortref()\l+ plugin_title()\l+ plugin_help()\l+ _std_plugin_method_warning()\l+ required_options()\l+ load()\l+ unload()\l+ job_prepare()\l+ job_exec()\l+ job_cleanup()\l+ set_debugsysexec()\l+ __construct()\l}" alt="" coords="5,227,216,659"/>
+<area shape="rect" id="node4" href="$classplugin__appreference__c.html" title="{plugin_appreference_c\n|+ $app\l|+ __construct()\l+ _message_prefix_text()\l+ log()\l+ tee()\l+ warning()\l+ fatal()\l}" alt="" coords="25,6,196,178"/>
+</map>

@@ -1,0 +1,17 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classbackupvfs__fileio__c.html#ae99c86e7f04d104791a7f955345f5c32" title="_vfs_disk_free_space" alt="" coords="273,5,423,35"/>
+<area shape="rect" id="node5" href="$classbackupvfs__fileio__c.html#a156f603f0a878656b21c909d35b6c663" title="_vfs_disk_total_space" alt="" coords="272,59,424,88"/>
+<area shape="rect" id="node7" href="$classbackupvfs__fileio__c.html#a29da45ee871140adbdf0b0da1ebd2423" title="_vfs_list_expired_items" alt="" coords="269,112,427,141"/>
+<area shape="rect" id="node17" href="$classbackupvfs__fileio__c.html#ad165606711d3ffa3dfb8fe5747110dd8" title="_vfs_remove_expired_items" alt="" coords="256,165,440,195"/>
+<area shape="rect" id="node26" href="$general-utils_8inc.html#a239b0432db7572e8872b92fd9690532c" title="si_suffix" alt="" coords="313,219,383,248"/>
+<area shape="rect" id="node28" href="$classbackupvfs__fileio__c.html#a28608dced5aadea601e8a29bdc77cf23" title="vfs_displayref" alt="" coords="297,272,399,301"/>
+<area shape="rect" id="node30" href="$classplugin__appreference__c.html#aab64680d0a39449c7b28d78550694f0d" title="plugin_appreference_c::warning" alt="" coords="245,325,451,355"/>
+<area shape="rect" id="node9" href="$general-sysutils_8inc.html#ac8c969cd307ea955528ab54a4c307a0f" title="list_expired_items" alt="" coords="580,112,705,141"/>
+<area shape="rect" id="node11" href="$general-sysutils_8inc.html#afe814a8de5621ae3af1921ca60a62ef7" title="_list_folder_items" alt="" coords="836,139,959,168"/>
+<area shape="rect" id="node13" href="$general-sysutils_8inc.html#afdf5bfb4e7162d411c1ba5aef80208cf" title="disk_usage" alt="" coords="853,85,941,115"/>
+<area shape="rect" id="node15" href="$general-sysutils_8inc.html#a02958c3bf0b643439bc3005aa643e954" title="subfolder_sizes" alt="" coords="1009,85,1121,115"/>
+<area shape="rect" id="node19" href="$general-sysutils_8inc.html#ae44efd7c9ed854da2e6246f5d1326f47" title="remove_expired_items" alt="" coords="567,165,719,195"/>
+<area shape="rect" id="node22" href="$general-utils_8inc.html#a6185d0c82f5be193802f7bd846fdd9f6" title="dir_fn" alt="" coords="871,192,924,221"/>
+<area shape="rect" id="node24" href="$general-utils_8inc.html#a0055ef7f48b70fd8f1c75cc5304b34bb" title="single_chars" alt="" coords="1019,192,1112,221"/>
+<area shape="rect" id="node32" href="$classplugin__appreference__c.html#aa0d6ac531d747c3b05553e6cd57a74d9" title="plugin_appreference_c::_message_prefix_text" alt="" coords="499,325,787,355"/>
+</map>

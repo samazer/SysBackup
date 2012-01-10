@@ -376,6 +376,8 @@ class plugin_base_c extends plugin_appreference_c
  */
 class plugin_framework_c extends teelog_c
 {
+   private $sys_timezone;        // default timezone to keep PHP happy
+
    var $app_title;
    var $app_version;
    var $app_conffile;
@@ -415,6 +417,18 @@ class plugin_framework_c extends teelog_c
    var $debug_sysexec;   // true to debug any commands exec'd on the system
 
 
+
+   function set_adminemail( $e )       { $this->admin_email  = $e;              }
+   function set_timezone( $t )         { $this->sys_timezone = $t;              }
+
+   function get_adminemail()           { return $this->admin_email;             }
+   function get_timezone()             { return $this->sys_timezone;            }
+
+   function set_dir_config( $d )       { $this->app_confdir  = $d;              }
+   function set_dir_plugins( $d )      { $this->app_plugindir = $d;             }
+
+   function get_dir_plugins()          { return $this->app_confdir;             }
+   function get_dir_config()           { return $this->app_confdir;             }
 
    function app_title()
    {

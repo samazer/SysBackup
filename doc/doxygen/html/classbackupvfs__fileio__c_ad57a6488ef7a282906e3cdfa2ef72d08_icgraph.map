@@ -1,0 +1,8 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classbackupvfs__fileio__c.html#a9d254b8cee4c39b10fb241cd1016a585" title="vfs_folder_check" alt="" coords="172,85,292,115"/>
+<area shape="rect" id="node5" href="$classbackupvfs__fileio__c.html#aa4e02ee1e4a3c8434f93123ff1ca4cfc" title="vfs_warn_disk_space" alt="" coords="343,85,489,115"/>
+<area shape="rect" id="node7" href="$classbackupvfs__sshremote__c.html#a6187bbcd771dd6107b31f2193e6c3537" title="backupvfs_sshremote_c::vfs_init" alt="" coords="564,5,777,35"/>
+<area shape="rect" id="node9" href="$classbackupvfs__sshremote__rotation__c.html#a6187bbcd771dd6107b31f2193e6c3537" title="backupvfs_sshremote_rotation_c::vfs_init" alt="" coords="539,59,803,88"/>
+<area shape="rect" id="node11" href="$classbackupvfs__localio__rotation__c.html#a6187bbcd771dd6107b31f2193e6c3537" title="backupvfs_localio_rotation_c::vfs_init" alt="" coords="551,112,791,141"/>
+<area shape="rect" id="node13" href="$classbackupvfs__baseio__c.html#a6187bbcd771dd6107b31f2193e6c3537" title="backupvfs_baseio_c::vfs_init" alt="" coords="576,165,765,195"/>
+</map>

@@ -1,0 +1,13 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f" title="teelog_c::fatal" alt="" coords="157,165,261,195"/>
+<area shape="rect" id="node23" href="$classteelog__c.html#aab64680d0a39449c7b28d78550694f0d" title="teelog_c::warning" alt="" coords="148,219,271,248"/>
+<area shape="rect" id="node5" href="$classstopwatch__c.html#a9183c847d07c84c8ce85f1ddff07860c" title="stopwatch_c::all_time" alt="" coords="320,112,469,141"/>
+<area shape="rect" id="node11" href="$general-log_8inc.html#a7a402c7c20b6fb9c2be97d73dd430327" title="backtrace" alt="" coords="356,165,433,195"/>
+<area shape="rect" id="node13" href="$general-utils_8inc.html#a77dd67e2e529e733ba6618dee1c1f09c" title="capture_begin" alt="" coords="344,5,445,35"/>
+<area shape="rect" id="node15" href="$general-utils_8inc.html#a67ba34c0b7537f53f68538230a6cb316" title="capture_end" alt="" coords="348,59,441,88"/>
+<area shape="rect" id="node17" href="$classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75" title="applog_c::log" alt="" coords="345,219,444,248"/>
+<area shape="rect" id="node21" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="teelog_c::tee" alt="" coords="347,272,443,301"/>
+<area shape="rect" id="node7" href="$classstopwatch__c.html#a6a93ed38a9b39db92205c955936b17eb" title="stopwatch_c::all_start" alt="" coords="519,139,668,168"/>
+<area shape="rect" id="node9" href="$classstopwatch__c.html#a14fa9b6e7d9cba61c9dea86f727b84a2" title="stopwatch_c::all_stop" alt="" coords="519,85,668,115"/>
+<area shape="rect" id="node19" href="$classapplog__c.html#a5ab616f7683c2f3e63af6086ae3b70f9" title="applog_c::log_prefix" alt="" coords="524,219,663,248"/>
+</map>

@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classbackupvfs__fileio__c.html#a265d2aab0a22ac3c73873d1f9c575b92" title="backupvfs_fileio_c::_unmark_backupset_incomplete" alt="" coords="123,72,448,101"/>
+<area shape="rect" id="node20" href="$classplugin__appreference__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="plugin_appreference_c::tee" alt="" coords="196,139,375,168"/>
+<area shape="rect" id="node5" href="$classbackupvfs__fileio__c.html#a1de803447f2d1899fd567bc9a6580f46" title="backupvfs_fileio_c::_vfs_fatal_file_error" alt="" coords="497,5,748,35"/>
+<area shape="rect" id="node14" href="$classbackupvfs__fileio__c.html#a045f7b19c3e0117d6b0ed6c2b5320d43" title="backupvfs_fileio_c::_vfs_unlink" alt="" coords="521,59,724,88"/>
+<area shape="rect" id="node16" href="$general-utils_8inc.html#a6185d0c82f5be193802f7bd846fdd9f6" title="dir_fn" alt="" coords="596,112,649,141"/>
+<area shape="rect" id="node7" href="$classplugin__appreference__c.html#a0824c910c5d7b7949a8d983ea0b34c1f" title="plugin_appreference_c::fatal" alt="" coords="808,5,992,35"/>
+<area shape="rect" id="node11" href="$classplugin__appreference__c.html#aab64680d0a39449c7b28d78550694f0d" title="plugin_appreference_c::warning" alt="" coords="797,59,1003,88"/>
+<area shape="rect" id="node9" href="$classplugin__appreference__c.html#aa0d6ac531d747c3b05553e6cd57a74d9" title="plugin_appreference_c::_message_prefix_text" alt="" coords="1051,59,1339,88"/>
+<area shape="rect" id="node18" href="$general-utils_8inc.html#a0055ef7f48b70fd8f1c75cc5304b34bb" title="single_chars" alt="" coords="853,112,947,141"/>
+</map>

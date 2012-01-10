@@ -1,0 +1,15 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classplugin__framework__c.html#ab98b7b7c22f79e3029c2ef0aff57d4f2" title="approve_job" alt="" coords="137,112,228,141"/>
+<area shape="rect" id="node5" href="$classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f" title="teelog_c::fatal" alt="" coords="131,165,235,195"/>
+<area shape="rect" id="node23" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="teelog_c::tee" alt="" coords="320,272,416,301"/>
+<area shape="rect" id="node26" href="$classplugin__framework__c.html#af9090086ab2ddab18780d7fa67c9d0c4" title="verbose" alt="" coords="149,323,216,352"/>
+<area shape="rect" id="node28" href="$classteelog__c.html#aab64680d0a39449c7b28d78550694f0d" title="teelog_c::warning" alt="" coords="121,219,244,248"/>
+<area shape="rect" id="node7" href="$classstopwatch__c.html#a9183c847d07c84c8ce85f1ddff07860c" title="stopwatch_c::all_time" alt="" coords="293,112,443,141"/>
+<area shape="rect" id="node13" href="$general-log_8inc.html#a7a402c7c20b6fb9c2be97d73dd430327" title="backtrace" alt="" coords="329,165,407,195"/>
+<area shape="rect" id="node15" href="$general-utils_8inc.html#a77dd67e2e529e733ba6618dee1c1f09c" title="capture_begin" alt="" coords="317,5,419,35"/>
+<area shape="rect" id="node17" href="$general-utils_8inc.html#a67ba34c0b7537f53f68538230a6cb316" title="capture_end" alt="" coords="321,59,415,88"/>
+<area shape="rect" id="node19" href="$classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75" title="applog_c::log" alt="" coords="319,219,417,248"/>
+<area shape="rect" id="node9" href="$classstopwatch__c.html#a6a93ed38a9b39db92205c955936b17eb" title="stopwatch_c::all_start" alt="" coords="492,139,641,168"/>
+<area shape="rect" id="node11" href="$classstopwatch__c.html#a14fa9b6e7d9cba61c9dea86f727b84a2" title="stopwatch_c::all_stop" alt="" coords="492,85,641,115"/>
+<area shape="rect" id="node21" href="$classapplog__c.html#a5ab616f7683c2f3e63af6086ae3b70f9" title="applog_c::log_prefix" alt="" coords="497,219,636,248"/>
+</map>

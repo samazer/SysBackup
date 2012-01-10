@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classlogfile__c.html#a3bc4fcb23205c3527da2fd273a5573e8" title="_save_to_buffer" alt="" coords="117,5,232,35"/>
+<area shape="rect" id="node5" href="$classlogfile__c.html#aa69c8bf1f1dcf4e72552efff1fe3e87e" title="close" alt="" coords="148,59,201,88"/>
+<area shape="rect" id="node7" href="$classlogfile__c.html#a7751f77b5263bcf940ece6e824a05b38" title="flush" alt="" coords="149,112,200,141"/>
+<area shape="rect" id="node9" href="$classlogfile__c.html#ac661e1ae69ba7f2da32807736e4a6aa6" title="lock" alt="" coords="152,165,197,195"/>
+<area shape="rect" id="node11" href="$classlogfile__c.html#a793d98ef7b7724d713be3c2e9f68c100" title="open" alt="" coords="149,219,200,248"/>
+<area shape="rect" id="node13" href="$classlogfile__c.html#aaa2cb429679e92474ea11e42cfaa9450" title="seek" alt="" coords="149,272,200,301"/>
+<area shape="rect" id="node15" href="$classlogfile__c.html#afb061ecbff1e66db62b9eddfea6e915f" title="unlock" alt="" coords="145,325,204,355"/>
+<area shape="rect" id="node17" href="$classlogfile__c.html#a51860af58b1fe05eb16431f214064bcf" title="write" alt="" coords="149,379,200,408"/>
+</map>

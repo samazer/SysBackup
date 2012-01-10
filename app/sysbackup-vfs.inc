@@ -143,8 +143,6 @@ require_once "app/sysbackup-vfs-sshremote-rotation.inc";
  */
 class backupvfs_main_c extends plugin_framework_c
 {
-   private $sys_timezone;        // default timezone to keep PHP happy
-
    private $backupset_namefmt;   // format string for the date() function to generate backupset names
                                  // embed \%\H\O\S\T\% to output %HOST% which is replaced with $sys_hostname
    private $backupset_name;      // name of the current backupset
@@ -168,16 +166,6 @@ class backupvfs_main_c extends plugin_framework_c
    private $xfer_queue;          // queue[] = array( $rel_ref, $sha1, $size ), ...
 
 
-
-   function set_adminemail( $e )       { $this->admin_email  = $e;              }
-   function set_timezone( $t )         { $this->sys_timezone = $t;              }
-   function set_dir_config( $d )       { $this->app_confdir  = $d;              }
-   function set_dir_plugins( $d )      { $this->app_plugindir = $d;             }
-
-   function get_adminemail()           { return $this->admin_email;             }
-   function get_timezone()             { return $this->sys_timezone;            }
-   function get_dir_plugins()          { return $this->app_confdir;             }
-   function get_dir_config()           { return $this->app_confdir;             }
 
    function set_hostname( $nam, $id )  { $this->sys_local->hostname = $nam; 
                                          $this->sys_local->hostid   = $id;      }
@@ -306,8 +294,8 @@ class backupvfs_main_c extends plugin_framework_c
       $this->tar                = new mktarball_util_c();
 
       $this->sys_local          = new backupvfs_localio_c( $this, $this->tar, $opts );
-      $this->sys_local_weekly   = new backupvfs_localio_rotation_plugin_c( $this, $this->tar, "weekly",  $opts );
-      $this->sys_local_monthly  = new backupvfs_localio_rotation_plugin_c( $this, $this->tar, "monthly", $opts );
+      $this->sys_local_weekly   = new backupvfs_localio_rotation_c( $this, $this->tar, "weekly",  $opts );
+      $this->sys_local_monthly  = new backupvfs_localio_rotation_c( $this, $this->tar, "monthly", $opts );
 
       $this->sys_remote         = array();
       $this->sys_remotes        = array();

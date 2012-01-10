@@ -1,0 +1,7 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classsysbackup__plugin__base__c.html#aa2a44983a650e4109b18e45f3a0bc93a" title="vfs_addfile" alt="" coords="153,5,239,35"/>
+<area shape="rect" id="node5" href="$classsysbackup__plugin__base__c.html#a41cbb4af0889bb6af5f2e2dca14b2609" title="vfs_compress_command" alt="" coords="112,59,280,88"/>
+<area shape="rect" id="node7" href="$classsysbackup__plugin__base__c.html#ac75ecf5dfcc807907a65ef66293a6eae" title="vfs_compress_file" alt="" coords="132,112,260,141"/>
+<area shape="rect" id="node9" href="$classsysbackup__plugin__base__c.html#aab6fa0f7aed7c9a2546553f1dc68626e" title="vfs_compress_string" alt="" coords="125,165,267,195"/>
+<area shape="rect" id="node11" href="$classsysbackup__plugin__base__c.html#af6cf707bae8e064fec0b7c6cfcadd680" title="vfs_tarball_folder" alt="" coords="136,219,256,248"/>
+</map>

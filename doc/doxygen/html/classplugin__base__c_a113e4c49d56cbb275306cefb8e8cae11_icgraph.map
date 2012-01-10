@@ -1,0 +1,11 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classplugin__base__c.html#a203501bed60ad9df01792367cbe8298d" title="__construct" alt="" coords="239,5,329,35"/>
+<area shape="rect" id="node5" href="$classbackupvfs__sshremote__c.html#ad369b4868e609fd71eddf054db23aae8" title="backupvfs_sshremote_c::__construct" alt="" coords="164,59,404,88"/>
+<area shape="rect" id="node7" href="$classbackupvfs__sshremote__rotation__c.html#a8792425b6f8d96047ce8e43f9b3a6dcf" title="backupvfs_sshremote_rotation_c::__construct" alt="" coords="139,112,429,141"/>
+<area shape="rect" id="node9" href="$classbackupvfs__localio__c.html#a7ce1ca245bb66169cc69e8d0e7839965" title="backupvfs_localio_c::__construct" alt="" coords="176,165,392,195"/>
+<area shape="rect" id="node11" href="$classbackupvfs__localio__rotation__c.html#a81c67278cceda601bed827b963eb2927" title="backupvfs_localio_rotation_c::__construct" alt="" coords="151,219,417,248"/>
+<area shape="rect" id="node13" href="$classbackupvfs__baseio__c.html#a203501bed60ad9df01792367cbe8298d" title="backupvfs_baseio_c::__construct" alt="" coords="176,272,392,301"/>
+<area shape="rect" id="node15" href="$classsysbackup__plugin__base__c.html#a203501bed60ad9df01792367cbe8298d" title="sysbackup_plugin_base_c::__construct" alt="" coords="159,325,409,355"/>
+<area shape="rect" id="node17" href="$classbackupvfs__baseio__c.html#a91a1483985f07ceb2a035ae78c4c8ea3" title="backupvfs_baseio_c::dump_config" alt="" coords="173,379,395,408"/>
+<area shape="rect" id="node19" href="$classplugin__base__c.html#ab864cc0c2b0f37fbfb5944795dee8355" title="plugin_instance" alt="" coords="228,432,340,461"/>
+</map>

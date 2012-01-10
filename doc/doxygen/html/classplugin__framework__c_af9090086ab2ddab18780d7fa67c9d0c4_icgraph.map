@@ -1,0 +1,21 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classbackupvfs__main__c.html#a64e895a87cdacf6fdc6ec7bedefdad2b" title="backupvfs_main_c::_verbose_report" alt="" coords="128,139,360,168"/>
+<area shape="rect" id="node15" href="$classplugin__framework__c.html#a314dbb02a6415ebee0b3f7da70c1b44c" title="add_job" alt="" coords="211,247,277,276"/>
+<area shape="rect" id="node21" href="$classsystem__backup__app__c.html#a4e659dc9df5d9aea9c7914794e9b7bd3" title="system_backup_app_c::app_after_init" alt="" coords="123,300,365,329"/>
+<area shape="rect" id="node23" href="$classplugin__framework__c.html#a7d53d4d9eebfbc03444a76d29c6f1068" title="app_init" alt="" coords="861,532,928,561"/>
+<area shape="rect" id="node25" href="$classplugin__framework__c.html#a51af30a60f9f02777c6396b8247e356f" title="main" alt="" coords="1077,403,1128,432"/>
+<area shape="rect" id="node27" href="$classplugin__framework__c.html#af977b227a3a3134a7b21b2fe604e6d65" title="default_flag_action" alt="" coords="179,612,309,641"/>
+<area shape="rect" id="node32" href="$classplugin__framework__c.html#ad6ffb3a15567273f231140338760fee6" title="load_app_config" alt="" coords="505,691,620,720"/>
+<area shape="rect" id="node35" href="$classplugin__framework__c.html#a3b039ffd22dff0609c2a466c3f7e670e" title="load_jobs" alt="" coords="205,455,283,484"/>
+<area shape="rect" id="node38" href="$classplugin__framework__c.html#a5517f5b644d22307dc22a51dfd113b42" title="load_plugins" alt="" coords="197,559,291,588"/>
+<area shape="rect" id="node42" href="$classbackupvfs__main__c.html#a8ac56db75b755b78c9c32acbc02648b3" title="backupvfs_main_c::plugin_internal" alt="" coords="133,665,355,695"/>
+<area shape="rect" id="node44" href="$classplugin__framework__c.html#aaf6d694c534d4744bd188494142ec4ee" title="trigger_events" alt="" coords="843,351,947,380"/>
+<area shape="rect" id="node5" href="$classbackupvfs__main__c.html#a017b3d6c2541988bcd244effa00574cd" title="backupvfs_main_c::vfs_addfile" alt="" coords="461,165,664,195"/>
+<area shape="rect" id="node7" href="$classbackupvfs__main__c.html#a41cbb4af0889bb6af5f2e2dca14b2609" title="backupvfs_main_c::vfs_compress_command" alt="" coords="420,219,705,248"/>
+<area shape="rect" id="node9" href="$classbackupvfs__main__c.html#a058e62de541a69b7e2ac4593c2f534a5" title="backupvfs_main_c::vfs_compress_file" alt="" coords="440,5,685,35"/>
+<area shape="rect" id="node11" href="$classbackupvfs__main__c.html#aab6fa0f7aed7c9a2546553f1dc68626e" title="backupvfs_main_c::vfs_compress_string" alt="" coords="433,59,692,88"/>
+<area shape="rect" id="node13" href="$classbackupvfs__main__c.html#a9be83ec6186cf96f66cff0ada6ec97f9" title="backupvfs_main_c::vfs_tarball_folder" alt="" coords="444,112,681,141"/>
+<area shape="rect" id="node17" href="$classbackupvfs__main__c.html#a16d29b017bd81585d3fa361bd7071df3" title="backupvfs_main_c::add_standard_internal_jobs" alt="" coords="415,272,711,301"/>
+<area shape="rect" id="node19" href="$classsystem__backup__app__c.html#adf31acb1b5029960ba976a48f60d3af7" title="system_backup_app_c::after_loading_jobs" alt="" coords="760,272,1029,301"/>
+<area shape="rect" id="node29" href="$classplugin__framework__c.html#a8d6f3c84cd5b11fef4e0871d5143744c" title="default_flag_args" alt="" coords="503,611,623,640"/>
+</map>

@@ -1,0 +1,25 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f" title="teelog_c::fatal" alt="" coords="603,105,707,135"/>
+<area shape="rect" id="node21" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="teelog_c::tee" alt="" coords="811,307,907,336"/>
+<area shape="rect" id="node23" href="$classbackupvfs__main__c.html#aca7d2c47bd2fa5c8f070e120bc67bd59" title="prune_expired_backups" alt="" coords="177,393,335,423"/>
+<area shape="rect" id="node25" href="$classbackupvfs__main__c.html#a3b1ef57bf4048f7998413a8b882bfc1d" title="remote_xferfiles" alt="" coords="199,340,313,369"/>
+<area shape="rect" id="node56" href="$classplugin__framework__c.html#af9090086ab2ddab18780d7fa67c9d0c4" title="plugin_framework_c::verbose" alt="" coords="160,447,352,476"/>
+<area shape="rect" id="node5" href="$classstopwatch__c.html#a9183c847d07c84c8ce85f1ddff07860c" title="stopwatch_c::all_time" alt="" coords="784,59,933,88"/>
+<area shape="rect" id="node11" href="$general-log_8inc.html#a7a402c7c20b6fb9c2be97d73dd430327" title="backtrace" alt="" coords="820,112,897,141"/>
+<area shape="rect" id="node13" href="$general-utils_8inc.html#a77dd67e2e529e733ba6618dee1c1f09c" title="capture_begin" alt="" coords="808,165,909,195"/>
+<area shape="rect" id="node15" href="$general-utils_8inc.html#a67ba34c0b7537f53f68538230a6cb316" title="capture_end" alt="" coords="812,5,905,35"/>
+<area shape="rect" id="node17" href="$classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75" title="applog_c::log" alt="" coords="809,231,908,260"/>
+<area shape="rect" id="node7" href="$classstopwatch__c.html#a6a93ed38a9b39db92205c955936b17eb" title="stopwatch_c::all_start" alt="" coords="983,85,1132,115"/>
+<area shape="rect" id="node9" href="$classstopwatch__c.html#a14fa9b6e7d9cba61c9dea86f727b84a2" title="stopwatch_c::all_stop" alt="" coords="983,32,1132,61"/>
+<area shape="rect" id="node19" href="$classapplog__c.html#a5ab616f7683c2f3e63af6086ae3b70f9" title="applog_c::log_prefix" alt="" coords="988,231,1127,260"/>
+<area shape="rect" id="node27" href="$classbackupvfs__main__c.html#ab09a722f53f0271dda6c7643b04aeb86" title="_notquiet_report_header" alt="" coords="575,417,735,447"/>
+<area shape="rect" id="node32" href="$classbackupvfs__main__c.html#a9f273c578498b4aeace0871c054789d2" title="get_keeplocal" alt="" coords="412,260,513,289"/>
+<area shape="rect" id="node34" href="$classteelog__c.html#a68af7815491e6b3a0950993a10b0355d" title="teelog_c::not_quiet" alt="" coords="589,549,720,579"/>
+<area shape="rect" id="node36" href="$classteelog__c.html#a851611e66979fe71d2932ef552d676ad" title="teelog_c::notquiet" alt="" coords="400,417,525,447"/>
+<area shape="rect" id="node39" href="$general-utils_8inc.html#a239b0432db7572e8872b92fd9690532c" title="si_suffix" alt="" coords="428,471,497,500"/>
+<area shape="rect" id="node41" href="$classbackupvfs__main__c.html#a812adbc765506dbbde552028680a5e07" title="summary_stats" alt="" coords="407,313,519,343"/>
+<area shape="rect" id="node53" href="$classbackupvfs__main__c.html#a995be90b7f2430568e61d0d27d5eec01" title="vfs_subfolder" alt="" coords="413,524,512,553"/>
+<area shape="rect" id="node29" href="$classteelog__c.html#afc7d95abfdeda09f4e9a17749e9b6039" title="teelog_c::quiet" alt="" coords="805,417,912,447"/>
+<area shape="rect" id="node43" href="$classbackupvfs__main__c.html#acf53494481c2ad91a88c94d5f40772ef" title="log_stats" alt="" coords="617,260,692,289"/>
+<area shape="rect" id="node47" href="$classbackupvfs__main__c.html#aaab7cc7dc706b0c47a22c643afe529a4" title="show_stats" alt="" coords="611,364,699,393"/>
+</map>

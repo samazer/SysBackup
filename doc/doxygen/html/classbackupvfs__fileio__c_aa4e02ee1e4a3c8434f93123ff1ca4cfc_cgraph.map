@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classbackupvfs__fileio__c.html#a9d254b8cee4c39b10fb241cd1016a585" title="vfs_folder_check" alt="" coords="204,112,324,141"/>
+<area shape="rect" id="node5" href="$classbackupvfs__fileio__c.html#ae99c86e7f04d104791a7f955345f5c32" title="_vfs_disk_free_space" alt="" coords="401,5,551,35"/>
+<area shape="rect" id="node7" href="$classbackupvfs__fileio__c.html#aa8cf81192f8af85912ee1b86a7c90724" title="_vfs_file_exists" alt="" coords="420,59,532,88"/>
+<area shape="rect" id="node9" href="$classbackupvfs__fileio__c.html#ad57a6488ef7a282906e3cdfa2ef72d08" title="_vfs_is_writable" alt="" coords="419,112,533,141"/>
+<area shape="rect" id="node11" href="$general-utils_8inc.html#a239b0432db7572e8872b92fd9690532c" title="si_suffix" alt="" coords="441,165,511,195"/>
+<area shape="rect" id="node13" href="$classplugin__appreference__c.html#aab64680d0a39449c7b28d78550694f0d" title="plugin_appreference_c::warning" alt="" coords="373,219,579,248"/>
+<area shape="rect" id="node15" href="$classplugin__appreference__c.html#aa0d6ac531d747c3b05553e6cd57a74d9" title="plugin_appreference_c::_message_prefix_text" alt="" coords="627,219,915,248"/>
+</map>

@@ -224,7 +224,7 @@
  * @subpackage sysbackup
  *
  */
-class backupvfs_localio_rotation_plugin_c extends backupvfs_localio_c
+class backupvfs_localio_rotation_c extends backupvfs_localio_c
 {
    var $rotation_type     = "weekly"; // type is either weekly or monthly
    var $rotation_hardlink = true;     // true if daily & rotation partitions are the same

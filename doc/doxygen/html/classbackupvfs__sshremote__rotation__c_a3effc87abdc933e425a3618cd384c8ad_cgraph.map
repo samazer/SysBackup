@@ -1,0 +1,15 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classbackupvfs__sshremote__c.html#a70fef1353659d85dea15516e3a523711" title="backupvfs_sshremote_c::_vfs_chmod" alt="" coords="183,5,425,35"/>
+<area shape="rect" id="node5" href="$classbackupvfs__sshremote__c.html#aa8cf81192f8af85912ee1b86a7c90724" title="backupvfs_sshremote_c::_vfs_file_exists" alt="" coords="173,59,435,88"/>
+<area shape="rect" id="node7" href="$classbackupvfs__sshremote__c.html#a36b6da8edcbd680ac53a08796024179f" title="backupvfs_sshremote_c::_vfs_link" alt="" coords="192,112,416,141"/>
+<area shape="rect" id="node9" href="$classbackupvfs__sshremote__c.html#a045f7b19c3e0117d6b0ed6c2b5320d43" title="backupvfs_sshremote_c::_vfs_unlink" alt="" coords="185,165,423,195"/>
+<area shape="rect" id="node11" href="$general-utils_8inc.html#a6185d0c82f5be193802f7bd846fdd9f6" title="dir_fn" alt="" coords="277,219,331,248"/>
+<area shape="rect" id="node15" href="$classplugin__appreference__c.html#a0824c910c5d7b7949a8d983ea0b34c1f" title="plugin_appreference_c::fatal" alt="" coords="212,272,396,301"/>
+<area shape="rect" id="node19" href="$classbackupvfs__baseio__c.html#a7679c332bdc81fbd35edb000c974be2f" title="backupvfs_baseio_c::get_path_backupset" alt="" coords="171,325,437,355"/>
+<area shape="rect" id="node21" href="$classbackupvfs__baseio__c.html#ae15557465d8607801e71be53d5821576" title="backupvfs_baseio_c::get_umaskfiles" alt="" coords="185,379,423,408"/>
+<area shape="rect" id="node23" href="$classplugin__base__c.html#a73fbaa129bbdf16d82c285bba75dd8fb" title="plugin_base_c::plugin_enabled" alt="" coords="205,432,403,461"/>
+<area shape="rect" id="node25" href="$classplugin__appreference__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="plugin_appreference_c::tee" alt="" coords="215,485,393,515"/>
+<area shape="rect" id="node28" href="$classbackupvfs__fileio__c.html#a28608dced5aadea601e8a29bdc77cf23" title="backupvfs_fileio_c::vfs_displayref" alt="" coords="195,539,413,568"/>
+<area shape="rect" id="node13" href="$general-utils_8inc.html#a0055ef7f48b70fd8f1c75cc5304b34bb" title="single_chars" alt="" coords="583,219,676,248"/>
+<area shape="rect" id="node17" href="$classplugin__appreference__c.html#aa0d6ac531d747c3b05553e6cd57a74d9" title="plugin_appreference_c::_message_prefix_text" alt="" coords="485,379,773,408"/>
+</map>

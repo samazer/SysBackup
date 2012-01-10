@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node1" href="$classplugin__appreference__c.html" title="plugin_appreference_c" alt="" coords="5,32,157,61"/>
+<area shape="rect" id="node3" href="$classbackupvfs__backupset__c.html" title="backupvfs_backupset_c" alt="" coords="205,5,368,35"/>
+<area shape="rect" id="node5" href="$classplugin__base__c.html" title="plugin_base_c" alt="" coords="235,59,339,88"/>
+<area shape="rect" id="node7" href="$classbackupvfs__fileio__c.html" title="backupvfs_fileio_c" alt="" coords="439,32,569,61"/>
+<area shape="rect" id="node19" href="$classsysbackup__plugin__base__c.html" title="sysbackup_plugin_base_c" alt="" coords="417,85,591,115"/>
+<area shape="rect" id="node9" href="$classbackupvfs__baseio__c.html" title="backupvfs_baseio_c" alt="" coords="640,32,781,61"/>
+<area shape="rect" id="node11" href="$classbackupvfs__localio__c.html" title="backupvfs_localio_c" alt="" coords="843,5,981,35"/>
+<area shape="rect" id="node15" href="$classbackupvfs__sshremote__c.html" title="backupvfs_sshremote_c" alt="" coords="831,59,993,88"/>
+<area shape="rect" id="node13" href="$classbackupvfs__localio__rotation__c.html" title="backupvfs_localio_rotation_c" alt="" coords="1056,5,1245,35"/>
+<area shape="rect" id="node17" href="$classbackupvfs__sshremote__rotation__c.html" title="backupvfs_sshremote_rotation_c" alt="" coords="1044,59,1257,88"/>
+</map>

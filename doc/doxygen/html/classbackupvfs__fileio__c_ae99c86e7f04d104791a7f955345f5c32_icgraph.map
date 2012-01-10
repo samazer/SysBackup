@@ -1,0 +1,13 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classbackupvfs__fileio__c.html#a6d122a7b0f70f6cdf2960be140a568e0" title="_vfs_prune_expired_backups" alt="" coords="204,112,393,141"/>
+<area shape="rect" id="node13" href="$classbackupvfs__fileio__c.html#a9d254b8cee4c39b10fb241cd1016a585" title="vfs_folder_check" alt="" coords="239,192,359,221"/>
+<area shape="rect" id="node5" href="$classbackupvfs__sshremote__c.html#a45a78f43a940f17654c557802f7bbe21" title="backupvfs_sshremote_c::vfs_prune_expired_backups" alt="" coords="468,5,801,35"/>
+<area shape="rect" id="node7" href="$classbackupvfs__sshremote__rotation__c.html#a45a78f43a940f17654c557802f7bbe21" title="backupvfs_sshremote_rotation_c::vfs_prune_expired_backups" alt="" coords="443,59,827,88"/>
+<area shape="rect" id="node9" href="$classbackupvfs__localio__c.html#a45a78f43a940f17654c557802f7bbe21" title="backupvfs_localio_c::vfs_prune_expired_backups" alt="" coords="480,112,789,141"/>
+<area shape="rect" id="node11" href="$classbackupvfs__localio__rotation__c.html#a45a78f43a940f17654c557802f7bbe21" title="backupvfs_localio_rotation_c::vfs_prune_expired_backups" alt="" coords="455,165,815,195"/>
+<area shape="rect" id="node15" href="$classbackupvfs__fileio__c.html#aa4e02ee1e4a3c8434f93123ff1ca4cfc" title="vfs_warn_disk_space" alt="" coords="561,219,708,248"/>
+<area shape="rect" id="node17" href="$classbackupvfs__sshremote__c.html#a6187bbcd771dd6107b31f2193e6c3537" title="backupvfs_sshremote_c::vfs_init" alt="" coords="900,139,1113,168"/>
+<area shape="rect" id="node19" href="$classbackupvfs__sshremote__rotation__c.html#a6187bbcd771dd6107b31f2193e6c3537" title="backupvfs_sshremote_rotation_c::vfs_init" alt="" coords="875,192,1139,221"/>
+<area shape="rect" id="node21" href="$classbackupvfs__localio__rotation__c.html#a6187bbcd771dd6107b31f2193e6c3537" title="backupvfs_localio_rotation_c::vfs_init" alt="" coords="887,245,1127,275"/>
+<area shape="rect" id="node23" href="$classbackupvfs__baseio__c.html#a6187bbcd771dd6107b31f2193e6c3537" title="backupvfs_baseio_c::vfs_init" alt="" coords="912,299,1101,328"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classsystem__backup__app__c.html#a4e659dc9df5d9aea9c7914794e9b7bd3" title="system_backup_app_c::app_after_init" alt="" coords="200,5,443,35"/>
+<area shape="rect" id="node5" href="$classbackupvfs__main__c.html#a32cab912e6c1954794c5438c636a079d" title="vfs_start" alt="" coords="285,59,357,88"/>
+<area shape="rect" id="node7" href="$classsystem__backup__app__c.html#a69cab8ae70a229c3b81b210003a00b25" title="system_backup_app_c::app_before_events" alt="" coords="491,59,765,88"/>
+</map>

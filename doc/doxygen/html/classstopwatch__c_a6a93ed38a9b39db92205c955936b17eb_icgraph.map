@@ -1,0 +1,34 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classstopwatch__c.html#a9183c847d07c84c8ce85f1ddff07860c" title="all_time" alt="" coords="125,117,192,147"/>
+<area shape="rect" id="node7" href="$classplugin__framework__c.html#a51af30a60f9f02777c6396b8247e356f" title="plugin_framework_c::main" alt="" coords="1123,93,1296,123"/>
+<area shape="rect" id="node71" href="$classstopwatch__c.html#a150f1a99bc7cda370998627966d1b55a" title="lap_start" alt="" coords="123,1204,195,1233"/>
+<area shape="rect" id="node5" href="$classplugin__framework__c.html#a7d53d4d9eebfbc03444a76d29c6f1068" title="plugin_framework_c::app_init" alt="" coords="783,144,972,173"/>
+<area shape="rect" id="node9" href="$classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f" title="teelog_c::fatal" alt="" coords="243,675,347,704"/>
+<area shape="rect" id="node54" href="$classplugin__framework__c.html#aaf6d694c534d4744bd188494142ec4ee" title="plugin_framework_c::trigger_events" alt="" coords="764,197,991,227"/>
+<area shape="rect" id="node11" href="$classbackupvfs__main__c.html#a96a5024d255cc5604d8933aa16b9e82d" title="backupvfs_main_c::_vfs_local_cleanup" alt="" coords="412,781,663,811"/>
+<area shape="rect" id="node13" href="$classplugin__framework__c.html#a314dbb02a6415ebee0b3f7da70c1b44c" title="plugin_framework_c::add_job" alt="" coords="443,1045,632,1075"/>
+<area shape="rect" id="node19" href="$classplugin__framework__c.html#a9e2403f6b07cae9a85ab2c5892a548d5" title="plugin_framework_c::add_plugin" alt="" coords="433,835,641,864"/>
+<area shape="rect" id="node21" href="$classsystem__backup__app__c.html#ab98b7b7c22f79e3029c2ef0aff57d4f2" title="system_backup_app_c::approve_job" alt="" coords="420,888,655,917"/>
+<area shape="rect" id="node23" href="$classremote__exec__c.html#ac72ad9f570c48e1d61faf54bb6067ffd" title="remote_exec_c::exec" alt="" coords="804,1149,951,1179"/>
+<area shape="rect" id="node27" href="$classlocalexec__c.html#ac72ad9f570c48e1d61faf54bb6067ffd" title="localexec_c::exec" alt="" coords="815,940,940,969"/>
+<area shape="rect" id="node31" href="$classremote__exec__c.html#abbbcdaf2575f762a7043928b8dab221c" title="remote_exec_c::fatal_file_error" alt="" coords="437,1203,637,1232"/>
+<area shape="rect" id="node34" href="$classlocalexec__c.html#abbbcdaf2575f762a7043928b8dab221c" title="localexec_c::fatal_file_error" alt="" coords="447,992,628,1021"/>
+<area shape="rect" id="node37" href="$classplugin__framework__c.html#ad6ffb3a15567273f231140338760fee6" title="plugin_framework_c::load_app_config" alt="" coords="417,248,657,277"/>
+<area shape="rect" id="node40" href="$classplugin__framework__c.html#a3b039ffd22dff0609c2a466c3f7e670e" title="plugin_framework_c::load_jobs" alt="" coords="437,301,637,331"/>
+<area shape="rect" id="node43" href="$classplugin__framework__c.html#a5517f5b644d22307dc22a51dfd113b42" title="plugin_framework_c::load_plugins" alt="" coords="428,195,647,224"/>
+<area shape="rect" id="node46" href="$classremote__exec__c.html#a445893aec4a3cec2cbda047c6ac7ba6d" title="remote_exec_c::params_required" alt="" coords="431,1149,644,1179"/>
+<area shape="rect" id="node49" href="$classlocalexec__c.html#a445893aec4a3cec2cbda047c6ac7ba6d" title="localexec_c::params_required" alt="" coords="440,461,635,491"/>
+<area shape="rect" id="node52" href="$classplugin__framework__c.html#a8ac56db75b755b78c9c32acbc02648b3" title="plugin_framework_c::plugin_internal" alt="" coords="423,408,652,437"/>
+<area shape="rect" id="node57" href="$classbackupvfs__main__c.html#a8ac56db75b755b78c9c32acbc02648b3" title="backupvfs_main_c::plugin_internal" alt="" coords="427,355,648,384"/>
+<area shape="rect" id="node59" href="$classbackupvfs__main__c.html#a017b3d6c2541988bcd244effa00574cd" title="backupvfs_main_c::vfs_addfile" alt="" coords="436,515,639,544"/>
+<area shape="rect" id="node61" href="$classbackupvfs__main__c.html#a41cbb4af0889bb6af5f2e2dca14b2609" title="backupvfs_main_c::vfs_compress_command" alt="" coords="395,568,680,597"/>
+<area shape="rect" id="node63" href="$classbackupvfs__main__c.html#a058e62de541a69b7e2ac4593c2f534a5" title="backupvfs_main_c::vfs_compress_file" alt="" coords="415,621,660,651"/>
+<area shape="rect" id="node65" href="$classbackupvfs__main__c.html#aab6fa0f7aed7c9a2546553f1dc68626e" title="backupvfs_main_c::vfs_compress_string" alt="" coords="408,675,667,704"/>
+<area shape="rect" id="node67" href="$classbackupvfs__main__c.html#a9be83ec6186cf96f66cff0ada6ec97f9" title="backupvfs_main_c::vfs_tarball_folder" alt="" coords="419,728,656,757"/>
+<area shape="rect" id="node15" href="$classbackupvfs__main__c.html#a16d29b017bd81585d3fa361bd7071df3" title="backupvfs_main_c::add_standard_internal_jobs" alt="" coords="729,1045,1025,1075"/>
+<area shape="rect" id="node17" href="$classsystem__backup__app__c.html#adf31acb1b5029960ba976a48f60d3af7" title="system_backup_app_c::after_loading_jobs" alt="" coords="1075,1045,1344,1075"/>
+<area shape="rect" id="node25" href="$classremote__exec__c.html#af8e0f4c7ed5345df6827643ba0ed585f" title="remote_exec_c::main" alt="" coords="1136,1149,1283,1179"/>
+<area shape="rect" id="node29" href="$classlocalexec__c.html#a3222532b78daa37e60441c2c04f64546" title="localexec_c::__construct" alt="" coords="1127,940,1292,969"/>
+<area shape="rect" id="node73" href="$classstopwatch__c.html#a1869a992628e829b60eee2cb35572a44" title="lap_stop" alt="" coords="260,1256,329,1285"/>
+<area shape="rect" id="node75" href="$classstopwatch__c.html#ad3bc34379579aad29260fc8489a1ca7d" title="lap_time" alt="" coords="503,1256,572,1285"/>
+</map>

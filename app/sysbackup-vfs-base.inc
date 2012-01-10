@@ -92,6 +92,8 @@ class backupvfs_baseio_c extends backupvfs_fileio_c
 
    function job_reset()    { $this->backupset->job_reset();  }
    function step_reset()   { $this->backupset->step_reset(); }
+   function all_reset()    { $this->backupset->job_reset();
+                             $this->backupset->step_reset(); }
 
    function get_stats()    { return $this->backupset->get_stats();  }
 

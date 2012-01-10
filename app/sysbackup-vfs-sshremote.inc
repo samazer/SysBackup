@@ -41,12 +41,19 @@
  * This class extends the Base VFS I/O class and overrides the methods
  * that access the filesystem. The new methods use the remote file I/O
  * class to perform the desired operations on the remote system
- * through SSH.
+ * through SSH to provide the remote backupset VFS logic.
  *
  */
-class backupvfs_sshremote_io_c extends backupvfs_baseio_c
+class backupvfs_sshremote_c extends backupvfs_baseio_c
 {
    var $remote;         // an object of type remote_fileio_c
+
+   var $remconf_file;   // name of file that contains remote configuration info
+
+   var $named_parameters;
+   var $np_default_method;
+   var $np_default_index;
+
 
    function __construct( &$application_object, $options )
    {
@@ -55,6 +62,40 @@ class backupvfs_sshremote_io_c extends backupvfs_baseio_c
       $this->remote       = new remote_fileio_c( $this->app, $options );
       $this->hostname     = $this->remote->remote_server;
       $this->keeplocal    = true;
+
+      $this->plugin_enabled     = false;
+
+      $this->plugin_type        = "sshremote";
+      $this->plugin_unique      = true;
+
+      $this->plugin_name        = "vfs-sshremote";
+      $this->plugin_title       = "SSH Remote Fileio VFS Plugin";
+      $this->plugin_version     = "0.01a";
+      $this->plugin_description = "Plugin to copy the backupset to a remote server via SSH/RemoteExec";
+
+      $this->named_parameters = new named_parameters_c( "systemlibs", "sys-remote-fileio" );
+
+      $np_method = $this->np_default_method = "remote-exec";
+      $np_index  = $this->np_default_index  = "remconf";
+
+      $this->named_parameters->register( $np_method, $np_index, array( 
+          "enabled"      => array( 1, NPREQ, "plugin_enabled", "true if the plugin is enabled" ),
+          "usehardlinks" => array( 1, NPREQ, "usehardlinks",   "true if remote server supports hardlinks" ),
+          "remconf_file" => array( 1, "path/name of the configuration file on remote system" ),
+                                                 ));
+
+      $this->named_parameters->set_optional(   $this->np_default_method, 
+                                               $this->np_default_index, 
+                                               $options );
+
+      $this->named_parameters->check(          $this->np_default_method, 
+                                               $this->np_default_index, 
+                                               $options );
+
+      $this->named_parameters->set_properties( $this,
+                                               $this->np_default_method, 
+                                               $this->np_default_index, 
+                                               $options );
    }
 
 
@@ -63,14 +104,6 @@ class backupvfs_sshremote_io_c extends backupvfs_baseio_c
       // remote storage always keeps files
       return true; 
    }
-
-
-   function job_reset()    { $this->backupset->job_reset();  }
-   function step_reset()   { $this->backupset->step_reset(); }
-   function all_reset()    { $this->backupset->job_reset();
-                             $this->backupset->step_reset(); }
-
-   function get_stats()    { return $this->backupset->get_stats();  }
 
 
   /**
@@ -279,65 +312,6 @@ class backupvfs_sshremote_io_c extends backupvfs_baseio_c
    function _vfs_remove_expired_items( $path, $max, $debug = true )
    {
       return $this->remote->remove_expired_items( $path, $max, $debug );
-   }
-}
-
-
-
-
-/**
- *
- * SSH VFS
- *
- * This class extends the I/O class to provide the remote backupset VFS logic.
- *
- */
-class backupvfs_sshremote_c extends backupvfs_sshremote_io_c 
-{
-   var $remconf_file;   // name of file that contains remote configuration info
-
-   var $named_parameters;
-   var $np_default_method;
-   var $np_default_index;
-
-
-   function __construct( &$application_object, $options )
-   {
-      parent::__construct( $application_object, $options );
-
-      $this->plugin_enabled     = false;
-
-      $this->plugin_type        = "sshremote";
-      $this->plugin_unique      = true;
-
-      $this->plugin_name        = "vfs-sshremote";
-      $this->plugin_title       = "SSH Remote Fileio VFS Plugin";
-      $this->plugin_version     = "0.01a";
-      $this->plugin_description = "Plugin to copy the backupset to a remote server via SSH/RemoteExec";
-
-      $this->named_parameters = new named_parameters_c( "systemlibs", "sys-remote-fileio" );
-
-      $np_method = $this->np_default_method = "remote-exec";
-      $np_index  = $this->np_default_index  = "remconf";
-
-      $this->named_parameters->register( $np_method, $np_index, array( 
-          "enabled"      => array( 1, NPREQ, "plugin_enabled", "true if the plugin is enabled" ),
-          "usehardlinks" => array( 1, NPREQ, "usehardlinks",   "true if remote server supports hardlinks" ),
-          "remconf_file" => array( 1, "path/name of the configuration file on remote system" ),
-                                                 ));
-
-      $this->named_parameters->set_optional(   $this->np_default_method, 
-                                               $this->np_default_index, 
-                                               $options );
-
-      $this->named_parameters->check(          $this->np_default_method, 
-                                               $this->np_default_index, 
-                                               $options );
-
-      $this->named_parameters->set_properties( $this,
-                                               $this->np_default_method, 
-                                               $this->np_default_index, 
-                                               $options );
    }
 
 

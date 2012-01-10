@@ -1,0 +1,22 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classbackupvfs__fileio__c.html#a6d122a7b0f70f6cdf2960be140a568e0" title="backupvfs_fileio_c::_vfs_prune_expired_backups" alt="" coords="237,192,544,221"/>
+<area shape="rect" id="node36" href="$classbackupvfs__baseio__c.html#a38980f2b9e4c06a156136d9e0de6b212" title="backupvfs_baseio_c::get_hostname" alt="" coords="276,272,505,301"/>
+<area shape="rect" id="node38" href="$classbackupvfs__localio__rotation__c.html#a2e83a78e79da068bdb436eef2eac484b" title="get_path_rotation" alt="" coords="329,325,452,355"/>
+<area shape="rect" id="node43" href="$classbackupvfs__localio__rotation__c.html#a7458df48772b986c76840f5f29c377c4" title="get_rotation_total" alt="" coords="329,379,452,408"/>
+<area shape="rect" id="node5" href="$classbackupvfs__fileio__c.html#ae99c86e7f04d104791a7f955345f5c32" title="backupvfs_fileio_c::_vfs_disk_free_space" alt="" coords="611,5,875,35"/>
+<area shape="rect" id="node7" href="$classbackupvfs__fileio__c.html#a156f603f0a878656b21c909d35b6c663" title="backupvfs_fileio_c::_vfs_disk_total_space" alt="" coords="609,59,876,88"/>
+<area shape="rect" id="node9" href="$classbackupvfs__fileio__c.html#a29da45ee871140adbdf0b0da1ebd2423" title="backupvfs_fileio_c::_vfs_list_expired_items" alt="" coords="605,112,880,141"/>
+<area shape="rect" id="node19" href="$classbackupvfs__fileio__c.html#ad165606711d3ffa3dfb8fe5747110dd8" title="backupvfs_fileio_c::_vfs_remove_expired_items" alt="" coords="592,165,893,195"/>
+<area shape="rect" id="node28" href="$general-utils_8inc.html#a239b0432db7572e8872b92fd9690532c" title="si_suffix" alt="" coords="708,219,777,248"/>
+<area shape="rect" id="node30" href="$classbackupvfs__fileio__c.html#a28608dced5aadea601e8a29bdc77cf23" title="backupvfs_fileio_c::vfs_displayref" alt="" coords="633,272,852,301"/>
+<area shape="rect" id="node32" href="$classplugin__appreference__c.html#aab64680d0a39449c7b28d78550694f0d" title="plugin_appreference_c::warning" alt="" coords="640,325,845,355"/>
+<area shape="rect" id="node11" href="$general-sysutils_8inc.html#ac8c969cd307ea955528ab54a4c307a0f" title="list_expired_items" alt="" coords="1023,112,1148,141"/>
+<area shape="rect" id="node13" href="$general-sysutils_8inc.html#afe814a8de5621ae3af1921ca60a62ef7" title="_list_folder_items" alt="" coords="1279,139,1401,168"/>
+<area shape="rect" id="node15" href="$general-sysutils_8inc.html#afdf5bfb4e7162d411c1ba5aef80208cf" title="disk_usage" alt="" coords="1296,85,1384,115"/>
+<area shape="rect" id="node17" href="$general-sysutils_8inc.html#a02958c3bf0b643439bc3005aa643e954" title="subfolder_sizes" alt="" coords="1452,85,1564,115"/>
+<area shape="rect" id="node21" href="$general-sysutils_8inc.html#ae44efd7c9ed854da2e6246f5d1326f47" title="remove_expired_items" alt="" coords="1009,165,1161,195"/>
+<area shape="rect" id="node24" href="$general-utils_8inc.html#a6185d0c82f5be193802f7bd846fdd9f6" title="dir_fn" alt="" coords="1313,192,1367,221"/>
+<area shape="rect" id="node26" href="$general-utils_8inc.html#a0055ef7f48b70fd8f1c75cc5304b34bb" title="single_chars" alt="" coords="1461,192,1555,221"/>
+<area shape="rect" id="node34" href="$classplugin__appreference__c.html#aa0d6ac531d747c3b05553e6cd57a74d9" title="plugin_appreference_c::_message_prefix_text" alt="" coords="941,352,1229,381"/>
+<area shape="rect" id="node40" href="$classplugin__appreference__c.html#a0824c910c5d7b7949a8d983ea0b34c1f" title="plugin_appreference_c::fatal" alt="" coords="651,379,835,408"/>
+</map>
