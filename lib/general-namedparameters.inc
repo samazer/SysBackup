@@ -382,7 +382,7 @@ class named_parameters_base_c
    function _dump_properties( &$obj, $cat, $cls, $meth, $idx, $show_help_flag = -1 )
    {
       $required_options = $this->_get_params( $cat, $cls, $meth, $idx );
-      $this->__dump_properties( &$obj, $required_options, $show_help_flag );
+      $this->__dump_properties( $obj, $required_options, $show_help_flag );
    }
 
 

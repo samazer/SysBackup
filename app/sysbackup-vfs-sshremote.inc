@@ -82,6 +82,12 @@ class backupvfs_sshremote_c extends backupvfs_baseio_c
           "enabled"      => array( 1, NPREQ, "plugin_enabled", "true if the plugin is enabled" ),
           "usehardlinks" => array( 1, NPREQ, "usehardlinks",   "true if remote server supports hardlinks" ),
           "remconf_file" => array( 1, "path/name of the configuration file on remote system" ),
+          "rotation_enabled" => array( 1, "true if rotations are enabled on the remote system" ),
+          "rotation_dayofweek" => array( 1, "day of week on which the weekly rotation is generated" ),
+          "rotation_dayofmonth" => array( 1, "day of month on which the monthly rotation is generated" ),
+          "rotation_total_daily" => array( 1, "total number of backupsets that are in the daily rotaiton" ),
+          "rotation_total_weekly" => array( 1, "total number of backupsets that are in the weekly rotaiton" ),
+          "rotation_total_monthly" => array( 1, "total number of backupsets that are in the monthly rotaiton" ),
                                                  ));
 
       $this->named_parameters->set_optional(   $this->np_default_method, 
@@ -309,7 +315,7 @@ class backupvfs_sshremote_c extends backupvfs_baseio_c
     * Remove items in a folder that have expired
     *
     */
-   function _vfs_remove_expired_items( $path, $max, $debug = true )
+   function _vfs_remove_expired_items( $path, $max, $debug = true, $folders_only = true )
    {
       return $this->remote->remove_expired_items( $path, $max, $debug );
    }

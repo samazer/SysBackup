@@ -284,8 +284,9 @@ class backupvfs_baseio_c extends backupvfs_fileio_c
     * mechanism (not supported for now.)
     *
     */
-   function _std_plugin_method_warning()
+   function _std_plugin_method_warning( $op )
    {
+      $this->app->warning( "from plugin {$this->plugin_name}: {$op}" );
       $this->app->warning( "This is a VFS plugin. It is not designed to be called in this way." );
       $this->app->fatal( "Invalid call" );
    }
@@ -340,7 +341,7 @@ class backupvfs_baseio_c extends backupvfs_fileio_c
    }
 
 
-   function vfs_addfile( $source_file )
+   function vfs_addfile( $target, $source )
    {
       $this->_std_vfsplugin_method_warning( "dummy vfs addfile operation" );
    }

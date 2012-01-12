@@ -1,0 +1,199 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-*- mode: php; mode: mmm; coding: utf-8; -*->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+<title>SysBackup Installation Requirements</title>
+</head>
+
+<body style='width:700px;'>
+<h1>SysBackup Installation Requirements</h1>
+
+<blockquote><img
+align="left"
+src="images/a+logo.png"
+style="padding-right:10px; padding-bottom:10px;"
+><small>Note: The most up-to-date copy of this file is available in the <a
+href="http://www.azertech.net/content/category/3/49/29/"
+target="_blank"
+>SysBackup Documentation and FAQ pages</a> on the <a
+href="http://www.azertech.net/"
+target="_blank"
+>AzerTech.net</a> web site.</small></blockquote>
+
+<br clear='all'>
+
+
+
+<!--- HTML below copies to azertech.net --->
+
+<p><table cellpadding='10px' cellspacing='10px' align=right><tr><td
+align='right'>
+
+<center><img
+align='center'
+width='250px'
+src="images/multi-function-tool.jpg"
+></center><br clear='all'>
+
+<a
+href="http://www.azertech.net/content/category/3/49/29/"
+target="_blank"
+>Docs & FAQ Pages<a><br />
+
+<a
+href="http://azer.ca/sysbackup-sfd"
+target="_blank"
+>Download SysBackup</a><br />
+
+<a
+href="http://azer.ca/sysbackup-sf"
+target="_blank"
+>SysBackup on SourceForge</a><br />
+
+<a
+href="http://azer.ca/sysbackup-gh"
+target="_blank"
+>SysBackup on GitHub</a><br />
+
+<a
+href="http://azer.ca/sysbackup-oh"
+target="_blank"
+>SysBackup on Ohloh</a><br />
+
+<a
+href="INSTALL.html"
+target="_blank"
+>Installation Overview</a><br />
+
+<a
+href="REQUIREMENTS.html"
+target="_blank"
+>System Requirements</a><br />
+
+<a
+href="BASICINSTALL.html"
+target="_blank"
+>Basic Installation</a><br />
+
+<a
+href="REMOTESTORAGE.html"
+target="_blank"
+>SSH Remote Storage</a><br />
+
+<a
+href="FIRSTRUN.html"
+target="_blank"
+>First Run</a><br />
+
+<a
+href="BE-PREPARED.html"
+target="_blank"
+>Be Prepared!</a><br />
+
+<br>
+
+<script type="text/javascript" src="http://www.ohloh.net/p/587730/widgets/project_factoids.js"></script>
+
+<br>
+
+<script type="text/javascript" src="http://www.ohloh.net/p/587730/widgets/project_languages.js"></script>
+
+<br>
+
+
+
+
+</td></tr></table>
+
+<h2>Requirements</h2>
+
+<p>PHP was chosen for this project because it has become the most
+popular scripting language in the world. Unfortunately, even though
+the LAMP stack has become wildly popular on the internet, PHP is not
+installed by default on many servers and workstations. Begin by
+checking your system to verify that you have PHP v5.1 (or higher)
+installed:
+
+<blockquote><pre>$ <b>php -v</b>
+PHP 5.1.6 (cli) (built: Nov 29 2010 16:47:46) 
+Copyright (c) 1997-2006 The PHP Group
+Zend Engine v2.1.0, Copyright (c) 1998-2006 Zend Technologies
+</pre></blockquote>
+
+<p>Modern Linux distros very often ship PHP in dozens of small
+packages. At the very least you will want to make sure that you have
+installed the command line version of PHP. The package names differ from installation to installation:
+
+<ul>
+
+  <li>For <b>Debian/Ubuntu</b>-derived distros look for the <tt>php5-cli</tt> package.
+  <li>For <b>Redhat</b>-derived distros look for the <tt>php-cli</tt> and <tt>php-process</tt> packages.
+
+  </ul>
+
+<p>If you forget to install the <tt>php-process</tt> package on Fedora 15
+you will get a
+
+<blockquote> <tt>PHP Fatal error: Call to undefined function
+posix_geteuid() in lib/general-sysutils.inc</tt> </blockquote>
+
+<p>Again, <tt>sudo yum install php-process</tt> will solve this problem.
+
+<p>Notes:
+
+<ul>
+
+  <li>SysBackup is a simple PHP script. In principal you do not need
+      root permissions to run it.  You can use SysBackup to easily
+      produce backups of files in your system account. It follows,
+      however, that you will need root access to backup other user
+      accounts, the root folder and other system-related bits and
+      pieces of a full server or workstation.
+  
+  <li>Most of the various configuration files are themselves PHP
+      scripts. If you are not familiar with PHP please take the time
+      to find out a bit about PHP. The manual is available at <a
+      target="_blank"
+      href="http://www.php.net/manual/">http://www.php.net/manual/</a>.
+
+  </ul>
+
+<p>If you plan to use the SSH Remote feature to write backups to a
+remote server you will need to make sure you have SSH properly
+installed on your system. Most Linux distros install OpenSSH by
+default but not all. If you are using a Debian derived distro (ie:
+Ubuntu) and find that the OpenSSH server is not installed you can
+install the <tt>openssh-server</tt> package. For detailed information
+follow the instructions here: <a href="" target="_blank"
+><tt>https://help.ubuntu.com/community/SSH</tt></a>
+
+
+<!--- HTML above copies to azertech.net --->
+
+<hr>
+<address><table align='right' cellpadding='0' cellspacing='0'><tr><td><a
+href="http://www.gnu.org/licenses/agpl.html"
+target="_blank"
+><img
+align='right'
+height='40px'
+src='gnu-license-files/agpl-v3-logo.svg'
+></a></td><td width='20px'>&nbsp;</td><td><a
+href="http://www.gnu.org/copyleft/fdl.html"
+target="_blank"
+><img
+align='right'
+height='40px'
+src='gnu-license-files/gfdl-logo.svg'
+></a></td></tr></table>Copyright &copy; 2011 by <a
+title="Click here to view Sam Azer's public About page"
+href="http://azertech.net/about">Sam Azer</a>&lt;<a
+title="Click here to email Sam Azer"
+href="mailto:sam@azertech.net?subject=SysBackup">sam@azertech.net</a>&gt;,
+All rights reserved.<br>
+</address>
+
+
+<!-- hhmts start -->Last modified: Thu Jan 12 13:42:31 EST 2012 <!-- hhmts end -->
+</body> </html>

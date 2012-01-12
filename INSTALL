@@ -1,11 +1,11 @@
 [Generated from doc/INSTALL.html]
 
 
-                               SysBackup Install
+                        SysBackup Installation Overview
 
-     Note: The most up-to-date copy of this file is available in the
-     [1]SysBackup Documentation and FAQ pages on the [2]AzerTech.net web
-     site.
+     [a+logo.png] Note: The most up-to-date copy of this file is
+     available in the [1]SysBackup Documentation and FAQ pages on the
+     [2]AzerTech.net web site.
 
                           [multi-function-tool.jpg]
 
@@ -14,595 +14,94 @@
                                                [5]SysBackup on SourceForge
                                                     [6]SysBackup on GitHub
                                                      [7]SysBackup on Ohloh
-                                              [8]Installation Instructions
-                                                           [9]Be Prepared!
-
-   The basic Installation of SysBackup involves mostly just the creation
-   of various folders on the system. Setup of remote storage involves
-   setting-up the SSH communications and installing the
-   remoteexec/localexec utility scripts (which are included in the
-   SysBackup package.)
-
-   Most people will try to read this INSTALL document without first
-   reading the [10]README file. If you are one of these people you may be
-   under the mistaken impression that SysBackup is a plug-and-play backup
-   tool. It is not. You can't just drop it into a system and expect it to
-   take care of backups for you. The instructions below are relatively
-   simple and, if you use the included job configuration files, you will
-   be able to generate a backupset very quickly - but it may not have much
-   value. Please take the time to review the [11]README, and
-   [12]BE-PREPARED documents before you try to use this software. You
-   might also want to check out the [13]SysBackup Documentation and FAQ
-   pages on the [14]AzerTech.net web site.
-
-Installation Assumptions
-
-   The instructions below will guide you through the process of installing
-   SysBackup. The text will make references to the computer being
-   backed-up and two different remote storage servers. To keep this text
-   simple it will refer to a few assumptions about what you, the reader,
-   are doing:
-     * [installation-components.png] You are learning about SysBackup by
-       installing it into a virtual machine for test purposes. The
-       hostname for this virtual server is test.azertech.net.
-     * Your test VM has limited disk space. Therefore you will only keep
-       one backupset on the test VM. The backup rotations will be sent via
-       SSH to the physical host for the VM. You also need an external copy
-       of your backups. These will be written to a NAS server, nas. The
-       hostname for your physical host is dom0.azertech.net and the
-       hostname for your network storage is nas.azertech.net.
-     * You want to install SysBackup Version 3.01a into your /opt/ system
-       folder. The resulting installation folder name is
-       /opt/sysbackup-v3.01a.
-     * Your backupsets will be stored in /home/sysbackup/.
-     * Your SysBackup configuration information will be stored in the /etc
-       system configuration folder at /etc/sysbackup.
-
-   Before you try to complete the installation it's a good idea to read
-   the [15]README file, the various comments in the main sysbackup.conf
-   configuration file and the information in the [16]JOB-CONF help file.
-
-   Feel free to run the sysbackup script at any time using the
-   --dump-config option, like this:
-
-     $ sudo /opt/sysbackup-v3.01a/sysbackup --dump-config
-
-   This will cause the script to load all configuration files and plugins.
-   It will then try to intialize itself and all the plugins before
-   displaying the resulting dump of the configuration. During this
-   initialization process the various libraries and plugins will execute a
-   variety of sanity checks. The code is designed to error-out whenever a
-   problem is found. The idea is that you should get a fatal error
-   immediately if there is something wrong. Of course, in practice, not
-   all of the plugins will be able to detect all possible problems on
-   initialization - but they should try.
-
-Installation Procedure
-
-   We will procede with the following steps:
-    1. Installation of the SysBackup scripts on the test VM.
-    2. Creation of various folders that SysBackup will be using and
-       copying of some needed configuration files.
-    3. The /etc/sysbackup.conf file must be edited to allow sysbackup to
-       run properly
-    4. Job configuration files need to be created (in /etc/conf.d/) for
-       each step in the backup process.
-    5. Installation of the RemoteExec/LocalExec scripts (included in the
-       SysBackup package) on the dom0 and nas remote storage servers.
-    6. The /etc/sysbackup-nas.conf files on each remote server must be
-       edited to tell sysbackup where to write backupsets.
-
-   NOTES:
-     * In most cases the installation will be performed by the system
-       administrator and usually requires root access.
-     * The PHP language was chosen for this software because it is so
-       popular. This software requires the command line version of PHP. It
-       is often called php-cli in popular repositories. Please ensure that
-       it is properly installed before trying to complete this
-       installation.
-     * This software has been tested only with PHP 5.3 and may not
-       function correctly with earlier versions of PHP.
-     * Most of the various configuration are themselves PHP scripts. If
-       you are not familiar with PHP please take the time to review the
-       docs at [17]http://www.php.net/manual/.
-
-   So let's get started now with the actual installation:
-
-  On the test VM
-
-   Please remember, as per the [18]assumptions made above, to replace
-   names and paths below with the correct values for your installation.
-    1.
-
-                                                               /etc/sysbackup/
-                                                                   +-- conf.d/
-                   | +-- dummy.conf -> /opt/sysbackup-v3.01a/conf.d/dummy.conf
-                                                           | +-- homedirs.conf
-               | +-- mailman.conf -> /opt/sysbackup-v3.01a/conf.d/mailman.conf
-                                                 | +-- mysql-localhost.conf ->
-                             /opt/sysbackup-v3.01a/conf.d/mysql-localhost.conf
-                                                    | +-- package-list.conf ->
-                                /opt/sysbackup-v3.01a/conf.d/package-list.conf
-                                                    | +-- squirrelmail.conf ->
-                                /opt/sysbackup-v3.01a/conf.d/squirrelmail.conf
-               | +-- sysdirs.conf -> /opt/sysbackup-v3.01a/conf.d/sysdirs.conf
-               | +-- sysmail.conf -> /opt/sysbackup-v3.01a/conf.d/sysmail.conf
-       | \-- syswebfiles.conf -> /opt/sysbackup-v3.01a/conf.d/syswebfiles.conf
-                                                                     +-- keys/
-                                                                | +-- filecopy
-                                                            | +-- filecopy.pub
-                                                               | +-- localexec
-                                                           | \-- localexec.pub
-                               +-- plugin.d -> /opt/sysbackup-v3.01a/plugin.d/
-                                                            \-- sysbackup.conf
-       Start by unpacking SysBackup into /opt/.
-    2. Next create a folder in /etc to hold all the SysBackup
-       configuration files: /etc/sysbackup.
-    3. Create a subfolder to hold ssh key files: /etc/sysbackup/keys.
-    4. Create a subfolder to hold the job configuration files:
-       /etc/sysbackup/conf.d.
-    5. Although it's not entirely necessary these instructions will assume
-       a symlink to the plugins folder as part of the sysbackup
-       configuration. Create this symlink in the usual way, ie: ln -s
-       /opt/sysbackup-v3.01a/plugin.d /etc/sysbackup/plugin.d.
-    6. Create a temp storage folder such as /home/sysbackup/temp. The
-       underlying partition will require enough disk space to hold the
-       largest tarball in your backupset. (Start with lots of disk space -
-       you can be more careful later.)
-    7. Create a storage folder for your daily backup. The backup folders
-       have the format <Backup Path>/<Host Name>/daily. Therefore, for
-       this installation we will use
-       /home/sysbackup/test.azertech.net/daily. Again, there is a disk
-       space issue to consider when setting-up your backup procedure but
-       you can deal with that issue later. One point to consider
-       immediately: The files in the temp folder will be moved to the
-       daily folder if you choose to keep a local copy of your backupset.
-       Keeping the two folders on the same partition can reduce
-       significantly the time it takes to complete a backup.
-    8. If you plan to keep weekly and monthly rotations you will need to
-       create folders for those also. For now we will assume
-       /home/sysbacup/test.azertech.net/weekly/ and
-       /home/sysbackup/test.azertech.net/monthly. Available disk space is
-       a consideration yet again. Perhaps more important is the ability to
-       use hardlinks between identical files in the daily, weekly and
-       monthy rotations. You will use less disk space if you can keep all
-       the backups - daily, weekly and monthly - on the same partition so
-       that identical files can be hardlinked to save space.
-    9. You can now copy the main configuration file and start editing it:
-       cp /opt/sysbackup-v3.01/sysbackup.conf /etc/sysbackup/. The file
-       contains comments that will help you to understand the various
-       items that you need to configure.
-   10. Look through the sample job configuration files in
-       /opt/sysbackup-v3.01a/conf.d/ and symlink any that you think you
-       can use, ie: ln -s /opt/sysbackup-v3.01a/conf.d/mailman.conf
-       /etc/sysbackup/conf.d/mailman.conf. If you find one that you want
-       to use but you see that you need to edit it you can copy it
-       instead: cp /opt/sysbackup-v3.01a/conf.d/homedirs.conf
-       /etc/sysbackup/conf.d/ and edit it for your purposes. Do this for
-       each of the provided sample job configuration files. See the
-       [19]JOB-CONF file for information on the structure and meaning of
-       these files.
-
-  On the Remote Storage Servers
-
-   The procedure for the remote servers is similar to the above procedure
-   in the sense that the sysbackup scripts need to be copied to the server
-   and some folders need to be created. Additionally, the server being
-   backed-up will access the filesystems on the remote servers through SSH
-   and a utility called localexec. Localexec is designed to remotely
-   execute standard PHP filesystem functions and return results that are
-   formatted as if the function call was local.
-
-   One last detail: SSH keys must be generated for both SCP and localexec.
-   The keys need to be copied to both servers. The remote storage server
-   must also be configured to run the localexec utility when called by the
-   key reserved for localexec.
-
-   Note that the remote storage of backupsets is handled in the same way
-   as local storage. The main difference is that remote storage servers
-   may be storing backupsets from many servers and, obviously, need more
-   disk space to handle the additional data.
-
-   The installation steps to follow are listed below. Please remember, as
-   per the [20]assumptions made above, to replace names and paths below
-   with the correct values for your installation.
-    1. Start by unpacking SysBackup into /opt/.
-    2. Create a new user called sysbackup, ie: sudo useradd -m sysbackup.
-    3. Create a temp storage folder such as /home/sysbackup/temp.
-    4. Create a storage folder for your daily backup. For this
-       installation we will use /home/sysbackup/test.azertech.net/daily.
-    5. If you plan to keep weekly and monthly rotations you will need to
-       create folders for those also. For now we will assume
-       /home/sysbacup/test.azertech.net/weekly/ and
-       /home/sysbackup/test.azertech.net/monthly.
-    6. In ~sysbackup/.ssh/ create two ssh keys:
-
-
-$ ssh-keygen -f localexec
-Generating public/private rsa key pair.
-Enter passphrase (empty for no passphrase):
-Enter same passphrase again:
-Your identification has been saved in localexec.
-Your public key has been saved in localexec.pub.
-The key fingerprint is:
-1b:12:c3:01:1a:93:2b:42:43:a1:6a:db:64:98:45:78 sysbackup at nas.azertech.net
-The key's randomart image is:
-+--[ RSA 2048]----+
-|.o=o...          |
-|.+oE . .         |
-|o +o  +          |
-|+ =    o         |
-|o= o  . S        |
-|. =    . o       |
-| . .    .        |
-|                 |
-|                 |
-+-----------------+
-
-$ ssh-keygen -f filecopy
-Generating public/private rsa key pair.
-Enter passphrase (empty for no passphrase):
-Enter same passphrase again:
-Your identification has been saved in filecopy.
-Your public key has been saved in filecopy.pub.
-The key fingerprint is:
-b4:61:ed:2d:68:cb:87:1b:5f:ce:a1:5f:18:a1:f2:ef sysbackup at dev.azertech.net
-The key's randomart image is:
-+--[ RSA 2048]----+
-|                 |
-|         .       |
-|        + . .    |
-|       o = o .   |
-|        S + o    |
-|       o = . o   |
-|        = o + .  |
-|         = * o   |
-|        . ooE    |
-+-----------------+
-
-
-       Note that, for general convenience, there are no passphrases used
-       in the above example.
-    7. Next, add the public keys to the authorized_keys2 file:
-
-$ echo 'command="/opt/sysbackup-v3.01a/localexec $SSH_ORIGINAL_COMMAND" ' \
-               `cat localexec.pub` >> ~sysbackup/.ssh/authorized_keys2
-$ cat filecopy.pub >> ~sysbackup/.ssh/authorized_keys2
-
-       Note that the localexec key triggers the localexec utility. The
-       SysBackup code will not work unless this is done. Check the
-       documentation for OpenSSH for additional information about keys and
-       local commands. Check the internet for help with setting-up
-       chrooted OpenSSH user accounts.
-    8. Copy the private keys to the /etc/sysbackup/keys/ folder on
-       test.azertech.net.
-    9. Edit the file /etc/sysbackup-nas.conf on each new sshremote server.
-       The file should contain the following information:
-
-path_temp=/home/sysbackup/temp/
-path_backup=/home/sysbackup/%HOST%/daily/
-path_rotation=/home/sysbackup/%HOST%/
-
-       Remember to change the /home/sysbackup path to reflect the path
-       that you are really using on your sshremote server. The SysBackup
-       utility will replace the %HOST% token with the host name of the
-       server being backed-up.
-   10. Verify the setup of the sshremote server by using the remexec
-       utility test.azertech.net:
-
-$ /opt/sysbackup-v3.01a/remexec /etc/sysbackup/keys/localexec \
-                                   sysbackup [at] nas.azertech.net \
-                                   readfile /etc/sysbackup-nas.conf
-path_temp=/home/sysbackup/temp/
-path_backup=/home/sysbackup/%HOST%/daily/
-path_rotation=/home/sysbackup/%HOST%/
-
-   11. Edit /etc/sysbackup/sysbackup.conf on test.azertech.net to include
-       the new sshremote server.
-
-$this->add_remote( "nas", new backupvfs_sshremote_c( $this, array(
-   "enabled"               => true,
-   "remote_server"         => "nas.azertech.net",
-   "remconf_file"          => "/etc/sysbackup-nas.conf",
-   "usehardlinks"          => true,
-   "ssh_localexec_keypath" => "/etc/sysbackup/keys/localexec",
-   "ssh_localexec_userid"  => "sysbackup",
-   "scp_filecopy_keypath"  => "/etc/sysbackup/keys/filecopy",
-   "scp_filecopy_userid"   => "sysbackup",
-                                                                  )));
-
-   12. Then run SysBackup with the --dump-config option to verify that the
-       new sshremote server is properly configured:
-
-$ sudo /opt/sysbackup-v3.01a/sysbackup --dump-config
-
-System Backups 3.01(alpha)
-
-Basic Application Settings:
-  req app_title                "System Backups"
-  req app_version              "3.01(alpha)"
-  req app_conffile             "/etc/sysbackup/sysbackup.conf"
-  req app_confdir              "/etc/sysbackup/conf.d/"
-  req app_plugindir            "/etc/sysbackup/plugin.d/"
-  req admin_email              "sysbackup[at]azertech.net"
-
-...
-
-Local Fileio VFS Plugin
-  req hostname                 "test.azertech.net"
-
-  req keeplocal                bool(true)
-
-  req path_temp                "/home/sysbackup/temp/"
-
-  req path_backup              "/home/sysbackup/test.azertech.net/daily/"
-
-  req path_rotation            "/home/sysbackup/test.azertech.net/"
-
-
-SSH Remote Fileio VFS Plugin
-  req hostname                 "nas.azertech.net"
-
-  req keeplocal                bool(true)
-
-  req path_temp                "/home/sysbackup/temp/"
-
-  req path_backup              "/home/sysbackup/test.azertech.net/daily/"
-
-  req path_rotation            "/home/sysbackup/test.azertech.net/"
-
-
-  req enabled                  bool(true)
-  req usehardlinks             bool(true)
-  req remconf_file             "/etc/sysbackup-nas.conf"
-  def ssh_binary               "/usr/bin/ssh"
-  int ssh_localexec_keypath    "/etc/sysbackup/keys/localexec"
-  opt ssh_localexec_options    string(blank)
-  int ssh_localexec_userid     "sysbackup"
-  def scp_binary               "/usr/bin/scp"
-  int scp_filecopy_keypath     "/etc/sysbackup/keys/filecopy"
-  opt scp_filecopy_options     "-B -p -q"
-  int scp_filecopy_userid      "sysbackup"
-  int remote_server            "nas.azertech.net"
-
-...
-
-
-   13. At this point your sshremote server is ready for action.
-
-   Repeat the above steps for each remote server you need. In most cases
-   you will want to backup your VM to the physical host and, separately,
-   to at least one remote host (on or offsite.)
-
-Final checkout and first backup
-
-   At this point you should be able to dump the sysbackup configurtion
-   without any problems:
-
-     $ sudo /opt/sysbackup-v3.01a/sysbackup --dump-config
-
-   You should now be able to run the backup and see the desired results.
-   Here's the output from a test run on a dev workstation:
-
-$ sudo ./sysbackup --dump-config --exec
-System Backups 3.01(alpha)
-
-Basic Application Settings:
-  req app_title                "System Backups"
-  req app_version              "3.01(alpha)"
-  req app_conffile             "/etc/sysbackup/sysbackup.conf"
-  req app_confdir              "/etc/sysbackup/conf.d/"
-  req app_plugindir            "/etc/sysbackup/plugin.d/"
-  req admin_email              "sysbackup[at]azertech.net"
-
-Plugins Loaded:
-  System Home Directories 0.01a (homedirs)
-    produces backups of User Home Directories
-  Mail Folders 0.01a (maildirs)
-    produces backups of Mail Folders consisting of one file per user.
-  Mailman Mailing List Server 0.01a (mailman)
-    produces backups of a Mailman Installation
-  MySQL Database 0.01a (mysql)
-    produces backups of a MySQL server (local or remote)
-  System Package List 0.01a (syspackages)
-    creates a backup of the System Package List for reference purposes
-  System Directories 0.01a (sysdirs)
-    produces backups of important System Directories
-
-Jobs Configured:
-  Event         Index                       Plugin(JobID)
-  genbackups    1000.System.Packages        syspackages(genpackagelist)
-  genbackups    1100.System.SystemDirs      sysdirs(systemdirs)
-  genbackups    1200.System.SystemMail.0000 maildirs(sysmail-dirs)
-  genbackups    1200.System.SystemMail.0001 sysdirs(sysmail-files)
-  genbackups    1900.System.SystemWWW       homedirs(sysweb)
-  genbackups    2000.Daemons.MySQL          mysql(mysqldb-localhost)
-  genbackups    2000.Daemons.MySQL-Config   sysdirs(MySQLConfig)
-  auxops        5000.RemoteXfer             internal(xfer-queued)
-
-Plugins Not Loaded (disabled):
-  Backup Rotation 0.01a (bkuprotation)
-  Sample do-nothing Plugin 0.01a (dummy)
-
-Jobs Not Configured:
-  systemdirs in '/etc/sysbackup/conf.d/dummy.conf' (disabled)
-  homedirs in '/etc/sysbackup/conf.d/homedirs.conf' (disabled)
-  mailmanlists in '/etc/sysbackup/conf.d/mailman.conf' (disabled by run conditio
-ns)
-  mailmanconfig in '/etc/sysbackup/conf.d/mailman.conf' (disabled by run conditi
-ons)
-  mailmansystem in '/etc/sysbackup/conf.d/mailman.conf' (disabled by run conditi
-ons)
-  mailmanlists in '/etc/sysbackup/conf.d/mailman.conf' (disabled by run conditio
-ns)
-
-Local Fileio VFS Plugin
-  req hostname                 "dev.azertech.net"
-
-  req keeplocal                bool(true)
-
-  req path_temp                "/home/sysbackup/temp/"
-
-  req path_backup              "/home/sysbackup/dev.azertech.net/daily/"
-
-  req path_rotation            "/home/sysbackup/dev.azertech.net/"
-
-
-SSH Remote Fileio VFS Plugin
-  req hostname                 "nas.azertech.net"
-
-  req keeplocal                bool(true)
-
-  req path_temp                "/home/sysbackup/temp/"
-
-  req path_backup              "/home/sysbackup/dev.azertech.net/daily/"
-
-  req path_rotation            "/home/sysbackup/dev.azertech.net/"
-
-
-  req enabled                  bool(true)
-  req usehardlinks             bool(true)
-  req remconf_file             "/etc/sysbackup-nas.conf"
-  def ssh_binary               "/usr/bin/ssh"
-  int ssh_localexec_keypath    "/etc/sysbackup/keys/nas-localexec.openssh"
-  opt ssh_localexec_options    string(blank)
-  int ssh_localexec_userid     "sysbackup"
-  def scp_binary               "/usr/bin/scp"
-  int scp_filecopy_keypath     "/etc/sysbackup/keys/nas-filecopy.openssh"
-  opt scp_filecopy_options     "-B -p -q"
-  int scp_filecopy_userid      "sysbackup"
-  int remote_server            "nas.azertech.net"
-
-Compression Options:
-  int tar_name                 "tar"
-  int tar_bin                  "/bin/tar"
-  int tar_ext                  ".tgz"
-  int tar_defopts              "--preserve-order --preserve-permissions --atime-
-preserve=system"
-  opt tar_opts1                string(blank)
-  opt tar_opts2                string(blank)
-  opt tar_opts3                string(blank)
-  int tar_cmd                  "%BINARY% %DEFOPTS% %OPTS1% --create %OPTS2% '%SO
-URCE%' %OPTS3%"
-  int gzip_name                "gzip"
-  int gzip_bin                 "/bin/gzip"
-  int gzip_ext                 ".gz"
-  int gzip_defopts             "--no-name"
-  opt gzip_opts1               string(blank)
-  int gzip_filter              "%BINARY% %DEFOPTS% %OPTS1%             >'%TARGET
-%'"
-  int gzip_file                "%BINARY% %DEFOPTS% %OPTS1% <'%SOURCE%' >'%TARGET
-%'"
-
-
-genbackups: Generate the Backup Set
-  1000.System.Packages: syspackages(genpackagelist)
-    etc          61KiB dev.azertech.net.packagelist.gz
-  --------dev.azertech.net: 0.5692s 61KiB/1
-
-  1100.System.SystemDirs: sysdirs(systemdirs)
-    etc           9MiB etc.tgz
-    etc          69MiB var-log.tgz
-    etc          71MiB root.tgz
-  --------dev.azertech.net: 36.3283s 149MiB/3
-
-  1200.System.SystemMail.0000: maildirs(sysmail-dirs)
-    mail         49KiB *var-spool-mail-demo.gz
-    mail        484KiB *var-spool-mail-root.gz
-  --------dev.azertech.net: 2.1870s  *533KiB/2
-
-  1200.System.SystemMail.0001: sysdirs(sysmail-files)
-    mail           67B *etc-aliases.gz
-  --------dev.azertech.net: 0.4256s  *67B/1
-
-  1900.System.SystemWWW: homedirs(sysweb)
-    var-www       146B *var-www-index.html.gz
-    var-www       134B *var-www-music.tgz
-    var-www       123B *var-www-projects.tgz
-    var-www       133B *var-www-usr--share--doc.tgz
-  --------dev.azertech.net: 1.3715s  *536B/4
-
-  2000.Daemons.MySQL: mysql(mysqldb-localhost)
-    mysql        17MiB *localhost-as400_magento.sql.gz
-    mysql         936B *localhost-caketest.sql.gz
-    mysql        51MiB *localhost-debian_magento.sql.gz
-    mysql       123KiB localhost-information_schema.sql.gz
-    mysql       132KiB *localhost-mysql.sql.gz
-    mysql        36KiB *localhost-netlink_drupal.sql.gz
-    mysql         420B *localhost-symfony.sql.gz
-  --------dev.azertech.net: 1:09.9145s 68MiB/7 *68MiB/6
-
-  2000.Daemons.MySQL-Config: sysdirs(MySQLConfig)
-    mysql         3KiB *etc-mysql.tgz
-    mysql       228KiB var-log-mysql.tgz
-  --------dev.azertech.net: 1.9456s 231KiB/2 *3KiB/1
-
-Summary Stats
-  --------dev.azertech.net: 2:03.3295s 218MiB/20 *69MiB/14 (~6GiB/h)
-
-
-auxops: Auxiliary Operations (ie: copy to NAS)
-  5000.RemoteXfer: internal(xfer-queued)
-       61KiB etc/dev.azertech.net.packagelist.gz        nas:0.8068s
-        9MiB etc/etc.tgz                                nas:1.8601s
-       69MiB etc/var-log.tgz                            nas:3.9200s
-       71MiB etc/root.tgz                               nas:4.1335s
-       49KiB mail/var-spool-mail-demo.gz                nas:*0.9164s
-      484KiB mail/var-spool-mail-root.gz                nas:*0.8114s
-         67B mail/etc-aliases.gz                        nas:*0.8193s
-        146B var-www/var-www-index.html.gz              nas:*0.8327s
-        134B var-www/var-www-music.tgz                  nas:*0.7859s
-        123B var-www/var-www-projects.tgz               nas:*0.8371s
-        133B var-www/var-www-usr--share--doc.tgz        nas:*0.8761s
-       17MiB mysql/localhost-as400_magento.sql.gz       nas:*0.8077s
-        936B mysql/localhost-caketest.sql.gz            nas:*0.8865s
-       51MiB mysql/localhost-debian_magento.sql.gz      nas:*0.8471s
-      123KiB mysql/localhost-information_schema.sql.gz  nas:0.7971s
-      132KiB mysql/localhost-mysql.sql.gz               nas:*0.8912s
-       36KiB mysql/localhost-netlink_drupal.sql.gz      nas:*0.8575s
-        420B mysql/localhost-symfony.sql.gz             nas:*0.8293s
-        3KiB mysql/etc-mysql.tgz                        nas:*0.8724s
-      228KiB mysql/var-log-mysql.tgz                    nas:0.7949s
-  ------------dev.azertech.net: 24.5852s
-  -sysbackup[at]nas.azertech.net: 24.1898s 218MiB/20 *69MiB/14
-
-Summary Stats
-  ------------dev.azertech.net: 2:27.9149s 218MiB/20 *69MiB/14 (~5GiB/h)
-  -sysbackup[at]nas.azertech.net: 24.1901s 218MiB/20 *69MiB/14 (~32GiB/h)
-
-
-   NOTE: The stars (*) in the above output indicate that a file was
-   hardlinked instead of being copied. This does not save any time on the
-   local filesystem but it saves a great deal of time on the remote
-   filesystems under SSH as only the SHA1 hash and link command go over
-   the network.
-
-Going Further
-
-   In practice there are many backup scripts that you can download from
-   the internet - and many highly sophisticated backup tools available -
-   but none of them are able to take the time to review your server and
-   your requirements to find out what you really need. For example: is
-   your server running 24x7? If so, how do you backup your databases or
-   your mail services, for example? One good way to do it is to stop all
-   services for a few seconds in the middle of the night so that you can
-   take snapshots of the filesystem using, for example, LVM. Then you can
-   restart all the services and run your backups off of the snapshots.
-
-   It takes time to organize all this and get it running smoothly. Please
-   take a moment to contact the author, Sam Azer, with your questions,
-   comments and suggestions. Hopefully system administrators will find
-   SysBackup to be a helpful tool in their toolbox.
+                                                  [8]Installation Overview
+                                                    [9]System Requirements
+                                                    [10]Basic Installation
+                                                    [11]SSH Remote Storage
+                                                             [12]First Run
+                                                          [13]Be Prepared!
+
+Overview
+
+   Please take a moment to review the [14]System Requirements before
+   installing SysBackup.
+
+   At the moment there are two basic types of installation:
+    1. [15]Basic Install: The current server/workstation is backed-up to
+       local (or mounted) storage.
+    2. [16]SSH Remote Storage: The current server/workstation is backed-up
+       to remote storage via SSH/SCP. Optionally a copy of the backup can
+       also be stored on the local (or mounted) filesystem.
+
+   You will always begin with the [17]Basic Install This is relatively
+   quick and easy to do. The basic Install involves mostly just the
+   creation of various folders on the system.
+
+   Setup of [18]SSH Remote Storage involves setting-up the SSH
+   communications (installing the key files,) and installing the local
+   exec utility script on the remote server. The Local Exec utility is
+   included, along with a test script called Remote Exec, in the SysBackup
+   package.
+
+  Jobs & Plugins
+
+   Once the basic software has been installed you will need to install and
+   enable the plugins that you want to use. At the time of this writing
+   there is a small collection of plugins available in the plugin.d/
+   folder. Hopefully that collection will grow over time. Each plugin is a
+   small and simple script that is designed to perform some kind of common
+   task. For example the mysql.plugin script is designed to backup a MySQL
+   database server, the mailman.plugin script is designed to backup a
+   mailman installation, etc.
+
+   Some of the plugins perform generic functions. The sysdirs.plugin, for
+   example, is designed to tarball any list of system folders. This tends
+   to work well for system folders that are rarely updated but wastes a
+   huge amount of disk space if you try using it on user home directories.
+   Users typically make changes to the files in their working folders and
+   those changes, when part of a huge tarball, prevent the SysBackup
+   utility from making use of hardlinks to save disk space. Therefore, the
+   homedirs.plugin is designed to list all the files and folders in a
+   users' home directory and compress everything in a more granular
+   fashion to save disk space. Another side-effect of more granular
+   tarballs is that they make it easier for the system administrator to
+   find files that might be requested by the users.
+
+   Once you get to know about the different plugins you can setup the jobs
+   you need to properly backup your server or workstation. Again,
+   setting-up the backup jobs is fairly easy. Job configuration scripts
+   are really just little scripts that schedule calls to the plugins.
+
+   In many cases you can configure a backup process that does everything
+   you need to do using the plugins that are available. In some cases you
+   might need additional functionality. If so you can review the code for
+   one of the existing plugins and write a plugin to simplify the task you
+   are trying to complete.
+
+  Be Prepared!
+
+   SysBackup can be configued to backup specific information and services.
+   Installation and configuration is relatively simple. From there the
+   generation of a backupset is a one-step automated process.
+
+   Unfortunately keeping a simple set of backups does not mean that you
+   are prepared for all the different information restore issues you might
+   face over a period of years. For helpful hints on how to make sure you
+   are as prepared as possible please take a look at the [19]BE-PREPARED
+   document.
+
+   You might also want to check out the [20]SysBackup Documentation and
+   FAQ pages on the [21]AzerTech.net web site.
      __________________________________________________________________
 
 
-                             [21][agpl-v3-logo.svg]   [22][gfdl-logo.svg]
+                             [22][agpl-v3-logo.svg]   [23][gfdl-logo.svg]
 
 
-    Copyright © 2011 by [23]Sam Azer<[24]sam@azertech.net>, All rights
+    Copyright © 2011 by [24]Sam Azer<[25]sam@azertech.net>, All rights
     reserved.
 
-   Last modified: Thu Dec 15 00:43:25 EST 2011
+   Last modified: Thu Jan 12 14:36:35 EST 2012
 
 References
 
@@ -613,20 +112,21 @@ References
    5. http://azer.ca/sysbackup-sf
    6. http://azer.ca/sysbackup-gh
    7. http://azer.ca/sysbackup-oh
-   8. file://localhost/projects/server-scripts/backupv3/doc/INSTALL.html
-   9. file://localhost/projects/server-scripts/backupv3/doc/BE-PREPARED.html
-  10. file://localhost/projects/server-scripts/backupv3/doc/README.html
-  11. file://localhost/projects/server-scripts/backupv3/doc/README.html
-  12. file://localhost/projects/server-scripts/backupv3/doc/BE-PREPARED.html
-  13. http://www.azertech.net/content/category/3/49/29/
-  14. http://www.azertech.net/
-  15. file://localhost/projects/server-scripts/backupv3/doc/README.html
-  16. file://localhost/projects/server-scripts/backupv3/doc/JOB-CONF.html
-  17. http://www.php.net/manual/
-  18. file://localhost/projects/server-scripts/backupv3/doc/INSTALL.html#assumptions
-  19. file://localhost/projects/server-scripts/backupv3/doc/JOB-CONF.html
-  20. file://localhost/projects/server-scripts/backupv3/doc/INSTALL.html#assumptions
-  21. http://www.gnu.org/licenses/agpl.html
-  22. http://www.gnu.org/copyleft/fdl.html
-  23. http://azertech.net/about
-  24. mailto:sam@azertech.net?subject=SysBackup
+   8. http://www.azertech.net/content/view/69/29/
+   9. http://www.azertech.net/content/view/94/29/
+  10. http://www.azertech.net/content/view/92/29/
+  11. http://www.azertech.net/content/view/93/29/
+  12. http://www.azertech.net/content/view/95/29/
+  13. http://www.azertech.net/content/view/70/29/
+  14. file://localhost/projects/server-scripts/backupv3/doc/REQUIREMENTS.html
+  15. file://localhost/projects/server-scripts/backupv3/doc/BASICINSTALL.html
+  16. file://localhost/projects/server-scripts/backupv3/doc/REMOTESTORAGE.html
+  17. file://localhost/projects/server-scripts/backupv3/doc/BASICINSTALL.html
+  18. file://localhost/projects/server-scripts/backupv3/doc/REMOTESTORAGE.html
+  19. file://localhost/projects/server-scripts/backupv3/doc/BE-PREPARED.html
+  20. http://www.azertech.net/content/category/3/49/29/
+  21. http://www.azertech.net/
+  22. http://www.gnu.org/licenses/agpl.html
+  23. http://www.gnu.org/copyleft/fdl.html
+  24. http://azertech.net/about
+  25. mailto:sam@azertech.net?subject=SysBackup

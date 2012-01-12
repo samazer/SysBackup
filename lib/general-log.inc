@@ -535,8 +535,18 @@ class applog_c extends stopwatch_c
 
 
 
-function backtrace($opts = DEBUG_BACKTRACE_IGNORE_ARGS)
+function backtrace($opts = false)
 {
+   if ( !defined( "PHP_VERSION_ID" ) )
+   {  
+      debug_print_backtrace();
+      return;
+   }
+
+   if ( $opts === false )
+      if ( defined( "DEBUG_BACKTRACE_IGNORE_ARGS" ) )
+         $opts = DEBUG_BACKTRACE_IGNORE_ARGS;
+
    if ( PHP_VERSION_ID > 50302 )
       debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
    elseif ( function_exists( "debug_print_backtrace" ) )

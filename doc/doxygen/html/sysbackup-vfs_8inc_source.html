@@ -860,7 +860,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00773"></a>00773       <span class="keywordflow">if</span> ( !file_exists( $abs_ref ) ) <span class="comment">// unexpected condition (programming error?)</span>
 <a name="l00774"></a>00774          $this-&gt;<a class="code" href="classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f">fatal</a>( <span class="stringliteral">&quot;expired file not found {$abs_ref}&quot;</span> );
 <a name="l00775"></a>00775 
-<a name="l00776"></a>00776       <span class="keywordflow">if</span> ( unlink( $abs_ref ) )
+<a name="l00776"></a>00776       <span class="keywordflow">if</span> ( unlink( $abs_ref ) === <span class="keyword">false</span> )
 <a name="l00777"></a>00777          $this-&gt;<a class="code" href="classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f">fatal</a>( <span class="stringliteral">&quot;unable to remove expired file {$abs_ref}&quot;</span> );
 <a name="l00778"></a>00778 
 <a name="l00779"></a>00779       <span class="keywordflow">return</span> <span class="keyword">false</span>;
@@ -1032,7 +1032,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="sysbackup-vfs_8inc.html">sysbackup-vfs.inc</a>      </li>
-      <li class="footer">Generated on Tue Jan 10 2012 14:54:12 for SysBackup by&#160;
+      <li class="footer">Generated on Thu Jan 12 2012 16:42:07 for SysBackup by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

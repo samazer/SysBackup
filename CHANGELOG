@@ -1,6 +1,14 @@
 -*- mode: text; coding: utf-8-unix; -*- 
 
 
+SysBackup v3.017alpha
+
+   2012.01.12 SA:
+
+      * Update documentation & many minor bugfixes. Also made some
+        minor adjustments to the code after a quick review to correct
+        some structural issues that crept-in recently.
+
 SysBackup v3.016alpha
 
       * major improvements, some bugs found and fixed, full rotation

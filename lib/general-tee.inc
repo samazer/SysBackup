@@ -160,7 +160,18 @@ class teelog_c extends applog_c
       echo $r;
 
       if ( $stop_flag )
+      {
+         if ( is_array( $msg ) )
+         {
+            $txt = "";
+            foreach ( $msg as $t )
+               $txt .= "{$t}\n";
+
+            $msg = $txt;
+         }
+
          throw new Exception( $msg );
+      }
    }
 
 

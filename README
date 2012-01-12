@@ -3,9 +3,9 @@
 
                                 SysBackup README
 
-     Note: The most up-to-date copy of this file is available in the
-     [1]SysBackup Documentation and FAQ pages on the [2]AzerTech.net web
-     site.
+     [a+logo.png] Note: The most up-to-date copy of this file is
+     available in the [1]SysBackup Documentation and FAQ pages on the
+     [2]AzerTech.net web site.
 
    Remember to check the notes in the headers of the various scripts
    (especially sysbackup, remexec and localexec for helpful information.
@@ -42,8 +42,12 @@ The Solution
                                                [5]SysBackup on SourceForge
                                                     [6]SysBackup on GitHub
                                                      [7]SysBackup on Ohloh
-                                              [8]Installation Instructions
-                                                           [9]Be Prepared!
+                                                  [8]Installation Overview
+                                                    [9]System Requirements
+                                                    [10]Basic Installation
+                                                    [11]SSH Remote Storage
+                                                             [12]First Run
+                                                          [13]Be Prepared!
 
    The ultimate solution is an iterative business process combined with a
    simple but flexible collection of tools. The business process will
@@ -145,10 +149,10 @@ Be Prepared!
      __________________________________________________________________
 
 
-                             [10][agpl-v3-logo.svg]   [11][gfdl-logo.svg]
+                             [14][agpl-v3-logo.svg]   [15][gfdl-logo.svg]
 
 
-    Copyright © 2011 by [12]Sam Azer<[13]sam@azertech.net>, All rights
+    Copyright © 2011 by [16]Sam Azer<[17]sam@azertech.net>, All rights
     reserved.
 
    Last modified: Sun Jan 8 21:51:39 EST 2012
@@ -162,9 +166,13 @@ References
    5. http://azer.ca/sysbackup-sf
    6. http://azer.ca/sysbackup-gh
    7. http://azer.ca/sysbackup-oh
-   8. file://localhost/projects/server-scripts/backupv3/doc/INSTALL.html
-   9. file://localhost/projects/server-scripts/backupv3/doc/BE-PREPARED.html
-  10. http://www.gnu.org/licenses/agpl.html
-  11. http://www.gnu.org/copyleft/fdl.html
-  12. http://azertech.net/about
-  13. mailto:sam@azertech.net?subject=SysBackup
+   8. http://www.azertech.net/content/view/69/29/
+   9. http://www.azertech.net/content/view/94/29/
+  10. http://www.azertech.net/content/view/92/29/
+  11. http://www.azertech.net/content/view/93/29/
+  12. http://www.azertech.net/content/view/95/29/
+  13. http://www.azertech.net/content/view/70/29/
+  14. http://www.gnu.org/licenses/agpl.html
+  15. http://www.gnu.org/copyleft/fdl.html
+  16. http://azertech.net/about
+  17. mailto:sam@azertech.net?subject=SysBackup

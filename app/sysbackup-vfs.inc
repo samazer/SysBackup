@@ -773,7 +773,7 @@ class backupvfs_main_c extends plugin_framework_c
       if ( !file_exists( $abs_ref ) ) // unexpected condition (programming error?)
          $this->fatal( "expired file not found {$abs_ref}" );
 
-      if ( unlink( $abs_ref ) )
+      if ( unlink( $abs_ref ) === false )
          $this->fatal( "unable to remove expired file {$abs_ref}" );
 
       return false;

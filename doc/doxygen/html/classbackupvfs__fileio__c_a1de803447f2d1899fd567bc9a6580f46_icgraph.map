@@ -1,10 +1,14 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$classbackupvfs__fileio__c.html#ab617a692171355b3889dc5d346544b5e" title="_mark_backupset_incomplete" alt="" coords="197,85,392,115"/>
-<area shape="rect" id="node11" href="$classbackupvfs__fileio__c.html#a265d2aab0a22ac3c73873d1f9c575b92" title="_unmark_backupset_incomplete" alt="" coords="191,192,399,221"/>
-<area shape="rect" id="node5" href="$classbackupvfs__sshremote__rotation__c.html#a32cab912e6c1954794c5438c636a079d" title="backupvfs_sshremote_rotation_c::vfs_start" alt="" coords="449,5,721,35"/>
-<area shape="rect" id="node7" href="$classbackupvfs__localio__rotation__c.html#a32cab912e6c1954794c5438c636a079d" title="backupvfs_localio_rotation_c::vfs_start" alt="" coords="461,59,709,88"/>
-<area shape="rect" id="node9" href="$classbackupvfs__baseio__c.html#a32cab912e6c1954794c5438c636a079d" title="backupvfs_baseio_c::vfs_start" alt="" coords="485,112,685,141"/>
-<area shape="rect" id="node13" href="$classbackupvfs__sshremote__rotation__c.html#a3d126aa4e416b60c57f6036370f348cb" title="backupvfs_sshremote_rotation_c::vfs_end" alt="" coords="452,165,719,195"/>
-<area shape="rect" id="node15" href="$classbackupvfs__localio__rotation__c.html#a3d126aa4e416b60c57f6036370f348cb" title="backupvfs_localio_rotation_c::vfs_end" alt="" coords="464,219,707,248"/>
-<area shape="rect" id="node17" href="$classbackupvfs__baseio__c.html#a3d126aa4e416b60c57f6036370f348cb" title="backupvfs_baseio_c::vfs_end" alt="" coords="488,272,683,301"/>
+<area shape="rect" id="node3" href="$classbackupvfs__fileio__c.html#ab617a692171355b3889dc5d346544b5e" title="_mark_backupset_incomplete" alt="" coords="240,85,435,115"/>
+<area shape="rect" id="node11" href="$classbackupvfs__fileio__c.html#a265d2aab0a22ac3c73873d1f9c575b92" title="_unmark_backupset_incomplete" alt="" coords="233,192,441,221"/>
+<area shape="rect" id="node19" href="$classbackupvfs__localio__c.html#a41cbb4af0889bb6af5f2e2dca14b2609" title="backupvfs_localio_c::vfs_compress_command" alt="" coords="191,245,484,275"/>
+<area shape="rect" id="node21" href="$classbackupvfs__localio__c.html#a058e62de541a69b7e2ac4593c2f534a5" title="backupvfs_localio_c::vfs_compress_file" alt="" coords="211,299,464,328"/>
+<area shape="rect" id="node23" href="$classbackupvfs__localio__c.html#ae807c51f32dfbc2e664a77a94ccd0c81" title="backupvfs_localio_c::vfs_compress_string" alt="" coords="203,352,472,381"/>
+<area shape="rect" id="node25" href="$classbackupvfs__localio__c.html#a9be83ec6186cf96f66cff0ada6ec97f9" title="backupvfs_localio_c::vfs_tarball_folder" alt="" coords="215,405,460,435"/>
+<area shape="rect" id="node5" href="$classbackupvfs__sshremote__rotation__c.html#a32cab912e6c1954794c5438c636a079d" title="backupvfs_sshremote_rotation_c::vfs_start" alt="" coords="535,5,807,35"/>
+<area shape="rect" id="node7" href="$classbackupvfs__localio__rotation__c.html#a32cab912e6c1954794c5438c636a079d" title="backupvfs_localio_rotation_c::vfs_start" alt="" coords="547,59,795,88"/>
+<area shape="rect" id="node9" href="$classbackupvfs__baseio__c.html#a32cab912e6c1954794c5438c636a079d" title="backupvfs_baseio_c::vfs_start" alt="" coords="571,112,771,141"/>
+<area shape="rect" id="node13" href="$classbackupvfs__sshremote__rotation__c.html#a3d126aa4e416b60c57f6036370f348cb" title="backupvfs_sshremote_rotation_c::vfs_end" alt="" coords="537,165,804,195"/>
+<area shape="rect" id="node15" href="$classbackupvfs__localio__rotation__c.html#a3d126aa4e416b60c57f6036370f348cb" title="backupvfs_localio_rotation_c::vfs_end" alt="" coords="549,219,792,248"/>
+<area shape="rect" id="node17" href="$classbackupvfs__baseio__c.html#a3d126aa4e416b60c57f6036370f348cb" title="backupvfs_baseio_c::vfs_end" alt="" coords="573,272,768,301"/>
 </map>

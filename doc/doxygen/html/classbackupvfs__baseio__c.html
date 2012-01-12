@@ -142,12 +142,12 @@ Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbackupvfs__baseio__c.html#a72eccd48c1736f4b51ba19f91d1dcc32">stat_str</a> ($type)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbackupvfs__baseio__c.html#a91a1483985f07ceb2a035ae78c4c8ea3">dump_config</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbackupvfs__baseio__c.html#a0cb322e92b958a8fa1637a0160923678">plugin_help</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbackupvfs__baseio__c.html#a934e7437277722b6b9a9676d164e5b94">_std_plugin_method_warning</a> ()</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbackupvfs__baseio__c.html#a9054dcae22b5d0430077b2d5dbbb5306">_std_plugin_method_warning</a> ($op)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbackupvfs__baseio__c.html#a42a85a0e1075b8510ebb6cf44a97cef9">_std_vfsplugin_method_warning</a> ($op)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbackupvfs__baseio__c.html#a6187bbcd771dd6107b31f2193e6c3537">vfs_init</a> ($backupset_name)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbackupvfs__baseio__c.html#a32cab912e6c1954794c5438c636a079d">vfs_start</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbackupvfs__baseio__c.html#a3d126aa4e416b60c57f6036370f348cb">vfs_end</a> ()</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbackupvfs__baseio__c.html#a1b03b15aa808f8396a62246efbb3f9eb">vfs_addfile</a> ($source_file)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbackupvfs__baseio__c.html#a017b3d6c2541988bcd244effa00574cd">vfs_addfile</a> ($target, $source)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbackupvfs__baseio__c.html#a6f61aba9f1ad5662993e30990b38f1bd">vfs_compress_string</a> ($target_filename, $source_str)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbackupvfs__baseio__c.html#a058e62de541a69b7e2ac4593c2f534a5">vfs_compress_file</a> ($target, $source)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbackupvfs__baseio__c.html#a36c3e59c103b3f3abad1aae7984ff4db">vfs_tarball_folder</a> ($target, $source)</td></tr>
@@ -214,14 +214,15 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <hr/><h2>Member Function Documentation</h2>
-<a class="anchor" id="a934e7437277722b6b9a9676d164e5b94"></a><!-- doxytag: member="backupvfs_baseio_c::_std_plugin_method_warning" ref="a934e7437277722b6b9a9676d164e5b94" args="()" -->
+<a class="anchor" id="a9054dcae22b5d0430077b2d5dbbb5306"></a><!-- doxytag: member="backupvfs_baseio_c::_std_plugin_method_warning" ref="a9054dcae22b5d0430077b2d5dbbb5306" args="($op)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">_std_plugin_method_warning </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>op</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -229,6 +230,8 @@ Here is the call graph for this function:</div>
 <div class="memdoc">
 <p>Standard Warning</p>
 <p>Programmers helper: displays a message for methods that have not been defined in the plugin code. In this case it also causes a fatal error if a VFS plugin is loaded via the regular plugin mechanism (not supported for now.) </p>
+
+<p>Reimplemented from <a class="el" href="classplugin__base__c.html#a9054dcae22b5d0430077b2d5dbbb5306">plugin_base_c</a>.</p>
 
 <p>Definition at line <a class="el" href="sysbackup-vfs-base_8inc_source.html#l00287">287</a> of file <a class="el" href="sysbackup-vfs-base_8inc_source.html">sysbackup-vfs-base.inc</a>.</p>
 
@@ -251,14 +254,14 @@ Here is the call graph for this function:</div>
 <p>Standard Warning</p>
 <p>Programmers helper: displays a message for methods that have not been defined in the plugin code </p>
 
-<p>Definition at line <a class="el" href="sysbackup-vfs-base_8inc_source.html#l00302">302</a> of file <a class="el" href="sysbackup-vfs-base_8inc_source.html">sysbackup-vfs-base.inc</a>.</p>
+<p>Definition at line <a class="el" href="sysbackup-vfs-base_8inc_source.html#l00303">303</a> of file <a class="el" href="sysbackup-vfs-base_8inc_source.html">sysbackup-vfs-base.inc</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
 <div class="center"><img src="classbackupvfs__baseio__c_a42a85a0e1075b8510ebb6cf44a97cef9_icgraph.png" border="0" usemap="#classbackupvfs__baseio__c_a42a85a0e1075b8510ebb6cf44a97cef9_icgraph" alt=""/></div>
 <map name="classbackupvfs__baseio__c_a42a85a0e1075b8510ebb6cf44a97cef9_icgraph" id="classbackupvfs__baseio__c_a42a85a0e1075b8510ebb6cf44a97cef9_icgraph">
-<area shape="rect" id="node3" href="classbackupvfs__baseio__c.html#a1b03b15aa808f8396a62246efbb3f9eb" title="vfs_addfile" alt="" coords="291,5,376,35"/><area shape="rect" id="node5" href="classbackupvfs__baseio__c.html#a058e62de541a69b7e2ac4593c2f534a5" title="vfs_compress_file" alt="" coords="269,59,397,88"/><area shape="rect" id="node7" href="classbackupvfs__baseio__c.html#a6f61aba9f1ad5662993e30990b38f1bd" title="vfs_compress_string" alt="" coords="263,112,404,141"/><area shape="rect" id="node9" href="classbackupvfs__baseio__c.html#a36c3e59c103b3f3abad1aae7984ff4db" title="vfs_tarball_folder" alt="" coords="273,165,393,195"/></map>
+<area shape="rect" id="node3" href="classbackupvfs__baseio__c.html#a017b3d6c2541988bcd244effa00574cd" title="vfs_addfile" alt="" coords="291,5,376,35"/><area shape="rect" id="node5" href="classbackupvfs__baseio__c.html#a058e62de541a69b7e2ac4593c2f534a5" title="vfs_compress_file" alt="" coords="269,59,397,88"/><area shape="rect" id="node7" href="classbackupvfs__baseio__c.html#a6f61aba9f1ad5662993e30990b38f1bd" title="vfs_compress_string" alt="" coords="263,112,404,141"/><area shape="rect" id="node9" href="classbackupvfs__baseio__c.html#a36c3e59c103b3f3abad1aae7984ff4db" title="vfs_tarball_folder" alt="" coords="273,165,393,195"/></map>
 </div>
 </p>
 
@@ -1009,7 +1012,7 @@ Here is the call graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="a1b03b15aa808f8396a62246efbb3f9eb"></a><!-- doxytag: member="backupvfs_baseio_c::vfs_addfile" ref="a1b03b15aa808f8396a62246efbb3f9eb" args="($source_file)" -->
+<a class="anchor" id="a017b3d6c2541988bcd244effa00574cd"></a><!-- doxytag: member="backupvfs_baseio_c::vfs_addfile" ref="a017b3d6c2541988bcd244effa00574cd" args="($target, $source)" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -1017,20 +1020,32 @@ Here is the call graph for this function:</div>
           <td class="memname">vfs_addfile </td>
           <td>(</td>
           <td class="paramtype">$&#160;</td>
-          <td class="paramname"><em>source_file</em></td><td>)</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>source</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="sysbackup-vfs-base_8inc_source.html#l00343">343</a> of file <a class="el" href="sysbackup-vfs-base_8inc_source.html">sysbackup-vfs-base.inc</a>.</p>
+<p>Reimplemented in <a class="el" href="classbackupvfs__localio__c.html#a017b3d6c2541988bcd244effa00574cd">backupvfs_localio_c</a>.</p>
+
+<p>Definition at line <a class="el" href="sysbackup-vfs-base_8inc_source.html#l00344">344</a> of file <a class="el" href="sysbackup-vfs-base_8inc_source.html">sysbackup-vfs-base.inc</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classbackupvfs__baseio__c_a1b03b15aa808f8396a62246efbb3f9eb_cgraph.png" border="0" usemap="#classbackupvfs__baseio__c_a1b03b15aa808f8396a62246efbb3f9eb_cgraph" alt=""/></div>
-<map name="classbackupvfs__baseio__c_a1b03b15aa808f8396a62246efbb3f9eb_cgraph" id="classbackupvfs__baseio__c_a1b03b15aa808f8396a62246efbb3f9eb_cgraph">
+<div class="center"><img src="classbackupvfs__baseio__c_a017b3d6c2541988bcd244effa00574cd_cgraph.png" border="0" usemap="#classbackupvfs__baseio__c_a017b3d6c2541988bcd244effa00574cd_cgraph" alt=""/></div>
+<map name="classbackupvfs__baseio__c_a017b3d6c2541988bcd244effa00574cd_cgraph" id="classbackupvfs__baseio__c_a017b3d6c2541988bcd244effa00574cd_cgraph">
 <area shape="rect" id="node3" href="classbackupvfs__baseio__c.html#a42a85a0e1075b8510ebb6cf44a97cef9" title="_std_vfsplugin_method_warning" alt="" coords="139,5,347,35"/></map>
 </div>
 </p>
@@ -1064,7 +1079,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="classbackupvfs__localio__c.html#a058e62de541a69b7e2ac4593c2f534a5">backupvfs_localio_c</a>.</p>
 
-<p>Definition at line <a class="el" href="sysbackup-vfs-base_8inc_source.html#l00355">355</a> of file <a class="el" href="sysbackup-vfs-base_8inc_source.html">sysbackup-vfs-base.inc</a>.</p>
+<p>Definition at line <a class="el" href="sysbackup-vfs-base_8inc_source.html#l00356">356</a> of file <a class="el" href="sysbackup-vfs-base_8inc_source.html">sysbackup-vfs-base.inc</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -1104,7 +1119,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="classbackupvfs__localio__c.html#ae807c51f32dfbc2e664a77a94ccd0c81">backupvfs_localio_c</a>.</p>
 
-<p>Definition at line <a class="el" href="sysbackup-vfs-base_8inc_source.html#l00349">349</a> of file <a class="el" href="sysbackup-vfs-base_8inc_source.html">sysbackup-vfs-base.inc</a>.</p>
+<p>Definition at line <a class="el" href="sysbackup-vfs-base_8inc_source.html#l00350">350</a> of file <a class="el" href="sysbackup-vfs-base_8inc_source.html">sysbackup-vfs-base.inc</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -1133,7 +1148,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="classbackupvfs__localio__rotation__c.html#a3d126aa4e416b60c57f6036370f348cb">backupvfs_localio_rotation_c</a>, and <a class="el" href="classbackupvfs__sshremote__rotation__c.html#a3d126aa4e416b60c57f6036370f348cb">backupvfs_sshremote_rotation_c</a>.</p>
 
-<p>Definition at line <a class="el" href="sysbackup-vfs-base_8inc_source.html#l00327">327</a> of file <a class="el" href="sysbackup-vfs-base_8inc_source.html">sysbackup-vfs-base.inc</a>.</p>
+<p>Definition at line <a class="el" href="sysbackup-vfs-base_8inc_source.html#l00328">328</a> of file <a class="el" href="sysbackup-vfs-base_8inc_source.html">sysbackup-vfs-base.inc</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -1163,7 +1178,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="classbackupvfs__localio__rotation__c.html#a6187bbcd771dd6107b31f2193e6c3537">backupvfs_localio_rotation_c</a>, <a class="el" href="classbackupvfs__sshremote__rotation__c.html#a6187bbcd771dd6107b31f2193e6c3537">backupvfs_sshremote_rotation_c</a>, and <a class="el" href="classbackupvfs__sshremote__c.html#a6187bbcd771dd6107b31f2193e6c3537">backupvfs_sshremote_c</a>.</p>
 
-<p>Definition at line <a class="el" href="sysbackup-vfs-base_8inc_source.html#l00308">308</a> of file <a class="el" href="sysbackup-vfs-base_8inc_source.html">sysbackup-vfs-base.inc</a>.</p>
+<p>Definition at line <a class="el" href="sysbackup-vfs-base_8inc_source.html#l00309">309</a> of file <a class="el" href="sysbackup-vfs-base_8inc_source.html">sysbackup-vfs-base.inc</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -1192,7 +1207,7 @@ Here is the call graph for this function:</div>
 
 <p>Reimplemented in <a class="el" href="classbackupvfs__localio__rotation__c.html#a32cab912e6c1954794c5438c636a079d">backupvfs_localio_rotation_c</a>, and <a class="el" href="classbackupvfs__sshremote__rotation__c.html#a32cab912e6c1954794c5438c636a079d">backupvfs_sshremote_rotation_c</a>.</p>
 
-<p>Definition at line <a class="el" href="sysbackup-vfs-base_8inc_source.html#l00319">319</a> of file <a class="el" href="sysbackup-vfs-base_8inc_source.html">sysbackup-vfs-base.inc</a>.</p>
+<p>Definition at line <a class="el" href="sysbackup-vfs-base_8inc_source.html#l00320">320</a> of file <a class="el" href="sysbackup-vfs-base_8inc_source.html">sysbackup-vfs-base.inc</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -1230,7 +1245,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="sysbackup-vfs-base_8inc_source.html#l00361">361</a> of file <a class="el" href="sysbackup-vfs-base_8inc_source.html">sysbackup-vfs-base.inc</a>.</p>
+<p>Definition at line <a class="el" href="sysbackup-vfs-base_8inc_source.html#l00362">362</a> of file <a class="el" href="sysbackup-vfs-base_8inc_source.html">sysbackup-vfs-base.inc</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -1597,7 +1612,7 @@ Here is the call graph for this function:</div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="classbackupvfs__baseio__c.html">backupvfs_baseio_c</a>      </li>
-      <li class="footer">Generated on Tue Jan 10 2012 14:54:12 for SysBackup by&#160;
+      <li class="footer">Generated on Thu Jan 12 2012 16:42:07 for SysBackup by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

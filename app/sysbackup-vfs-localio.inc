@@ -95,7 +95,7 @@ class backupvfs_localio_c extends backupvfs_baseio_c
 
       $this->tar->last_exec_result(true); // reset the exec result
       if ( $this->tar->str( $tmp_file, $source ) != false )
-         $this->_fatal_file_error( "unable to compress string", false, $tmp_file );
+         $this->_vfs_fatal_file_error( "unable to compress string", false, $tmp_file );
 
       return $this->backupset->addfile( $target, $tmp_file );
    }
@@ -107,7 +107,7 @@ class backupvfs_localio_c extends backupvfs_baseio_c
 
       $this->tar->last_exec_result(true); // reset the exec result
       if ( $this->tar->command( $cmd, $tmp_file ) != false )
-         $this->_fatal_file_error( "unable to get+compress command output", false, $cmd );
+         $this->_vfs_fatal_file_error( "unable to get+compress command output", false, $cmd );
 
       return $this->backupset->addfile( $target, $tmp_file );
    }
@@ -119,7 +119,7 @@ class backupvfs_localio_c extends backupvfs_baseio_c
 
       $this->tar->last_exec_result(true); // reset the exec result
       if ( $this->tar->file( $tmp_file, $source ) != false )
-         $this->_fatal_file_error( "unable to compress file", $source, $tmp_file );
+         $this->_vfs_fatal_file_error( "unable to compress file", $source, $tmp_file );
 
       return $this->backupset->addfile( $target, $tmp_file );
    }
@@ -138,7 +138,7 @@ class backupvfs_localio_c extends backupvfs_baseio_c
             $this->app->warning( "tarball may contain errors: {$target}" );
             $this->app->warning( "error message was: {$msg}" );
          }
-           else $this->_fatal_file_error( "unable to tarball folder", $source, $tmp_file );
+           else $this->_vfs_fatal_file_error( "unable to tarball folder", $source, $tmp_file );
       }
 
       $msg = $this->tar->last_error();

@@ -117,7 +117,9 @@ require_once "general-sysutils.inc";
          return `{$cmd}`;
 
       if ( $fn === true  )
-         $fn = tempnam( sys_get_temp_dir(), "package-list-" );
+         $fn = tempnam( function_exists( "sys_get_temp_dir" ) 
+                           ? sys_get_temp_dir() 
+                           : "/tmp/", "package-list-" );
 
       $r = 0;
       $params = array( "descriptorspec" => array( 1 => array( "file", $fn, "w" ) ) );

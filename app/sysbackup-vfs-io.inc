@@ -74,7 +74,9 @@ class backupvfs_fileio_c extends plugin_base_c
    */
    function _vfs_fatal_file_error( $msg, $source = false, $target = false  )
    {
-      $r = $this->app->tar->last_exec_result();
+      $tar = &$this->app->get_tar_object();
+
+      $r = $tar->last_exec_result();
 
       if ( $source !== false )
          $this->warning( "source file is {$source}" );
@@ -82,11 +84,14 @@ class backupvfs_fileio_c extends plugin_base_c
       if ( $target !== false )
          $this->warning( "target file is {$target}" );
 
-      $r = error_get_last();
-      if ( $r['message'] )
-         $this->warning( "filesystem error message: {$r['message']}" );
+      if ( function_exists( "error_get_last" ) )
+      {
+         $r = error_get_last();
+         if ( $r['message'] )
+            $this->warning( "filesystem error message: {$r['message']}" );
+      }
 
-      $r = $this->app->tar->last_error();
+      $r = $tar->last_error();
       if ( $r )
          $this->warning( "compression library error message: {$r}" );
 

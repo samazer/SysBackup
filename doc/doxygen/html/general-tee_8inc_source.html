@@ -235,7 +235,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00148"></a>00148 
 <a name="l00149"></a>00149       $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <a class="code" href="general-log_8inc.html#a151da409b6dfe03c874dedcd76f68b2e">TEELOG_TXTFATAL</a> . <span class="stringliteral">&quot;Backtrace follows:&quot;</span> );
 <a name="l00150"></a>00150 
-<a name="l00151"></a>00151       <a class="code" href="general-log_8inc.html#a7a402c7c20b6fb9c2be97d73dd430327">backtrace</a>();
+<a name="l00151"></a>00151       <a class="code" href="general-log_8inc.html#a17e043fbbec86750a0d43b4fc9520c16">backtrace</a>();
 <a name="l00152"></a>00152 
 <a name="l00153"></a>00153       $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <a class="code" href="general-log_8inc.html#a151da409b6dfe03c874dedcd76f68b2e">TEELOG_TXTFATAL</a> . <span class="stringliteral">&quot;stopped &quot;</span> . date( <span class="stringliteral">&quot;Y.m.d H:i:s&quot;</span> ) 
 <a name="l00154"></a>00154                                   . <span class="stringliteral">&quot; after &quot;</span> . $this-&gt;<a class="code" href="classstopwatch__c.html#a9183c847d07c84c8ce85f1ddff07860c">all_time</a>(<span class="keyword">true</span>) . <span class="stringliteral">&quot; seconds&quot;</span> );
@@ -247,27 +247,38 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00160"></a>00160       echo $r;
 <a name="l00161"></a>00161 
 <a name="l00162"></a>00162       <span class="keywordflow">if</span> ( $stop_flag )
-<a name="l00163"></a>00163          <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception( $msg );
-<a name="l00164"></a>00164    }
-<a name="l00165"></a>00165 
-<a name="l00166"></a>00166 
-<a name="l00167"></a><a class="code" href="classteelog__c.html#aab64680d0a39449c7b28d78550694f0d">00167</a>    function <a class="code" href="classteelog__c.html#aab64680d0a39449c7b28d78550694f0d">warning</a>( $msg )
-<a name="l00168"></a>00168    {
-<a name="l00169"></a>00169       $msg = <a class="code" href="general-log_8inc.html#a44b6505f29f3a09a76dc301e4d18de4e">TEELOG_TXTWARNING</a> . <span class="stringliteral">&quot;{$msg}&quot;</span>;
-<a name="l00170"></a>00170 
-<a name="l00171"></a>00171       $this-&gt;<a class="code" href="classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75">log</a>( $msg );
-<a name="l00172"></a>00172       $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( $msg );
-<a name="l00173"></a>00173    }
-<a name="l00174"></a>00174 }
-<a name="l00175"></a>00175 
+<a name="l00163"></a>00163       {
+<a name="l00164"></a>00164          <span class="keywordflow">if</span> ( is_array( $msg ) )
+<a name="l00165"></a>00165          {
+<a name="l00166"></a>00166             $txt = <span class="stringliteral">&quot;&quot;</span>;
+<a name="l00167"></a>00167             <span class="keywordflow">foreach</span> ( $msg as $t )
+<a name="l00168"></a>00168                $txt .= <span class="stringliteral">&quot;{$t}\n&quot;</span>;
+<a name="l00169"></a>00169 
+<a name="l00170"></a>00170             $msg = $txt;
+<a name="l00171"></a>00171          }
+<a name="l00172"></a>00172 
+<a name="l00173"></a>00173          <span class="keywordflow">throw</span> <span class="keyword">new</span> Exception( $msg );
+<a name="l00174"></a>00174       }
+<a name="l00175"></a>00175    }
 <a name="l00176"></a>00176 
 <a name="l00177"></a>00177 
+<a name="l00178"></a><a class="code" href="classteelog__c.html#aab64680d0a39449c7b28d78550694f0d">00178</a>    function <a class="code" href="classteelog__c.html#aab64680d0a39449c7b28d78550694f0d">warning</a>( $msg )
+<a name="l00179"></a>00179    {
+<a name="l00180"></a>00180       $msg = <a class="code" href="general-log_8inc.html#a44b6505f29f3a09a76dc301e4d18de4e">TEELOG_TXTWARNING</a> . <span class="stringliteral">&quot;{$msg}&quot;</span>;
+<a name="l00181"></a>00181 
+<a name="l00182"></a>00182       $this-&gt;<a class="code" href="classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75">log</a>( $msg );
+<a name="l00183"></a>00183       $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( $msg );
+<a name="l00184"></a>00184    }
+<a name="l00185"></a>00185 }
+<a name="l00186"></a>00186 
+<a name="l00187"></a>00187 
+<a name="l00188"></a>00188 
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="general-tee_8inc.html">general-tee.inc</a>      </li>
-      <li class="footer">Generated on Tue Jan 10 2012 14:54:12 for SysBackup by&#160;
+      <li class="footer">Generated on Thu Jan 12 2012 16:42:07 for SysBackup by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

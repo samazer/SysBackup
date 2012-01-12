@@ -106,8 +106,11 @@ class localexec_c extends teelog_c
 
    function fatal_file_error()
    {
-      $r = error_get_last();
-      $this->fatal( $r['message'] );
+      if ( function_exists( "error_get_last" ) )
+      {
+         $r = error_get_last();
+         $this->fatal( $r['message'] );
+      }
    }
 
 

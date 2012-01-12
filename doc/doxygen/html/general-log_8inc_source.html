@@ -622,21 +622,31 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00535"></a>00535 
 <a name="l00536"></a>00536 
 <a name="l00537"></a>00537 
-<a name="l00538"></a><a class="code" href="general-log_8inc.html#a7a402c7c20b6fb9c2be97d73dd430327">00538</a> function <a class="code" href="general-log_8inc.html#a7a402c7c20b6fb9c2be97d73dd430327">backtrace</a>($opts = DEBUG_BACKTRACE_IGNORE_ARGS)
+<a name="l00538"></a><a class="code" href="general-log_8inc.html#a17e043fbbec86750a0d43b4fc9520c16">00538</a> function <a class="code" href="general-log_8inc.html#a17e043fbbec86750a0d43b4fc9520c16">backtrace</a>($opts = <span class="keyword">false</span>)
 <a name="l00539"></a>00539 {
-<a name="l00540"></a>00540    <span class="keywordflow">if</span> ( PHP_VERSION_ID &gt; 50302 )
-<a name="l00541"></a>00541       debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
-<a name="l00542"></a>00542    elseif ( function_exists( <span class="stringliteral">&quot;debug_print_backtrace&quot;</span> ) )
-<a name="l00543"></a>00543           debug_print_backtrace();
-<a name="l00544"></a>00544 }
+<a name="l00540"></a>00540    <span class="keywordflow">if</span> ( !defined( <span class="stringliteral">&quot;PHP_VERSION_ID&quot;</span> ) )
+<a name="l00541"></a>00541    {  
+<a name="l00542"></a>00542       debug_print_backtrace();
+<a name="l00543"></a>00543       <span class="keywordflow">return</span>;
+<a name="l00544"></a>00544    }
 <a name="l00545"></a>00545 
-<a name="l00546"></a>00546 
+<a name="l00546"></a>00546    <span class="keywordflow">if</span> ( $opts === <span class="keyword">false</span> )
+<a name="l00547"></a>00547       <span class="keywordflow">if</span> ( defined( <span class="stringliteral">&quot;DEBUG_BACKTRACE_IGNORE_ARGS&quot;</span> ) )
+<a name="l00548"></a>00548          $opts = DEBUG_BACKTRACE_IGNORE_ARGS;
+<a name="l00549"></a>00549 
+<a name="l00550"></a>00550    <span class="keywordflow">if</span> ( PHP_VERSION_ID &gt; 50302 )
+<a name="l00551"></a>00551       debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+<a name="l00552"></a>00552    elseif ( function_exists( <span class="stringliteral">&quot;debug_print_backtrace&quot;</span> ) )
+<a name="l00553"></a>00553           debug_print_backtrace();
+<a name="l00554"></a>00554 }
+<a name="l00555"></a>00555 
+<a name="l00556"></a>00556 
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="general-log_8inc.html">general-log.inc</a>      </li>
-      <li class="footer">Generated on Tue Jan 10 2012 14:54:12 for SysBackup by&#160;
+      <li class="footer">Generated on Thu Jan 12 2012 16:42:07 for SysBackup by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

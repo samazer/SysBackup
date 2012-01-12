@@ -1,0 +1,306 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-*- mode: php; mode: mmm; coding: utf-8; -*->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+<title>SysBackup Install Instructions</title>
+</head>
+
+<body style='width:700px;'>
+<h1>SysBackup Install</h1>
+
+<blockquote><img
+align="left"
+src="images/a+logo.png"
+style="padding-right:10px; padding-bottom:10px;"
+><small>Note: The most up-to-date copy of this file is available in the <a
+href="http://www.azertech.net/content/category/3/49/29/"
+target="_blank"
+>SysBackup Documentation and FAQ pages</a> on the <a
+href="http://www.azertech.net/"
+target="_blank"
+>AzerTech.net</a> web site.</small></blockquote>
+
+<br clear='all'>
+
+
+
+<!--- HTML below copies to azertech.net --->
+
+<h2>Basic Install</h2>
+
+<p><table align='right' bgcolor='lightgrey' border='0px'
+style="padding: 10px;"
+  ><tr><td><small><small>
+<tt><font size=+1 color='blue'>/etc/sysbackup/</font></tt><br />
+<tt>+-- <font color='blue'>conf.d</font>/</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>dummy.conf</font> -> /opt/sysbackup/conf.d/dummy.conf</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- homedirs.conf</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>mailman.conf</font> -> /opt/sysbackup/conf.d/mailman.conf</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>mysql.conf</font> -> /opt/sysbackup/conf.d/mysql.conf</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>package-list.conf</font> -> /opt/sysbackup/conf.d/package-list.conf</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>squirrelmail.conf</font> -> /opt/sysbackup/conf.d/squirrelmail.conf</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>sysdirs.conf</font> -> /opt/sysbackup/conf.d/sysdirs.conf</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>sysmail.conf</font> -> /opt/sysbackup/conf.d/sysmail.conf</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;\-- <font color='brown'>syswebfiles.conf</font> -> /opt/sysbackup/conf.d/syswebfiles.conf</tt><br />
+<tt>+-- <font color='blue'>keys</font>/</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- filecopy</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- filecopy.pub</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- localexec</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;\-- localexec.pub</tt><br />
+<tt>+-- <font color='blue'>plugin.d</font> -> <font color='blue'>/opt/sysbackup/plugin.d</font>/</tt><br />
+<tt>\-- sysbackup.conf</tt><br />
+<br>
+<br>
+<br>
+<tt><font size=+1 color='blue'>/home/sysbackup/</font></tt><br />
+<tt>+-- <font color='blue'>.ssh</font>/</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>known_hosts</font></tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>authorized_keys2</font></tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>localexec.openssh</font></tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>localexec.openssh.pub</font></tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>filecopy.openssh</font></tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>filecopy.openssh.pub</font></tt><br />
+<tt>+-- <font color='blue'>test.azertech.net</font>/</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='blue'>daily</font>/</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='blue'>weekly</font>/</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='blue'>monthly</font>/</tt><br />
+<tt>\-- <font color='blue'>temp</font>/</tt><br />
+<br>
+<br>
+<br>
+<tt><font size=+1 color='blue'>/opt/sysbackup/</font></tt><br />
+<tt>+-- <font color='blue'>app</font>/</tt><br />
+<tt>+-- <font color='blue'>conf.d</font>/</tt><br />
+<tt>+-- <font color='blue'>doc</font>/</tt><br />
+<tt>+-- <font color='blue'>lib</font>/</tt><br />
+<tt>+-- <font color='blue'>plugin.d</font>/</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>dumpusers.plugin</font></tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>homedirs.plugin</font></tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>maildirs.plugin</font></tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>mailman.plugin</font></tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>mysql.plugin</font></tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>packagelist.plugin</font></tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;\-- <font color='brown'>sysdirs.plugin</font></tt><br />
+<tt>+-- <font color='brown'>dumpusers</font></tt><br />
+<tt>+-- <font color='brown'>localexec</font></tt><br />
+<tt>+-- <font color='brown'>remexec</font></tt><br />
+<tt>+-- <font color='brown'>sysbackup</font></tt><br />
+<tt>\-- <font color='brown'>sysbackup.conf</font></tt><br />
+</small></small></td></tr></table>
+
+<p>This process is relatively simple. It consists of
+unpacking the SysBackup package into a convenient location (we'll use
+<tt>/opt/sysbackup/</tt> for this example, then setting-up two folder
+trees: one for configuration information and another for storage of
+backups. For this example we'll be using <tt>/etc/sysbackup/</tt> to
+store the configuration files and <tt>/home/sysbackup/</tt> to store
+the backups. Please refer to the sample directory listings on the
+right while reading the instructions below.
+
+<p>Once the setup is completed you will want to edit the
+    <tt>sysbackup.conf</tt> configuration file to reflect your
+    setup.
+
+<p>The last step in the process is to actually configure your backup
+    jobs. See the existing job configuration files in the
+    <tt>conf.d</tt> folder for detailed information about backup job
+    configuration. See also the <a href="JOB-CONF.html"
+    target="_blank" >JOB-CONF</a> file more details.
+
+<h3>Let's get started</h3>
+
+<p><table cellpadding='10px' cellspacing='10px' align=right><tr><td
+align='right'>
+
+<center><img
+align='center'
+width='250px'
+src="images/multi-function-tool.jpg"
+></center><br clear='all'>
+
+<a
+href="http://www.azertech.net/content/category/3/49/29/"
+target="_blank"
+>Docs & FAQ Pages<a><br />
+
+<a
+href="http://azer.ca/sysbackup-sfd"
+target="_blank"
+>Download SysBackup</a><br />
+
+<a
+href="http://azer.ca/sysbackup-sf"
+target="_blank"
+>SysBackup on SourceForge</a><br />
+
+<a
+href="http://azer.ca/sysbackup-gh"
+target="_blank"
+>SysBackup on GitHub</a><br />
+
+<a
+href="http://azer.ca/sysbackup-oh"
+target="_blank"
+>SysBackup on Ohloh</a><br />
+
+<a
+href="INSTALL.html"
+target="_blank"
+>Installation Overview</a><br />
+
+<a
+href="REQUIREMENTS.html"
+target="_blank"
+>System Requirements</a><br />
+
+<a
+href="BASICINSTALL.html"
+target="_blank"
+>Basic Installation</a><br />
+
+<a
+href="REMOTESTORAGE.html"
+target="_blank"
+>SSH Remote Storage</a><br />
+
+<a
+href="FIRSTRUN.html"
+target="_blank"
+>First Run</a><br />
+
+<a
+href="BE-PREPARED.html"
+target="_blank"
+>Be Prepared!</a><br />
+
+<br>
+
+<script type="text/javascript" src="http://www.ohloh.net/p/587730/widgets/project_factoids.js"></script>
+
+<br>
+
+<script type="text/javascript" src="http://www.ohloh.net/p/587730/widgets/project_languages.js"></script>
+
+<br>
+
+
+
+
+</td></tr></table>
+
+<ol>
+
+   <li>Start by unpacking the SysBackup tarball into an appropriate
+       folder. For this example we will use <tt>/opt/sysbackup/</tt>.
+
+   <li>Next you will want to setup your configuration folders and
+       files. For this example we will use
+       <tt>/etc/sysbackup/</tt>. 
+
+    <li>Create a subfolder to hold any ssh key files that you might need in the future:
+    <tt>/etc/sysbackup/keys</tt>.
+
+    <li>Create a subfolder to hold the job configuration files:
+    <tt>/etc/sysbackup/conf.d</tt>.
+    
+    <li>For now you can create a symlink from
+    <tt>/etc/sysbackup/plugin.d</tt> to the
+    <tt>/opt/sysbackup/plugin.d</tt> folder. This will ensure that
+    your installation will load all the distribution plugins. In the
+    future, when you update the distribution files in
+    <tt>/opt/sysbackup</tt> your installation will load the updated
+    plugins. Create this symlink in the usual way, ie: <tt>ln -s
+    /opt/sysbackup/plugin.d /etc/sysbackup/plugin.d</tt>.
+
+    <li>Create a folder for temporary storage. For this example we
+    will use <tt>/home/sysbackup/temp</tt>.
+
+  <p>The underlying partition
+    will require enough disk space to hold the largest tarball in your
+    backupset. (Start with lots of disk space if possible. You can be
+    more careful later.)
+
+    <li>Create a storage folder for your daily backup rotation. By
+    default the backup folders have the format <tt>&lt;Backup
+    Path&gt;/&lt;Host Name&gt;/Rotation</tt>. Therefore, for this
+    installation we will use
+    <tt>/home/sysbackup/test.azertech.net/daily</tt>.
+
+  <p>Again, there is
+    a disk space issue to consider when setting-up your backup
+    procedure but you can deal with that issue later.
+
+  <p>One point to
+    consider immediately: The files in the temp folder will be moved
+    to the daily folder if you choose to keep a local copy of your
+    backupset. Keeping the two folders on the same partition can
+    reduce significantly the time it takes to complete a backup.
+
+    <li>If you plan to keep weekly and monthly rotations you will need
+    to create folders for those also. For now we will assume
+    <tt>/home/sysbacup/test.azertech.net/weekly/</tt> and
+    <tt>/home/sysbackup/test.azertech.net/monthly</tt>.
+
+<p>Available disk
+    space is the main consideration yet again. Perhaps more important is the
+    ability to use hardlinks between identical files in the daily,
+    weekly and monthy rotations. You will use less disk space if you
+    can keep all the backups - daily, weekly and monthly - on the same
+    partition so that identical files can be hardlinked to save space.
+
+    <li>You can now copy the main configuration file and
+    start editing it: <tt>cp /opt/sysbackup/sysbackup.conf
+    /etc/sysbackup/</tt>. The file contains comments that will help
+    you to understand the various items that you need to configure.
+
+</ol>
+
+<p>This completes the software and folder setup. At this point the
+SysBackup script will run but it will not do much for you. To get the
+right results you need to configure the backup jobs that you want
+SysBackup to execute for you.
+
+<p>Look through the sample job configuration files in
+    <tt>/opt/sysbackup/conf.d/</tt> and symlink any that you
+    think you can use, ie: <tt>ln -s
+    /opt/sysbackup/conf.d/mailman.conf
+    /etc/sysbackup/conf.d/mailman.conf</tt>. If you find one that you
+    want to use but you see that you need to edit it you can copy it
+    instead: <tt>cp /opt/sysbackup/conf.d/homedirs.conf
+    /etc/sysbackup/conf.d/</tt> and edit it for your purposes.
+
+<p>See the
+    <a href="JOB-CONF.html" target="_blank" >JOB-CONF</a> file for
+    information on the structure and meaning of these files.
+
+
+
+<!--- HTML above copies to azertech.net --->
+
+<hr>
+<address><table align='right' cellpadding='0' cellspacing='0'><tr><td><a
+href="http://www.gnu.org/licenses/agpl.html"
+target="_blank"
+><img
+align='right'
+height='40px'
+src='gnu-license-files/agpl-v3-logo.svg'
+></a></td><td width='20px'>&nbsp;</td><td><a
+href="http://www.gnu.org/copyleft/fdl.html"
+target="_blank"
+><img
+align='right'
+height='40px'
+src='gnu-license-files/gfdl-logo.svg'
+></a></td></tr></table>Copyright &copy; 2011 by <a
+title="Click here to view Sam Azer's public About page"
+href="http://azertech.net/about">Sam Azer</a>&lt;<a
+title="Click here to email Sam Azer"
+href="mailto:sam@azertech.net?subject=SysBackup">sam@azertech.net</a>&gt;,
+All rights reserved.<br>
+</address>
+
+
+<!-- hhmts start -->Last modified: Thu Jan 12 16:20:09 EST 2012 <!-- hhmts end -->
+</body> </html>

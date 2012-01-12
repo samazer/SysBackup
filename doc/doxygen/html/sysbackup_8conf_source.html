@@ -489,84 +489,61 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00402"></a>00402 <span class="comment"> */</span>
 <a name="l00403"></a>00403 $this-&gt;set_rotations_monthly( 12 ); <span class="comment">// keep 12 months of monthly backups</span>
 <a name="l00404"></a>00404 
-<a name="l00405"></a>00405 <span class="comment"></span>
-<a name="l00406"></a>00406 <span class="comment">/**</span>
-<a name="l00407"></a>00407 <span class="comment"> *</span>
-<a name="l00408"></a>00408 <span class="comment"> * The total number of daily backups to keep in rotation on the remote server</span>
-<a name="l00409"></a>00409 <span class="comment"> *</span>
-<a name="l00410"></a>00410 <span class="comment"> */</span>
-<a name="l00411"></a><a class="code" href="sysbackup_8conf.html#ad016e8911b15b01aa2f0e985114cd198">00411</a> define( <span class="stringliteral">&quot;TOTAL_BACKREM_DAILY&quot;</span>,       7 );
-<a name="l00412"></a>00412 
-<a name="l00413"></a>00413 <span class="comment"></span>
-<a name="l00414"></a>00414 <span class="comment">/**</span>
-<a name="l00415"></a>00415 <span class="comment"> *</span>
-<a name="l00416"></a>00416 <span class="comment"> * The total number of weekly backups to keep in rotation on the remote server</span>
-<a name="l00417"></a>00417 <span class="comment"> *</span>
-<a name="l00418"></a>00418 <span class="comment"> */</span>
-<a name="l00419"></a><a class="code" href="sysbackup_8conf.html#afe423cb0d03bbbec24939b4c34a52a07">00419</a> define( <span class="stringliteral">&quot;TOTAL_BACKREM_WEEKLY&quot;</span>,     12 );
-<a name="l00420"></a>00420 
-<a name="l00421"></a>00421 <span class="comment"></span>
-<a name="l00422"></a>00422 <span class="comment">/**</span>
-<a name="l00423"></a>00423 <span class="comment"> *</span>
-<a name="l00424"></a>00424 <span class="comment"> * The total number of monthly backups to keep in rotation on the remote server</span>
-<a name="l00425"></a>00425 <span class="comment"> *</span>
-<a name="l00426"></a>00426 <span class="comment"> */</span>
-<a name="l00427"></a><a class="code" href="sysbackup_8conf.html#a79d064d950c7fa1352dba91e7bee2146">00427</a> define( <span class="stringliteral">&quot;TOTAL_BACKREM_MONTHLY&quot;</span>,    12 );
-<a name="l00428"></a>00428 
+<a name="l00405"></a>00405 
+<a name="l00406"></a>00406 
+<a name="l00407"></a>00407 
+<a name="l00408"></a>00408 $this-&gt;add_sshremote( <span class="stringliteral">&quot;nas1&quot;</span>, array(
+<a name="l00409"></a>00409    <span class="stringliteral">&quot;enabled&quot;</span>               =&gt; <span class="keyword">true</span>,
+<a name="l00410"></a>00410    <span class="stringliteral">&quot;remote_server&quot;</span>         =&gt; <span class="stringliteral">&quot;192.168.1.23&quot;</span>,
+<a name="l00411"></a>00411    <span class="stringliteral">&quot;remconf_file&quot;</span>          =&gt; <span class="stringliteral">&quot;/etc/sysbackup-nas.conf&quot;</span>,
+<a name="l00412"></a>00412    <span class="stringliteral">&quot;usehardlinks&quot;</span>          =&gt; <span class="keyword">true</span>,
+<a name="l00413"></a>00413    <span class="stringliteral">&quot;ssh_localexec_keypath&quot;</span> =&gt; <span class="stringliteral">&quot;/etc/sysbackup/keys/localexec.openssh&quot;</span>,
+<a name="l00414"></a>00414    <span class="stringliteral">&quot;ssh_localexec_userid&quot;</span>  =&gt; <span class="stringliteral">&quot;sysbackup&quot;</span>,
+<a name="l00415"></a>00415    <span class="stringliteral">&quot;scp_filecopy_keypath&quot;</span>  =&gt; <span class="stringliteral">&quot;/etc/sysbackup/keys/filecopy.openssh&quot;</span>,
+<a name="l00416"></a>00416    <span class="stringliteral">&quot;scp_filecopy_userid&quot;</span>   =&gt; <span class="stringliteral">&quot;sysbackup&quot;</span>,
+<a name="l00417"></a>00417 
+<a name="l00418"></a>00418    <span class="stringliteral">&quot;rotation_enabled&quot;</span>      =&gt; <span class="keyword">true</span>,
+<a name="l00419"></a>00419    <span class="stringliteral">&quot;rotation_dayofweek&quot;</span>    =&gt; 0,
+<a name="l00420"></a>00420    <span class="stringliteral">&quot;rotation_dayofmonth&quot;</span>   =&gt; 1,
+<a name="l00421"></a>00421    <span class="stringliteral">&quot;rotation_total_daily&quot;</span>  =&gt; 7, <span class="comment">// total number of backups to keep in the daily rotation on the remote server</span>
+<a name="l00422"></a>00422    <span class="stringliteral">&quot;rotation_total_weekly&quot;</span> =&gt; 4, <span class="comment">// total number of backups in the weekly rotation</span>
+<a name="l00423"></a>00423    <span class="stringliteral">&quot;rotation_total_monthly&quot;</span>=&gt; 4, <span class="comment">// total number of backups in the monthly rotation</span>
+<a name="l00424"></a>00424                                    ));
+<a name="l00425"></a>00425 
+<a name="l00426"></a>00426 
+<a name="l00427"></a>00427 
+<a name="l00428"></a>00428 $this-&gt;setup_compression( array( 
 <a name="l00429"></a>00429 
-<a name="l00430"></a>00430 
-<a name="l00431"></a>00431 $this-&gt;add_sshremote( <span class="stringliteral">&quot;nas1&quot;</span>, array(
-<a name="l00432"></a>00432    <span class="stringliteral">&quot;enabled&quot;</span>               =&gt; <span class="keyword">true</span>,
-<a name="l00433"></a>00433    <span class="stringliteral">&quot;remote_server&quot;</span>         =&gt; <span class="stringliteral">&quot;192.168.1.23&quot;</span>,
-<a name="l00434"></a>00434    <span class="stringliteral">&quot;remconf_file&quot;</span>          =&gt; <span class="stringliteral">&quot;/etc/sysbackup-nas.conf&quot;</span>,
-<a name="l00435"></a>00435    <span class="stringliteral">&quot;usehardlinks&quot;</span>          =&gt; <span class="keyword">true</span>,
-<a name="l00436"></a>00436    <span class="stringliteral">&quot;ssh_localexec_keypath&quot;</span> =&gt; <span class="stringliteral">&quot;/etc/sysbackup/keys/localexec.openssh&quot;</span>,
-<a name="l00437"></a>00437    <span class="stringliteral">&quot;ssh_localexec_userid&quot;</span>  =&gt; <span class="stringliteral">&quot;sysbackup&quot;</span>,
-<a name="l00438"></a>00438    <span class="stringliteral">&quot;scp_filecopy_keypath&quot;</span>  =&gt; <span class="stringliteral">&quot;/etc/sysbackup/keys/filecopy.openssh&quot;</span>,
-<a name="l00439"></a>00439    <span class="stringliteral">&quot;scp_filecopy_userid&quot;</span>   =&gt; <span class="stringliteral">&quot;sysbackup&quot;</span>,
+<a name="l00430"></a>00430    <span class="stringliteral">&quot;tar_name&quot;</span>     =&gt; <span class="stringliteral">&quot;tar&quot;</span>,
+<a name="l00431"></a>00431    <span class="stringliteral">&quot;tar_bin&quot;</span>      =&gt; <span class="stringliteral">&quot;/bin/tar&quot;</span>,
+<a name="l00432"></a>00432    <span class="stringliteral">&quot;tar_ext&quot;</span>      =&gt; <span class="stringliteral">&quot;.tgz&quot;</span>,
+<a name="l00433"></a>00433 
+<a name="l00434"></a>00434    <span class="stringliteral">&quot;tar_defopts&quot;</span>  =&gt; <span class="stringliteral">&quot;--preserve-order --preserve-permissions --atime-preserve&quot;</span>,
+<a name="l00435"></a>00435    <span class="stringliteral">&quot;tar_opts1&quot;</span>    =&gt; <span class="stringliteral">&quot;&quot;</span>,
+<a name="l00436"></a>00436    <span class="stringliteral">&quot;tar_opts2&quot;</span>    =&gt; <span class="stringliteral">&quot;&quot;</span>,
+<a name="l00437"></a>00437    <span class="stringliteral">&quot;tar_opts3&quot;</span>    =&gt; <span class="stringliteral">&quot;&quot;</span>,
+<a name="l00438"></a>00438 
+<a name="l00439"></a>00439    <span class="stringliteral">&quot;tar_cmd&quot;</span>      =&gt; <span class="stringliteral">&quot;%BINARY% %DEFOPTS% %OPTS1% --create %OPTS2% &#39;%SOURCE%&#39; %OPTS3%&quot;</span>,
 <a name="l00440"></a>00440 
-<a name="l00441"></a>00441    <span class="stringliteral">&quot;rotation_enabled&quot;</span>      =&gt; <span class="keyword">true</span>,
-<a name="l00442"></a>00442    <span class="stringliteral">&quot;rotation_dayofweek&quot;</span>    =&gt; 0,
-<a name="l00443"></a>00443    <span class="stringliteral">&quot;rotation_dayofmonth&quot;</span>   =&gt; 1,
-<a name="l00444"></a>00444    <span class="stringliteral">&quot;rotation_total_daily&quot;</span>  =&gt; <a class="code" href="sysbackup_8conf.html#ad016e8911b15b01aa2f0e985114cd198">TOTAL_BACKREM_DAILY</a>,
-<a name="l00445"></a>00445    <span class="stringliteral">&quot;rotation_total_weekly&quot;</span> =&gt; <a class="code" href="sysbackup_8conf.html#afe423cb0d03bbbec24939b4c34a52a07">TOTAL_BACKREM_WEEKLY</a>,
-<a name="l00446"></a>00446    <span class="stringliteral">&quot;rotation_total_monthly&quot;</span>=&gt; <a class="code" href="sysbackup_8conf.html#a79d064d950c7fa1352dba91e7bee2146">TOTAL_BACKREM_MONTHLY</a>,
-<a name="l00447"></a>00447                                    ));
-<a name="l00448"></a>00448 
-<a name="l00449"></a>00449 
+<a name="l00441"></a>00441    <span class="stringliteral">&quot;gzip_name&quot;</span>    =&gt; <span class="stringliteral">&quot;gzip&quot;</span>,
+<a name="l00442"></a>00442    <span class="stringliteral">&quot;gzip_bin&quot;</span>     =&gt; <span class="stringliteral">&quot;/bin/gzip&quot;</span>,
+<a name="l00443"></a>00443    <span class="stringliteral">&quot;gzip_ext&quot;</span>     =&gt; <span class="stringliteral">&quot;.gz&quot;</span>,
+<a name="l00444"></a>00444 
+<a name="l00445"></a>00445    <span class="stringliteral">&quot;gzip_defopts&quot;</span> =&gt; <span class="stringliteral">&quot;--no-name&quot;</span>,
+<a name="l00446"></a>00446    <span class="stringliteral">&quot;gzip_opts1&quot;</span>   =&gt; <span class="stringliteral">&quot;&quot;</span>,
+<a name="l00447"></a>00447 
+<a name="l00448"></a>00448    <span class="stringliteral">&quot;gzip_filter&quot;</span>  =&gt; <span class="stringliteral">&quot;%BINARY% %DEFOPTS% %OPTS1%             &gt;&#39;%TARGET%&#39;&quot;</span>,
+<a name="l00449"></a>00449    <span class="stringliteral">&quot;gzip_file&quot;</span>    =&gt; <span class="stringliteral">&quot;%BINARY% %DEFOPTS% %OPTS1% &lt;&#39;%SOURCE%&#39; &gt;&#39;%TARGET%&#39;&quot;</span>,
 <a name="l00450"></a>00450 
-<a name="l00451"></a>00451 $this-&gt;setup_compression( array( 
+<a name="l00451"></a>00451                                  ));
 <a name="l00452"></a>00452 
-<a name="l00453"></a>00453    <span class="stringliteral">&quot;tar_name&quot;</span>     =&gt; <span class="stringliteral">&quot;tar&quot;</span>,
-<a name="l00454"></a>00454    <span class="stringliteral">&quot;tar_bin&quot;</span>      =&gt; <span class="stringliteral">&quot;/bin/tar&quot;</span>,
-<a name="l00455"></a>00455    <span class="stringliteral">&quot;tar_ext&quot;</span>      =&gt; <span class="stringliteral">&quot;.tgz&quot;</span>,
-<a name="l00456"></a>00456 
-<a name="l00457"></a>00457    <span class="stringliteral">&quot;tar_defopts&quot;</span>  =&gt; <span class="stringliteral">&quot;--preserve-order --preserve-permissions --atime-preserve=system&quot;</span>,
-<a name="l00458"></a>00458    <span class="stringliteral">&quot;tar_opts1&quot;</span>    =&gt; <span class="stringliteral">&quot;&quot;</span>,
-<a name="l00459"></a>00459    <span class="stringliteral">&quot;tar_opts2&quot;</span>    =&gt; <span class="stringliteral">&quot;&quot;</span>,
-<a name="l00460"></a>00460    <span class="stringliteral">&quot;tar_opts3&quot;</span>    =&gt; <span class="stringliteral">&quot;&quot;</span>,
-<a name="l00461"></a>00461 
-<a name="l00462"></a>00462    <span class="stringliteral">&quot;tar_cmd&quot;</span>      =&gt; <span class="stringliteral">&quot;%BINARY% %DEFOPTS% %OPTS1% --create %OPTS2% &#39;%SOURCE%&#39; %OPTS3%&quot;</span>,
-<a name="l00463"></a>00463 
-<a name="l00464"></a>00464    <span class="stringliteral">&quot;gzip_name&quot;</span>    =&gt; <span class="stringliteral">&quot;gzip&quot;</span>,
-<a name="l00465"></a>00465    <span class="stringliteral">&quot;gzip_bin&quot;</span>     =&gt; <span class="stringliteral">&quot;/bin/gzip&quot;</span>,
-<a name="l00466"></a>00466    <span class="stringliteral">&quot;gzip_ext&quot;</span>     =&gt; <span class="stringliteral">&quot;.gz&quot;</span>,
-<a name="l00467"></a>00467 
-<a name="l00468"></a>00468    <span class="stringliteral">&quot;gzip_defopts&quot;</span> =&gt; <span class="stringliteral">&quot;--no-name&quot;</span>,
-<a name="l00469"></a>00469    <span class="stringliteral">&quot;gzip_opts1&quot;</span>   =&gt; <span class="stringliteral">&quot;&quot;</span>,
-<a name="l00470"></a>00470 
-<a name="l00471"></a>00471    <span class="stringliteral">&quot;gzip_filter&quot;</span>  =&gt; <span class="stringliteral">&quot;%BINARY% %DEFOPTS% %OPTS1%             &gt;&#39;%TARGET%&#39;&quot;</span>,
-<a name="l00472"></a>00472    <span class="stringliteral">&quot;gzip_file&quot;</span>    =&gt; <span class="stringliteral">&quot;%BINARY% %DEFOPTS% %OPTS1% &lt;&#39;%SOURCE%&#39; &gt;&#39;%TARGET%&#39;&quot;</span>,
-<a name="l00473"></a>00473 
-<a name="l00474"></a>00474                                  ));
-<a name="l00475"></a>00475 
-<a name="l00476"></a>00476 
+<a name="l00453"></a>00453 
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="sysbackup_8conf.html">sysbackup.conf</a>      </li>
-      <li class="footer">Generated on Tue Jan 10 2012 14:54:12 for SysBackup by&#160;
+      <li class="footer">Generated on Thu Jan 12 2012 16:42:07 for SysBackup by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

@@ -1,0 +1,405 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-*- mode: php; mode: mmm; coding: utf-8; -*->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
+<title>SysBackup SSH Remote Storage Setup</title>
+</head>
+
+<body style='width:700px;'>
+<h1>SysBackup SSH Remote Storage Setup</h1>
+
+<blockquote><img
+align="left"
+src="images/a+logo.png"
+style="padding-right:10px; padding-bottom:10px;"
+><small>Note: The most up-to-date copy of this file is available in the <a
+href="http://www.azertech.net/content/category/3/49/29/"
+target="_blank"
+>SysBackup Documentation and FAQ pages</a> on the <a
+href="http://www.azertech.net/"
+target="_blank"
+>AzerTech.net</a> web site.</small></blockquote>
+
+<br clear='all'>
+
+
+
+<!--- HTML below copies to azertech.net --->
+
+<h3>Overview</h3>
+
+<p><table align='right' bgcolor='lightgrey' border='0px'
+style="padding: 10px;"
+  ><tr><td><small><small>
+<tt><font size=+1 color='blue'>/etc/sysbackup/</font></tt><br />
+<tt>\-- sysbackup-nas.conf</tt><br />
+<br>
+<br>
+<br>
+<tt><font size=+1 color='blue'>/home/sysbackup/</font></tt><br />
+<tt>+-- <font color='blue'>.ssh</font>/</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>known_hosts</font></tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>authorized_keys2</font></tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>localexec.openssh</font></tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>localexec.openssh.pub</font></tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>filecopy.openssh</font></tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='brown'>filecopy.openssh.pub</font></tt><br />
+<tt>+-- <font color='blue'>test.azertech.net</font>/</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='blue'>daily</font>/</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='blue'>weekly</font>/</tt><br />
+<tt>|&nbsp;&nbsp;&nbsp;+-- <font color='blue'>monthly</font>/</tt><br />
+<tt>\-- <font color='blue'>temp</font>/</tt><br />
+</small></small></td></tr></table>
+
+<p>The procedure for sending your backupsets to a remote storage
+server via SSH is similar to the procedure for setting-up SysBackup on
+your server or workstation. It consists mainly of installing SysBackup
+on the remote storage server. You will need two password-less SSH
+keys: one for using SCP to copy files and the other for calls to the
+<tt>localexec</tt> utility. <tt>localexec</tt> is designed to execute
+standard PHP filesystem functions and return results that can easily
+be scanned.
+
+<p>Note that the remote storage of backupsets is managed in exactly
+the same way as local storage - hardlinks are used to save disk space
+whenever possible between identical files and backupsets are pruned to
+keep a limited number of daily, weekly and monthly backupsets in
+rotation.
+
+<br clear='all'>
+
+<h3>Let's get started</h3>
+
+<p><table cellpadding='10px' cellspacing='10px' align=right><tr><td
+align='right'>
+  
+<center><img
+align='center'
+width='250px'
+src="images/multi-function-tool.jpg"
+></center><br clear='all'>
+
+<a
+href="http://www.azertech.net/content/category/3/49/29/"
+target="_blank"
+>Docs & FAQ Pages<a><br />
+
+<a
+href="http://azer.ca/sysbackup-sfd"
+target="_blank"
+>Download SysBackup</a><br />
+
+<a
+href="http://azer.ca/sysbackup-sf"
+target="_blank"
+>SysBackup on SourceForge</a><br />
+
+<a
+href="http://azer.ca/sysbackup-gh"
+target="_blank"
+>SysBackup on GitHub</a><br />
+
+<a
+href="http://azer.ca/sysbackup-oh"
+target="_blank"
+>SysBackup on Ohloh</a><br />
+
+<a
+href="INSTALL.html"
+target="_blank"
+>Installation Overview</a><br />
+
+<a
+href="REQUIREMENTS.html"
+target="_blank"
+>System Requirements</a><br />
+
+<a
+href="BASICINSTALL.html"
+target="_blank"
+>Basic Installation</a><br />
+
+<a
+href="REMOTESTORAGE.html"
+target="_blank"
+>SSH Remote Storage</a><br />
+
+<a
+href="FIRSTRUN.html"
+target="_blank"
+>First Run</a><br />
+
+<a
+href="BE-PREPARED.html"
+target="_blank"
+>Be Prepared!</a><br />
+
+<br>
+
+<script type="text/javascript" src="http://www.ohloh.net/p/587730/widgets/project_factoids.js"></script>
+
+<br>
+
+<script type="text/javascript" src="http://www.ohloh.net/p/587730/widgets/project_languages.js"></script>
+
+<br>
+
+
+
+
+</td></tr></table>
+
+  <ol>
+    
+    <li>Start by unpacking the SysBackup package. Again, for this
+    example we will be keeping the SysBackup files in
+    <tt>/opt/sysbackup/</tt>.
+    
+    <li>Create a new user called sysbackup, ie: <tt>sudo useradd -m sysbackup</tt>.
+
+    <li>Create a temp storage folder such as
+    <tt>/home/sysbackup/temp</tt>. <p>Note that, in practice, the
+    temporary files folder is not used very much by the SysBackup
+    software and will probably never need much disk space - you should
+    not have to worry about where you choose to put it.
+
+    <li>Create a storage folder for your daily backups. For this
+    example we will use
+    <tt>/home/sysbackup/test.azertech.net/daily</tt>. <p>Keep in mind
+    that you will need enough disk space on the underlying partition
+    to store all the backupsets in your daily rotation for this
+    server.
+
+    <li>If you plan to keep weekly and monthly rotations you will need
+    to create folders for those also. For now we will assume
+    <tt>/home/sysbacup/test.azertech.net/weekly/</tt> and
+    <tt>/home/sysbackup/test.azertech.net/monthly</tt>. <p>Again, the
+    major consideration when setting-up the weekly and monthly
+    backupset rotations will be disk space. It's important to
+    carefully calculate the disk space you will need and make sure you
+    have enough space available for the number of backupsets that you
+    plan to keep in rotation.
+
+    <li>In <tt>~sysbackup/.ssh/</tt> create two ssh keys:
+
+    <blockquote><pre><small>
+
+$ <b>ssh-keygen -f localexec</b>
+Generating public/private rsa key pair.
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in localexec.
+Your public key has been saved in localexec.pub.
+The key fingerprint is:
+1b:12:c3:01:1a:93:2b:42:43:a1:6a:db:64:98:45:78 sysbackup at nas.azertech.net
+The key's randomart image is:
++--[ RSA 2048]----+
+|.o=o...          |
+|.+oE . .         |
+|o +o  +          |
+|+ =    o         |
+|o= o  . S        |
+|. =    . o       |
+| . .    .        |
+|                 |
+|                 |
++-----------------+
+
+$ <b>ssh-keygen -f filecopy</b>
+Generating public/private rsa key pair.
+Enter passphrase (empty for no passphrase): 
+Enter same passphrase again: 
+Your identification has been saved in filecopy.
+Your public key has been saved in filecopy.pub.
+The key fingerprint is:
+b4:61:ed:2d:68:cb:87:1b:5f:ce:a1:5f:18:a1:f2:ef sysbackup at dev.azertech.net
+The key's randomart image is:
++--[ RSA 2048]----+
+|                 |
+|         .       |
+|        + . .    |
+|       o = o .   |
+|        S + o    |
+|       o = . o   |
+|        = o + .  |
+|         = * o   |
+|        . ooE    |
++-----------------+
+
+</small></pre></blockquote>
+
+<p>Note that, for general convenience, there are no passphrases used in the above example. 
+
+<li>Next, add the public keys to the authorized_keys2 file:
+
+<blockquote><pre><small>
+$ <b>echo 'command="/opt/sysbackup-v3.01a/localexec $SSH_ORIGINAL_COMMAND" ' \
+               `cat localexec.pub` >> ~sysbackup/.ssh/authorized_keys2</b>
+$ <b>cat filecopy.pub >> ~sysbackup/.ssh/authorized_keys2</b>
+</small></pre></blockquote>
+
+<p>Note that the localexec key triggers the localexec utility. The
+SysBackup code will not work unless this is done. Check the
+documentation for OpenSSH for additional information about keys and
+local commands.  Google for help with setting-up chrooted
+OpenSSH user accounts.
+
+    <li>Copy the private keys to the <tt>/etc/sysbackup/keys/</tt> folder on <tt>test.azertech.net</tt>.
+
+    <li>Next you will need to configure SysBackup. The configuration
+    information is not actually used by the <tt>localexec</tt> utility
+    - it is loaded into the server which is executing the backup
+    (<tt>test.azertech.net</tt> in this example.) Edit the file
+    <tt>/etc/sysbackup-nas.conf</tt> on each new sshremote server. The
+    file should contain the following information:
+
+<blockquote><pre>
+path_temp=/home/sysbackup/temp/
+path_daily=/home/sysbackup/%HOST%/daily/
+path_weekly=/home/sysbackup/%HOST%/daily/
+path_monthly=/home/sysbackup/%HOST%/daily/
+</pre></blockquote>
+
+<p>Remember to change the <tt>/home/sysbackup</tt> path to reflect the
+path that you are really using on your sshremote server. The SysBackup
+utility will replace the <tt>%HOST%</tt> token with the host name of
+the server being backed-up.
+
+<li><tt>localexec</tt> has the ability to log all activity. To enable the log simply create it and <tt>localexec</tt> will see it and write to it each time it is called:
+
+<blockquote><pre>
+$ <b>sudo touch /var/log/remote-exec.log</b>
+$ <b>sudo chmod 666 /var/log/remote-exec.log</b>
+</pre></blockquote>
+
+<p>The <tt>chmod</tt> command above is only necessary if you plan on running <tt>localexec</tt> without root permissions.
+
+<p>At the time of this writing there is no configuration option for changing the location of the log file - you will have to edit the code for now.
+
+    <li>Verify the setup of the sshremote server by using the remexec
+    utility <tt>test.azertech.net</tt>:
+
+<blockquote><pre><small>
+$ <b>/opt/sysbackup-v3.01a/remexec /etc/sysbackup/keys/localexec \
+                                   sysbackup [at] nas.azertech.net \
+                                   readfile /etc/sysbackup-nas.conf</b>
+path_temp=/home/sysbackup/temp/
+path_daily=/home/sysbackup/%HOST%/daily/
+path_weekly=/home/sysbackup/%HOST%/daily/
+path_monthly=/home/sysbackup/%HOST%/daily/
+</small></pre></blockquote>
+
+    <li>Edit <tt>/etc/sysbackup/sysbackup.conf</tt> on
+    <tt>test.azertech.net</tt> to include the new sshremote server.
+
+
+<blockquote><pre><small>
+$this->add_remote( "nas", new backupvfs_sshremote_c( $this, array(
+   "enabled"               => true,
+   "remote_server"         => "nas.azertech.net",
+   "remconf_file"          => "/etc/sysbackup-nas.conf",
+   "usehardlinks"          => true,
+   "ssh_localexec_keypath" => "/etc/sysbackup/keys/localexec",
+   "ssh_localexec_userid"  => "sysbackup",
+   "scp_filecopy_keypath"  => "/etc/sysbackup/keys/filecopy",
+   "scp_filecopy_userid"   => "sysbackup",
+   "rotation_enabled"      => true,
+   "rotation_dayofweek"    => 0, // day of week (0=sunday, 1=monday...) for weekly rotation
+   "rotation_dayofmonth"   => 1, // day of month for monthly rotation
+   "rotation_total_daily"  => 7, // total number of daily backups to keep
+   "rotation_total_weekly" => 4, // total number of weekly backups to keep
+   "rotation_total_monthly"=> 4, // total number of monthly backups to keep
+                                                                  )));
+</small></pre></blockquote>
+
+<li>Finally, on the server that you want to backup (in this example
+it's <tt>test.azertech.net</tt>,) run SysBackup with the
+<tt>--dump-config</tt> option to see if you've done everything
+correctly. If everything is okay you will get a nice dump that will
+look similar to the following:
+
+<blockquote><pre><small>
+$ <b>sudo /opt/sysbackup/sysbackup --dump-config</b>
+
+System Backups 3.01(alpha)
+
+Basic Application Settings:
+  req app_title                "System Backups"
+  req app_version              "3.01(alpha)"
+  req app_conffile             "/etc/sysbackup/sysbackup.conf"
+  req app_confdir              "/etc/sysbackup/conf.d/"
+  req app_plugindir            "/etc/sysbackup/plugin.d/"
+  req admin_email              "sysbackup[at]azertech.net"
+
+...
+
+Local Fileio VFS Plugin
+  req hostname                 "test.azertech.net"                                       
+  req keeplocal                bool(true)                                              
+  req path_temp                "/home/sysbackup/temp/"                                
+  req path_backup              "/home/sysbackup/test.azertech.net/daily/"               
+  req path_rotation            "/home/sysbackup/test.azertech.net/"                     
+
+SSH Remote Fileio VFS Plugin
+  req hostname                 "nas.azertech.net"                                          
+  req keeplocal                bool(true)                                              
+  req path_temp                "/home/sysbackup/temp/"                                 
+  req path_backup              "/home/sysbackup/test.azertech.net/daily/"                
+  req path_rotation            "/home/sysbackup/test.azertech.net/"                      
+
+  req enabled                  bool(true)
+  req usehardlinks             bool(true)
+  req remconf_file             "/etc/sysbackup-nas.conf"
+  def ssh_binary               "/usr/bin/ssh"
+  int ssh_localexec_keypath    "/etc/sysbackup/keys/localexec"
+  opt ssh_localexec_options    string(blank)
+  int ssh_localexec_userid     "sysbackup"
+  def scp_binary               "/usr/bin/scp"
+  int scp_filecopy_keypath     "/etc/sysbackup/keys/filecopy"
+  opt scp_filecopy_options     "-B -p -q"
+  int scp_filecopy_userid      "sysbackup"
+  int remote_server            "nas.azertech.net"
+
+...
+
+</small></pre></blockquote>
+
+    <li>At this point your sshremote server is ready for action. 
+
+    </ol>
+
+<p>Repeat the above steps for each remote server you need. In most
+cases you will want to backup your VM to the physical host and,
+separately, to at least one remote host (on or offsite.)
+    
+
+
+<!--- HTML above copies to azertech.net --->
+
+<hr>
+<address><table align='right' cellpadding='0' cellspacing='0'><tr><td><a
+href="http://www.gnu.org/licenses/agpl.html"
+target="_blank"
+><img
+align='right'
+height='40px'
+src='gnu-license-files/agpl-v3-logo.svg'
+></a></td><td width='20px'>&nbsp;</td><td><a
+href="http://www.gnu.org/copyleft/fdl.html"
+target="_blank"
+><img
+align='right'
+height='40px'
+src='gnu-license-files/gfdl-logo.svg'
+></a></td></tr></table>Copyright &copy; 2011 by <a
+title="Click here to view Sam Azer's public About page"
+href="http://azertech.net/about">Sam Azer</a>&lt;<a
+title="Click here to email Sam Azer"
+href="mailto:sam@azertech.net?subject=SysBackup">sam@azertech.net</a>&gt;,
+All rights reserved.<br>
+</address>
+
+
+<!-- hhmts start -->Last modified: Thu Jan 12 16:22:58 EST 2012 <!-- hhmts end -->
+</body> </html>

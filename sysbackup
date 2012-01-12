@@ -324,6 +324,13 @@ define( "EXT_BACKUP_LAST", ".last" );
 define( "EXT_BACKUP_PREV", ".prev" );
 
 
+// use a default TZ if none specified in the INI file to avoid a
+// warning from PHP5. The timezone setting will be corrected when the
+// configuration file is loaded.
+if ( ini_get('date.timezone') == "" )
+   date_default_timezone_set('America/New_York');
+
+
 set_include_path( realpath(dirname($argv[0])) . ":" . get_include_path() );
 include "app/sysbackup.inc";
 

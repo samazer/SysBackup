@@ -1,0 +1,103 @@
+[Generated from doc/REQUIREMENTS.html]
+
+
+                      SysBackup Installation Requirements
+
+     [a+logo.png] Note: The most up-to-date copy of this file is
+     available in the [1]SysBackup Documentation and FAQ pages on the
+     [2]AzerTech.net web site.
+
+                          [multi-function-tool.jpg]
+
+                                                       [3]Docs & FAQ Pages
+                                                     [4]Download SysBackup
+                                               [5]SysBackup on SourceForge
+                                                    [6]SysBackup on GitHub
+                                                     [7]SysBackup on Ohloh
+                                                  [8]Installation Overview
+                                                    [9]System Requirements
+                                                    [10]Basic Installation
+                                                    [11]SSH Remote Storage
+                                                             [12]First Run
+                                                          [13]Be Prepared!
+
+Requirements
+
+   PHP was chosen for this project because it has become the most popular
+   scripting language in the world. Unfortunately, even though the LAMP
+   stack has become wildly popular on the internet, PHP is not installed
+   by default on many servers and workstations. Begin by checking your
+   system to verify that you have PHP v5.1 (or higher) installed:
+
+$ php -v
+PHP 5.1.6 (cli) (built: Nov 29 2010 16:47:46)
+Copyright (c) 1997-2006 The PHP Group
+Zend Engine v2.1.0, Copyright (c) 1998-2006 Zend Technologies
+
+   Modern Linux distros very often ship PHP in dozens of small packages.
+   At the very least you will want to make sure that you have installed
+   the command line version of PHP. The package names differ from
+   installation to installation:
+     * For Debian/Ubuntu-derived distros look for the php5-cli package.
+     * For Redhat-derived distros look for the php-cli and php-process
+       packages.
+
+   If you forget to install the php-process package on Fedora 15 you will
+   get a
+
+     PHP Fatal error: Call to undefined function posix_geteuid() in
+     lib/general-sysutils.inc
+
+   Again, sudo yum install php-process will solve this problem.
+
+   Notes:
+     * SysBackup is a simple PHP script. In principal you do not need root
+       permissions to run it. You can use SysBackup to easily produce
+       backups of files in your system account. It follows, however, that
+       you will need root access to backup other user accounts, the root
+       folder and other system-related bits and pieces of a full server or
+       workstation.
+     * Most of the various configuration files are themselves PHP scripts.
+       If you are not familiar with PHP please take the time to find out a
+       bit about PHP. The manual is available at
+       [14]http://www.php.net/manual/.
+
+   If you plan to use the SSH Remote feature to write backups to a remote
+   server you will need to make sure you have SSH properly installed on
+   your system. Most Linux distros install OpenSSH by default but not all.
+   If you are using a Debian derived distro (ie: Ubuntu) and find that the
+   OpenSSH server is not installed you can install the openssh-server
+   package. For detailed information follow the instructions here:
+   [15]https://help.ubuntu.com/community/SSH
+     __________________________________________________________________
+
+
+                             [16][agpl-v3-logo.svg]   [17][gfdl-logo.svg]
+
+
+    Copyright © 2011 by [18]Sam Azer<[19]sam@azertech.net>, All rights
+    reserved.
+
+   Last modified: Thu Jan 12 13:42:31 EST 2012
+
+References
+
+   1. http://www.azertech.net/content/category/3/49/29/
+   2. http://www.azertech.net/
+   3. http://www.azertech.net/content/category/3/49/29/
+   4. http://azer.ca/sysbackup-sfd
+   5. http://azer.ca/sysbackup-sf
+   6. http://azer.ca/sysbackup-gh
+   7. http://azer.ca/sysbackup-oh
+   8. http://www.azertech.net/content/view/69/29/
+   9. http://www.azertech.net/content/view/94/29/
+  10. http://www.azertech.net/content/view/92/29/
+  11. http://www.azertech.net/content/view/93/29/
+  12. http://www.azertech.net/content/view/95/29/
+  13. http://www.azertech.net/content/view/70/29/
+  14. http://www.php.net/manual/
+  15. file://localhost/projects/server-scripts/backupv3/doc/REQUIREMENTS.azertech
+  16. http://www.gnu.org/licenses/agpl.html
+  17. http://www.gnu.org/copyleft/fdl.html
+  18. http://azertech.net/about
+  19. mailto:sam@azertech.net?subject=SysBackup

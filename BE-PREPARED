@@ -3,9 +3,9 @@
 
                                   BE PREPARED!
 
-     Note: The most up-to-date copy of this file is available in the
-     [1]SysBackup Documentation and FAQ pages on the [2]AzerTech.net web
-     site.
+     [a+logo.png] Note: The most up-to-date copy of this file is
+     available in the [1]SysBackup Documentation and FAQ pages on the
+     [2]AzerTech.net web site.
 
                           [multi-function-tool.jpg]
 
@@ -14,8 +14,12 @@
                                                [5]SysBackup on SourceForge
                                                     [6]SysBackup on GitHub
                                                      [7]SysBackup on Ohloh
-                                              [8]Installation Instructions
-                                                           [9]Be Prepared!
+                                                  [8]Installation Overview
+                                                    [9]System Requirements
+                                                    [10]Basic Installation
+                                                    [11]SSH Remote Storage
+                                                             [12]First Run
+                                                          [13]Be Prepared!
                                                    Special Considerations:
                                                            Accounting data
                                                           A common example
@@ -84,7 +88,7 @@
 
      Think about it: Making backups is easy but what will they be worth on
              the day you are called for help? To succeed you will need to:
-                                                        [10][image014.png]
+                                                        [14][image014.png]
      * ensure that you have properly evaluated your future needs,
      * planned the day-to-day business process that will ensure you are
        prepared to respond to those future needs,
@@ -295,10 +299,10 @@ Day-to-day Issues
      __________________________________________________________________
 
 
-                             [11][agpl-v3-logo.svg]   [12][gfdl-logo.svg]
+                             [15][agpl-v3-logo.svg]   [16][gfdl-logo.svg]
 
 
-    Copyright © 2011 by [13]Sam Azer<[14]sam@azertech.net>, All rights
+    Copyright © 2011 by [17]Sam Azer<[18]sam@azertech.net>, All rights
     reserved.
 
    Last modified: Mon Dec 26 01:34:23 EST 2011
@@ -312,10 +316,14 @@ References
    5. http://azer.ca/sysbackup-sf
    6. http://azer.ca/sysbackup-gh
    7. http://azer.ca/sysbackup-oh
-   8. file://localhost/projects/server-scripts/backupv3/doc/INSTALL.html
-   9. file://localhost/projects/server-scripts/backupv3/doc/BE-PREPARED.html
-  10. file://localhost/projects/server-scripts/backupv3/doc/images/image014.png
-  11. http://www.gnu.org/licenses/agpl.html
-  12. http://www.gnu.org/copyleft/fdl.html
-  13. http://azertech.net/about
-  14. mailto:sam@azertech.net?subject=SysBackup
+   8. http://www.azertech.net/content/view/69/29/
+   9. http://www.azertech.net/content/view/94/29/
+  10. http://www.azertech.net/content/view/92/29/
+  11. http://www.azertech.net/content/view/93/29/
+  12. http://www.azertech.net/content/view/95/29/
+  13. http://www.azertech.net/content/view/70/29/
+  14. file://localhost/projects/server-scripts/backupv3/doc/images/stories/projects/sysbackup/image014.png
+  15. http://www.gnu.org/licenses/agpl.html
+  16. http://www.gnu.org/copyleft/fdl.html
+  17. http://azertech.net/about
+  18. mailto:sam@azertech.net?subject=SysBackup
