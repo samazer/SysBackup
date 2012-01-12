@@ -11,17 +11,21 @@ Searching for files in directory /projects/server-scripts/backupv3/doc/gnu-licen
 Searching for files in directory /projects/server-scripts/backupv3/doc/images
 Searching for files in directory /projects/server-scripts/backupv3/doc/images/wikimedia.org
 Searching for files to process...
-Searching for files in directory /projects/server-scripts/backupv3
 Searching for files in directory /projects/server-scripts/backupv3/app
-Searching for files in directory /projects/server-scripts/backupv3/conf.d
-Searching for files in directory /projects/server-scripts/backupv3/doc
-Searching for files in directory /projects/server-scripts/backupv3/doc/doxygen
-Searching for files in directory /projects/server-scripts/backupv3/doc/gnu-license-files
-Searching for files in directory /projects/server-scripts/backupv3/doc/images
-Searching for files in directory /projects/server-scripts/backupv3/doc/images/wikimedia.org
 Searching for files in directory /projects/server-scripts/backupv3/lib
+Searching for files in directory /projects/server-scripts/backupv3/conf.d
 Searching for files in directory /projects/server-scripts/backupv3/plugin.d
 Reading and parsing tag files
+Preprocessing /projects/server-scripts/backupv3/dumpusers...
+Parsing file /projects/server-scripts/backupv3/dumpusers...
+Preprocessing /projects/server-scripts/backupv3/localexec...
+Parsing file /projects/server-scripts/backupv3/localexec...
+Preprocessing /projects/server-scripts/backupv3/remexec...
+Parsing file /projects/server-scripts/backupv3/remexec...
+Preprocessing /projects/server-scripts/backupv3/sysbackup...
+Parsing file /projects/server-scripts/backupv3/sysbackup...
+Preprocessing /projects/server-scripts/backupv3/sysbackup.conf...
+Parsing file /projects/server-scripts/backupv3/sysbackup.conf...
 Reading /projects/server-scripts/backupv3/app/sysbackup-plugins.inc...
 Parsing file /projects/server-scripts/backupv3/app/sysbackup-plugins.inc...
 Reading /projects/server-scripts/backupv3/app/sysbackup-vfs-backupset.inc...
@@ -74,16 +78,42 @@ Reading /projects/server-scripts/lib/sys-remote-filesys.inc...
 Parsing file /projects/server-scripts/lib/sys-remote-filesys.inc...
 Reading /projects/server-scripts/lib/sys-tarballs.inc...
 Parsing file /projects/server-scripts/lib/sys-tarballs.inc...
-Preprocessing /projects/server-scripts/backupv3/dumpusers...
-Parsing file /projects/server-scripts/backupv3/dumpusers...
-Preprocessing /projects/server-scripts/backupv3/localexec...
-Parsing file /projects/server-scripts/backupv3/localexec...
-Preprocessing /projects/server-scripts/backupv3/remexec...
-Parsing file /projects/server-scripts/backupv3/remexec...
-Preprocessing /projects/server-scripts/backupv3/sysbackup...
-Parsing file /projects/server-scripts/backupv3/sysbackup...
-Preprocessing /projects/server-scripts/backupv3/sysbackup.conf...
-Parsing file /projects/server-scripts/backupv3/sysbackup.conf...
+Preprocessing /projects/server-scripts/backupv3/conf.d/dummy.conf...
+Parsing file /projects/server-scripts/backupv3/conf.d/dummy.conf...
+Preprocessing /projects/server-scripts/backupv3/conf.d/dumpusers.conf...
+Parsing file /projects/server-scripts/backupv3/conf.d/dumpusers.conf...
+Preprocessing /projects/server-scripts/backupv3/conf.d/homedirs.conf...
+Parsing file /projects/server-scripts/backupv3/conf.d/homedirs.conf...
+Preprocessing /projects/server-scripts/backupv3/conf.d/mailman.conf...
+Parsing file /projects/server-scripts/backupv3/conf.d/mailman.conf...
+Preprocessing /projects/server-scripts/backupv3/conf.d/mysql-localhost.conf...
+Parsing file /projects/server-scripts/backupv3/conf.d/mysql-localhost.conf...
+Preprocessing /projects/server-scripts/backupv3/conf.d/package-list.conf...
+Parsing file /projects/server-scripts/backupv3/conf.d/package-list.conf...
+Preprocessing /projects/server-scripts/backupv3/conf.d/squirrelmail.conf...
+Parsing file /projects/server-scripts/backupv3/conf.d/squirrelmail.conf...
+Preprocessing /projects/server-scripts/backupv3/conf.d/sysdirs.conf...
+Parsing file /projects/server-scripts/backupv3/conf.d/sysdirs.conf...
+Preprocessing /projects/server-scripts/backupv3/conf.d/sysmail.conf...
+Parsing file /projects/server-scripts/backupv3/conf.d/sysmail.conf...
+Preprocessing /projects/server-scripts/backupv3/conf.d/syswebfiles.conf...
+Parsing file /projects/server-scripts/backupv3/conf.d/syswebfiles.conf...
+Preprocessing /projects/server-scripts/backupv3/plugin.d/dummy.plugin...
+Parsing file /projects/server-scripts/backupv3/plugin.d/dummy.plugin...
+Preprocessing /projects/server-scripts/backupv3/plugin.d/dumpusers.plugin...
+Parsing file /projects/server-scripts/backupv3/plugin.d/dumpusers.plugin...
+Preprocessing /projects/server-scripts/backupv3/plugin.d/homedirs.plugin...
+Parsing file /projects/server-scripts/backupv3/plugin.d/homedirs.plugin...
+Preprocessing /projects/server-scripts/backupv3/plugin.d/maildirs.plugin...
+Parsing file /projects/server-scripts/backupv3/plugin.d/maildirs.plugin...
+Preprocessing /projects/server-scripts/backupv3/plugin.d/mailman.plugin...
+Parsing file /projects/server-scripts/backupv3/plugin.d/mailman.plugin...
+Preprocessing /projects/server-scripts/backupv3/plugin.d/mysql.plugin...
+Parsing file /projects/server-scripts/backupv3/plugin.d/mysql.plugin...
+Preprocessing /projects/server-scripts/backupv3/plugin.d/package-list.plugin...
+Parsing file /projects/server-scripts/backupv3/plugin.d/package-list.plugin...
+Preprocessing /projects/server-scripts/backupv3/plugin.d/sysdirs.plugin...
+Parsing file /projects/server-scripts/backupv3/plugin.d/sysdirs.plugin...
 Building group list...
 Building directory list...
 Building namespace list...
@@ -146,16 +176,30 @@ Generating code for file app/sysbackup-vfs-sshremote-rotation.inc...
 Generating code for file app/sysbackup-vfs-sshremote.inc...
 Generating code for file app/sysbackup-vfs.inc...
 Generating code for file app/sysbackup.inc...
+Generating code for file conf.d/dummy.conf...
+Generating code for file conf.d/dumpusers.conf...
+Generating code for file conf.d/homedirs.conf...
+Generating code for file conf.d/mailman.conf...
+Generating code for file conf.d/mysql-localhost.conf...
+Generating code for file conf.d/package-list.conf...
+Generating code for file conf.d/squirrelmail.conf...
+Generating code for file conf.d/sysdirs.conf...
+Generating code for file conf.d/sysmail.conf...
+Generating code for file conf.d/syswebfiles.conf...
 Generating code for file dumpusers...
 Generating code for file localexec...
+Generating code for file plugin.d/dummy.plugin...
+Generating code for file plugin.d/dumpusers.plugin...
+Generating code for file plugin.d/homedirs.plugin...
+Generating code for file plugin.d/maildirs.plugin...
+Generating code for file plugin.d/mailman.plugin...
+Generating code for file plugin.d/mysql.plugin...
+Generating code for file plugin.d/package-list.plugin...
+Generating code for file plugin.d/sysdirs.plugin...
 Generating code for file remexec...
 Generating code for file sysbackup...
 Generating code for file sysbackup.conf...
-Generating code for file lib/gene/projects/server-scripts/lib/general-utils.inc:139: warning: argument 'none' of command @param is not found in the argument list of capture_begin()
-/projects/server-scripts/lib/general-utils.inc:154: warning: argument 'none' of command @param is not found in the argument list of capture_end()
-/projects/server-scripts/lib/general-utils.inc:35: warning: The following parameters of single_chars($txt,$chr) are not documented:
-  parameter 'chr'
-ral-log.inc...
+Generating code for file lib/general-log.inc...
 Generating code for file lib/general-namedparameters.inc...
 Generating code for file lib/general-net.inc...
 Generating code for file lib/general-plugins.inc...
@@ -174,7 +218,11 @@ Generating file documentation...
 Generating docs for file app/sysbackup-plugins.inc...
 Generating docs for file app/sysbackup-vfs-backupset.inc...
 Generating docs for file app/sysbackup-vfs-base.inc...
-Generating docs for file app/sysbackup-vfs-hashlists.inc...
+Generating docs for file app/sysbac/projects/server-scripts/lib/general-utils.inc:139: warning: argument 'none' of command @param is not found in the argument list of capture_begin()
+/projects/server-scripts/lib/general-utils.inc:154: warning: argument 'none' of command @param is not found in the argument list of capture_end()
+/projects/server-scripts/lib/general-utils.inc:35: warning: The following parameters of single_chars($txt,$chr) are not documented:
+  parameter 'chr'
+kup-vfs-hashlists.inc...
 Generating docs for file app/sysbackup-vfs-io.inc...
 Generating docs for file app/sysbackup-vfs-localio-rotation.inc...
 Generating docs for file app/sysbackup-vfs-localio.inc...
@@ -182,8 +230,26 @@ Generating docs for file app/sysbackup-vfs-sshremote-rotation.inc...
 Generating docs for file app/sysbackup-vfs-sshremote.inc...
 Generating docs for file app/sysbackup-vfs.inc...
 Generating docs for file app/sysbackup.inc...
+Generating docs for file conf.d/dummy.conf...
+Generating docs for file conf.d/dumpusers.conf...
+Generating docs for file conf.d/homedirs.conf...
+Generating docs for file conf.d/mailman.conf...
+Generating docs for file conf.d/mysql-localhost.conf...
+Generating docs for file conf.d/package-list.conf...
+Generating docs for file conf.d/squirrelmail.conf...
+Generating docs for file conf.d/sysdirs.conf...
+Generating docs for file conf.d/sysmail.conf...
+Generating docs for file conf.d/syswebfiles.conf...
 Generating docs for file dumpusers...
 Generating docs for file localexec...
+Generating docs for file plugin.d/dummy.plugin...
+Generating docs for file plugin.d/dumpusers.plugin...
+Generating docs for file plugin.d/homedirs.plugin...
+Generating docs for file plugin.d/maildirs.plugin...
+Generating docs for file plugin.d/mailman.plugin...
+Generating docs for file plugin.d/mysql.plugin...
+Generating docs for file plugin.d/package-list.plugin...
+Generating docs for file plugin.d/sysdirs.plugin...
 Generating docs for file remexec...
 Generating docs for file sysbackup...
 Generating docs for file sysbackup.conf...
@@ -235,12 +301,13 @@ Generating caller graph for function single_spaces
 Generating docs for file lib/sys-account-info.inc...
 Generating docs for file lib/sys-account-migration.inc...
 Generating docs for file lib/sys-packagelist.inc...
-Generating call graph for function package_/projects/server-scripts/lib/sys-tarballs.inc:206: warning: end of comment block while expecting command </pre>
+Generating call graph for function package_list
+Generating caller graph for function package_list
+Generating /projects/server-scripts/lib/sys-tarballs.inc:206: warning: end of comment block while expecting command </pre>
 /projects/server-scripts/lib/sys-account-migration.inc:210: warning: argument 'id' of command @param is not found in the argument list of account_migration_c::migration_commands()
 /projects/server-scripts/backupv3/app/sysbackup-vfs-backupset.inc:227: warning: Unsupported xml/html tag <hostname> found
 /projects/server-scripts/backupv3/app/sysbackup-vfs-backupset.inc:229: warning: Unsupported xml/html tag <hostname> found
-list
-Generating docs for file lib/sys-remote-fileio.inc...
+docs for file lib/sys-remote-fileio.inc...
 Generating docs for file lib/sys-remote-filesys.inc...
 Generating docs for file lib/sys-tarballs.inc...
 Generating page documentation...
@@ -306,11 +373,11 @@ Generating call graph for function backupvfs_baseio_c::vfs_start
 Generating call graph for function backupvfs_baseio_c::vfs_tarball_folder
 Generating docs for compound backupvfs_fileio_c...
 Generating call graph for function backupvfs_fileio_c::_mark_backupset_incomplete
-Generating caller graph for function backupvfs_fileio_c::_mar/projects/server-scripts/backupv3/app/sysbackup-vfs-io.inc:300: warning: Unsupported xml/html tag <temp> found
+Generating caller graph for function backupvfs_fileio_c::_mark_backupset_inco/projects/server-scripts/backupv3/app/sysbackup-vfs-io.inc:300: warning: Unsupported xml/html tag <temp> found
 /projects/server-scripts/backupv3/app/sysbackup-vfs-io.inc:300: warning: Unsupported xml/html tag <daily> found
 /projects/server-scripts/backupv3/app/sysbackup-vfs-io.inc:300: warning: Unsupported xml/html tag <weekly> found
 /projects/server-scripts/backupv3/app/sysbackup-vfs-io.inc:301: warning: Unsupported xml/html tag <monthly> found
-k_backupset_incomplete
+mplete
 Generating call graph for function backupvfs_fileio_c::_unmark_backupset_incomplete
 Generating caller graph for function backupvfs_fileio_c::_unmark_backupset_incomplete
 Generating call graph for function backupvfs_fileio_c::_vfs_can_hardlink
@@ -437,9 +504,24 @@ Generating call graph for function backupvfs_sshremote_rotation_c::vfs_start
 Generating docs for compound backupvfs_stats_c...
 Generating call graph for function backupvfs_stats_c::__construct
 Generating caller graph for function backupvfs_stats_c::reset
+Generating docs for compound dummy_plugin_c...
+Generating call graph for function dummy_plugin_c::__construct
+Generating call graph for function dummy_plugin_c::job_exec
+Generating call graph for function dummy_plugin_c::plugin_help
+Generating docs for compound dumpusers_plugin_c...
+Generating call graph for function dumpusers_plugin_c::__construct
+Generating call graph for function dumpusers_plugin_c::job_exec
+Generating call graph for function dumpusers_plugin_c::plugin_help
 Generating docs for compound effective_user_c...
 Generating call graph for function effective_user_c::__construct
 Generating caller graph for function effective_user_c::refresh
+Generating docs for compound homedirs_plugin_c...
+Generating call graph for function homedirs_plugin_c::__construct
+Generating call graph for function homedirs_plugin_c::dir_backup
+Generating caller graph for function homedirs_plugin_c::dir_backup
+Generating call graph for function homedirs_plugin_c::job_exec
+Generating call graph for function homedirs_plugin_c::plugin_help
+Generating caller graph for function homedirs_plugin_c::required_options
 Generating docs for compound linux_distro_c...
 Generating docs for compound localexec_c...
 Generating call graph for function localexec_c::__construct
@@ -467,6 +549,14 @@ Generating caller graph for function logfile_c::open
 Generating caller graph for function logfile_c::seek
 Generating caller graph for function logfile_c::unlock
 Generating caller graph for function logfile_c::write
+Generating docs for compound maildirs_plugin_c...
+Generating call graph for function maildirs_plugin_c::__construct
+Generating docs for compound mailman_plugin_c...
+Generating call graph for function mailman_plugin_c::__construct
+Generating call graph for function mailman_plugin_c::job_exec
+Generating call graph for function mailman_plugin_c::list_lists
+Generating caller graph for function mailman_plugin_c::list_lists
+Generating call graph for function mailman_plugin_c::plugin_help
 Generating docs for compound mktarball_util_c...
 Generating call graph for function mktarball_util_c::_build_compress_file_cmd
 Generating caller graph for function mktarball_util_c::_build_compress_file_cmd
@@ -485,11 +575,16 @@ Generating caller graph for function mktarball_util_c::_eval_tarballer_exitcode
 Generating call graph for function mktarball_util_c::command
 Generating call graph for function mktarball_util_c::file
 Generating call graph for function mktarball_util_c::folder
-Generating caller gr/projects/server-scripts/lib/general-namedparameters.inc:134: warning: Unsupported xml/html tag <req> found
-/projects/server-scripts/lib/general-namedparameters.inc:134: warning: Unsupported xml/html tag <default> found
-/projects/server-scripts/lib/general-namedparameters.inc:134: warning: Unsupported xml/html tag <help> found
-aph for function mktarball_util_c::last_error
+Generating caller graph for function mktarball_util_c::last_error
 Generating call graph for function mktarball_util_c::str
+Generating docs for compound mysql_plugin_c...
+Generating call graph for function mysql_plugin_c::__construct
+Generating call graph for function mysql_plugin_c::get_database_list
+Generating caller graph for function mysql_plugin_c::get_database_list
+Generating call graph for function mysql_plugin_c::job_exec
+Generating call graph for function mysql_plugin_c::job_prepare
+Generating call graph for function mysql_plugin_c::plugin_help
+Generating caller graph for function mysql_plugin_c::required_options
 Generating docs for compound named_parameters_base_c...
 Generating call graph for function named_parameters_base_c::__dump_properties
 Generating caller graph for function named_parameters_base_c::__dump_properties
@@ -517,7 +612,10 @@ Generating caller graph for function named_parameters_base_c::_get_params
 Generating caller graph for function named_parameters_base_c::_get_required
 Generating caller graph for function named_parameters_base_c::_get_showhelp_flag
 Generating call graph for function named_parameters_base_c::_get_valid
-Generating caller graph for function named_parameters_base_c::_get_valid
+Generating caller graph for function named_parameters_base_c/projects/server-scripts/lib/general-namedparameters.inc:134: warning: Unsupported xml/html tag <req> found
+/projects/server-scripts/lib/general-namedparameters.inc:134: warning: Unsupported xml/html tag <default> found
+/projects/server-scripts/lib/general-namedparameters.inc:134: warning: Unsupported xml/html tag <help> found
+::_get_valid
 Generating caller graph for function named_parameters_base_c::_get_varname
 Generating call graph for function named_parameters_base_c::_register
 Generating caller graph for function named_parameters_base_c::_register
@@ -549,6 +647,9 @@ Generating call graph for function named_parameters_c::get_varname
 Generating call graph for function named_parameters_c::register
 Generating call graph for function named_parameters_c::set_optional
 Generating call graph for function named_parameters_c::set_properties
+Generating docs for compound packagelist_plugin_c...
+Generating call graph for function packagelist_plugin_c::__construct
+Generating call graph for function packagelist_plugin_c::job_exec
 Generating docs for compound plugin_appreference_c...
 Generating caller graph for function plugin_appreference_c::_message_prefix_text
 Generating call graph for function plugin_appreference_c::fatal
@@ -656,20 +757,51 @@ Generating caller graph for function stopwatch_c::lap_stop
 Generating call graph for function stopwatch_c::lap_time
 Generating docs for compound sysbackup_plugin_base_c...
 Generating call graph for function sysbackup_plugin_base_c::__construct
+Generating caller graph for function sysbackup_plugin_base_c::compressed_file_ext
+Generating caller graph for function sysbackup_plugin_base_c::compressor_ext
 Generating caller graph for function sysbackup_plugin_base_c::encode_filename
 Generating call graph for function sysbackup_plugin_base_c::rel_ref
 Generating caller graph for function sysbackup_plugin_base_c::rel_ref
+Generating caller graph for function sysbackup_plugin_base_c::tarball_ext
+Generating caller graph for function sysbackup_plugin_base_c::verbose
 Generating call graph for function sysbackup_plugin_base_c::vfs_addfile
 Generating call graph for function sysbackup_plugin_base_c::vfs_compress_command
+Generating caller graph for function sysbackup_plugin_base_c::vfs_compress_command
 Generating call graph for function sysbackup_plugin_base_c::vfs_compress_file
+Generating caller graph for function sysbackup_plugin_base_c::vfs_compress_file
 Generating call graph for function sysbackup_plugin_base_c::vfs_compress_string
+Generating caller graph for function sysbackup_plugin_base_c::vfs_compress_string
 Generating call graph for function sysbackup_plugin_base_c::vfs_tarball_folder
+Generating caller graph for function sysbackup_plugin_base_c::vfs_tarball_folder
+Generating docs for compound sysdirs_plugin_c...
+Generating call graph for function sysdirs_plugin_c::__construct
+Generating call graph for function sysdirs_plugin_c::job_exec
+Generating call graph for function sysdirs_plugin_c::plugin_help
+Generating caller graph for function sysdirs_plugin_c::required_options
+Generating call graph for function sysdirs_plugin_c::sysdir_backup
+Generating caller graph for function sysdirs_plugin_c::sysdir_backup
 Generating docs for compound system_backup_app_c...
 Generating call graph for function system_backup_app_c::after_loading_jobs
 Generating call graph for function system_backup_app_c::app_after_events
 Generating call graph for function system_backup_app_c::app_after_init
 Generating call graph for function system_backup_app_c::app_after_job
-Generating c/projects/server-scripts/lib/sys-tarballs.inc:29: warning: Found unknown command `\subpackage'
+Generating call graph for function system_backup_app_c::app_before_events
+Generating call graph for function system_backup_app_c::app_before_init
+Generating call graph for function system_backup_app_c::app_before_job
+Generating call graph for function system_backup_app_c::app_title
+Generating call graph for function system_backup_app_c::approve_job
+Generating docs for compound teelog_c...
+Generating call graph for function teelog_c::fatal
+Generating caller graph for function teelog_c::fatal
+Generating caller graph for function teelog_c::not_quiet
+Generating call graph for function teelog_c::notquiet
+Generating caller graph for function teelog_c::notquiet
+Generating caller graph for function teelog_c::quiet
+Generating caller graph for function teelog_c::tee
+Generating caller graph for function teelog_c::teefn
+Generating call graph for function teelog_c::warning
+Generating caller graph for function teelog_c::warning
+Gener/projects/server-scripts/lib/sys-tarballs.inc:29: warning: Found unknown command `\subpackage'
 /projects/server-scripts/lib/sys-tarballs.inc:30: warning: Found unknown command `\license'
 /projects/server-scripts/lib/sys-tarballs.inc:31: warning: Found unknown command `\copyright'
 /projects/server-scripts/lib/sys-tarballs.inc:32: warning: unable to resolve link to `http://www.azertech.net/' for \link command
@@ -782,118 +914,218 @@ Generating c/projects/server-scripts/lib/sys-tarballs.inc:29: warning: Found unk
 /projects/server-scripts/backupv3/sysbackup.conf:74: warning: Illegal command link as part of a \link
 /projects/server-scripts/backupv3/sysbackup.conf:75: warning: Unexpected end of comment while inside link command
 
-/projects/server-scripts/backupv3/sysbackup:25: warning: Found unknown command `\subpackage'
-/projects/server-scripts/backupv3/sysbackup:26: warning: Found unknown command `\license'
-/projects/server-scripts/backupv3/sysbackup:27: warning: Found unknown command `\copyright'
-/projects/server-scripts/backupv3/sysbackup:28: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/backupv3/sysbackup:29: warning: Illegal command link as part of a \link
-/projects/server-scripts/backupv3/sysbackup:36: warning: Illegal command subpackage as part of a \link
-/projects/server-scripts/backupv3/sysbackup:52: warning: Unexpected xml/html command p found
-/projects/server-scripts/backupv3/sysbackup:72: warning: Found unknown command `\subpackage'
-/projects/server-scripts/backupv3/sysbackup:73: warning: Found unknown command `\license'
-/projects/server-scripts/backupv3/sysbackup:74: warning: Found unknown command `\copyright'
-/projects/server-scripts/backupv3/sysbackup:75: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/backupv3/sysbackup:76: warning: Illegal command link as part of a \link
-/projects/server-scripts/backupv3/sysbackup:80: warning: Unexpected xml/html command p found
-/projects/server-scripts/backupv3/sysbackup:100: warning: Found unknown command `\subpackage'
-/projects/server-scripts/backupv3/sysbackup:101: warning: Found unknown command `\license'
-/projects/server-scripts/backupv3/sysbackup:102: warning: Found unknown command `\copyright'
-/projects/server-scripts/backupv3/sysbackup:103: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/backupv3/sysbackup:104: warning: Illegal command link as part of a \link
-/projects/server-scripts/backupv3/sysbackup:114: warning: Unexpected xml/html command p found
-/projects/server-scripts/backupv3/sysbackup:134: warning: Found unknown command `\subpackage'
-/projects/server-scripts/backupv3/sysbackup:135: warning: Found unknown command `\license'
-/projects/server-scripts/backupv3/sysbackup:136: warning: Found unknown command `\copyright'
-/projects/server-scripts/backupv3/sysbackup:137: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/backupv3/sysbackup:138: warning: Illegal command link as part of a \link
-/projects/server-scripts/backupv3/sysbackup:148: warning: Unexpected xml/html command p found
-/projects/server-scripts/backupv3/sysbackup:168: warning: Found unknown command `\subpackage'
-/projects/server-scripts/backupv3/sysbackup:169: warning: Found unknown command `\license'
-/projects/server-scripts/backupv3/sysbackup:170: warning: Found unknown command `\copyright'
-/projects/server-scripts/backupv3/sysbackup:171: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/backupv3/sysbackup:172: warning: Illegal command link as part of a \link
-/projects/server-scripts/backupv3/sysbackup:189: warning: Unexpected xml/html command p found
-/projects/server-scripts/backupv3/sysbackup:377: warning: Found unknown command `\subpackage'
-/projects/server-scripts/backupv3/sysbackup:378: warning: Found unknown command `\license'
-/projects/server-scripts/backupv3/sysbackup:379: warning: Found unknown command `\copyright'
-/projects/server-scripts/backupv3/sysbackup:380: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/backupv3/sysbackup:381: warning: Illegal command link as part of a \link
-/projects/server-scripts/backupv3/sysbackup:383: warning: Illegal command subpackage as part of a \link
-/projects/server-scripts/backupv3/sysbackup:387: warning: Unexpected xml/html command p found
-/projects/server-scripts/backupv3/sysbackup:408: warning: Found unknown command `\subpackage'
-/projects/server-scripts/backupv3/sysbackup:409: warning: Found unknown command `\license'
-/projects/server-scripts/backupv3/sysbackup:410: warning: Found unknown command `\copyright'
-/projects/server-scripts/backupv3/sysbackup:411: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/backupv3/sysbackup:412: warning: Illegal command link as part of a \link
-/projects/server-scripts/backupv3/sysbackup:443: warning: Unexpected xml/html command p found
-/projects/server-scripts/backupv3/sysbackup:464: warning: Found unknown command `\subpackage'
-/projects/server-scripts/backupv3/sysbackup:465: warning: Found unknown command `\license'
-/projects/server-scripts/backupv3/sysbackup:466: warning: Found unknown command `\copyright'
-/projects/server-scripts/backupv3/sysbackup:467: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/backupv3/sysbackup:468: warning: Illegal command link as part of a \link
-/projects/server-scripts/backupv3/sysbackup:472: warning: Unexpected xml/html command p found
-/projects/server-scripts/backupv3/sysbackup:492: warning: Found unknown command `\subpackage'
-/projects/server-scripts/backupv3/sysbackup:493: warning: Found unknown command `\license'
-/projects/server-scripts/backupv3/sysbackup:494: warning: Found unknown command `\copyright'
-/projects/server-scripts/backupv3/sysbackup:495: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/backupv3/sysbackup:496: warning: Illegal command link as part of a \link
-/projects/server-scripts/backupv3/sysbackup:500: warning: Unexpected xml/html command p found
-/projects/server-scripts/backupv3/sysbackup:606: warning: Found unknown command `\subpackage'
-/projects/server-scripts/backupv3/sysbackup:607: warning: Found unknown command `\license'
-/projects/server-scripts/backupv3/sysbackup:608: warning: Found unknown command `\copyright'
-/projects/server-scripts/backupv3/sysbackup:609: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/backupv3/sysbackup:610: warning: Illegal command link as part of a \link
-/projects/server-scripts/backupv3/sysbackup:614: warning: Unexpected xml/html command p found
-/projects/server-scripts/backupv3/sysbackup:676: warning: Found unknown command `\subpackage'
-/projects/server-scripts/backupv3/sysbackup:677: warning: Found unknown command `\license'
-/projects/server-scripts/backupv3/sysbackup:678: warning: Found unknown command `\copyright'
-/projects/server-scripts/backupv3/sysbackup:679: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/backupv3/sysbackup:680: warning: Illegal command link as part of a \link
-/projects/server-scripts/backupv3/sysbackup:684: warning: Unexpected xml/html command p found
-/projects/server-scripts/backupv3/sysbackup:758: warning: Found unknown command `\subpackage'
-/projects/server-scripts/backupv3/sysbackup:759: warning: Found unknown command `\license'
-/projects/server-scripts/backupv3/sysbackup:760: warning: Found unknown command `\copyright'
-/projects/server-scripts/backupv3/sysbackup:761: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/backupv3/sysbackup:762: warning: Illegal command link as part of a \link
-/projects/server-scripts/backupv3/sysbackup:766: warning: Unexpected xml/html command p found
-/projects/server-scripts/backupv3/sysbackup:796: warning: Found unknown command `\subpackage'
-/projects/server-scripts/backupv3/sysbackup:797: warning: Found unknown command `\license'
-/projects/server-scripts/backupv3/sysbackup:798: warning: Found unknown command `\copyright'
-/projects/server-scripts/backupv3/sysbackup:799: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/backupv3/sysbackup:800: warning: Illegal command link as part of a \link
-/projects/server-scripts/backupv3/sysbackup:802: warning: Illegal command subpackage as part of a \link
-/projects/server-scripts/backupv3/sysbackup:806: warning: Unexpected xml/html command p found
-/projects/server-scripts/backupv3/sysbackup:832: warning: Found unknown command `\subpackage'
-/projects/server-scripts/backupv3/sysbackup:833: warning: Found unknown command `\license'
-/projects/server-scripts/backupv3/sysbackup:834: warning: Found unknown command `\copyright'
-/projects/server-scripts/backupv3/sysbackup:835: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/backupv3/sysbackup:836: warning: Illegal command link as part of a \link
-/projects/server-scripts/backupv3/sysbackup:840: warning: Unexpected xml/html command p found
-/projects/server-scripts/backupv3/sysbackup:1096: warning: Found unknown command `\subpackage'
-/projects/server-scripts/backupv3/sysbackup:1097: warning: Found unknown command `\license'
-/projects/server-scripts/backupv3/sysbackup:1098: warning: Found unknown command `\copyright'
-/projects/server-scripts/backupv3/sysbackup:1099: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/backupv3/sysbackup:1100: warning: Illegal command link as part of a \link
-/projects/server-scripts/backupv3/sysbackup:1101: warning: Unexpected end of comment while inside link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:78: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:79: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:80: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:81: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:82: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:86: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:116: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:117: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:118: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:119: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:120: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:122: warning: Illegal command subpackage as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:126: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:152: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:153: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:154: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:155: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:156: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:160: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:416: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:417: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:418: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:419: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:420: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:424: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:444: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:445: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:446: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:447: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:448: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:455: warning: Illegal command subpackage as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:471: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:491: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:492: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:493: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:494: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:495: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:499: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:519: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:520: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:521: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:522: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:523: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:533: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:553: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:554: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:555: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:556: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:557: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:567: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:587: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:588: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:589: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:590: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:591: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:608: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:796: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:797: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:798: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:799: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:800: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:802: warning: Illegal command subpackage as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:806: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:827: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:828: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:829: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:830: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:831: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:862: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:883: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:884: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:885: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:886: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:887: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:891: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:911: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:912: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:913: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:914: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:915: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:919: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1025: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1026: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1027: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1028: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1029: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1033: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1095: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1096: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1097: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1098: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1099: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1118: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1138: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1139: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1140: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1141: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1142: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1152: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1172: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1173: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1174: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1175: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1176: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1183: warning: Unexpected token TK_LISTITEM
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1184: warning: Unexpected token TK_LISTITEM
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1197: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1217: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1218: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1219: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1220: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1221: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1230: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1250: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1251: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1252: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1253: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1254: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1261: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1281: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1282: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1283: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1284: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1285: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1294: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1314: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1315: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1316: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1317: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1318: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1327: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1347: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1348: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1349: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1350: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1351: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1358: warning: Unexpected token TK_LISTITEM
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1359: warning: Unexpected token TK_LISTITEM
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1361: warning: Unexpected token TK_LISTITEM
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1364: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1384: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1385: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1386: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1387: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1388: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1395: warning: Unexpected token TK_LISTITEM
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1397: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1417: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1418: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1419: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1420: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1421: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1428: warning: Unexpected token TK_LISTITEM
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1430: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1450: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1451: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1452: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1453: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1454: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1458: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1478: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1479: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1480: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1481: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1482: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1484: warning: Illegal command subpackage as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1493: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1513: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1514: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1515: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1516: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1517: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1526: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1546: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1547: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1548: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1549: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1550: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1558: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1589: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1590: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1591: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1592: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1593: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1597: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1617: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1618: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1619: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1620: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1621: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1625: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1645: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1646: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1647: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1648: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1649: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1653: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1673: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1674: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1675: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1676: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1677: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1681: warning: Unexpected xml/html command p found
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1701: warning: Found unknown command `\subpackage'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1702: warning: Found unknown command `\license'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1703: warning: Found unknown command `\copyright'
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1704: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1705: warning: Illegal command link as part of a \link
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1706: warning: Unexpected end of comment while inside link command
 
-/projects/server-scripts/backupv3/sysbackup:1101: warning: unexpected end of comment while inside <ul> block
-all graph for function system_backup_app_c::app_before_events
-Generating call graph for function system_backup_app_c::app_before_init
-Generating call graph for function system_backup_app_c::app_before_job
-Generating call graph for function system_backup_app_c::app_title
-Generating call graph for function system_backup_app_c::approve_job
-Generating docs for compound teelog_c...
-Generating call graph for function teelog_c::fatal
-Generating caller graph for function teelog_c::fatal
-Generating caller graph for function teelog_c::not_quiet
-Generating call graph for function teelog_c::notquiet
-Generating caller graph for function teelog_c::notquiet
-Generating caller graph for function teelog_c::quiet
-Generating caller graph for function teelog_c::tee
-Generating caller graph for function teelog_c::teefn
-Generating call graph for function teelog_c::warning
-Generating caller graph for function teelog_c::warning
-Generating graphical class hierarchy...
+/projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1706: warning: unexpected end of comment while inside <ul> block
+ating graphical class hierarchy...
 Generating namespace index...
 Generating docs for namespace aforms
 Generating docs for namespace server
@@ -902,539 +1134,611 @@ Generating namespace member index...
 Generating graph info page...
 Generating directory documentation...
 Generating dependency graph for directory app/
+Generating dependency graph for directory conf.d/
 Generating dependency graph for directory lib/
+Generating dependency graph for directory plugin.d/
 Generating file index...
 Generating directory index...
 Generating example index...
 Generating file member index...
 finalizing index lists...
 Generating dot graphs using 0 parallel threads...
-Running dot for graph 1/490
-Running dot for graph 2/490
-Running dot for graph 3/490
-Running dot for graph 4/490
-Running dot for graph 5/490
-Running dot for graph 6/490
-Running dot for graph 7/490
-Running dot for graph 8/490
-Running dot for graph 9/490
-Running dot for graph 10/490
-Running dot for graph 11/490
-Running dot for graph 12/490
-Running dot for graph 13/490
-Running dot for graph 14/490
-Running dot for graph 15/490
-Running dot for graph 16/490
-Running dot for graph 17/490
-Running dot for graph 18/490
-Running dot for graph 19/490
-Running dot for graph 20/490
-Running dot for graph 21/490
-Running dot for graph 22/490
-Running dot for graph 23/490
-Running dot for graph 24/490
-Running dot for graph 25/490
-Running dot for graph 26/490
-Running dot for graph 27/490
-Running dot for graph 28/490
-Running dot for graph 29/490
-Running dot for graph 30/490
-Running dot for graph 31/490
-Running dot for graph 32/490
-Running dot for graph 33/490
-Running dot for graph 34/490
-Running dot for graph 35/490
-Running dot for graph 36/490
-Running dot for graph 37/490
-Running dot for graph 38/490
-Running dot for graph 39/490
-Running dot for graph 40/490
-Running dot for graph 41/490
-Running dot for graph 42/490
-Running dot for graph 43/490
-Running dot for graph 44/490
-Running dot for graph 45/490
-Running dot for graph 46/490
-Running dot for graph 47/490
-Running dot for graph 48/490
-Running dot for graph 49/490
-Running dot for graph 50/490
-Running dot for graph 51/490
-Running dot for graph 52/490
-Running dot for graph 53/490
-Running dot for graph 54/490
-Running dot for graph 55/490
-Running dot for graph 56/490
-Running dot for graph 57/490
-Running dot for graph 58/490
-Running dot for graph 59/490
-Running dot for graph 60/490
-Running dot for graph 61/490
-Running dot for graph 62/490
-Running dot for graph 63/490
-Running dot for graph 64/490
-Running dot for graph 65/490
-Running dot for graph 66/490
-Running dot for graph 67/490
-Running dot for graph 68/490
-Running dot for graph 69/490
-Running dot for graph 70/490
-Running dot for graph 71/490
-Running dot for graph 72/490
-Running dot for graph 73/490
-Running dot for graph 74/490
-Running dot for graph 75/490
-Running dot for graph 76/490
-Running dot for graph 77/490
-Running dot for graph 78/490
-Running dot for graph 79/490
-Running dot for graph 80/490
-Running dot for graph 81/490
-Running dot for graph 82/490
-Running dot for graph 83/490
-Running dot for graph 84/490
-Running dot for graph 85/490
-Running dot for graph 86/490
-Running dot for graph 87/490
-Running dot for graph 88/490
-Running dot for graph 89/490
-Running dot for graph 90/490
-Running dot for graph 91/490
-Running dot for graph 92/490
-Running dot for graph 93/490
-Running dot for graph 94/490
-Running dot for graph 95/490
-Running dot for graph 96/490
-Running dot for graph 97/490
-Running dot for graph 98/490
-Running dot for graph 99/490
-Running dot for graph 100/490
-Running dot for graph 101/490
-Running dot for graph 102/490
-Running dot for graph 103/490
-Running dot for graph 104/490
-Running dot for graph 105/490
-Running dot for graph 106/490
-Running dot for graph 107/490
-Running dot for graph 108/490
-Running dot for graph 109/490
-Running dot for graph 110/490
-Running dot for graph 111/490
-Running dot for graph 112/490
-Running dot for graph 113/490
-Running dot for graph 114/490
-Running dot for graph 115/490
-Running dot for graph 116/490
-Running dot for graph 117/490
-Running dot for graph 118/490
-Running dot for graph 119/490
-Running dot for graph 120/490
-Running dot for graph 121/490
-Running dot for graph 122/490
-Running dot for graph 123/490
-Running dot for graph 124/490
-Running dot for graph 125/490
-Running dot for graph 126/490
-Running dot for graph 127/490
-Running dot for graph 128/490
-Running dot for graph 129/490
-Running dot for graph 130/490
-Running dot for graph 131/490
-Running dot for graph 132/490
-Running dot for graph 133/490
-Running dot for graph 134/490
-Running dot for graph 135/490
-Running dot for graph 136/490
-Running dot for graph 137/490
-Running dot for graph 138/490
-Running dot for graph 139/490
-Running dot for graph 140/490
-Running dot for graph 141/490
-Running dot for graph 142/490
-Running dot for graph 143/490
-Running dot for graph 144/490
-Running dot for graph 145/490
-Running dot for graph 146/490
-Running dot for graph 147/490
-Running dot for graph 148/490
-Running dot for graph 149/490
-Running dot for graph 150/490
-Running dot for graph 151/490
-Running dot for graph 152/490
-Running dot for graph 153/490
-Running dot for graph 154/490
-Running dot for graph 155/490
-Running dot for graph 156/490
-Running dot for graph 157/490
-Running dot for graph 158/490
-Running dot for graph 159/490
-Running dot for graph 160/490
-Running dot for graph 161/490
-Running dot for graph 162/490
-Running dot for graph 163/490
-Running dot for graph 164/490
-Running dot for graph 165/490
-Running dot for graph 166/490
-Running dot for graph 167/490
-Running dot for graph 168/490
-Running dot for graph 169/490
-Running dot for graph 170/490
-Running dot for graph 171/490
-Running dot for graph 172/490
-Running dot for graph 173/490
-Running dot for graph 174/490
-Running dot for graph 175/490
-Running dot for graph 176/490
-Running dot for graph 177/490
-Running dot for graph 178/490
-Running dot for graph 179/490
-Running dot for graph 180/490
-Running dot for graph 181/490
-Running dot for graph 182/490
-Running dot for graph 183/490
-Running dot for graph 184/490
-Running dot for graph 185/490
-Running dot for graph 186/490
-Running dot for graph 187/490
-Running dot for graph 188/490
-Running dot for graph 189/490
-Running dot for graph 190/490
-Running dot for graph 191/490
-Running dot for graph 192/490
-Running dot for graph 193/490
-Running dot for graph 194/490
-Running dot for graph 195/490
-Running dot for graph 196/490
-Running dot for graph 197/490
-Running dot for graph 198/490
-Running dot for graph 199/490
-Running dot for graph 200/490
-Running dot for graph 201/490
-Running dot for graph 202/490
-Running dot for graph 203/490
-Running dot for graph 204/490
-Running dot for graph 205/490
-Running dot for graph 206/490
-Running dot for graph 207/490
-Running dot for graph 208/490
-Running dot for graph 209/490
-Running dot for graph 210/490
-Running dot for graph 211/490
-Running dot for graph 212/490
-Running dot for graph 213/490
-Running dot for graph 214/490
-Running dot for graph 215/490
-Running dot for graph 216/490
-Running dot for graph 217/490
-Running dot for graph 218/490
-Running dot for graph 219/490
-Running dot for graph 220/490
-Running dot for graph 221/490
-Running dot for graph 222/490
-Running dot for graph 223/490
-Running dot for graph 224/490
-Running dot for graph 225/490
-Running dot for graph 226/490
-Running dot for graph 227/490
-Running dot for graph 228/490
-Running dot for graph 229/490
-Running dot for graph 230/490
-Running dot for graph 231/490
-Running dot for graph 232/490
-Running dot for graph 233/490
-Running dot for graph 234/490
-Running dot for graph 235/490
-Running dot for graph 236/490
-Running dot for graph 237/490
-Running dot for graph 238/490
-Running dot for graph 239/490
-Running dot for graph 240/490
-Running dot for graph 241/490
-Running dot for graph 242/490
-Running dot for graph 243/490
-Running dot for graph 244/490
-Running dot for graph 245/490
-Running dot for graph 246/490
-Running dot for graph 247/490
-Running dot for graph 248/490
-Running dot for graph 249/490
-Running dot for graph 250/490
-Running dot for graph 251/490
-Running dot for graph 252/490
-Running dot for graph 253/490
-Running dot for graph 254/490
-Running dot for graph 255/490
-Running dot for graph 256/490
-Running dot for graph 257/490
-Running dot for graph 258/490
-Running dot for graph 259/490
-Running dot for graph 260/490
-Running dot for graph 261/490
-Running dot for graph 262/490
-Running dot for graph 263/490
-Running dot for graph 264/490
-Running dot for graph 265/490
-Running dot for graph 266/490
-Running dot for graph 267/490
-Running dot for graph 268/490
-Running dot for graph 269/490
-Running dot for graph 270/490
-Running dot for graph 271/490
-Running dot for graph 272/490
-Running dot for graph 273/490
-Running dot for graph 274/490
-Running dot for graph 275/490
-Running dot for graph 276/490
-Running dot for graph 277/490
-Running dot for graph 278/490
-Running dot for graph 279/490
-Running dot for graph 280/490
-Running dot for graph 281/490
-Running dot for graph 282/490
-Running dot for graph 283/490
-Running dot for graph 284/490
-Running dot for graph 285/490
-Running dot for graph 286/490
-Running dot for graph 287/490
-Running dot for graph 288/490
-Running dot for graph 289/490
-Running dot for graph 290/490
-Running dot for graph 291/490
-Running dot for graph 292/490
-Running dot for graph 293/490
-Running dot for graph 294/490
-Running dot for graph 295/490
-Running dot for graph 296/490
-Running dot for graph 297/490
-Running dot for graph 298/490
-Running dot for graph 299/490
-Running dot for graph 300/490
-Running dot for graph 301/490
-Running dot for graph 302/490
-Running dot for graph 303/490
-Running dot for graph 304/490
-Running dot for graph 305/490
-Running dot for graph 306/490
-Running dot for graph 307/490
-Running dot for graph 308/490
-Running dot for graph 309/490
-Running dot for graph 310/490
-Running dot for graph 311/490
-Running dot for graph 312/490
-Running dot for graph 313/490
-Running dot for graph 314/490
-Running dot for graph 315/490
-Running dot for graph 316/490
-Running dot for graph 317/490
-Running dot for graph 318/490
-Running dot for graph 319/490
-Running dot for graph 320/490
-Running dot for graph 321/490
-Running dot for graph 322/490
-Running dot for graph 323/490
-Running dot for graph 324/490
-Running dot for graph 325/490
-Running dot for graph 326/490
-Running dot for graph 327/490
-Running dot for graph 328/490
-Running dot for graph 329/490
-Running dot for graph 330/490
-Running dot for graph 331/490
-Running dot for graph 332/490
-Running dot for graph 333/490
-Running dot for graph 334/490
-Running dot for graph 335/490
-Running dot for graph 336/490
-Running dot for graph 337/490
-Running dot for graph 338/490
-Running dot for graph 339/490
-Running dot for graph 340/490
-Running dot for graph 341/490
-Running dot for graph 342/490
-Running dot for graph 343/490
-Running dot for graph 344/490
-Running dot for graph 345/490
-Running dot for graph 346/490
-Running dot for graph 347/490
-Running dot for graph 348/490
-Running dot for graph 349/490
-Running dot for graph 350/490
-Running dot for graph 351/490
-Running dot for graph 352/490
-Running dot for graph 353/490
-Running dot for graph 354/490
-Running dot for graph 355/490
-Running dot for graph 356/490
-Running dot for graph 357/490
-Running dot for graph 358/490
-Running dot for graph 359/490
-Running dot for graph 360/490
-Running dot for graph 361/490
-Running dot for graph 362/490
-Running dot for graph 363/490
-Running dot for graph 364/490
-Running dot for graph 365/490
-Running dot for graph 366/490
-Running dot for graph 367/490
-Running dot for graph 368/490
-Running dot for graph 369/490
-Running dot for graph 370/490
-Running dot for graph 371/490
-Running dot for graph 372/490
-Running dot for graph 373/490
-Running dot for graph 374/490
-Running dot for graph 375/490
-Running dot for graph 376/490
-Running dot for graph 377/490
-Running dot for graph 378/490
-Running dot for graph 379/490
-Running dot for graph 380/490
-Running dot for graph 381/490
-Running dot for graph 382/490
-Running dot for graph 383/490
-Running dot for graph 384/490
-Running dot for graph 385/490
-Running dot for graph 386/490
-Running dot for graph 387/490
-Running dot for graph 388/490
-Running dot for graph 389/490
-Running dot for graph 390/490
-Running dot for graph 391/490
-Running dot for graph 392/490
-Running dot for graph 393/490
-Running dot for graph 394/490
-Running dot for graph 395/490
-Running dot for graph 396/490
-Running dot for graph 397/490
-Running dot for graph 398/490
-Running dot for graph 399/490
-Running dot for graph 400/490
-Running dot for graph 401/490
-Running dot for graph 402/490
-Running dot for graph 403/490
-Running dot for graph 404/490
-Running dot for graph 405/490
-Running dot for graph 406/490
-Running dot for graph 407/490
-Running dot for graph 408/490
-Running dot for graph 409/490
-Running dot for graph 410/490
-Running dot for graph 411/490
-Running dot for graph 412/490
-Running dot for graph 413/490
-Running dot for graph 414/490
-Running dot for graph 415/490
-Running dot for graph 416/490
-Running dot for graph 417/490
-Running dot for graph 418/490
-Running dot for graph 419/490
-Running dot for graph 420/490
-Running dot for graph 421/490
-Running dot for graph 422/490
-Running dot for graph 423/490
-Running dot for graph 424/490
-Running dot for graph 425/490
-Running dot for graph 426/490
-Running dot for graph 427/490
-Running dot for graph 428/490
-Running dot for graph 429/490
-Running dot for graph 430/490
-Running dot for graph 431/490
-Running dot for graph 432/490
-Running dot for graph 433/490
-Running dot for graph 434/490
-Running dot for graph 435/490
-Running dot for graph 436/490
-Running dot for graph 437/490
-Running dot for graph 438/490
-Running dot for graph 439/490
-Running dot for graph 440/490
-Running dot for graph 441/490
-Running dot for graph 442/490
-Running dot for graph 443/490
-Running dot for graph 444/490
-Running dot for graph 445/490
-Running dot for graph 446/490
-Running dot for graph 447/490
-Running dot for graph 448/490
-Running dot for graph 449/490
-Running dot for graph 450/490
-Running dot for graph 451/490
-Running dot for graph 452/490
-Running dot for graph 453/490
-Running dot for graph 454/490
-Running dot for graph 455/490
-Running dot for graph 456/490
-Running dot for graph 457/490
-Running dot for graph 458/490
-Running dot for graph 459/490
-Running dot for graph 460/490
-Running dot for graph 461/490
-Running dot for graph 462/490
-Running dot for graph 463/490
-Running dot for graph 464/490
-Running dot for graph 465/490
-Running dot for graph 466/490
-Running dot for graph 467/490
-Running dot for graph 468/490
-Running dot for graph 469/490
-Running dot for graph 470/490
-Running dot for graph 471/490
-Running dot for graph 472/490
-Running dot for graph 473/490
-Running dot for graph 474/490
-Running dot for graph 475/490
-Running dot for graph 476/490
-Running dot for graph 477/490
-Running dot for graph 478/490
-Running dot for graph 479/490
-Running dot for graph 480/490
-Running dot for graph 481/490
-Running dot for graph 482/490
-Running dot for graph 483/490
-Running dot for graph 484/490
-Running dot for graph 485/490
-Running dot for graph 486/490
-Running dot for graph 487/490
-Running dot for graph 488/490
-Running dot for graph 489/490
-Running dot for graph 490/490
-Patching output file 1/38
-Patching output file 2/38
-Patching output file 3/38
-Patching output file 4/38
-Patching output file 5/38
-Patching output file 6/38
-Patching output file 7/38
-Patching output file 8/38
-Patching output file 9/38
-Patching output file 10/38
-Patching output file 11/38
-Patching output file 12/38
-Patching output file 13/38
-Patching output file 14/38
-Patching output file 15/38
-Patching output file 16/38
-Patching output file 17/38
-Patching output file 18/38
-Patching output file 19/38
-Patching output file 20/38
-Patching output file 21/38
-Patching output file 22/38
-Patching output file 23/38
-Patching output file 24/38
-Patching output file 25/38
-Patching output file 26/38
-Patching output file 27/38
-Patching output file 28/38
-Patching output file 29/38
-Patching output file 30/38
-Patching output file 31/38
-Patching output file 32/38
-Patching output file 33/38
-Patching output file 34/38
-Patching output file 35/38
-Patching output file 36/38
-Patching output file 37/38
-Patching output file 38/38
+Running dot for graph 1/550
+Running dot for graph 2/550
+Running dot for graph 3/550
+Running dot for graph 4/550
+Running dot for graph 5/550
+Running dot for graph 6/550
+Running dot for graph 7/550
+Running dot for graph 8/550
+Running dot for graph 9/550
+Running dot for graph 10/550
+Running dot for graph 11/550
+Running dot for graph 12/550
+Running dot for graph 13/550
+Running dot for graph 14/550
+Running dot for graph 15/550
+Running dot for graph 16/550
+Running dot for graph 17/550
+Running dot for graph 18/550
+Running dot for graph 19/550
+Running dot for graph 20/550
+Running dot for graph 21/550
+Running dot for graph 22/550
+Running dot for graph 23/550
+Running dot for graph 24/550
+Running dot for graph 25/550
+Running dot for graph 26/550
+Running dot for graph 27/550
+Running dot for graph 28/550
+Running dot for graph 29/550
+Running dot for graph 30/550
+Running dot for graph 31/550
+Running dot for graph 32/550
+Running dot for graph 33/550
+Running dot for graph 34/550
+Running dot for graph 35/550
+Running dot for graph 36/550
+Running dot for graph 37/550
+Running dot for graph 38/550
+Running dot for graph 39/550
+Running dot for graph 40/550
+Running dot for graph 41/550
+Running dot for graph 42/550
+Running dot for graph 43/550
+Running dot for graph 44/550
+Running dot for graph 45/550
+Running dot for graph 46/550
+Running dot for graph 47/550
+Running dot for graph 48/550
+Running dot for graph 49/550
+Running dot for graph 50/550
+Running dot for graph 51/550
+Running dot for graph 52/550
+Running dot for graph 53/550
+Running dot for graph 54/550
+Running dot for graph 55/550
+Running dot for graph 56/550
+Running dot for graph 57/550
+Running dot for graph 58/550
+Running dot for graph 59/550
+Running dot for graph 60/550
+Running dot for graph 61/550
+Running dot for graph 62/550
+Running dot for graph 63/550
+Running dot for graph 64/550
+Running dot for graph 65/550
+Running dot for graph 66/550
+Running dot for graph 67/550
+Running dot for graph 68/550
+Running dot for graph 69/550
+Running dot for graph 70/550
+Running dot for graph 71/550
+Running dot for graph 72/550
+Running dot for graph 73/550
+Running dot for graph 74/550
+Running dot for graph 75/550
+Running dot for graph 76/550
+Running dot for graph 77/550
+Running dot for graph 78/550
+Running dot for graph 79/550
+Running dot for graph 80/550
+Running dot for graph 81/550
+Running dot for graph 82/550
+Running dot for graph 83/550
+Running dot for graph 84/550
+Running dot for graph 85/550
+Running dot for graph 86/550
+Running dot for graph 87/550
+Running dot for graph 88/550
+Running dot for graph 89/550
+Running dot for graph 90/550
+Running dot for graph 91/550
+Running dot for graph 92/550
+Running dot for graph 93/550
+Running dot for graph 94/550
+Running dot for graph 95/550
+Running dot for graph 96/550
+Running dot for graph 97/550
+Running dot for graph 98/550
+Running dot for graph 99/550
+Running dot for graph 100/550
+Running dot for graph 101/550
+Running dot for graph 102/550
+Running dot for graph 103/550
+Running dot for graph 104/550
+Running dot for graph 105/550
+Running dot for graph 106/550
+Running dot for graph 107/550
+Running dot for graph 108/550
+Running dot for graph 109/550
+Running dot for graph 110/550
+Running dot for graph 111/550
+Running dot for graph 112/550
+Running dot for graph 113/550
+Running dot for graph 114/550
+Running dot for graph 115/550
+Running dot for graph 116/550
+Running dot for graph 117/550
+Running dot for graph 118/550
+Running dot for graph 119/550
+Running dot for graph 120/550
+Running dot for graph 121/550
+Running dot for graph 122/550
+Running dot for graph 123/550
+Running dot for graph 124/550
+Running dot for graph 125/550
+Running dot for graph 126/550
+Running dot for graph 127/550
+Running dot for graph 128/550
+Running dot for graph 129/550
+Running dot for graph 130/550
+Running dot for graph 131/550
+Running dot for graph 132/550
+Running dot for graph 133/550
+Running dot for graph 134/550
+Running dot for graph 135/550
+Running dot for graph 136/550
+Running dot for graph 137/550
+Running dot for graph 138/550
+Running dot for graph 139/550
+Running dot for graph 140/550
+Running dot for graph 141/550
+Running dot for graph 142/550
+Running dot for graph 143/550
+Running dot for graph 144/550
+Running dot for graph 145/550
+Running dot for graph 146/550
+Running dot for graph 147/550
+Running dot for graph 148/550
+Running dot for graph 149/550
+Running dot for graph 150/550
+Running dot for graph 151/550
+Running dot for graph 152/550
+Running dot for graph 153/550
+Running dot for graph 154/550
+Running dot for graph 155/550
+Running dot for graph 156/550
+Running dot for graph 157/550
+Running dot for graph 158/550
+Running dot for graph 159/550
+Running dot for graph 160/550
+Running dot for graph 161/550
+Running dot for graph 162/550
+Running dot for graph 163/550
+Running dot for graph 164/550
+Running dot for graph 165/550
+Running dot for graph 166/550
+Running dot for graph 167/550
+Running dot for graph 168/550
+Running dot for graph 169/550
+Running dot for graph 170/550
+Running dot for graph 171/550
+Running dot for graph 172/550
+Running dot for graph 173/550
+Running dot for graph 174/550
+Running dot for graph 175/550
+Running dot for graph 176/550
+Running dot for graph 177/550
+Running dot for graph 178/550
+Running dot for graph 179/550
+Running dot for graph 180/550
+Running dot for graph 181/550
+Running dot for graph 182/550
+Running dot for graph 183/550
+Running dot for graph 184/550
+Running dot for graph 185/550
+Running dot for graph 186/550
+Running dot for graph 187/550
+Running dot for graph 188/550
+Running dot for graph 189/550
+Running dot for graph 190/550
+Running dot for graph 191/550
+Running dot for graph 192/550
+Running dot for graph 193/550
+Running dot for graph 194/550
+Running dot for graph 195/550
+Running dot for graph 196/550
+Running dot for graph 197/550
+Running dot for graph 198/550
+Running dot for graph 199/550
+Running dot for graph 200/550
+Running dot for graph 201/550
+Running dot for graph 202/550
+Running dot for graph 203/550
+Running dot for graph 204/550
+Running dot for graph 205/550
+Running dot for graph 206/550
+Running dot for graph 207/550
+Running dot for graph 208/550
+Running dot for graph 209/550
+Running dot for graph 210/550
+Running dot for graph 211/550
+Running dot for graph 212/550
+Running dot for graph 213/550
+Running dot for graph 214/550
+Running dot for graph 215/550
+Running dot for graph 216/550
+Running dot for graph 217/550
+Running dot for graph 218/550
+Running dot for graph 219/550
+Running dot for graph 220/550
+Running dot for graph 221/550
+Running dot for graph 222/550
+Running dot for graph 223/550
+Running dot for graph 224/550
+Running dot for graph 225/550
+Running dot for graph 226/550
+Running dot for graph 227/550
+Running dot for graph 228/550
+Running dot for graph 229/550
+Running dot for graph 230/550
+Running dot for graph 231/550
+Running dot for graph 232/550
+Running dot for graph 233/550
+Running dot for graph 234/550
+Running dot for graph 235/550
+Running dot for graph 236/550
+Running dot for graph 237/550
+Running dot for graph 238/550
+Running dot for graph 239/550
+Running dot for graph 240/550
+Running dot for graph 241/550
+Running dot for graph 242/550
+Running dot for graph 243/550
+Running dot for graph 244/550
+Running dot for graph 245/550
+Running dot for graph 246/550
+Running dot for graph 247/550
+Running dot for graph 248/550
+Running dot for graph 249/550
+Running dot for graph 250/550
+Running dot for graph 251/550
+Running dot for graph 252/550
+Running dot for graph 253/550
+Running dot for graph 254/550
+Running dot for graph 255/550
+Running dot for graph 256/550
+Running dot for graph 257/550
+Running dot for graph 258/550
+Running dot for graph 259/550
+Running dot for graph 260/550
+Running dot for graph 261/550
+Running dot for graph 262/550
+Running dot for graph 263/550
+Running dot for graph 264/550
+Running dot for graph 265/550
+Running dot for graph 266/550
+Running dot for graph 267/550
+Running dot for graph 268/550
+Running dot for graph 269/550
+Running dot for graph 270/550
+Running dot for graph 271/550
+Running dot for graph 272/550
+Running dot for graph 273/550
+Running dot for graph 274/550
+Running dot for graph 275/550
+Running dot for graph 276/550
+Running dot for graph 277/550
+Running dot for graph 278/550
+Running dot for graph 279/550
+Running dot for graph 280/550
+Running dot for graph 281/550
+Running dot for graph 282/550
+Running dot for graph 283/550
+Running dot for graph 284/550
+Running dot for graph 285/550
+Running dot for graph 286/550
+Running dot for graph 287/550
+Running dot for graph 288/550
+Running dot for graph 289/550
+Running dot for graph 290/550
+Running dot for graph 291/550
+Running dot for graph 292/550
+Running dot for graph 293/550
+Running dot for graph 294/550
+Running dot for graph 295/550
+Running dot for graph 296/550
+Running dot for graph 297/550
+Running dot for graph 298/550
+Running dot for graph 299/550
+Running dot for graph 300/550
+Running dot for graph 301/550
+Running dot for graph 302/550
+Running dot for graph 303/550
+Running dot for graph 304/550
+Running dot for graph 305/550
+Running dot for graph 306/550
+Running dot for graph 307/550
+Running dot for graph 308/550
+Running dot for graph 309/550
+Running dot for graph 310/550
+Running dot for graph 311/550
+Running dot for graph 312/550
+Running dot for graph 313/550
+Running dot for graph 314/550
+Running dot for graph 315/550
+Running dot for graph 316/550
+Running dot for graph 317/550
+Running dot for graph 318/550
+Running dot for graph 319/550
+Running dot for graph 320/550
+Running dot for graph 321/550
+Running dot for graph 322/550
+Running dot for graph 323/550
+Running dot for graph 324/550
+Running dot for graph 325/550
+Running dot for graph 326/550
+Running dot for graph 327/550
+Running dot for graph 328/550
+Running dot for graph 329/550
+Running dot for graph 330/550
+Running dot for graph 331/550
+Running dot for graph 332/550
+Running dot for graph 333/550
+Running dot for graph 334/550
+Running dot for graph 335/550
+Running dot for graph 336/550
+Running dot for graph 337/550
+Running dot for graph 338/550
+Running dot for graph 339/550
+Running dot for graph 340/550
+Running dot for graph 341/550
+Running dot for graph 342/550
+Running dot for graph 343/550
+Running dot for graph 344/550
+Running dot for graph 345/550
+Running dot for graph 346/550
+Running dot for graph 347/550
+Running dot for graph 348/550
+Running dot for graph 349/550
+Running dot for graph 350/550
+Running dot for graph 351/550
+Running dot for graph 352/550
+Running dot for graph 353/550
+Running dot for graph 354/550
+Running dot for graph 355/550
+Running dot for graph 356/550
+Running dot for graph 357/550
+Running dot for graph 358/550
+Running dot for graph 359/550
+Running dot for graph 360/550
+Running dot for graph 361/550
+Running dot for graph 362/550
+Running dot for graph 363/550
+Running dot for graph 364/550
+Running dot for graph 365/550
+Running dot for graph 366/550
+Running dot for graph 367/550
+Running dot for graph 368/550
+Running dot for graph 369/550
+Running dot for graph 370/550
+Running dot for graph 371/550
+Running dot for graph 372/550
+Running dot for graph 373/550
+Running dot for graph 374/550
+Running dot for graph 375/550
+Running dot for graph 376/550
+Running dot for graph 377/550
+Running dot for graph 378/550
+Running dot for graph 379/550
+Running dot for graph 380/550
+Running dot for graph 381/550
+Running dot for graph 382/550
+Running dot for graph 383/550
+Running dot for graph 384/550
+Running dot for graph 385/550
+Running dot for graph 386/550
+Running dot for graph 387/550
+Running dot for graph 388/550
+Running dot for graph 389/550
+Running dot for graph 390/550
+Running dot for graph 391/550
+Running dot for graph 392/550
+Running dot for graph 393/550
+Running dot for graph 394/550
+Running dot for graph 395/550
+Running dot for graph 396/550
+Running dot for graph 397/550
+Running dot for graph 398/550
+Running dot for graph 399/550
+Running dot for graph 400/550
+Running dot for graph 401/550
+Running dot for graph 402/550
+Running dot for graph 403/550
+Running dot for graph 404/550
+Running dot for graph 405/550
+Running dot for graph 406/550
+Running dot for graph 407/550
+Running dot for graph 408/550
+Running dot for graph 409/550
+Running dot for graph 410/550
+Running dot for graph 411/550
+Running dot for graph 412/550
+Running dot for graph 413/550
+Running dot for graph 414/550
+Running dot for graph 415/550
+Running dot for graph 416/550
+Running dot for graph 417/550
+Running dot for graph 418/550
+Running dot for graph 419/550
+Running dot for graph 420/550
+Running dot for graph 421/550
+Running dot for graph 422/550
+Running dot for graph 423/550
+Running dot for graph 424/550
+Running dot for graph 425/550
+Running dot for graph 426/550
+Running dot for graph 427/550
+Running dot for graph 428/550
+Running dot for graph 429/550
+Running dot for graph 430/550
+Running dot for graph 431/550
+Running dot for graph 432/550
+Running dot for graph 433/550
+Running dot for graph 434/550
+Running dot for graph 435/550
+Running dot for graph 436/550
+Running dot for graph 437/550
+Running dot for graph 438/550
+Running dot for graph 439/550
+Running dot for graph 440/550
+Running dot for graph 441/550
+Running dot for graph 442/550
+Running dot for graph 443/550
+Running dot for graph 444/550
+Running dot for graph 445/550
+Running dot for graph 446/550
+Running dot for graph 447/550
+Running dot for graph 448/550
+Running dot for graph 449/550
+Running dot for graph 450/550
+Running dot for graph 451/550
+Running dot for graph 452/550
+Running dot for graph 453/550
+Running dot for graph 454/550
+Running dot for graph 455/550
+Running dot for graph 456/550
+Running dot for graph 457/550
+Running dot for graph 458/550
+Running dot for graph 459/550
+Running dot for graph 460/550
+Running dot for graph 461/550
+Running dot for graph 462/550
+Running dot for graph 463/550
+Running dot for graph 464/550
+Running dot for graph 465/550
+Running dot for graph 466/550
+Running dot for graph 467/550
+Running dot for graph 468/550
+Running dot for graph 469/550
+Running dot for graph 470/550
+Running dot for graph 471/550
+Running dot for graph 472/550
+Running dot for graph 473/550
+Running dot for graph 474/550
+Running dot for graph 475/550
+Running dot for graph 476/550
+Running dot for graph 477/550
+Running dot for graph 478/550
+Running dot for graph 479/550
+Running dot for graph 480/550
+Running dot for graph 481/550
+Running dot for graph 482/550
+Running dot for graph 483/550
+Running dot for graph 484/550
+Running dot for graph 485/550
+Running dot for graph 486/550
+Running dot for graph 487/550
+Running dot for graph 488/550
+Running dot for graph 489/550
+Running dot for graph 490/550
+Running dot for graph 491/550
+Running dot for graph 492/550
+Running dot for graph 493/550
+Running dot for graph 494/550
+Running dot for graph 495/550
+Running dot for graph 496/550
+Running dot for graph 497/550
+Running dot for graph 498/550
+Running dot for graph 499/550
+Running dot for graph 500/550
+Running dot for graph 501/550
+Running dot for graph 502/550
+Running dot for graph 503/550
+Running dot for graph 504/550
+Running dot for graph 505/550
+Running dot for graph 506/550
+Running dot for graph 507/550
+Running dot for graph 508/550
+Running dot for graph 509/550
+Running dot for graph 510/550
+Running dot for graph 511/550
+Running dot for graph 512/550
+Running dot for graph 513/550
+Running dot for graph 514/550
+Running dot for graph 515/550
+Running dot for graph 516/550
+Running dot for graph 517/550
+Running dot for graph 518/550
+Running dot for graph 519/550
+Running dot for graph 520/550
+Running dot for graph 521/550
+Running dot for graph 522/550
+Running dot for graph 523/550
+Running dot for graph 524/550
+Running dot for graph 525/550
+Running dot for graph 526/550
+Running dot for graph 527/550
+Running dot for graph 528/550
+Running dot for graph 529/550
+Running dot for graph 530/550
+Running dot for graph 531/550
+Running dot for graph 532/550
+Running dot for graph 533/550
+Running dot for graph 534/550
+Running dot for graph 535/550
+Running dot for graph 536/550
+Running dot for graph 537/550
+Running dot for graph 538/550
+Running dot for graph 539/550
+Running dot for graph 540/550
+Running dot for graph 541/550
+Running dot for graph 542/550
+Running dot for graph 543/550
+Running dot for graph 544/550
+Running dot for graph 545/550
+Running dot for graph 546/550
+Running dot for graph 547/550
+Running dot for graph 548/550
+Running dot for graph 549/550
+Running dot for graph 550/550
+Patching output file 1/48
+Patching output file 2/48
+Patching output file 3/48
+Patching output file 4/48
+Patching output file 5/48
+Patching output file 6/48
+Patching output file 7/48
+Patching output file 8/48
+Patching output file 9/48
+Patching output file 10/48
+Patching output file 11/48
+Patching output file 12/48
+Patching output file 13/48
+Patching output file 14/48
+Patching output file 15/48
+Patching output file 16/48
+Patching output file 17/48
+Patching output file 18/48
+Patching output file 19/48
+Patching output file 20/48
+Patching output file 21/48
+Patching output file 22/48
+Patching output file 23/48
+Patching output file 24/48
+Patching output file 25/48
+Patching output file 26/48
+Patching output file 27/48
+Patching output file 28/48
+Patching output file 29/48
+Patching output file 30/48
+Patching output file 31/48
+Patching output file 32/48
+Patching output file 33/48
+Patching output file 34/48
+Patching output file 35/48
+Patching output file 36/48
+Patching output file 37/48
+Patching output file 38/48
+Patching output file 39/48
+Patching output file 40/48
+Patching output file 41/48
+Patching output file 42/48
+Patching output file 43/48
+Patching output file 44/48
+Patching output file 45/48
+Patching output file 46/48
+Patching output file 47/48
+Patching output file 48/48
 finished...

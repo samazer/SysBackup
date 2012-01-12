@@ -5,7 +5,10 @@
 
      [a+logo.png] Note: The most up-to-date copy of this file is
      available in the [1]SysBackup Documentation and FAQ pages on the
-     [2]AzerTech.net web site.
+     [2]AzerTech.net web site. Source code documentation was previously
+     being generated using phpdoc; work has begun to switch over to
+     Doxygen. The results so far can be found in the
+     [3]/doc/doxygen/html/ folder within the distribution tarball.
 
   Overview
 
@@ -45,17 +48,17 @@
 
                           [multi-function-tool.jpg]
 
-                                                       [3]Docs & FAQ Pages
-                                                     [4]Download SysBackup
-                                               [5]SysBackup on SourceForge
-                                                    [6]SysBackup on GitHub
-                                                     [7]SysBackup on Ohloh
-                                                  [8]Installation Overview
-                                                    [9]System Requirements
-                                                    [10]Basic Installation
-                                                    [11]SSH Remote Storage
-                                                             [12]First Run
-                                                          [13]Be Prepared!
+                                                       [4]Docs & FAQ Pages
+                                                     [5]Download SysBackup
+                                               [6]SysBackup on SourceForge
+                                                    [7]SysBackup on GitHub
+                                                     [8]SysBackup on Ohloh
+                                                  [9]Installation Overview
+                                                   [10]System Requirements
+                                                    [11]Basic Installation
+                                                    [12]SSH Remote Storage
+                                                             [13]First Run
+                                                          [14]Be Prepared!
 
     1. Start by unpacking the SysBackup package. Again, for this example
        we will be keeping the SysBackup files in /opt/sysbackup/.
@@ -269,10 +272,10 @@ SSH Remote Fileio VFS Plugin
      __________________________________________________________________
 
 
-                             [14][agpl-v3-logo.svg]   [15][gfdl-logo.svg]
+                             [15][agpl-v3-logo.svg]   [16][gfdl-logo.svg]
 
 
-    Copyright © 2011 by [16]Sam Azer<[17]sam@azertech.net>, All rights
+    Copyright © 2011 by [17]Sam Azer<[18]sam@azertech.net>, All rights
     reserved.
 
    Last modified: Thu Jan 12 17:44:20 EST 2012
@@ -281,18 +284,19 @@ References
 
    1. http://www.azertech.net/content/category/3/49/29/
    2. http://www.azertech.net/
-   3. http://www.azertech.net/content/category/3/49/29/
-   4. http://azer.ca/sysbackup-sfd
-   5. http://azer.ca/sysbackup-sf
-   6. http://azer.ca/sysbackup-gh
-   7. http://azer.ca/sysbackup-oh
-   8. http://www.azertech.net/content/view/69/29/
-   9. http://www.azertech.net/content/view/94/29/
-  10. http://www.azertech.net/content/view/92/29/
-  11. http://www.azertech.net/content/view/93/29/
-  12. http://www.azertech.net/content/view/95/29/
-  13. http://www.azertech.net/content/view/70/29/
-  14. http://www.gnu.org/licenses/agpl.html
-  15. http://www.gnu.org/copyleft/fdl.html
-  16. http://azertech.net/about
-  17. mailto:sam@azertech.net?subject=SysBackup
+   3. file://localhost/projects/server-scripts/backupv3/doc/doxygen/html/
+   4. http://www.azertech.net/content/category/3/49/29/
+   5. http://azer.ca/sysbackup-sfd
+   6. http://azer.ca/sysbackup-sf
+   7. http://azer.ca/sysbackup-gh
+   8. http://azer.ca/sysbackup-oh
+   9. http://www.azertech.net/content/view/69/29/
+  10. http://www.azertech.net/content/view/94/29/
+  11. http://www.azertech.net/content/view/92/29/
+  12. http://www.azertech.net/content/view/93/29/
+  13. http://www.azertech.net/content/view/95/29/
+  14. http://www.azertech.net/content/view/70/29/
+  15. http://www.gnu.org/licenses/agpl.html
+  16. http://www.gnu.org/copyleft/fdl.html
+  17. http://azertech.net/about
+  18. mailto:sam@azertech.net?subject=SysBackup

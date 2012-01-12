@@ -87,8 +87,158 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Base Plugin class for the SysBackup Plugins</p>
+<div class="textblock"><p>Dump Users</p>
+<p>Utilities to help with migration of a server</p>
+<p>This script should read the password &amp; group files in the specified directory and emit a number of UserMod commands that, when executed on a new server, will effectively recreate identical account information.</p>
+<p><b>Usage</b></p>
+<p><code>dumpusers [dir] &gt;recreate-users.sh</code></p>
+<p>The <em>dir</em> parameter tells the script where to look for copies of the /etc/passwd, /etc/shadow, /etc/group, etc. files. Often this is a directory on the new server containing a copy of the /etc/ directory from the original server. If the script is run without any parameters it will attempt to read the original files in the /etc/ directory.</p>
+<p><b>Output</b></p>
+<p>The output from the script is itself a script. It should be saved to a convenient file and reviewed for accuracy. If all goes well the script will recreate all the users and groups from the original server on the new server (not including the system users and groups which are most often not needed.) Output from the script looks something like the following sample:</p>
+<pre></pre><pre> #
+ # Account dump from /etc/ on dev3
+ #</pre><pre> # fredjones
+ groupadd --gid 1000 fredjones
+ useradd --gid 1000  --uid 1000  --home-dir "/home/fredjones"  --comment "fredjones"  \
+         --groups "cdrom,pulse"  --password "..."  --shell "/bin/bash" -M fredjones</pre><pre> # fredsmith
+ groupadd --gid 1001 fredsmith
+ useradd --gid 1001  --uid 1001  --home-dir "/home/fredsmith"  --comment "fredsmith"  \
+         --password "..."  --shell "/bin/bash" -M fredsmith</pre><pre> </pre><p><b>Warning</b></p>
+<p>This script does not take into consideration several bits and pieces of information that are legal in the various password, group and shadow files. Review carefully the output from the script and, if necessary, take the time to either modify the output manually or update the script to properly handle the information that is not currently handled.</p>
 <p><b>Copyright</b></p>
+<p>Copyright (c) 2009-2010 by Sam Azer, All Rights Reserved.</p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>1.0</dd></dl>
+<p>sys-utils  <a href="http://www.gnu.org/licenses/gpl.html">http://www.gnu.org/licenses/gpl.html</a> GPL  2009-2010 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  LocalExec  </a>Utility to execute simple operations on behalf of remote scripts and return a text-based response code.</p>
+<p>System maintenance scripts that operate from a remote server often use SSH to perform operations on remote file systems that can't be mounted. In such cases it is often necessary to get detailed information about the contents of the remote file system. This utility performs the desired operations and returns the results in a format that can be scanned.</p>
+<p><b>Copyright</b></p>
+<p>Copyright (c) 2009-2010 by Sam Azer, All Rights Reserved.</p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01a</dd></dl>
+<p>sys-test  <a href="http://www.gnu.org/licenses/gpl.html">http://www.gnu.org/licenses/gpl.html</a> GPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>   sys-test  Remote Exec  </a>Utility to execute simple file system operations on a remote server using the localexec script through ssh.</p>
+<p>This is really the test script for the <a class="el" href="sys-remote-filesys_8inc.html">sys-remote-filesys.inc</a> module and <a class="el" href="classremote__filesystem__c.html">remote_filesystem_c</a> class.</p>
+<p><b>Copyright</b></p>
+<p>Copyright (c) 2009-2010 by Sam Azer, All Rights Reserved.</p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01a</dd></dl>
+<p>sys-test  <a href="http://www.gnu.org/licenses/gpl.html">http://www.gnu.org/licenses/gpl.html</a> GPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  System Backup utility  </a>-------------------------------------------------------------------</p>
+<p><b>GENERAL NOTES</b></p>
+<p>The current code has been completely re-organized and is no longer compatible with the code in sysbackup-v3015a or prior versions. Please note that this is still alpha quality code (ie: it's not feature complete) and there's a chance that there might be some more changes. Specifically any plugins that were written during the past month or so might have to be updated and your /etc/sysbackup/sysbackup.conf file will need to be edited with care. Finally the /etc/sysbackup-nas.conf file on your remote NAS server needs some minor editing.</p>
+<p><b>Redhat/Fedora distros</b></p>
+<p>PHP on Redhat (and also on Ubuntu) is distributed as a large number of small packages. At this time I do not have a list of the packages required to run sysbackup. If you get strange error messages about functions not found it's a safe bet that you need to install a PHP package. Note also that this code has been tested on fairly recent versions of PHP5 and probably won't work on anything less than v5.3.</p>
+<p><b>Time Zone setting</b></p>
+<p>If you forget to set your local time zone in your PHP ini file you will get a warning from PHP. Unfortunately this warning prevents the remote exec / local exec tools from functioning correctly. The code has been updated to look in the INI file for a setting and, if none is found, use New York (Eastern Standard Time) by default. This avoids the warning message but might result in incorrect times being logged.</p>
+<p><b>Log Files</b></p>
+<p>If you sudo touch /var/log/remote-exec.log and sudo chmod 666 /var/log/remote-exec.log you will be able to check the log file for usage and error messages. Otherwise logging is disabled. Don't forget to update your logrotate settings if you use this feature.</p>
+<p><b>ABOUT PHPDocumentor</b></p>
+<p>Please note that PHP Documentor will not parse many of the files in this package unless it has been patched. For information on how to make the necessary changes see the FAQ:</p>
+<p>PhpDocumentor 'not a PHP file' issues</p>
+<p>in the FAQ section on AzerTech.net under Software Development <a href="http://www.azertech.net/content/view/53/29/">http://www.azertech.net/content/view/53/29/</a></p>
+<p>-------------------------------------------------------------------</p>
+<p><b>Original Goals:</b></p>
+<p>The basic goal of this script has always been to take a picture of the server every night - in a way that makes it easy to find any file that might be needed. In addition this picture must be complete enough that it can be used to build a new server in the event of a disaster or during migration. Not surprisingly it often happens that equipment upgrades are usually scheduled to occur more frequently than disasters!</p>
+<p>To make this possible it must be easy for the system admin to list all the items that need to be backed-up. The script should be smart enough to check if the item exists on the current server and make a backup of it - or not bother if it doesn't exist. This is because there may be more than one server with similar but not identical configuration. To save time the backup script must be smart enough to live in one repo but run on the various similar servers.</p>
+<p>The backups should be saved in a rotation on the current server. The script must also be able to save a rotation on one or more remote servers. There should be separate daily, weekly and monthly rotations to ensure that long term backups are readily available (long term rotations are often helpful in cases where a problem causes damage that is not readily apparent.)</p>
+<p>If two tar files are identical between backups the script should be able to detect the situation and replace the second copy with a hard link to the previous identical copy.</p>
+<p><b>Current Status</b></p>
+<p><b>GOOD</b></p>
+<ul>
+<li>
+<p class="startli">Modular design of v3 is a huge benefit: Plugins are easy to write and backup jobs are easy to configure. Most needs can be met by creating a simple job configuration script that calls on the various plugins to do the work. In practice there won't be much need to write new plugins.</p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli"></p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli"></p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli"></p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli"></p>
+<p class="endli"></p>
+</li>
+</ul>
+<p><b>BAD</b></p>
+<ul>
+<li>
+<p class="startli">This is a total re-write so the code will need to be reviewed a few more times. Performance and usability issues will need to be reviewed also (especially since many features are missing at the time of this writing; ie: the ability to specify different configuration files in the command line.) In spite of all the recent testing there is no doubt that more bugs will be found.</p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli">Many of the sanity checks in v2 are not included in v3 because of the modular design. The local VFS code, for example, doesn't check to see if there's a remote system configured or not. So if there's no available local disk space the local VFS doesn't try to perform the backup in remote-only mode as it did in v2 (at the time of this writing. It may be possible to set the keeplocal flag to false for each VFS object that finds it does not have enough space - then the application can test for any VFS objects that are working and error out if none are available.)</p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli">Error handling code for this initial implementation doesn't send emails or try to complete the backup in cases where problems are detected. Most detected problems simply result in a fatal error.</p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli"></p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli"></p>
+<p class="endli"></p>
+</li>
+</ul>
+<p><b>UGLY</b></p>
+<ul>
+<li>
+<p class="startli">Lots of command line options needed but little time to add them. It's hard (not currently possible) to change the behavior of a backup run on the fly. At the moment it is necessary to edit the job configuration to change the backup behaviour.</p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli">The use of named parameters passed as $option arrays to methods and their parents simplifies much of the code - but makes it difficult to detect errors. The new named parameters class helps quite a bit but the issues are not fully resolved.</p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli">The code makes little effort to manage spaces, quotes and double-quotes inside tarball file names. The code to manage this issue has been improved dramatically since this note was first written but the support for spaces in the backupset file and folder names has not been tested. Note that this problem affects only files generated by the backup software. The files and folders being backed-up have no name restrictions of any kind.</p>
+<p class="endli"></p>
+</li>
+<li>
+<p class="startli"></p>
+<p class="endli"></p>
+</li>
+</ul>
+<p><b>Installation</b></p>
+<p>See the INSTALL and <a class="el" href="sysbackup_8conf.html">sysbackup.conf</a> files for help with installation.</p>
+<p><b>Verification</b></p>
+<p>From time to time it is important to verify that everything is actually working as expected. Several steps must be performed to ensure that the verification is valid.</p>
+<p>See the BE-PREPARED.html file to get started with disaster recovery planning.</p>
+<p><b>FAQ</b></p>
+<p><b>What's the difference between a warning and a fatal error here?</b></p>
+<p>Answer: There are two answers to this question:</p>
+<p>(1) You will often see a few warnings that contain informat about an error. These are often followed by a fatal error. The entire message is actually a fatal error but the warning method is called for the information and the fatal method is called at the end with the final error message. This is a coding issue (fatal stops the program execution and so can only be used once at the end.)</p>
+<p>(2) In principal the backup app must stop for configuration errors and sanity check errors. If there's something strange going on we assume that the system is either not configured properly or there's something seriously wrong that must be corrected before the backup system is allowed to run - so stop and let the admin fix it before trying again. Warnings are for problems that do not prevent the completion of the backup.</p>
+<p>In practice it's not always easy to decide between the two when writing the code. After the code has been written there are problems that the admin might start to want to see as warnings instead of fatal errors and vice-versa.</p>
+<p><b>History</b></p>
+<p>This file started out as a super simple bash script called /etc/cron.daily/daily.sh on a dev server used by Sam Azer. It is supposed to be short and straight-forward but circumstances cause it to grow a little from time to time. It has been used on BNT servers and servers belonging to various customers.</p>
+<p>The code was first published in the Bell Integrator Build &amp; Run server maintenance manual in 2002. The ability to write nightly backups to an off-site server was added a few years later.</p>
+<p>The rewrite as a PHP script was prompted by the complexity of the daily.sh script running on mail2.bnt.ca. There are too many operations being performed in that script (including general server status and anti-spam reporting.) It became obvious that it would be necessary to separate the anti-spam code from the backup code and add some minor improvements along the way. Offsite backups, for example, are not being rotated by daily.sh and the use of hard-links to save disk space had been planned for years but never implemented.</p>
+<p>The current re-write implements a light-weight plug-in architecture to allow the various blocks of code to be separated from the basic backup procedure.</p>
+<p><b>Copyright</b></p>
+<p>Copyright (c) 2001-2011 by Sam Azer, All Rights Reserved.</p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>3.01 (alpha)</dd></dl>
+<p>sysbackup  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2001-2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  Base Plugin class for the SysBackup Plugins  </a><b>Copyright</b></p>
 <p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.</p>
 <p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
 <p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
@@ -352,211 +502,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
 <dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
 <dl class="version"><dt><b>Version:</b></dt><dd>0.01 (alpha)</dd></dl>
-<p>sysbackup  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  Dump Users  </a>Utilities to help with migration of a server</p>
+<p>sysbackup  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  Dummy Configuration file - for documentation purposes only.  Review this file for detailed information on how to add a backup job to one of the available backup events:  + Use the --dump-events option to get a list of the events that will be triggered by the sysbackup application.  + Use the --dump-jobs option to get a list of the jobs that have been configured.  Events will be triggered in the order in which they appear. Jobs will be executed in alphabetical order of JobIndex when their event is triggered.  TODO: complete this configuration file documentation.  </a><b>Copyright</b></p>
 <p></p>
-<p>This script should read the password &amp; group files in the specified directory and emit a number of UserMod commands that, when executed on a new server, will effectively recreate identical account information.</p>
-<p></p>
-<p><b>Usage</b></p>
-<p><code>dumpusers [dir] &gt;recreate-users.sh</code></p>
-<p></p>
-<p>The <em>dir</em> parameter tells the script where to look for copies of the /etc/passwd, /etc/shadow, /etc/group, etc. files. Often this is a directory on the new server containing a copy of the /etc/ directory from the original server. If the script is run without any parameters it will attempt to read the original files in the /etc/ directory.</p>
-<p></p>
-<p><b>Output</b></p>
-<p></p>
-<p>The output from the script is itself a script. It should be saved to a convenient file and reviewed for accuracy. If all goes well the script will recreate all the users and groups from the original server on the new server (not including the system users and groups which are most often not needed.) Output from the script looks something like the following sample:</p>
-<pre></pre><pre> #
- # Account dump from /etc/ on dev3
- #</pre><pre> # fredjones
- groupadd --gid 1000 fredjones
- useradd --gid 1000  --uid 1000  --home-dir "/home/fredjones"  --comment "fredjones"  \
-         --groups "cdrom,pulse"  --password "..."  --shell "/bin/bash" -M fredjones</pre><pre> # fredsmith
- groupadd --gid 1001 fredsmith
- useradd --gid 1001  --uid 1001  --home-dir "/home/fredsmith"  --comment "fredsmith"  \
-         --password "..."  --shell "/bin/bash" -M fredsmith</pre><pre> </pre><p></p>
-<p><b>Warning</b></p>
-<p></p>
-<p>This script does not take into consideration several bits and pieces of information that are legal in the various password, group and shadow files. Review carefully the output from the script and, if necessary, take the time to either modify the output manually or update the script to properly handle the information that is not currently handled.</p>
-<p></p>
-<p><b>Copyright</b></p>
-<p></p>
-<p>Copyright (c) 2009-2010 by Sam Azer, All Rights Reserved.</p>
-<p></p>
-<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
-<p></p>
-<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
-<p></p>
-<p>You should have received a copy of the GNU General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
-<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
-<dl class="version"><dt><b>Version:</b></dt><dd>1.0</dd></dl>
-<p>sys-utils  <a href="http://www.gnu.org/licenses/gpl.html">http://www.gnu.org/licenses/gpl.html</a> GPL  2009-2010 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  LocalExec  </a>Utility to execute simple operations on behalf of remote scripts and return a text-based response code.</p>
-<p></p>
-<p>System maintenance scripts that operate from a remote server often use SSH to perform operations on remote file systems that can't be mounted. In such cases it is often necessary to get detailed information about the contents of the remote file system. This utility performs the desired operations and returns the results in a format that can be scanned.</p>
-<p></p>
-<p><b>Copyright</b></p>
-<p></p>
-<p>Copyright (c) 2009-2010 by Sam Azer, All Rights Reserved.</p>
-<p></p>
-<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
-<p></p>
-<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
-<p></p>
-<p>You should have received a copy of the GNU General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
-<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
-<dl class="version"><dt><b>Version:</b></dt><dd>0.01a</dd></dl>
-<p>sys-test  <a href="http://www.gnu.org/licenses/gpl.html">http://www.gnu.org/licenses/gpl.html</a> GPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>   sys-test  Remote Exec  </a>Utility to execute simple file system operations on a remote server using the localexec script through ssh.</p>
-<p></p>
-<p>This is really the test script for the <a class="el" href="sys-remote-filesys_8inc.html">sys-remote-filesys.inc</a> module and <a class="el" href="classremote__filesystem__c.html">remote_filesystem_c</a> class.</p>
-<p></p>
-<p><b>Copyright</b></p>
-<p></p>
-<p>Copyright (c) 2009-2010 by Sam Azer, All Rights Reserved.</p>
-<p></p>
-<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
-<p></p>
-<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
-<p></p>
-<p>You should have received a copy of the GNU General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
-<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
-<dl class="version"><dt><b>Version:</b></dt><dd>0.01a</dd></dl>
-<p>sys-test  <a href="http://www.gnu.org/licenses/gpl.html">http://www.gnu.org/licenses/gpl.html</a> GPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  System Backup utility  </a>-------------------------------------------------------------------</p>
-<p></p>
-<p><b>GENERAL NOTES</b></p>
-<p></p>
-<p>The current code has been completely re-organized and is no longer compatible with the code in sysbackup-v3015a or prior versions. Please note that this is still alpha quality code (ie: it's not feature complete) and there's a chance that there might be some more changes. Specifically any plugins that were written during the past month or so might have to be updated and your /etc/sysbackup/sysbackup.conf file will need to be edited with care. Finally the /etc/sysbackup-nas.conf file on your remote NAS server needs some minor editing.</p>
-<p></p>
-<p><b>Redhat/Fedora distros</b></p>
-<p></p>
-<p>PHP on Redhat (and also on Ubuntu) is distributed as a large number of small packages. At this time I do not have a list of the packages required to run sysbackup. If you get strange error messages about functions not found it's a safe bet that you need to install a PHP package. Note also that this code has been tested on fairly recent versions of PHP5 and probably won't work on anything less than v5.3.</p>
-<p></p>
-<p><b>Time Zone setting</b></p>
-<p></p>
-<p>If you forget to set your local time zone in your PHP ini file you will get a warning from PHP. Unfortunately this warning prevents the remote exec / local exec tools from functioning correctly. The code has been updated to look in the INI file for a setting and, if none is found, use New York (Eastern Standard Time) by default. This avoids the warning message but might result in incorrect times being logged.</p>
-<p></p>
-<p><b>Log Files</b></p>
-<p></p>
-<p>If you sudo touch /var/log/remote-exec.log and sudo chmod 666 /var/log/remote-exec.log you will be able to check the log file for usage and error messages. Otherwise logging is disabled. Don't forget to update your logrotate settings if you use this feature.</p>
-<p></p>
-<p><b>ABOUT PHPDocumentor</b></p>
-<p>Please note that PHP Documentor will not parse many of the files in this package unless it has been patched. For information on how to make the necessary changes see the FAQ:</p>
-<p>PhpDocumentor 'not a PHP file' issues</p>
-<p>in the FAQ section on AzerTech.net under Software Development <a href="http://www.azertech.net/content/view/53/29/">http://www.azertech.net/content/view/53/29/</a></p>
-<p></p>
-<p>-------------------------------------------------------------------</p>
-<p></p>
-<p><b>Original Goals:</b></p>
-<p></p>
-<p>The basic goal of this script has always been to take a picture of the server every night - in a way that makes it easy to find any file that might be needed. In addition this picture must be complete enough that it can be used to build a new server in the event of a disaster or during migration. Not surprisingly it often happens that equipment upgrades are usually scheduled to occur more frequently than disasters!</p>
-<p></p>
-<p>To make this possible it must be easy for the system admin to list all the items that need to be backed-up. The script should be smart enough to check if the item exists on the current server and make a backup of it - or not bother if it doesn't exist. This is because there may be more than one server with similar but not identical configuration. To save time the backup script must be smart enough to live in one repo but run on the various similar servers.</p>
-<p></p>
-<p>The backups should be saved in a rotation on the current server. The script must also be able to save a rotation on one or more remote servers. There should be separate daily, weekly and monthly rotations to ensure that long term backups are readily available (long term rotations are often helpful in cases where a problem causes damage that is not readily apparent.)</p>
-<p></p>
-<p>If two tar files are identical between backups the script should be able to detect the situation and replace the second copy with a hard link to the previous identical copy.</p>
-<p></p>
-<p><b>Current Status</b></p>
-<p></p>
-<p><b>GOOD</b></p>
-<ul>
-<li>
-<p class="startli">Modular design of v3 is a huge benefit: Plugins are easy to write and backup jobs are easy to configure. Most needs can be met by creating a simple job configuration script that calls on the various plugins to do the work. In practice there won't be much need to write new plugins.</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli"></p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli"></p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli"></p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli"></p>
-<p class="endli"></p>
-</li>
-</ul>
-<p></p>
-<p><b>BAD</b></p>
-<ul>
-<li>
-<p class="startli">This is a total re-write so the code will need to be reviewed a few more times. Performance and usability issues will need to be reviewed also (especially since many features are missing at the time of this writing; ie: the ability to specify different configuration files in the command line.) In spite of all the recent testing there is no doubt that more bugs will be found.</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli">Many of the sanity checks in v2 are not included in v3 because of the modular design. The local VFS code, for example, doesn't check to see if there's a remote system configured or not. So if there's no available local disk space the local VFS doesn't try to perform the backup in remote-only mode as it did in v2 (at the time of this writing. It may be possible to set the keeplocal flag to false for each VFS object that finds it does not have enough space - then the application can test for any VFS objects that are working and error out if none are available.)</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli">Error handling code for this initial implementation doesn't send emails or try to complete the backup in cases where problems are detected. Most detected problems simply result in a fatal error.</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli"></p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli"></p>
-<p class="endli"></p>
-</li>
-</ul>
-<p></p>
-<p><b>UGLY</b></p>
-<ul>
-<li>
-<p class="startli">Lots of command line options needed but little time to add them. It's hard (not currently possible) to change the behavior of a backup run on the fly. At the moment it is necessary to edit the job configuration to change the backup behaviour.</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli">The use of named parameters passed as $option arrays to methods and their parents simplifies much of the code - but makes it difficult to detect errors. The new named parameters class helps quite a bit but the issues are not fully resolved.</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli">The code makes little effort to manage spaces, quotes and double-quotes inside tarball file names. The code to manage this issue has been improved dramatically since this note was first written but the support for spaces in the backupset file and folder names has not been tested. Note that this problem affects only files generated by the backup software. The files and folders being backed-up have no name restrictions of any kind.</p>
-<p class="endli"></p>
-</li>
-<li>
-<p class="startli"></p>
-<p class="endli"></p>
-</li>
-</ul>
-<p></p>
-<p><b>Installation</b></p>
-<p></p>
-<p>See the INSTALL and <a class="el" href="sysbackup_8conf.html">sysbackup.conf</a> files for help with installation.</p>
-<p></p>
-<p><b>Verification</b></p>
-<p></p>
-<p>From time to time it is important to verify that everything is actually working as expected. Several steps must be performed to ensure that the verification is valid.</p>
-<p></p>
-<p>See the BE-PREPARED.html file to get started with disaster recovery planning.</p>
-<p></p>
-<p><b>FAQ</b></p>
-<p></p>
-<p><b>What's the difference between a warning and a fatal error here?</b></p>
-<p></p>
-<p>Answer: There are two answers to this question:</p>
-<p></p>
-<p>(1) You will often see a few warnings that contain informat about an error. These are often followed by a fatal error. The entire message is actually a fatal error but the warning method is called for the information and the fatal method is called at the end with the final error message. This is a coding issue (fatal stops the program execution and so can only be used once at the end.)</p>
-<p></p>
-<p>(2) In principal the backup app must stop for configuration errors and sanity check errors. If there's something strange going on we assume that the system is either not configured properly or there's something seriously wrong that must be corrected before the backup system is allowed to run - so stop and let the admin fix it before trying again. Warnings are for problems that do not prevent the completion of the backup.</p>
-<p>In practice it's not always easy to decide between the two when writing the code. After the code has been written there are problems that the admin might start to want to see as warnings instead of fatal errors and vice-versa.</p>
-<p></p>
-<p><b>History</b></p>
-<p></p>
-<p>This file started out as a super simple bash script called /etc/cron.daily/daily.sh on a dev server used by Sam Azer. It is supposed to be short and straight-forward but circumstances cause it to grow a little from time to time. It has been used on BNT servers and servers belonging to various customers.</p>
-<p></p>
-<p>The code was first published in the Bell Integrator Build &amp; Run server maintenance manual in 2002. The ability to write nightly backups to an off-site server was added a few years later.</p>
-<p></p>
-<p>The rewrite as a PHP script was prompted by the complexity of the daily.sh script running on mail2.bnt.ca. There are too many operations being performed in that script (including general server status and anti-spam reporting.) It became obvious that it would be necessary to separate the anti-spam code from the backup code and add some minor improvements along the way. Offsite backups, for example, are not being rotated by daily.sh and the use of hard-links to save disk space had been planned for years but never implemented.</p>
-<p></p>
-<p>The current re-write implements a light-weight plug-in architecture to allow the various blocks of code to be separated from the basic backup procedure.</p>
-<p></p>
-<p><b>Copyright</b></p>
-<p></p>
-<p>Copyright (c) 2001-2011 by Sam Azer, All Rights Reserved.</p>
+<p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.</p>
 <p></p>
 <p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
 <p></p>
@@ -564,8 +512,201 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p></p>
 <p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
 <dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
-<dl class="version"><dt><b>Version:</b></dt><dd>3.01 (alpha)</dd></dl>
-<p>sysbackup  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2001-2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a> </a></p>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01 (alpha)</dd></dl>
+<p>jobconfig  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  Dump users and groups job configuration  This file adds a job to the sysbackup genbackups event. The job produces a script containing commands that, if executed, will re-create the user and group accounts in the system. Running this script on a new server has the effect of re-creating those accounts with the same ID's and passwords.  </a><b>Copyright</b></p>
+<p></p>
+<p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.</p>
+<p></p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p></p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p></p>
+<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01 (alpha)</dd></dl>
+<p>sysbackup  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  HomeDirs backup Configuration  This file adds a job to the sysbackup genbackups event. The job produces: tarballs for each subdir within a home dir andit compresses any files found in the home dir.  The files are named in such a way that it is easy to see where they came from.  The sysadmin can specify folders to include and folders to exclude.  Folders which contain many subfolders that do not get updated often can be specified as individual home dirs. Each subfolder in these directories will be compressed into a separate tarball. The use of hardlinks for identical tarballs in multiple backup rotations will save disk space and network bandwidth.  </a><b>Copyright</b></p>
+<p></p>
+<p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.</p>
+<p></p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p></p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p></p>
+<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01 (alpha)</dd></dl>
+<p>sysbackup  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  Mailman backup Configuration  This script adds jobs to the sysbackup genbackups event. The jobs (try to produce) a full backup of a mailman installation. The resulting backup should be useful for the majority of restore cases.  </a><b>Copyright</b></p>
+<p></p>
+<p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.</p>
+<p></p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p></p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p></p>
+<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01 (alpha)</dd></dl>
+<p>sysbackup  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  MySQL Server Backup Configuration  This file adds a job to the sysbackup genbackups event. The job produces a dump of the databases in a mysql server.  </a><b>Copyright</b></p>
+<p></p>
+<p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.</p>
+<p></p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p></p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p></p>
+<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01 (alpha)</dd></dl>
+<p>sysbackup  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  Package List Configuration  This file adds a job to the sysbackup genbackups event. The job produces a system package list. This can be helpful in cases where a sys admin must rebuild a server from scratch and needs to know the version numbers of the packages that were previously in use.  </a><b>Copyright</b></p>
+<p></p>
+<p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.</p>
+<p></p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p></p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p></p>
+<p>You should have received a copy of the GNU Affero eneral Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01 (alpha)</dd></dl>
+<p>jobconfig  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  Squirrelmail backup Configuration  This script adds jobs to the sysbackup genbackups event. The jobs (try to produce) a full backup of a Squirrelmail installation. The resulting backup should be useful for the majority of restore cases.  </a><b>Copyright</b></p>
+<p></p>
+<p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.</p>
+<p></p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p></p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p></p>
+<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01 (alpha)</dd></dl>
+<p>sysbackup  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  System Dirs backup Configuration  This file adds a job to the sysbackup genbackups event. The job produces: tarballs for each folder specified in the include optionyou can specify exclude patterns in the options for each include patternthe main exclude option excludes the specified patterns for each folder in the include list.  </a><b>Copyright</b></p>
+<p></p>
+<p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.</p>
+<p></p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p></p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p></p>
+<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01 (alpha)</dd></dl>
+<p>jobconfig  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  Mail Spool and other mail-related files  This file adds a job to the sysbackup genbackups event. The job produces: tarballs for each mail file in the system mail spool folder  </a><b>Copyright</b></p>
+<p></p>
+<p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.</p>
+<p></p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p></p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p></p>
+<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01 (alpha)</dd></dl>
+<p>sysbackup  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  System web files  This file adds a job to the sysbackup genbackups event. The job produces: tarballs for each file or folder in /var/www  </a><b>Copyright</b></p>
+<p></p>
+<p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.</p>
+<p></p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p></p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p></p>
+<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01 (alpha)</dd></dl>
+<p>jobconfig  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  Dummy Plugin  </a><b>Copyright</b></p>
+<p></p>
+<p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.</p>
+<p></p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p></p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p></p>
+<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01 (alpha)</dd></dl>
+<p>plugin  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>   plugin  dump users plugin  Utility that can be helpful when migrating accounts from one server to the next. Emits a shell script that, when executed on the target system, creates the user accounts that existed on the backed-up system.  </a><b>Copyright</b></p>
+<p></p>
+<p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.</p>
+<p></p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p></p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p></p>
+<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01 (alpha)</dd></dl>
+<p>plugin  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  Home Directories Plugin  WARNING: If you specify a folder as a home dir this plugin will NOT PRODUCE A TARBALL FOR THAT FOLDER IF IT IS EMPTY. THEREFORE REMEMBER, WHEN RESTORING A BACKUP, TO MANUALLY CREATE THE FOLDER in case you need it.  </a><b>Copyright</b></p>
+<p></p>
+<p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.</p>
+<p></p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p></p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p></p>
+<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01 (alpha)</dd></dl>
+<p>plugin  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  Mail Directory Plugin  A plugin that expects to find multiple files in a mail folder - each one belonging to a different user. In practice this plugin is essentially identical in behavior to the homedirs plugin.  </a>include Directories</p>
+<p></p>
+<p>Edit this list to match the locations of user mail-spool-type directories on your server. These are directories that contain one file for every user on your server.</p>
+<p></p>
+<p>A separate compressed file will be created for each user (file) found unless that file is listed in the exclude array. This is intended to make it easier to extract files for a particular user when performing restore operations.</p>
+<p></p>
+<p><b>Copyright</b></p>
+<p></p>
+<p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.</p>
+<p></p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p></p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p></p>
+<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01 (alpha)</dd></dl>
+<p>plugin  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  Mailman Plugin  </a><b>Copyright</b></p>
+<p></p>
+<p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.</p>
+<p></p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p></p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p></p>
+<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01 (alpha)</dd></dl>
+<p>plugin  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  mysql Plugin  </a><b>Copyright</b></p>
+<p></p>
+<p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.</p>
+<p></p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p></p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p></p>
+<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01 (alpha)</dd></dl>
+<p>plugin  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  Package List Plugin  </a><b>Copyright</b></p>
+<p></p>
+<p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.</p>
+<p></p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p></p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p></p>
+<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01 (alpha)</dd></dl>
+<p>plugin  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  System Directories Plugin  </a><b>Copyright</b></p>
+<p></p>
+<p>Copyright (c) 2011 by Sam Azer, All Rights Reserved.</p>
+<p></p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p></p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p></p>
+<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01 (alpha)</dd></dl>
+<p>plugin  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a> </a></p>
 </li>
 </ul>
 </div></div>
@@ -573,7 +714,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="namespacesysbackup.html">sysbackup</a>      </li>
-      <li class="footer">Generated on Thu Jan 12 2012 16:42:07 for SysBackup by&#160;
+      <li class="footer">Generated on Thu Jan 12 2012 18:28:07 for SysBackup by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

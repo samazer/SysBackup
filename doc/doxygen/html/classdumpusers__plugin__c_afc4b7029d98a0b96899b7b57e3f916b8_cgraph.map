@@ -1,0 +1,10 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$general-utils_8inc.html#a77dd67e2e529e733ba6618dee1c1f09c" title="capture_begin" alt="" coords="229,5,331,35"/>
+<area shape="rect" id="node5" href="$general-utils_8inc.html#a67ba34c0b7537f53f68538230a6cb316" title="capture_end" alt="" coords="233,59,327,88"/>
+<area shape="rect" id="node7" href="$classsysbackup__plugin__base__c.html#a763df51214b94ecbe0764412568e1676" title="sysbackup_plugin_base_c::compressed_file_ext" alt="" coords="129,112,431,141"/>
+<area shape="rect" id="node9" href="$classsysbackup__plugin__base__c.html#aab6fa0f7aed7c9a2546553f1dc68626e" title="sysbackup_plugin_base_c::vfs_compress_string" alt="" coords="128,165,432,195"/>
+<area shape="rect" id="node11" href="$classsysbackup__plugin__base__c.html#a32168f03079994172f55c1c80bc81752" title="sysbackup_plugin_base_c::rel_ref" alt="" coords="480,165,699,195"/>
+<area shape="rect" id="node13" href="$general-utils_8inc.html#a6185d0c82f5be193802f7bd846fdd9f6" title="dir_fn" alt="" coords="861,139,915,168"/>
+<area shape="rect" id="node17" href="$classsysbackup__plugin__base__c.html#a7bf5323a9f76fcbf3f8e2d5f7b39c583" title="sysbackup_plugin_base_c::encode_filename" alt="" coords="748,192,1028,221"/>
+<area shape="rect" id="node15" href="$general-utils_8inc.html#a0055ef7f48b70fd8f1c75cc5304b34bb" title="single_chars" alt="" coords="1079,139,1172,168"/>
+</map>

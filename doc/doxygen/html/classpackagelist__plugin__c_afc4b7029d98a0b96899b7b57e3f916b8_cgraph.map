@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classplugin__appreference__c.html#a0824c910c5d7b7949a8d983ea0b34c1f" title="plugin_appreference_c::fatal" alt="" coords="181,5,365,35"/>
+<area shape="rect" id="node7" href="$sys-packagelist_8inc.html#a7b3d96f099297f2260202505208d5e69" title="package_list" alt="" coords="227,112,320,141"/>
+<area shape="rect" id="node11" href="$classsysbackup__plugin__base__c.html#ac75ecf5dfcc807907a65ef66293a6eae" title="sysbackup_plugin_base_c::vfs_compress_file" alt="" coords="129,165,417,195"/>
+<area shape="rect" id="node21" href="$classplugin__appreference__c.html#aab64680d0a39449c7b28d78550694f0d" title="plugin_appreference_c::warning" alt="" coords="171,59,376,88"/>
+<area shape="rect" id="node5" href="$classplugin__appreference__c.html#aa0d6ac531d747c3b05553e6cd57a74d9" title="plugin_appreference_c::_message_prefix_text" alt="" coords="467,32,755,61"/>
+<area shape="rect" id="node9" href="$general-sysexec_8inc.html#ae6efbf28782d7bf198e599ea0a0c121a" title="sysexec" alt="" coords="576,112,645,141"/>
+<area shape="rect" id="node13" href="$classsysbackup__plugin__base__c.html#a32168f03079994172f55c1c80bc81752" title="sysbackup_plugin_base_c::rel_ref" alt="" coords="501,165,720,195"/>
+<area shape="rect" id="node15" href="$general-utils_8inc.html#a6185d0c82f5be193802f7bd846fdd9f6" title="dir_fn" alt="" coords="917,139,971,168"/>
+<area shape="rect" id="node19" href="$classsysbackup__plugin__base__c.html#a7bf5323a9f76fcbf3f8e2d5f7b39c583" title="sysbackup_plugin_base_c::encode_filename" alt="" coords="804,192,1084,221"/>
+<area shape="rect" id="node17" href="$general-utils_8inc.html#a0055ef7f48b70fd8f1c75cc5304b34bb" title="single_chars" alt="" coords="1135,139,1228,168"/>
+</map>

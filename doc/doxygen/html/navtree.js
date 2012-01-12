@@ -18,13 +18,20 @@ var NAVTREE =
       [ "backupvfs_sshremote_c", "classbackupvfs__sshremote__c.html", null ],
       [ "backupvfs_sshremote_rotation_c", "classbackupvfs__sshremote__rotation__c.html", null ],
       [ "backupvfs_stats_c", "classbackupvfs__stats__c.html", null ],
+      [ "dummy_plugin_c", "classdummy__plugin__c.html", null ],
+      [ "dumpusers_plugin_c", "classdumpusers__plugin__c.html", null ],
       [ "effective_user_c", "classeffective__user__c.html", null ],
+      [ "homedirs_plugin_c", "classhomedirs__plugin__c.html", null ],
       [ "linux_distro_c", "classlinux__distro__c.html", null ],
       [ "localexec_c", "classlocalexec__c.html", null ],
       [ "logfile_c", "classlogfile__c.html", null ],
+      [ "maildirs_plugin_c", "classmaildirs__plugin__c.html", null ],
+      [ "mailman_plugin_c", "classmailman__plugin__c.html", null ],
       [ "mktarball_util_c", "classmktarball__util__c.html", null ],
+      [ "mysql_plugin_c", "classmysql__plugin__c.html", null ],
       [ "named_parameters_base_c", "classnamed__parameters__base__c.html", null ],
       [ "named_parameters_c", "classnamed__parameters__c.html", null ],
+      [ "packagelist_plugin_c", "classpackagelist__plugin__c.html", null ],
       [ "plugin_appreference_c", "classplugin__appreference__c.html", null ],
       [ "plugin_base_c", "classplugin__base__c.html", null ],
       [ "plugin_framework_c", "classplugin__framework__c.html", null ],
@@ -33,6 +40,7 @@ var NAVTREE =
       [ "remote_filesystem_c", "classremote__filesystem__c.html", null ],
       [ "stopwatch_c", "classstopwatch__c.html", null ],
       [ "sysbackup_plugin_base_c", "classsysbackup__plugin__base__c.html", null ],
+      [ "sysdirs_plugin_c", "classsysdirs__plugin__c.html", null ],
       [ "system_backup_app_c", "classsystem__backup__app__c.html", null ],
       [ "teelog_c", "classteelog__c.html", null ]
     ] ],
@@ -63,7 +71,17 @@ var NAVTREE =
               ] ]
             ] ]
           ] ],
-          [ "sysbackup_plugin_base_c", "classsysbackup__plugin__base__c.html", null ]
+          [ "sysbackup_plugin_base_c", "classsysbackup__plugin__base__c.html", [
+            [ "dummy_plugin_c", "classdummy__plugin__c.html", null ],
+            [ "dumpusers_plugin_c", "classdumpusers__plugin__c.html", null ],
+            [ "homedirs_plugin_c", "classhomedirs__plugin__c.html", [
+              [ "maildirs_plugin_c", "classmaildirs__plugin__c.html", null ]
+            ] ],
+            [ "mailman_plugin_c", "classmailman__plugin__c.html", null ],
+            [ "mysql_plugin_c", "classmysql__plugin__c.html", null ],
+            [ "packagelist_plugin_c", "classpackagelist__plugin__c.html", null ],
+            [ "sysdirs_plugin_c", "classsysdirs__plugin__c.html", null ]
+          ] ]
         ] ]
       ] ],
       [ "remote_filesystem_c", "classremote__filesystem__c.html", [
@@ -106,6 +124,24 @@ var NAVTREE =
       [ "app/sysbackup-vfs-sshremote.inc", "sysbackup-vfs-sshremote_8inc.html", null ],
       [ "app/sysbackup-vfs.inc", "sysbackup-vfs_8inc.html", null ],
       [ "app/sysbackup.inc", "sysbackup_8inc.html", null ],
+      [ "conf.d/dummy.conf", "dummy_8conf.html", null ],
+      [ "conf.d/dumpusers.conf", "dumpusers_8conf.html", null ],
+      [ "conf.d/homedirs.conf", "homedirs_8conf.html", null ],
+      [ "conf.d/mailman.conf", "mailman_8conf.html", null ],
+      [ "conf.d/mysql-localhost.conf", "mysql-localhost_8conf.html", null ],
+      [ "conf.d/package-list.conf", "package-list_8conf.html", null ],
+      [ "conf.d/squirrelmail.conf", "squirrelmail_8conf.html", null ],
+      [ "conf.d/sysdirs.conf", "sysdirs_8conf.html", null ],
+      [ "conf.d/sysmail.conf", "sysmail_8conf.html", null ],
+      [ "conf.d/syswebfiles.conf", "syswebfiles_8conf.html", null ],
+      [ "plugin.d/dummy.plugin", "dummy_8plugin.html", null ],
+      [ "plugin.d/dumpusers.plugin", "dumpusers_8plugin.html", null ],
+      [ "plugin.d/homedirs.plugin", "homedirs_8plugin.html", null ],
+      [ "plugin.d/maildirs.plugin", "maildirs_8plugin.html", null ],
+      [ "plugin.d/mailman.plugin", "mailman_8plugin.html", null ],
+      [ "plugin.d/mysql.plugin", "mysql_8plugin.html", null ],
+      [ "plugin.d/package-list.plugin", "package-list_8plugin.html", null ],
+      [ "plugin.d/sysdirs.plugin", "sysdirs_8plugin.html", null ],
       [ "lib/general-log.inc", "general-log_8inc.html", null ],
       [ "lib/general-namedparameters.inc", "general-namedparameters_8inc.html", null ],
       [ "lib/general-net.inc", "general-net_8inc.html", null ],
@@ -124,7 +160,9 @@ var NAVTREE =
     ] ],
     [ "Directories", "dirs.html", [
       [ "app", "dir_7c3f8a30817664b13e60a1ccacefa6f4.html", null ],
-      [ "lib", "dir_e1b14e73bf661583829f9e5382b32873.html", null ]
+      [ "conf.d", "dir_39ab6a6df16411ce87c5807407268527.html", null ],
+      [ "lib", "dir_e1b14e73bf661583829f9e5382b32873.html", null ],
+      [ "plugin.d", "dir_196278b156ddb477da8606468b3c12c9.html", null ]
     ] ],
     [ "Globals", "globals.html", null ]
   ] ]

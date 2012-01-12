@@ -1,0 +1,13 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classsysbackup__plugin__base__c.html#a763df51214b94ecbe0764412568e1676" title="sysbackup_plugin_base_c::compressed_file_ext" alt="" coords="140,5,441,35"/>
+<area shape="rect" id="node5" href="$general-utils_8inc.html#a6185d0c82f5be193802f7bd846fdd9f6" title="dir_fn" alt="" coords="941,111,995,140"/>
+<area shape="rect" id="node9" href="$classsysbackup__plugin__base__c.html#a6504cd010cb32ee39f8659247b888645" title="sysbackup_plugin_base_c::tarball_ext" alt="" coords="169,109,412,139"/>
+<area shape="rect" id="node11" href="$classsysbackup__plugin__base__c.html#a51c39b5f33bea9632e037e0b94fa0db8" title="sysbackup_plugin_base_c::verbose" alt="" coords="176,163,405,192"/>
+<area shape="rect" id="node13" href="$classsysbackup__plugin__base__c.html#ac75ecf5dfcc807907a65ef66293a6eae" title="sysbackup_plugin_base_c::vfs_compress_file" alt="" coords="147,216,435,245"/>
+<area shape="rect" id="node20" href="$classsysbackup__plugin__base__c.html#af6cf707bae8e064fec0b7c6cfcadd680" title="sysbackup_plugin_base_c::vfs_tarball_folder" alt="" coords="149,269,432,299"/>
+<area shape="rect" id="node23" href="$classplugin__appreference__c.html#aab64680d0a39449c7b28d78550694f0d" title="plugin_appreference_c::warning" alt="" coords="188,323,393,352"/>
+<area shape="rect" id="node7" href="$general-utils_8inc.html#a0055ef7f48b70fd8f1c75cc5304b34bb" title="single_chars" alt="" coords="1159,111,1252,140"/>
+<area shape="rect" id="node15" href="$classsysbackup__plugin__base__c.html#a32168f03079994172f55c1c80bc81752" title="sysbackup_plugin_base_c::rel_ref" alt="" coords="525,216,744,245"/>
+<area shape="rect" id="node18" href="$classsysbackup__plugin__base__c.html#a7bf5323a9f76fcbf3f8e2d5f7b39c583" title="sysbackup_plugin_base_c::encode_filename" alt="" coords="828,216,1108,245"/>
+<area shape="rect" id="node25" href="$classplugin__appreference__c.html#aa0d6ac531d747c3b05553e6cd57a74d9" title="plugin_appreference_c::_message_prefix_text" alt="" coords="491,323,779,352"/>
+</map>

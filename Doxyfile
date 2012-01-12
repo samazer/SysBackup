@@ -620,12 +620,15 @@ WARN_LOGFILE           =
 # directories like "/usr/src/myproject". Separate the files or directories 
 # with spaces.
 
-INPUT                  = /projects/server-scripts/backupv3 \
-                         dumpusers \
+INPUT                  = dumpusers \
                          localexec \
                          remexec \
                          sysbackup \
-                         sysbackup.conf
+                         sysbackup.conf \
+                         app/ \
+                         lib/ \
+                         conf.d/ \
+                         plugin.d/
 
 # This tag can be used to specify the character encoding of the source files 
 # that doxygen parses. Internally doxygen uses the UTF-8 encoding, which is 
@@ -675,8 +678,8 @@ FILE_PATTERNS          = *.c \
                          *.for \
                          *.vhd \
                          *.vhdl \
-                         .conf \
-                         .plugin
+                         *.conf \
+                         *.plugin
 
 # The RECURSIVE tag can be used to turn specify whether or not subdirectories 
 # should be searched for input files as well. Possible values are YES and NO. 

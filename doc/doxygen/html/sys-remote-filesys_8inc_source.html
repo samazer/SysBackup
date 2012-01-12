@@ -218,8 +218,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00131"></a>00131    {
 <a name="l00132"></a>00132       $this-&gt;_result_stderr( $stdout, $stderr );
 <a name="l00133"></a>00133 
-<a name="l00134"></a>00134       <span class="keywordflow">if</span> ( substr( $stdout, 0, strlen( <a class="code" href="sys-remote-filesys_8inc.html#a2c59bc306b1f4806c8220014ce7dfadf">LOCALEXEC_TXTRESULT</a> ) ) == <a class="code" href="sys-remote-filesys_8inc.html#a2c59bc306b1f4806c8220014ce7dfadf">LOCALEXEC_TXTRESULT</a> )
-<a name="l00135"></a>00135          <span class="keywordflow">return</span> urldecode(trim(substr($stdout, strlen(<a class="code" href="sys-remote-filesys_8inc.html#a2c59bc306b1f4806c8220014ce7dfadf">LOCALEXEC_TXTRESULT</a>))));
+<a name="l00134"></a>00134       <span class="keywordflow">if</span> ( substr( $stdout, 0, strlen( <a class="code" href="localexec.html#a2c59bc306b1f4806c8220014ce7dfadf">LOCALEXEC_TXTRESULT</a> ) ) == <a class="code" href="localexec.html#a2c59bc306b1f4806c8220014ce7dfadf">LOCALEXEC_TXTRESULT</a> )
+<a name="l00135"></a>00135          <span class="keywordflow">return</span> urldecode(trim(substr($stdout, strlen(<a class="code" href="localexec.html#a2c59bc306b1f4806c8220014ce7dfadf">LOCALEXEC_TXTRESULT</a>))));
 <a name="l00136"></a>00136 
 <a name="l00137"></a>00137       <span class="keywordflow">return</span> trim( $stdout );
 <a name="l00138"></a>00138    }
@@ -235,7 +235,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00148"></a>00148          <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00149"></a>00149       }
 <a name="l00150"></a>00150 
-<a name="l00151"></a>00151       <span class="keywordflow">if</span> ( substr( $stdout, 0, strlen( <a class="code" href="sys-remote-filesys_8inc.html#a2c59bc306b1f4806c8220014ce7dfadf">LOCALEXEC_TXTRESULT</a> ) ) == <a class="code" href="sys-remote-filesys_8inc.html#a2c59bc306b1f4806c8220014ce7dfadf">LOCALEXEC_TXTRESULT</a> )
+<a name="l00151"></a>00151       <span class="keywordflow">if</span> ( substr( $stdout, 0, strlen( <a class="code" href="localexec.html#a2c59bc306b1f4806c8220014ce7dfadf">LOCALEXEC_TXTRESULT</a> ) ) == <a class="code" href="localexec.html#a2c59bc306b1f4806c8220014ce7dfadf">LOCALEXEC_TXTRESULT</a> )
 <a name="l00152"></a>00152          $stdout = substr( $stdout, strpos( $stdout, <span class="stringliteral">&quot;\n&quot;</span> ) );
 <a name="l00153"></a>00153 
 <a name="l00154"></a>00154       $vals = explode( <span class="stringliteral">&quot;\n&quot;</span>, trim($stdout) );
@@ -264,7 +264,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00177"></a>00177    {
 <a name="l00178"></a>00178       $this-&gt;_result_stderr( $stdout, $stderr );
 <a name="l00179"></a>00179 
-<a name="l00180"></a>00180       <span class="keywordflow">if</span> ( substr( $stdout, 0, strlen( <a class="code" href="sys-remote-filesys_8inc.html#a2c59bc306b1f4806c8220014ce7dfadf">LOCALEXEC_TXTRESULT</a> ) ) == <a class="code" href="sys-remote-filesys_8inc.html#a2c59bc306b1f4806c8220014ce7dfadf">LOCALEXEC_TXTRESULT</a> )
+<a name="l00180"></a>00180       <span class="keywordflow">if</span> ( substr( $stdout, 0, strlen( <a class="code" href="localexec.html#a2c59bc306b1f4806c8220014ce7dfadf">LOCALEXEC_TXTRESULT</a> ) ) == <a class="code" href="localexec.html#a2c59bc306b1f4806c8220014ce7dfadf">LOCALEXEC_TXTRESULT</a> )
 <a name="l00181"></a>00181       {
 <a name="l00182"></a>00182          <span class="keywordflow">if</span> ( ($p = strpos( $stdout, <span class="stringliteral">&quot;\n&quot;</span> )) === <span class="keyword">false</span> )
 <a name="l00183"></a>00183             <span class="keywordflow">return</span> <span class="stringliteral">&quot;&quot;</span>;
@@ -331,10 +331,10 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00244"></a>00244          <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00245"></a>00245       }
 <a name="l00246"></a>00246 
-<a name="l00247"></a>00247       <span class="keywordflow">if</span> ( strtoupper($output[<span class="stringliteral">&quot;stdout&quot;</span>]) == strtoupper(<a class="code" href="sys-remote-filesys_8inc.html#a2c59bc306b1f4806c8220014ce7dfadf">LOCALEXEC_TXTRESULT</a> . <span class="stringliteral">&quot;true\n&quot;</span>) )
+<a name="l00247"></a>00247       <span class="keywordflow">if</span> ( strtoupper($output[<span class="stringliteral">&quot;stdout&quot;</span>]) == strtoupper(<a class="code" href="localexec.html#a2c59bc306b1f4806c8220014ce7dfadf">LOCALEXEC_TXTRESULT</a> . <span class="stringliteral">&quot;true\n&quot;</span>) )
 <a name="l00248"></a>00248          <span class="keywordflow">return</span> <span class="keyword">true</span>;
 <a name="l00249"></a>00249 
-<a name="l00250"></a>00250       <span class="keywordflow">if</span> ( strtoupper($output[<span class="stringliteral">&quot;stdout&quot;</span>]) == strtoupper(<a class="code" href="sys-remote-filesys_8inc.html#a2c59bc306b1f4806c8220014ce7dfadf">LOCALEXEC_TXTRESULT</a> . <span class="stringliteral">&quot;false\n&quot;</span>) )
+<a name="l00250"></a>00250       <span class="keywordflow">if</span> ( strtoupper($output[<span class="stringliteral">&quot;stdout&quot;</span>]) == strtoupper(<a class="code" href="localexec.html#a2c59bc306b1f4806c8220014ce7dfadf">LOCALEXEC_TXTRESULT</a> . <span class="stringliteral">&quot;false\n&quot;</span>) )
 <a name="l00251"></a>00251          <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00252"></a>00252 
 <a name="l00253"></a>00253       $msg = array( <span class="stringliteral">&quot;localexec call &quot;</span>
@@ -593,7 +593,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="sys-remote-filesys_8inc.html">sys-remote-filesys.inc</a>      </li>
-      <li class="footer">Generated on Thu Jan 12 2012 16:42:07 for SysBackup by&#160;
+      <li class="footer">Generated on Thu Jan 12 2012 18:28:07 for SysBackup by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

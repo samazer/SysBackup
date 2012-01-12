@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classmysql__plugin__c.html#aab77694ad6652a9e2c81834415bbaa07" title="get_database_list" alt="" coords="145,112,268,141"/>
+<area shape="rect" id="node5" href="$classplugin__appreference__c.html#a0824c910c5d7b7949a8d983ea0b34c1f" title="plugin_appreference_c::fatal" alt="" coords="340,5,524,35"/>
+<area shape="rect" id="node9" href="$classmysql__plugin__c.html#ab6c3c2e5ecada87922be69022cd01abb" title="required_options" alt="" coords="373,59,491,88"/>
+<area shape="rect" id="node11" href="$general-sysexec_8inc.html#ae6efbf28782d7bf198e599ea0a0c121a" title="sysexec" alt="" coords="397,112,467,141"/>
+<area shape="rect" id="node13" href="$classsysbackup__plugin__base__c.html#a51c39b5f33bea9632e037e0b94fa0db8" title="sysbackup_plugin_base_c::verbose" alt="" coords="317,165,547,195"/>
+<area shape="rect" id="node15" href="$classplugin__appreference__c.html#aab64680d0a39449c7b28d78550694f0d" title="plugin_appreference_c::warning" alt="" coords="329,219,535,248"/>
+<area shape="rect" id="node7" href="$classplugin__appreference__c.html#aa0d6ac531d747c3b05553e6cd57a74d9" title="plugin_appreference_c::_message_prefix_text" alt="" coords="595,112,883,141"/>
+</map>
