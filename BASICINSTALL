@@ -58,6 +58,8 @@ Basic Install
                                                                +-- remexec
                                                              +-- sysbackup
                                                         \-- sysbackup.conf
+                                                                 /var/log/
+                                                         \-- sysbackup.log
 
    This process is relatively simple. It consists of unpacking the
    SysBackup package into a convenient location (we'll use /opt/sysbackup/
@@ -136,6 +138,18 @@ Basic Install
        cp /opt/sysbackup/sysbackup.conf /etc/sysbackup/. The file contains
        comments that will help you to understand the various items that
        you need to configure.
+   10. SysBackup will log a limited amount of information to
+       /var/log/sysbackup.log during each backup run. Create the log file
+       as follows so that SysBackup can write to it:
+
+$ sudo touch /var/log/sysbackup.log
+$ sudo chmod 666 /var/log/sysbackup.log
+
+       The chmod command above is only necessary if you plan on running
+       sysbackup without root permissions.
+       At the time of this writing there is no configuration option for
+       changing the location of the log file - you will have to edit the
+       code for now if you need to change the log file location.
 
    This completes the software and folder setup. At this point the
    SysBackup script will run but it will not do much for you. To get the
@@ -161,7 +175,7 @@ Basic Install
     Copyright © 2011 by [18]Sam Azer<[19]sam@azertech.net>, All rights
     reserved.
 
-   Last modified: Thu Jan 12 16:20:09 EST 2012
+   Last modified: Thu Jan 12 17:37:40 EST 2012
 
 References
 

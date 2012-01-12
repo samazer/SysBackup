@@ -24,6 +24,8 @@
                                                            |   +-- weekly/
                                                           |   +-- monthly/
                                                                  \-- temp/
+                                                                 /var/log/
+                                                       \-- remote-exec.log
 
    The procedure for sending your backupsets to a remote storage server
    via SSH is similar to the procedure for setting-up SysBackup on your
@@ -165,13 +167,16 @@ $ sudo chmod 666 /var/log/remote-exec.log
        localexec without root permissions.
        At the time of this writing there is no configuration option for
        changing the location of the log file - you will have to edit the
-       code for now.
-   11. Verify the setup of the sshremote server by using the remexec
-       utility test.azertech.net:
+       code for now if you need to change the log file location.
+   11. Verify the setup of the sshremote server by using the remexec test
+       utility on test.azertech.net. The command below will read the
+       /etc/sysbackup-nas.conf file on the remote storage server and
+       display it to the console. The result should look something like
+       this:
 
-$ /opt/sysbackup-v3.01a/remexec /etc/sysbackup/keys/localexec \
-                                   sysbackup [at] nas.azertech.net \
-                                   readfile /etc/sysbackup-nas.conf
+$ /opt/sysbackup/remexec /etc/sysbackup/keys/localexec \
+                            sysbackup@nas.azertech.net \
+                            readfile /etc/sysbackup-nas.conf
 path_temp=/home/sysbackup/temp/
 path_daily=/home/sysbackup/%HOST%/daily/
 path_weekly=/home/sysbackup/%HOST%/daily/
@@ -198,11 +203,10 @@ ly rotation
    "rotation_total_monthly"=> 4, // total number of monthly backups to keep
                                                                   )));
 
-   13. Finally, on the server that you want to backup (in this example
-       it's test.azertech.net,) run SysBackup with the --dump-config
-       option to see if you've done everything correctly. If everything is
-       okay you will get a nice dump that will look similar to the
-       following:
+   Finally, (again on the server that you want to backup - in this example
+   it's test.azertech.net,) run SysBackup with the --dump-config option to
+   see if you've done everything correctly. If everything is okay you will
+   get a nice dump that will look similar to the following:
 
 $ sudo /opt/sysbackup/sysbackup --dump-config
 
@@ -258,11 +262,10 @@ SSH Remote Fileio VFS Plugin
 ...
 
 
-   14. At this point your sshremote server is ready for action.
-
-   Repeat the above steps for each remote server you need. In most cases
-   you will want to backup your VM to the physical host and, separately,
-   to at least one remote host (on or offsite.)
+   At this point your remote server is ready for action. You will want to
+   repeat the above steps for any other remote server you need. If you are
+   backing-up a Virtual Machine you will want to backup the VM to the
+   physical host and at least one onsite or offsite remote host.)
      __________________________________________________________________
 
 
@@ -272,7 +275,7 @@ SSH Remote Fileio VFS Plugin
     Copyright © 2011 by [16]Sam Azer<[17]sam@azertech.net>, All rights
     reserved.
 
-   Last modified: Thu Jan 12 16:22:58 EST 2012
+   Last modified: Thu Jan 12 17:44:20 EST 2012
 
 References
 

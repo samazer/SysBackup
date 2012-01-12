@@ -54,19 +54,6 @@ Overview
    database server, the mailman.plugin script is designed to backup a
    mailman installation, etc.
 
-   Some of the plugins perform generic functions. The sysdirs.plugin, for
-   example, is designed to tarball any list of system folders. This tends
-   to work well for system folders that are rarely updated but wastes a
-   huge amount of disk space if you try using it on user home directories.
-   Users typically make changes to the files in their working folders and
-   those changes, when part of a huge tarball, prevent the SysBackup
-   utility from making use of hardlinks to save disk space. Therefore, the
-   homedirs.plugin is designed to list all the files and folders in a
-   users' home directory and compress everything in a more granular
-   fashion to save disk space. Another side-effect of more granular
-   tarballs is that they make it easier for the system administrator to
-   find files that might be requested by the users.
-
    Once you get to know about the different plugins you can setup the jobs
    you need to properly backup your server or workstation. Again,
    setting-up the backup jobs is fairly easy. Job configuration scripts
@@ -101,7 +88,7 @@ Overview
     Copyright © 2011 by [24]Sam Azer<[25]sam@azertech.net>, All rights
     reserved.
 
-   Last modified: Thu Jan 12 14:36:35 EST 2012
+   Last modified: Thu Jan 12 17:35:24 EST 2012
 
 References
 

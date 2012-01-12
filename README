@@ -67,24 +67,39 @@ The Solution
    files into a backup set. The jobs are really easy to setup.
 
    The jobs make use of a collection of plugins that are designed to
-   simplify common tasks. Some of the plugins, such as the MailMan Mailing
-   List Plugin, help the administrator perform several related tasks by
-   configuring one simple backup job. Some of the plugins, such as the
-   MySQL plugin, understand a specific service and are able to correctly
-   extract data from that service. This allows the more general SysBackup
-   software to make valid tarballs from the MySQL data.
+   simplify common tasks. Each plugin is a small and simple script that is
+   designed to perform some kind of common task. For example the
+   mysql.plugin script is designed to backup a MySQL database server, the
+   mailman.plugin script is designed to backup a mailman installation,
+   etc.
+
+   Some of the plugins perform generic functions. The sysdirs.plugin, for
+   example, is designed to tarball any list of system folders. This tends
+   to work well for system folders that are rarely updated but wastes a
+   huge amount of disk space if you try using it on user home directories.
+   Users typically make changes to the files in their working folders and
+   those changes, when part of a huge tarball, prevent the SysBackup
+   utility from making use of hardlinks to save disk space. Therefore, the
+   homedirs.plugin is designed to list all the files and folders in a
+   users' home directory and compress everything into separate files. This
+   more granular approach can save a great deal of disk space. It can also
+   make it easier for the system administrator to find files that might be
+   requested by the users.
+
+   At the time of this writing there is a small collection of plugins
+   available and, hopefully, that collection will grow over time.
+
+   Once you get to know about the different plugins you can setup the jobs
+   you need to properly backup your server or workstation. Again,
+   setting-up the backup jobs is fairly easy. Job configuration scripts
+   are really just little scripts that schedule calls to the plugins. If
+   you need to do something complicated you can take a look at the code
+   for the existing plugins and roll your own.
 
    The resulting backup sets are conveniently organized into daily, weekly
-   and monthly rotations. Each backupset contains a set of sub-folders
-   containing, hopefully, everything related to a particular service or
-   user.
-
-   Note that SysBackup uses plugins for such tasks as encryption of
-   backupsets and SSH access to remote storage. This allows the behavior
-   of SysBackup to be changed by simply making use of different plugins as
-   needed. Most important: The plugins are really easy to write. If you
-   need something you don't see you might find that you can script it
-   yourself in a few minutes.
+   and monthly rotations that are automatically pruned for you. Each
+   backupset contains a set of sub-folders containing, hopefully,
+   everything related to a particular service or user.
 
    Together these tools become a powerful and effective solution to the
    day-to-day problems faced by a system administrator. At the same time,
@@ -119,12 +134,12 @@ Limitations
 
 Be Prepared!
 
-   [main-use-case.png] It's always a good idea to make some kind of backup
-   - having copies of data is better than not having copies - but any
-   experienced system administrator will tell you that backups are not, by
-   themselves, very useful. Blindly running a backup utility is not the
-   same as being prepared for the day-to-day issues that your organization
-   will face over a period of years.
+   [14][main-use-case.png] It's always a good idea to make some kind of
+   backup - having copies of data is better than not having copies - but
+   any experienced system administrator will tell you that backups are
+   not, by themselves, very useful. Blindly running a backup utility is
+   not the same as being prepared for the day-to-day issues that your
+   organization will face over a period of years.
 
    The goal of any serious backup process is to be prepared. An
    experienced system administrator wants to make sure that any piece of
@@ -149,13 +164,13 @@ Be Prepared!
      __________________________________________________________________
 
 
-                             [14][agpl-v3-logo.svg]   [15][gfdl-logo.svg]
+                             [15][agpl-v3-logo.svg]   [16][gfdl-logo.svg]
 
 
-    Copyright © 2011 by [16]Sam Azer<[17]sam@azertech.net>, All rights
+    Copyright © 2011 by [17]Sam Azer<[18]sam@azertech.net>, All rights
     reserved.
 
-   Last modified: Sun Jan 8 21:51:39 EST 2012
+   Last modified: Thu Jan 12 17:06:30 EST 2012
 
 References
 
@@ -172,7 +187,8 @@ References
   11. http://www.azertech.net/content/view/93/29/
   12. http://www.azertech.net/content/view/95/29/
   13. http://www.azertech.net/content/view/70/29/
-  14. http://www.gnu.org/licenses/agpl.html
-  15. http://www.gnu.org/copyleft/fdl.html
-  16. http://azertech.net/about
-  17. mailto:sam@azertech.net?subject=SysBackup
+  14. http://www.azertech.net/content/view/70/29/
+  15. http://www.gnu.org/licenses/agpl.html
+  16. http://www.gnu.org/copyleft/fdl.html
+  17. http://azertech.net/about
+  18. mailto:sam@azertech.net?subject=SysBackup

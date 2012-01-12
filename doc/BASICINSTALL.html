@@ -87,6 +87,11 @@ style="padding: 10px;"
 <tt>+-- <font color='brown'>remexec</font></tt><br />
 <tt>+-- <font color='brown'>sysbackup</font></tt><br />
 <tt>\-- <font color='brown'>sysbackup.conf</font></tt><br />
+<br>
+<br>
+<br>
+<tt><font size=+1 color='blue'>/var/log/</font></tt><br />
+<tt>\-- <font color='brown'>sysbackup.log</font></tt><br />
 </small></small></td></tr></table>
 
 <p>This process is relatively simple. It consists of
@@ -254,6 +259,23 @@ target="_blank"
     /etc/sysbackup/</tt>. The file contains comments that will help
     you to understand the various items that you need to configure.
 
+
+<li>SysBackup will log a limited amount of information to
+<tt>/var/log/sysbackup.log</tt> during each backup run. Create the log
+file as follows so that SysBackup can write to it:
+
+<blockquote><pre>
+$ <b>sudo touch /var/log/sysbackup.log</b>
+$ <b>sudo chmod 666 /var/log/sysbackup.log</b>
+</pre></blockquote>
+
+<p>The <tt>chmod</tt> command above is only necessary if you plan on
+running <tt>sysbackup</tt> without root permissions.
+
+<p>At the time of this writing there is no configuration option for
+changing the location of the log file - you will have to edit the code
+for now if you need to change the log file location.
+
 </ol>
 
 <p>This completes the software and folder setup. At this point the
@@ -302,5 +324,5 @@ All rights reserved.<br>
 </address>
 
 
-<!-- hhmts start -->Last modified: Thu Jan 12 16:20:09 EST 2012 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Thu Jan 12 17:37:40 EST 2012 <!-- hhmts end -->
 </body> </html>

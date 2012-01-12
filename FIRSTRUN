@@ -27,9 +27,37 @@
      $ sudo /opt/sysbackup/sysbackup --dump-config
 
    You should now be able to run the backup and see the desired results.
-   Here's the output from a test run on a dev workstation:
+   Check the Sample Output below to see the output from a test run on a
+   dev VM.
 
-   (please scroll down the page to see the dump.)
+  Troubleshooting
+
+   There are quite a few sanity checks that take place immediately after
+   you run the SysBackup script. If you have SSH Remote servers configured
+   you might experience a noticable delay before the configuration dump is
+   produced.
+
+   The code is designed to exit with a fatal error if the sanity checks
+   find any problem that might block the script from generating the
+   complete backupset. As a result your first few attampts to run
+   SysBackup may result in a bunch of complicated error messages.
+   Hopefully you will find the messages to be sufficiently helpful and you
+   will correct the minor problems very quickly.
+
+   Problems that occur on a remote storage server are sometimes difficult
+   to debug. Don't forget to check the OpenSSH Secure Log on the remote
+   server, as well as the error messages logged to
+   /var/log/remote-exec.log (also on the remote server.)
+
+   At the time of this writing the lowest version of PHP that has been
+   tested by the author with SysBackup is 5.1.6. If you get any Function
+   Not Found errors and the offending function name is listed in the PHP
+   documentation, please email the author at sam [at] azertech [dot] net
+   with your PHP version and the function name.
+
+  Sample Output
+
+   Here is the sample output from a run of SysBackup on a test VM:
 
 $ sudo /opt/sysbackup/sysbackup --dump-config --exec
 System Backups 3.01(alpha)
@@ -164,19 +192,12 @@ genbackups: Generate the Backup Set
 
   1900.System.SystemWWW: homedirs(sysweb)
     var-www       146B *var-www-index.html.gz
-    var-www       134B *var-www-music.tgz
-    var-www       123B *var-www-projects.tgz
     var-www       133B *var-www-usr--share--doc.tgz
-  --------dev.azertech.net: 1.3715s  *536B/4
+  --------dev.azertech.net: 1.3715s  *536B/2
 
   2000.Daemons.MySQL: mysql(mysqldb-localhost)
-    mysql        17MiB *localhost-as400_magento.sql.gz
-    mysql         936B *localhost-caketest.sql.gz
-    mysql        51MiB *localhost-debian_magento.sql.gz
     mysql       123KiB localhost-information_schema.sql.gz
     mysql       132KiB *localhost-mysql.sql.gz
-    mysql        36KiB *localhost-netlink_drupal.sql.gz
-    mysql         420B *localhost-symfony.sql.gz
   --------dev.azertech.net: 1:09.9145s 68MiB/7 *68MiB/6
 
   2000.Daemons.MySQL-Config: sysdirs(MySQLConfig)
@@ -198,16 +219,9 @@ auxops: Auxiliary Operations (ie: copy to NAS)
       484KiB mail/var-spool-mail-root.gz                nas:*0.8114s
          67B mail/etc-aliases.gz                        nas:*0.8193s
         146B var-www/var-www-index.html.gz              nas:*0.8327s
-        134B var-www/var-www-music.tgz                  nas:*0.7859s
-        123B var-www/var-www-projects.tgz               nas:*0.8371s
         133B var-www/var-www-usr--share--doc.tgz        nas:*0.8761s
-       17MiB mysql/localhost-as400_magento.sql.gz       nas:*0.8077s
-        936B mysql/localhost-caketest.sql.gz            nas:*0.8865s
-       51MiB mysql/localhost-debian_magento.sql.gz      nas:*0.8471s
       123KiB mysql/localhost-information_schema.sql.gz  nas:0.7971s
       132KiB mysql/localhost-mysql.sql.gz               nas:*0.8912s
-       36KiB mysql/localhost-netlink_drupal.sql.gz      nas:*0.8575s
-        420B mysql/localhost-symfony.sql.gz             nas:*0.8293s
         3KiB mysql/etc-mysql.tgz                        nas:*0.8724s
       228KiB mysql/var-log-mysql.tgz                    nas:0.7949s
   ------------dev.azertech.net: 24.5852s
@@ -218,11 +232,14 @@ Summary Stats
   -sysbackup[at]nas.azertech.net: 24.1901s 218MiB/20 *69MiB/14 (~32GiB/h)
 
 
-   NOTE: The stars (*) in the above output indicate that a file was
+   NOTES: The output above has been manually edited for privacy and
+   various output lines have been deleted. As such the total numbers of
+   bytes, the tarball counts and the estimated throughputs are not
+   correct. The stars (*) in the above output indicate that a file was
    hardlinked instead of being copied. This does not save any time on the
    local filesystem but it saves a great deal of time on the remote
-   filesystems under SSH as only the SHA1 hash and link command go over
-   the network.
+   filesystems under SSH as only a few filesystem commands go over the
+   network in cases where tarballs are hardlinked instead of copied.
 
 Going Further
 
@@ -249,7 +266,7 @@ Going Further
     Copyright © 2011 by [16]Sam Azer<[17]sam@azertech.net>, All rights
     reserved.
 
-   Last modified: Thu Jan 12 16:30:44 EST 2012
+   Last modified: Thu Jan 12 17:28:53 EST 2012
 
 References
 
