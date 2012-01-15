@@ -155,7 +155,7 @@ class backupvfs_localio_c extends backupvfs_baseio_c
          if ( file_put_contents( $abs_ref, $msg ) === false )
             $this->fatal( "unable to write error message file: {$rel_ref}" );
 
-         if ( chmod( $abs_ref, $this->sys_umaskfiles ) === false )
+         if ( chmod( $abs_ref, $this->get_umaskfiles() ) === false )
             $this->fatal( "unable to change mode on file: {$rel_ref}" );
       }
 
