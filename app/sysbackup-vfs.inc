@@ -530,6 +530,9 @@ class backupvfs_main_c extends plugin_framework_c
 
    function vfs_init( $backupset_name  = false )
    {
+      if ( $this->appmode_sanitycheck() )
+         return; // no need to init the filesystems during a sanitycheck
+
       if ( $backupset_name === false )
       {
          $backupset_name = str_replace( "%HOST%", 
@@ -684,6 +687,9 @@ class backupvfs_main_c extends plugin_framework_c
 
    function vfs_start()
    {
+      if ( $this->appmode_sanitycheck() )
+         return; // no need to init the filesystems during a sanitycheck
+
       $this->sys_local->vfs_start();
 
       if ( $this->sys_local_weekly->plugin_enabled )

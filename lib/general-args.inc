@@ -605,12 +605,6 @@ class general_args_c
          {
             $args    = $arg_spec["args"];
             $params  = $arg_spec["params"];
-            $default = isset( $arg_spec["default"] ) 
-                          ? $arg_spec["default"]
-                          : NULL;
-
-            $ex      = $arg_spec["example"];
-            $desc    = $arg_spec["desc"];
 
             if ( !is_array( $args ) )
               $args = array( $args );

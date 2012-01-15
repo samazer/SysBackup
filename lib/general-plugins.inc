@@ -574,6 +574,19 @@ class plugin_framework_c extends teelog_c
 
 
 
+   function appmode_sanitycheck()
+   {
+      return !$this->app_exec_flag;
+   }
+
+
+   function appmode_exec()
+   {
+      return $this->app_exec_flag;
+   }
+
+
+
    function set_appexec( $flg = -1 )
    {
       if ( $flg === -1 )
@@ -1010,7 +1023,7 @@ class plugin_framework_c extends teelog_c
       }
 
       // tell all the plugins that they've been loaded
-      if ( $this->app_exec_flag )
+      if ( $this->appmode_exec() )
       {
          if ( $this->verbose() )
             $this->tee( "...loading plugins at " . $this->all_time(true) . " seconds" );
@@ -1117,7 +1130,7 @@ class plugin_framework_c extends teelog_c
       $this->app_before_events();
       $this->default_action_args();
 
-          if ( $this->app_exec_flag )
+          if ( $this->appmode_exec() )
           {
              $this->trigger_events();
 

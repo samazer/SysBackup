@@ -4,6 +4,9 @@ AFORMs library:
 
    2012.01.15 SA:
 
+      * Added appmode_sanitycheck() and appmode_exec() to clarify the
+        two major modes of apps running under the plugin framework.
+
       * Changed quite a few previously fatal errors into
         warnings. This allows users to run an app which is totally not
         setup - and still see the help text.

@@ -171,15 +171,17 @@ EOT;
    function app_before_init()
    {
       // see: sysbackup-vfs.inc: vfs_init()
-      $this->vfs_init();
+      if ( $this->appmode_exec() )
+         $this->vfs_init();
 
       $argv = &$GLOBALS["argv"];
 
       $this->hostname_short( $this->get_hostid() );
       $this->application_name( basename( $argv[0] ) );
 
-      $this->teefn( dir_fn( $this->get_path_backupset(), 
-                            $this->get_hostname() . EXT_OUTPUTCAPTURE ) );
+      if ( $this->appmode_exec() )
+         $this->teefn( dir_fn( $this->get_path_backupset(), 
+                               $this->get_hostname() . EXT_OUTPUTCAPTURE ) );
   
 
       $cmdl = "";
@@ -224,7 +226,9 @@ EOT;
       $this->warn_disk_space( true );
 
       // see: sysbackup-vfs.inc: vfs_start()
-      $this->vfs_start();
+      if ( $this->appmode_exec() )
+         $this->vfs_start();
+
       $this->_notquiet_report_header(true);
 
       $this->max_job_subfolder_width = 0;
@@ -241,7 +245,8 @@ EOT;
       $this->summary_stats();
 
       // see: sysbackup-vfs.inc: vfs_end()
-      $this->vfs_end();
+      if ( $this->appmode_exec() )
+         $this->vfs_end();
    }
 
 
@@ -251,7 +256,8 @@ EOT;
       // before each job to avoid having $targets going into
       // random subfolders.
       // see: sysbackup-vfs.inc: vfs_subfolder()
-      $this->vfs_subfolder( "" );
+      if ( $this->appmode_exec() )
+         $this->vfs_subfolder( "" );
 
       $this->warn_disk_space( false );
 

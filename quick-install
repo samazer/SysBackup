@@ -446,6 +446,17 @@ echo "done.\n";
 
 
 
+if ( file_exists( $conf_filename ) )
+{
+   $backup_conf_filename = $conf_filename . date("-Ymd-His");
+
+   echo "\nrenaming '{$conf_filename}' to '{$backup_conf_filename}'...";
+   unlink( $backup_conf_filename );
+   rename( $conf_filename, $backup_conf_filename );
+   echo "done.\n";
+}
+
+
 echo "\nCreating the main configuration file...";
 
 if ( ($text = file_get_contents( $template_name )) === false )

@@ -11,6 +11,14 @@ SysBackup v3.017alpha
         last night.) Fortunately nobody downloaded any copies so will
         re-post the correction as the same v3.017a.
 
+      * Fixed some calls to code that did more than just sanity
+        checking when the app was in sanity-check mode.
+
+      * Changed a number of fatal errors into warnings so that users
+        can now run sysbackup without root permissions. All the sanity
+        checks will fail and warnings will be issued but the user will
+        eventually get the new help text.
+
 SysBackup v3.017alpha
 
    2012.01.14 SA:
