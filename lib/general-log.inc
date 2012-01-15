@@ -172,11 +172,11 @@ class logfile_c
          $fn = $this->logfile;
       else $this->logfile = $fn;
 
-      if ( !is_writable( $fn ) && ($this->logfile_warning != $fn) )
+      if ( !is_writable( dirname($fn) ) && ($this->logfile_warning != $fn) )
       {
          if ( $this->logfile_warning != $fn )
          {
-            echo "\n", TEELOG_TXTWARNING, "Unable to write to '{$fn}'\n";
+            echo "\n", TEELOG_TXTWARNING, "Unable to write to '" . dirname($fn) . "'\n";
             $this->logfile_warning = $fn;
          }
 
