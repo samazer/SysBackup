@@ -1,0 +1,519 @@
+#!/usr/bin/php
+<?php /* -*- mode: php; mode: mmm; coding: utf-8-unix; -*- */
+/**
+ *
+ * Quick Install
+ *
+ * <p>This script attempts to setup SysBackup. Note that this is
+ * intended to be a super-simple no-frill script with minimal features
+ * and error checking.
+ *
+ * <p><b>Copyright</b>
+ *
+ * <p>Copyright (c) 2009-2010 by Sam Azer, All Rights Reserved.
+ *
+ * <p>This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * <p>This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * <p>You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * @author Sam Azer <sam@azertech.net>
+ * @version 1.0
+ * @package sysbackup
+ * @subpackage sys-utils
+ * @license http://www.gnu.org/licenses/gpl.html GPL
+ * @copyright 2009-2010 by Sam Azer, All rights reserved
+ * @link http://www.azertech.net/
+ * @link http://www.samazer.net/about
+ *
+ *
+ */
+
+
+
+include "lib/general-utils.inc";
+
+
+
+function create_dir( $dir )
+{
+   if ( file_exists( $dir ) )
+   {
+      echo "folder exists: {$dir}\n";
+      return;
+   }
+
+   if ( mkdir( $dir, 0777, true ) != true )
+     throw new Exception( "Unable to mkdir( $dir ) - please check the path and your permissions" );
+}
+
+
+class keyboard_input_c
+{
+   function pause( $prompt = "Press ENTER to continue:" )
+   {
+      return readline( $prompt );
+   }
+
+
+   function text( $prompt, $default )
+   {
+      $r = readline( "{$prompt} [{$default}]:" );
+      if ( $r == "" )
+         return $default;
+
+      return $r;
+   }
+
+
+   function yes_no( $prompt, $default )
+   {
+      $default = strtolower($default);
+
+      $p = $prompt
+         . " ["
+         . ($default == 'y' ? "Y" : "y")
+         . "/"
+         . ($default == 'n' ? "N" : "n")
+         . "]:"
+         ;
+
+      $okay = false;
+      while ( !$okay )
+      {
+         $r = readline( $p );
+         if ( $r == "" )
+            return $default;
+
+         if ( strtolower($r) == 'y' )
+            return 'y';
+
+         if ( strtolower($r) == 'n' )
+            return 'n';
+
+         echo "Please press Enter for '{$default}', or enter 'y' or 'n'\n";
+      }
+   }
+
+
+   function folder( $prompt, $default )
+   {
+      $f = $this->text( $prompt, $default );
+
+      if ( file_exists( $f ) )
+      {
+         echo "Note: already exists: {$f}\n";
+
+         if ( !is_writable( $f ) )
+            echo "Note: you do not have permission to write to this folder\n";
+
+      }
+
+      return $f;
+   }
+}
+
+
+
+function php_ver()
+{
+   $php_ver = trim(substr(`php -v`, 3, 20));
+   if ( ($p = strpos( $php_ver, " " )) !== false )
+      $php_ver = substr( $php_ver, 0, $p );
+
+   return $php_ver;
+}
+
+
+
+echo <<< EOT
+
+Welcome to the SysBackup Quick Install Procedure. 
+
+This is a super-simple script - it will crash for 
+little issues such as trying to create a 
+configuration folder in /etc/ without root 
+permissions. Press Ctrl+C to quit at any time.
+
+First I will ask you a few questions:
+
+(1) What is the SysAdmin email address?
+(2) Where do you want to keep your SysBackup configuration?
+(3) Where do you want to keep your Backups?
+(4) Where do you want to keep your log file?
+
+Then I will tell you what I plan to do so that you can
+approve or cancel the operation.
+
+
+EOT;
+
+
+
+$kbd = new keyboard_input_c();
+$r = $kbd->yes_no( "Shall we begin", 'y' );
+
+if ( $r == 'n' )
+{
+   echo "Okay - please run me again whenever you like.\n";
+   echo "(stopping)\n";
+   exit();
+}
+
+echo "\n";
+
+
+
+$running_as      = trim(`whoami`);
+$hostname        = trim(`hostname --long`);
+$hostid          = trim(`hostname --short`);
+
+$sysbackup_bin   = "sysbackup";
+$sysbackup_conf  = "sysbackup.conf";
+
+$install         = dirname(realpath( $argv[0] ));
+$install_bin     = dir_fn( $install, $sysbackup_bin );
+$install_conf    = dir_fn( $install, "conf.d" );
+$install_plugins = dir_fn( $install, "plugin.d" );
+
+$php_vers        = php_ver();
+$php_vers_tested = ($php_vers >= "5.1");
+$php_vers_okay   = $php_vers_tested ? "been tested" : "NOT BEEN TESTED";
+
+
+if ( $running_as == "root" )
+{
+   $config_dir  = "/etc/sysbackup/";
+   $storage_dir = "/home/sysbackup/";
+   $logfile     = "/var/log/sysbackup.log";
+}
+  else
+{
+   $config_dir  = "/home/{$running_as}/sysbackup/";
+   $storage_dir = "/home/{$running_as}/sysbackup/backups/";
+   $logfile     = "/home/{$running_as}/sysbackup/sysbackup.log";
+}
+
+
+
+echo <<< EOT
+
+PHP Version check:
+
+Your PHP version is {$php_vers}. 
+SysBackup has {$php_vers_okay} with this version of PHP.
+
+
+EOT;
+
+if ( !$php_vers_tested )
+echo <<< EOT
+
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+SysBackup may not function correctly with this version of 
+PHP. Please try it and take a moment to email the author 
+with your PHP Version Number, any Function Not Found errors 
+that you receive and any other pertinent information that 
+the author can use towards improving this software. Thanks!
+xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
+
+EOT;
+
+$kbd->pause();
+
+
+
+
+echo <<< EOT
+
+You are running as user {$running_as} on {$hostname}.
+Your PHP version is {$php_vers}. 
+SysBackup has {$php_vers_okay} with this version of PHP.
+You are installing from {$install}.
+
+The following defaults have been chosen:
+
+       Config Dir: {$config_dir}
+      Storage Dir: {$storage_dir}
+Log File Location: {$logfile}
+
+
+EOT;
+
+
+
+$admin_email = $kbd->text( "What's the system administrators email address?", "{$running_as}@{$hostname}" );
+
+$config_dir  = $kbd->folder( "Where shall I put the configuration files?", $config_dir  );
+$storage_dir = $kbd->folder( "Where shall I put the backupset rotations?", $storage_dir );
+$logfile     = $kbd->folder( "Where shall I put the log file?",            $logfile );
+
+$kbd->pause();
+
+$conf_keys       = dir_fn( $config_dir, "keys" );
+$conf_confd      = dir_fn( $config_dir, "conf.d" );
+$conf_plugind    = dir_fn( $config_dir, "plugin.d" );
+$conf_sysconf    = dir_fn( $config_dir, $sysbackup_conf );
+
+$store_temp      = dir_fn( $storage_dir, "temp" );
+$store_daily     = dir_fn( $storage_dir . "/" . $hostname, "daily" );
+$store_weekly    = dir_fn( $storage_dir . "/" . $hostname, "weekly" );
+$store_monthly   = dir_fn( $storage_dir . "/" . $hostname, "monthly" );
+
+$bin_filename    = dir_fn( $config_dir, $sysbackup_bin  );
+$conf_filename   = dir_fn( $config_dir, $sysbackup_conf );
+$template_name   = dir_fn( $install,    $sysbackup_conf . ".template" );
+
+$key_localexec   = "{$conf_keys}/localexec-{$hostname}.openssh";
+$key_filecopy    = "{$conf_keys}/filecopy-{$hostname}.openssh";
+
+$xlate_params    = array( "running_as" => $running_as,
+                          "hostname" => $hostname,
+                          "hostid" => $hostid,
+                          "admin_email" => $admin_email,
+                          "config_dir" => $config_dir,
+                          "storage_dir" => $storage_dir,
+                          "logfile" => $logfile,
+                          "install" => $install,
+                          "config_dir" => $config_dir,
+                          "storage_dir" => $storage_dir,
+                          "logfile" => $logfile,
+                          "conf_keys" => $conf_keys,
+                          "conf_confd" => $conf_confd,
+                          "conf_plugind" => $conf_plugind,
+                          "conf_sysconf" => $conf_sysconf,
+                          "store_temp" => $store_temp,
+                          "store_daily" => $store_daily,
+                          "store_weekly" => $store_weekly,
+                          "store_monthly" => $store_monthly,
+                          "install_conf" => $install_conf,
+                          "install_plugins" => $install_plugins,
+                        );
+
+
+
+echo <<< EOT
+
+We will now setup:
+
+The Configuration Folder Tree:
+{$config_dir}
++-- {$conf_keys}/
++-- {$conf_confd}/
++-- {$conf_plugind}/
+\-- {$conf_sysconf}
+
+The Backupset Rotations Tree:
+{$storage_dir}
++-- {$store_temp}/
++-- {$store_daily}/
++-- {$store_weekly}/
+\-- {$store_monthly}/
+
+The SysBackup Log File:
+{$logfile}
+
+
+EOT;
+
+
+
+if ( $kbd->yes_no( "Do you wish to continue?", "n" ) != 'y' )
+{
+   echo "Stopping with no changes made.\n";
+   exit(1);
+}
+
+
+
+echo "Creating folders...";
+create_dir( $config_dir    );
+create_dir( $conf_confd    );
+create_dir( $conf_keys     );
+create_dir( $conf_plugind  );
+create_dir( $storage_dir   );
+create_dir( $store_temp    );
+create_dir( $store_daily   );
+create_dir( $store_weekly  );
+create_dir( $store_monthly );
+echo "done.\n";
+
+
+
+
+if ( !file_exists( $key_localexec ) )
+{   
+   echo "Creating Local Exec SSH key...";
+   `ssh-keygen -N "" -f {$key_localexec}`;
+   echo "done.\n";
+}
+  else "Found existing {$key_localexec}\n";
+
+
+if ( !file_exists( $key_filecopy ) )
+{   
+   echo "Creating File Copy SSH key...";
+   `ssh-keygen -N "" -f {$key_filecopy}`;
+   echo "done.\n";
+}
+  else "Found existing {$key_filecopy}\n";
+
+
+
+
+echo "\nCopying default Job Configuration files:\n";
+$default = file_exists( $conf_confd ) ? "n" : "y";
+
+if ( $kbd->yes_no( "Do you wish install or overwrite "
+                 . "the job configuration files?", $default ) == 'y' )
+{
+   $overwrite = $kbd->yes_no( "Do you wish to overwrite "
+                            . "existing job files?", "n" );
+
+   chdir( $install_conf );
+   $files = glob( "*" );
+
+   foreach( $files as $file )
+   {
+      $src = dir_fn( $install_conf, $file );
+      $dst = dir_fn( $conf_confd, $file );
+
+      if ( file_exists( $dst ) )
+      {
+         if ( $overwrite == 'n' )
+            continue;
+
+         if ( unlink( $dst ) === false )
+            throw new Exception( "Unable to remove {$dst}" );
+      }
+
+      if ( copy( $src, $dst ) === false )
+         throw new Exception( "Unable to copy {$src} to {$dst}" );
+   }
+}
+
+echo "done.\n";
+
+
+
+
+echo "\nCopying plugins:\n";
+if ( $kbd->yes_no( "Do you wish to install or update the plugins?", 
+                                           'y' ) == 'y' )
+{
+   $overwrite = $kbd->yes_no( "Do you wish to overwrite "
+                            . "existing plugin files?", "y" );
+
+   chdir( $install_plugins );
+   $files = glob( "*" );
+
+   foreach( $files as $file )
+   {
+      $src = dir_fn( $install_plugins, $file );
+      $dst = dir_fn( $conf_plugind, $file );
+
+      if ( file_exists( $dst ) )
+      {
+         if ( $overwrite == 'n' )
+            continue;
+
+         if ( unlink( $dst ) === false )
+            throw new Exception( "Unable to remove {$dst}" );
+      }
+
+      if ( copy( $src, $dst ) === false )
+         throw new Exception( "Unable to copy {$src} to {$dst}" );
+   }
+}
+
+echo "done.\n";
+
+
+
+echo "\nCreating log file...";
+file_put_contents( $logfile, "initialized\n" );
+echo "done.\n";
+
+
+
+
+echo "\nCreating the main configuration file...";
+
+if ( ($text = file_get_contents( $template_name )) === false )
+   throw new Exception( "Unable to read {$template_name}" );
+
+
+$t = $text;
+foreach ( $xlate_params as $name => $value )
+   $t = str_replace( strtoupper( "%{$name}%" ), $value, $t );
+
+
+if ( file_put_contents( $conf_filename, $t ) === false )
+   throw new Exception( "Unable to write {$conf_filename}" );
+
+echo "done.\n";
+
+
+
+echo "\nCreating a sample sysbackup cron script in {$config_dir}...";
+$script = <<< EOT
+#!/usr/bin/sh
+
+{$install_bin} --config '{$conf_filename}' --dump-config --exec
+
+EOT;
+
+$cronscript = dir_fn( $config_dir, "sysbackup" );
+if ( file_put_contents( $cronscript, $script ) === false )
+   throw new Exception( "Unable to write {$cronscript}" );
+
+echo "done.\n";
+
+
+
+
+
+echo <<< EOT
+
+Almost done...
+
+Please review carefully the settings in {$conf_filename}.
+
+Check in particular:
+- the Time Zone setting.
+- the Host Name and Host ID settings
+- the Keep Local setting
+- the Use Hardlinks setting
+- the Minimum Free Space and Minimum Backup Size settings
+- the Daily, Weekly and Monthly Rotation settings
+
+
+Once you are ready you can try to load and display the 
+configuration:
+
+{$install_bin} --config {$conf_filename} --dump-config
+
+After that you will want to setup the backup jobs that help 
+you meet the anticipated needs of your user community. 
+Check the BE-PREPARED doc for helpful tips and information 
+on how to do this in a meaningful way.
+
+Please take a moment to email the author at 
+sam [at] azertech [dot] net with your questions, comments, 
+concerns and suggestions.
+
+
+EOT;
+
+
+
+

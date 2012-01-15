@@ -1,0 +1,434 @@
+<?php /* -*- mode: php; mode: mmm; coding: utf-8-unix; -*- */
+/**
+ *
+ * Simple System Backup Configuration File
+ *
+ * <b>WARNING</b>
+ *
+ * <p>Backups are meaningless on their own. <b>What you need is a BACKUP,
+ * RESTORE and TEST PROCEDURE</b>.
+ *
+ * <p>I wrote this software for me and for my servers. I tend to
+ * implement the same logic and follow the same procedures on all the
+ * systems that I touch. The software that you see here works very
+ * well for me - but it might not work so well for you! Your results
+ * will depend on your circumstances and how you do things.
+ *
+ * <p>Do not rely on the default settings in this configuration
+ * file. They will work - you will get some backup files - but you may
+ * not have what you need to restore the server in the event of a
+ * disaster.
+ *
+ * <p>It is critically important that you take the time and make the
+ * effort to follow a meaningful backup proceedure. See the Be
+ * Prepared article on AzerTech.net for some tips.
+ *
+ *
+ * <p><b>Introduction</b>
+ *
+ * <p>This PHP script provides the basic configuration information
+ * needed by the BNT Simple Backup script.
+ * 
+ * <p><b>Installation</b>
+ *
+ * <ul>
+ *
+ * <li>Copy this file to /etc/sysbackup/sysbackup.conf and edit it to
+ * suit your needs.
+ *
+ * <li>Setup a job to run the sysbackup script every night. An
+ * easy way to do this is to copy the script to your /etc/cron.daily/
+ * directory.
+ *
+ * <li>If you plan to use the SSH backup to a remote server inside a
+ * secure network you will want to create a chrooted user account (on
+ * the remote server) and install a password-less key pair.
+ *
+ * </ul>
+ *
+ * <p><b>History</b>
+ *
+ * This file started out as a bash script called /etc/backups.conf.
+ *
+ * <p><b>Copyright</b>
+ *
+ * <p>Copyright (c) 2001-2010 by Sam Azer, All Rights Reserved.
+ *
+ * <p>This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * <p>This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * <p>You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
+ *
+ * @author Sam Azer <sam@azertech.net>
+ * @version 2.00 (alpha)
+ * @package server-maint
+ * @subpackage sys-tools
+ * @license http://www.gnu.org/licenses/gpl.html GPL
+ * @copyright 2002-2010 by Sam Azer, All rights reserved
+ * @link http://www.azertech.net/
+ * @link http://www.samazer.net/about
+ *
+ *
+ */
+
+
+
+
+/**
+ *
+ * The email address for the system administrator
+ *
+ */
+$this->set_adminemail("%ADMIN_EMAIL%");
+
+
+/**
+ *
+ * Directory to search for Job Configuration Files
+ *
+ */
+$this->set_dir_config( "%CONF_CONFD%" );
+
+
+/**
+ *
+ * Directory to search for Backup Plugin Scripts
+ *
+ */
+$this->set_dir_plugins( "%CONF_PLUGIND%" );
+
+
+/**
+ *
+ * Desired timezone (used to generate the backup set name)
+ *
+ * See: http://www.php.net/manual/en/timezones.php
+ *
+ */
+$this->set_timezone( "America/Montreal" );
+
+
+/**
+ *
+ * The local host name to be used when assembling directory names
+ *
+ */
+$this->set_hostname( trim( `hostname --long` ), 
+                     trim( `hostname --short` ) );
+
+
+/**
+ *
+ * The log file name
+ *
+ * Occasionally there is some text that is written by a script that
+ * turns out to be helpful. The log file will contain, as faithfully
+ * as possible, a copy of all texts output during the execution of
+ * this script.
+ *
+ */
+$this->logfn( "%LOGFILE%" );
+
+
+
+/**
+ *
+ * The format to pass to the date() function to generate the backupset
+ * name. Embed %HOST% (ie: \%\H\O\S\T\%) to get the current system
+ * host name into the backupset name. This can be helpful when
+ * backupsets are being manually copied.
+ *
+ */
+$this->set_nameformat( "\%\H\O\S\T\%\-Ymd" );
+
+
+/**
+ *
+ * A few settings below will refer to storage space on the local
+ * filesystem. This space is generally divided into Temporary space
+ * and space for the daily, weekly and monthly backup rotations. In
+ * practice all of these spaces are often on a partition that has been
+ * set aside for backups - so the following temporary variable holds
+ * the root path to this partition and the remaining settings are
+ * based on that root path. Of course this temporary variable can be
+ * ignored and you can set your paths as needed below.
+ *
+ */
+$path_root = "%STORAGE_DIR%";
+
+
+/**
+ *
+ * The path to the temp files folder on the local file system. This
+ * folder must have enough free space (sys_minfreespace) to hold the
+ * largest single tarball that might be generated during the backup
+ * process. Note that the backup process is much faster if this temp
+ * folder is on the same partition as the main backup directory.
+ *
+ */
+$this->set_path_temp( "%STORE_TEMP%" );
+
+
+/**
+ *
+ * The path to the backup folder (usually the daily rotation) on the
+ * local file system. This folder must have sys_minbackupsize bytes
+ * free to locally store a full backup (if backups are being stored
+ * locally.)
+ *
+ */
+$this->set_path_daily( "%STORE_DAILY%" );
+
+/**
+ *
+ * The path to the weekly backupset rotations folder on the local file
+ * system. Note that rotations are written much faster if this folder
+ * is on the same partition as the main backup directory.
+ *
+ */
+$this->set_path_weekly( "%STORE_WEEKLY%" );
+
+/**
+ *
+ * The path to the monthly backupset rotations folder on the local file
+ * system. Note that rotations are written much faster if this folder
+ * is on the same partition as the main backup directory.
+ *
+ */
+$this->set_path_monthly( "%STORE_MONTHLY%" );
+
+
+/**
+ *
+ * Do we want a full copy of the backup to be saved on the local filesystem?
+ *
+ */
+$this->set_keeplocal( true );
+
+
+/**
+ *
+ * Do we want to make use of hardlinks between different backupsets?
+ *
+ * The current backup (being generated) should be on the same
+ * partition as the backup that was generated by the most recent
+ * successful backup run. (This software makes this assumption.) If
+ * that's the case - ie: if the most recent successful run can still
+ * be found on the same partition - it makes sense to use hardlinks
+ * for identical files so as to save disk space. 
+ *
+ * Obviously this won't work if Keep Local is off or if there's a
+ * separate script that moves the most recent backup off to another
+ * partition.
+ *
+ * NOTES: 
+ *
+ * 1. The software will not handle attempts to hardlink identical
+ *    files that are on different partitions.
+ * 
+ * 2. It is possible, over a period of many months or a few years, for
+ *    normal hard disk bit rot to cause the data within very old files
+ *    to deteriorate. In some cases (such as long term storage of
+ *    photos, for example,) this will eventually become an
+ *    issue. Please make sure that files are scanned every few months
+ *    to ensure that the hard disk controller detects and correct any
+ *    possible problems.
+ *
+ */
+$this->set_usehardlinks( true );
+
+
+/**
+ *
+ * The minimum amount of free space required to process a backup
+ *
+ * Specify the number of bytes to check for, the minimum amount of
+ * space required, before starting a backup operation. If the system
+ * doesn't have this much storage available on the target device the
+ * nightly-backup script will not try to backup anything - it will
+ * simply quit. 
+ *
+ * <p>If the local filesystem contains the minimum backup space this
+ * script will attempt to execute the various steps in the backup
+ * process.
+ *
+ * <p>The minimum backup space required is slightly larger than the
+ * maximum amount of file space needed by any one step in the backup
+ * process. Note also that any other processes in the system that
+ * might need the same filesystem must be given the space they need
+ * to operate during the backup process.
+ *
+ * <p>Use a value of zero to disable this test. After completing the
+ * first full backup it should be possible to review the files in the
+ * backup and estimate a suitable value to use here.
+ *
+ */
+$this->set_minfreespace( 0 * 1024.0 * 1024.0 * 1024.0 );
+
+
+/**
+ *
+ * The minimum amount of free space required to save a full copy of
+ * the backup
+ *
+ * <p>A local daily backup will be made if the filesystem contains the
+ * amount of space specified in the minimum backup size constant.
+ *
+ * <p>The backup process will execute even if the local filesystem does
+ * not contain this much available space. However, the full backup
+ * will not be saved locally in this case. The backup will be written
+ * to the remote server filesystem if there is enough space there.
+ *
+ * <p>If neither the local or remote filespaces have the minimum required
+ * free space the backup script will simply exit without making a
+ * backup.
+ *
+ * <p>Use a value of zero to disable this test. After completing the
+ * first full backup it should be possible to review the files in the
+ * backup and estimate a suitable value to use here.
+ *
+ */
+$this->set_minbackupsize( 0 * 1024.0 * 1024.0 * 1024.0 );
+
+
+
+/**
+ *
+ * Folder and File Permissions
+ *
+ * Whenever SysBackup creates a folder or file it will attempt to set
+ * the permissions specified here. The first parameter is for folders
+ * and the second for files.
+ *
+ * NOTE: These values are only used for folders and files written by
+ * the SysBackup software (ie: the backupsets.) You should allow much
+ * less access (perhaps even 0700 for user root only) for the root
+ * paths that you create manually when you setup this software on your
+ * server. This is particularly true for servers that are connected to
+ * the public internet.
+ *
+ */
+$this->set_umasks( 0777, 0666 );
+
+
+
+/**
+ *
+ * Rotations Enabled
+ *
+ * Set this to True to automatically rotate nightly backups.  In
+ * effect this limits the total number of daily backups that are
+ * stored in the daily backups folder.  Backups that are generated on
+ * the indicated day of the week are either copied or hard-linked into
+ * the Weekly backups folder and their number is also limited.
+ * Similarly, backups that occur on the indicated day of the month are
+ * either copied or hard-linked into the monthly backups folder. Their
+ * number is limited as with the daily and weekly backups. This
+ * process allows a vast amount of information to be stored over a
+ * very long period of time while limiting the disk space used.
+ *
+ */
+$this->set_rotation_enabled( false );
+
+
+/**
+ *
+ * The day of the week on which to execute the weekly rotation
+ *
+ * The day of the week is compared against the numeric value provided
+ * by the PHP getdate() function. 0=Sunday, 1=Monday, ... 6=Saturday.
+ *
+ * @link http://ca.php.net/manual/en/function.getdate.php getdate()
+ *
+ */
+$this->set_rotation_dayofweek( 0 ); // sunday
+
+
+/**
+ *
+ * The day of the month on which to execute the monthly rotation
+ *
+ * You can put an expression here to calculate the last day of each
+ * month but the backup is usually done in the early morning (ie: 1am
+ * through 5am,) so executing the backup on the first of the month
+ * usually has the effect of backing-up the data from the last working
+ * day of the month.
+ *
+ */
+$this->set_rotation_dayofmonth( 1 ); // first day of every month
+
+/**
+ *
+ * The total number of daily backups to keep in rotation on the local server
+ *
+ */
+$this->set_rotations_daily( 7 );  // keep 7 days of backups online
+
+
+/**
+ *
+ * The total number of weekly backups to keep in rotation on the local server
+ *
+ * Each weekly backup is created on the Day Of Week set above. 
+ *
+ * If hardlinks are enabled and the weekly rotations are on the same
+ * partition as the daily rotations there will be no significant disk
+ * space used - until the corresponding daily backup rotates out of
+ * the system. Be careful not to rely too much on the amount of disk
+ * space you save because of hardlinks - the savings can vanish
+ * suddenly as users make changes to little-used files.
+ *
+ */
+$this->set_rotations_weekly( 12 ); // keep 12 weeks of weekly backups
+
+
+/**
+ *
+ * The total number of monthly backups to keep in rotation on the local server
+ *
+ * Each Monthly backup is created on the Day of Month that was set above.
+ *
+ * As with the Weekly Rotation it is important to be careful about
+ * disk space when using hardlinks. See the note above.
+ *
+ */
+$this->set_rotations_monthly( 12 ); // keep 12 months of monthly backups
+
+
+
+
+
+$this->setup_compression( array( 
+
+   "tar_name"     => "tar",
+   "tar_bin"      => "/bin/tar",
+   "tar_ext"      => ".tgz",
+
+   "tar_defopts"  => "--preserve-order --preserve-permissions --atime-preserve",
+   "tar_opts1"    => "",
+   "tar_opts2"    => "",
+   "tar_opts3"    => "",
+
+   "tar_cmd"      => "%BINARY% %DEFOPTS% %OPTS1% --create %OPTS2% '%SOURCE%' %OPTS3%",
+
+   "gzip_name"    => "gzip",
+   "gzip_bin"     => "/bin/gzip",
+   "gzip_ext"     => ".gz",
+
+   "gzip_defopts" => "--no-name",
+   "gzip_opts1"   => "",
+
+   "gzip_filter"  => "%BINARY% %DEFOPTS% %OPTS1%             >'%TARGET%'",
+   "gzip_file"    => "%BINARY% %DEFOPTS% %OPTS1% <'%SOURCE%' >'%TARGET%'",
+
+                                 ));
+
+

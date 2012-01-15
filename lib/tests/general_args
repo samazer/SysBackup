@@ -1,0 +1,276 @@
+#!/usr/bin/php
+<?php /* -*- mode: php; mode: mmm; coding: utf-8-unix; -*- */
+
+
+include "general-utils.inc";
+include "general-args.inc";
+
+
+class test_general_args_c
+{
+   var $app_config;
+   var $quiet_flag;
+   var $app_confdir;
+   var $app_plugindir;
+
+
+   function callback( $group_id,
+                      $arg_id, $param_count, $args,
+                      $arg_spec
+                    )
+   {
+      echo "at callback( {$group_id}, {$arg_id}, {$param_count}, args, arg_spec )\n";
+      var_dump( $args );
+   }
+
+
+
+   function __construct()
+   {
+      $argspecs = array( "config" => array( "args"    => array( "-c", "--config" ),
+                                            "params"  => 1,
+                                            "prop"    => array( "app_config" ),
+                                            "default" => array( "/etc/application/app.conf" ),
+                                            "example" => "--config <file>",
+                                            "desc"    => "Set the path and file name of the application configuration file.",
+                                          ),
+
+                         "quiet"  => array( "args"    => array( "-q", "--quiet" ),
+                                            "params"  => 0,
+                                            "prop"    => "quiet_flag",
+                                            "default" => false,
+                                            "value"   => true,
+                                            "example" => "--quiet",
+                                            "desc"    => "Force the application to run without issuing any messages to the console.",
+                                          ),
+
+                        "confdir" => array( "args"    => array( "-d", "--conf.d", "--confdir" ),
+                                            "params"  => 1,
+                                            "prop"    => "app_confdir",
+                                            "default" => "/etc/sysbackup/conf.d",
+                                            "example" => "--confdir <path>",
+                                            "desc"    => "Specify the directory that holds the job configuration files",
+                                          ),
+
+                      "plugindir" => array( "args"    => array( "-p", "--plugin.d", "--plugindir" ),
+                                            "params"  => 1,
+                                            "prop"    => "app_plugindir",
+                                            "default" => "/etc/sysbackup/plugin.d",
+                                            "example" => "--plugindir <path>",
+                                            "desc"    => "Specify the directory that holds the plugin scripts",
+                                          ),
+                    );
+
+      general_args_c::register( "test", "Test Args", "This group of args is used for testing", $argspecs );
+      general_args_c::set_callback( "test", $this, "callback" );
+   }
+}
+
+
+$test_obj = new test_general_args_c();
+
+$test_args = array( "./general_args_test",
+                    "--quiet",
+                    "-c", "path",
+                    "foo",
+                    "bar",
+                 );
+
+capture_begin();
+general_args_c::reset();
+$r = general_args_c::scan( $test_args );
+var_dump( $r );
+$x = capture_end();
+
+$y = <<< EOT
+at callback( test, quiet, 0, args, arg_spec )
+array(1) {
+  [0]=>
+  string(7) "--quiet"
+}
+at callback( test, config, 1, args, arg_spec )
+array(2) {
+  [0]=>
+  string(2) "-c"
+  [1]=>
+  string(4) "path"
+}
+array(4) {
+  [0]=>
+  array(1) {
+    [0]=>
+    string(7) "--quiet"
+  }
+  [1]=>
+  array(2) {
+    [0]=>
+    string(2) "-c"
+    [1]=>
+    string(4) "path"
+  }
+  [2]=>
+  array(1) {
+    [0]=>
+    string(3) "foo"
+  }
+  [3]=>
+  array(1) {
+    [0]=>
+    string(3) "bar"
+  }
+}
+EOT;
+
+echo "First Test ", ( trim($x) == trim($y) ) ? "passed" : "FAILED", "\n";
+
+
+$test_args = array( "./general_args_test",
+                    "--invalid-argument",
+                    "--quiet",
+                    "-c",
+                 );
+
+capture_begin();
+general_args_c::reset();
+$r = general_args_c::scan( $test_args );
+var_dump( $r );
+var_dump( general_args_c::get_errors() );
+$x = capture_end();
+
+$y = <<< EOT
+
+at callback( test, quiet, 0, args, arg_spec )
+array(1) {
+  [0]=>
+  string(7) "--quiet"
+}
+bool(false)
+array(2) {
+  [0]=>
+  array(2) {
+    [0]=>
+    string(18) "--invalid-argument"
+    [1]=>
+    string(36) "--invalid-argument is not recognized"
+  }
+  [1]=>
+  array(2) {
+    [0]=>
+    string(2) "-c"
+    [1]=>
+    string(33) "-c requires 1 parameters, 0 found"
+  }
+}
+
+EOT;
+
+echo "Second Test ", ( trim($x) == trim($y) ) ? "passed" : "FAILED", "\n";
+
+
+$test_list = array( array( "file-not-exists", "/etc/resolv.conf",       false ),
+                    array( "file-not-exists", "/etc/resolv.confzzz",    true  ),
+                    array( "file-exists",     "/etc/resolv.conf",       true  ),
+                    array( "file-exists",     "/etc/resolv.confzzz",    false ),
+                    array( "dir-not-exists",  "/tmp",                   false ),
+                    array( "dir-not-exists",  "/tmpzzz",                true  ),
+                    array( "dir-exists",      "/tmp",                   true  ),
+                    array( "dir-exists",      "/tmpzzz",                false ),
+                    array( "date",            "2012-01-14",             true  ),
+                    array( "date",            "20120199",               false ),
+                    array( "time",            "12:34:56",               true  ),
+                    array( "time",            "12:99:99",               false ),
+                    array( "stamp",           "2012-01-14 12:34:56",    true  ),
+                    array( "stamp",           "2012-01-99 99:99:99",    false ),
+                    array( "string",          "any string",             true  ),
+                    array( "bool",            "true",                   true  ),
+                    array( "bool",            "false",                  true  ),
+                    array( "bool",            "blah",                   false ),
+                    array( "truefalse",       "true",                   true  ),
+                    array( "truefalse",       "false",                  true  ),
+                    array( "truefalse",       "blah",                   false ),
+                    array( "yesno",           "yes",                    true  ),
+                    array( "yesno",           "no",                     true  ),
+                    array( "yesno",           "blah",                   false ),
+                    array( "onoff",           "on",                     true  ),
+                    array( "onoff",           "off",                    true  ), 
+                    array( "onoff",           "blah",                   false ),
+                    array( "int",             "123",                    true  ),
+                    array( "int",             "123.9",                  false ),
+                    array( "int",             "28e7",                   false ),
+                    array( "float",           "0xf8",                   false ),
+                    array( "float",           "123",                    true  ),
+                    array( "float",           "123.9",                  true  ),
+                    array( "float",           "28e9",                   true  ),
+                    array( "email",           "sam@bnt.ca",             true  ),
+                    array( "email",           "invalid-address",        false ),
+                    );
+
+
+
+capture_begin();
+echo "testing arg tests:\n";
+foreach ( $test_list as $test )
+{
+   $r = general_args_c::_test_arg_valid( $test[1], $test[0] );
+   echo "test('{$test[1]}', '{$test[0]}')...", 
+        ($r == "") == $test[2] ? "passed" : "FAILED",
+        "\n";
+}
+$x = capture_end();
+
+$y = <<< EOT
+
+testing arg tests:
+test('/etc/resolv.conf', 'file-not-exists')...passed
+test('/etc/resolv.confzzz', 'file-not-exists')...passed
+test('/etc/resolv.conf', 'file-exists')...passed
+test('/etc/resolv.confzzz', 'file-exists')...passed
+test('/tmp', 'dir-not-exists')...passed
+test('/tmpzzz', 'dir-not-exists')...passed
+test('/tmp', 'dir-exists')...passed
+test('/tmpzzz', 'dir-exists')...passed
+test('2012-01-14', 'date')...passed
+test('20120199', 'date')...passed
+test('12:34:56', 'time')...passed
+test('12:99:99', 'time')...passed
+test('2012-01-14 12:34:56', 'stamp')...passed
+test('2012-01-99 99:99:99', 'stamp')...passed
+test('any string', 'string')...passed
+test('true', 'bool')...passed
+test('false', 'bool')...passed
+test('blah', 'bool')...passed
+test('true', 'truefalse')...passed
+test('false', 'truefalse')...passed
+test('blah', 'truefalse')...passed
+test('yes', 'yesno')...passed
+test('no', 'yesno')...passed
+test('blah', 'yesno')...passed
+test('on', 'onoff')...passed
+test('off', 'onoff')...passed
+test('blah', 'onoff')...passed
+test('123', 'int')...passed
+test('123.9', 'int')...passed
+test('28e7', 'int')...passed
+test('0xf8', 'float')...passed
+test('123', 'float')...passed
+test('123.9', 'float')...passed
+test('28e9', 'float')...passed
+test('sam@bnt.ca', 'email')...passed
+test('invalid-address', 'email')...passed
+
+EOT;
+
+echo "Arg Tests ", ( trim($x) == trim($y) ) ? "passed" : "FAILED", "\n";
+
+
+
+
+echo "Command line arg scan:\n";
+
+general_args_c::reset();
+$r = general_args_c::scan();
+var_dump( $r );
+
+echo "Error array from the scan:\n";
+var_dump( general_args_c::get_errors() );
+
