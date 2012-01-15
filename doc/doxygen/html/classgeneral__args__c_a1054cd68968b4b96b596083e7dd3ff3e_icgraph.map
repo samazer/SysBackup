@@ -1,0 +1,9 @@
+<map id="G" name="G">
+<area shape="rect" id="node3" href="$classplugin__framework__c.html#acaa52db5cef22a93cf7595307b0bbbf6" title="plugin_framework_c::app_commandline_help" alt="" coords="107,59,389,88"/>
+<area shape="rect" id="node5" href="$classplugin__framework__c.html#a5323b07f4d20d0ff8e1b36999cc66e8a" title="plugin_framework_c::app_help" alt="" coords="447,32,644,61"/>
+<area shape="rect" id="node16" href="$classsystem__backup__app__c.html#a5323b07f4d20d0ff8e1b36999cc66e8a" title="system_backup_app_c::app_help" alt="" coords="437,85,653,115"/>
+<area shape="rect" id="node7" href="$classplugin__framework__c.html#a7d53d4d9eebfbc03444a76d29c6f1068" title="plugin_framework_c::app_init" alt="" coords="1011,5,1200,35"/>
+<area shape="rect" id="node11" href="$classplugin__framework__c.html#aa53f549a824e262f7622538c100dc8bb" title="plugin_framework_c::default_action" alt="" coords="701,59,928,88"/>
+<area shape="rect" id="node9" href="$classplugin__framework__c.html#a51af30a60f9f02777c6396b8247e356f" title="plugin_framework_c::main" alt="" coords="1284,32,1457,61"/>
+<area shape="rect" id="node13" href="$classplugin__framework__c.html#ab9d64f053d906162d5346666ffd79ea1" title="plugin_framework_c::default_action_args" alt="" coords="976,59,1235,88"/>
+</map>
