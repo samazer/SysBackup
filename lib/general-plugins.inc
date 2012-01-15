@@ -89,6 +89,7 @@ require_once "general-tee.inc";
 require_once "general-sysutils.inc";
 require_once "general-sysexec.inc";
 require_once "general-namedparameters.inc";
+require_once "general-args.inc";
 
 
 /**
@@ -985,6 +986,14 @@ class plugin_framework_c extends teelog_c
 
    function app_init()
    {
+      general_args_c::scan();
+
+      if ( general_args_c::display_errors() )
+      {
+         echo "stopping\n";
+         exit(1);
+      }
+
       $this->load_app_config();
       $this->app_before_init();
 
@@ -1137,6 +1146,17 @@ class plugin_framework_c extends teelog_c
 
 
 
+   function commandline_args_callback( $group_id,
+                                       $arg_id, $param_count, $args,
+                                       $arg_spec
+                                     )
+   {
+      $p = $arg_spec["prop"][0];
+      $this->$p = $args[1];
+   }
+
+
+
    function __construct( $initial_config = false )
    {
       parent::__construct();
@@ -1157,6 +1177,42 @@ class plugin_framework_c extends teelog_c
             "app_plugindir" => array( 1, PLUGGABLEAPP_PLUGIN_D,   "path to the main app plugin dir"       ),
             "admin_email"   => array( 1, PLUGGABLEAPP_ADMINEMAIL, "email address for app administrator"   ),
                                                  ));
+
+
+      $command_line_args = array(
+         "config" => array( "args"    => array( "-c", "--config", "--conf" ),
+                            "params"  => 1,
+                            "prop"    => array( "app_conffile" ),
+                            "test"    => array( "file-exists" ),
+                            "default" => array( PLUGGABLEAPP_CONF ),
+                            "example" => "--config <file>",
+                            "desc"    => "Set the path and file name of the sysbackup configuration file.",
+                          ),
+
+        "confdir" => array( "args"    => array( "-d", "--conf.d", "--confdir" ),
+                            "params"  => 1,
+                            "prop"    => "app_confdir",
+                            "default" => PLUGGABLEAPP_CONF_D,
+                            "example" => "--confdir <path>",
+                            "desc"    => "Specify the directory that holds the job configuration files",
+                          ),
+
+      "plugindir" => array( "args"    => array( "-p", "--plugin.d", "--plugindir" ),
+                            "params"  => 1,
+                            "prop"    => "app_plugindir",
+                            "default" => PLUGGABLEAPP_PLUGIN_D,
+                            "example" => "--plugindir <path>",
+                            "desc"    => "Specify the directory that holds the plugin scripts",
+                          ),
+                                 );
+
+      general_args_c::register( "general-plugins", 
+                                "Config", "Configuration options",
+                                $command_line_args );
+
+      general_args_c::set_callback( "general-plugins", 
+                                    $this, 
+                                    "commandline_args_callback" );
 
       $this->plugins = array();
       $argv = $this->argv = $GLOBALS["argv"];

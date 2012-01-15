@@ -1,20 +1,3 @@
 <map id="G" name="G">
-<area shape="rect" id="node1" href="$classplugin__appreference__c.html" title="plugin_appreference_c" alt="" coords="5,125,157,155"/>
-<area shape="rect" id="node3" href="$classbackupvfs__backupset__c.html" title="backupvfs_backupset_c" alt="" coords="205,99,368,128"/>
-<area shape="rect" id="node5" href="$classplugin__base__c.html" title="plugin_base_c" alt="" coords="235,152,339,181"/>
-<area shape="rect" id="node7" href="$classbackupvfs__fileio__c.html" title="backupvfs_fileio_c" alt="" coords="439,85,569,115"/>
-<area shape="rect" id="node19" href="$classsysbackup__plugin__base__c.html" title="sysbackup_plugin_base_c" alt="" coords="417,219,591,248"/>
-<area shape="rect" id="node9" href="$classbackupvfs__baseio__c.html" title="backupvfs_baseio_c" alt="" coords="641,32,783,61"/>
-<area shape="rect" id="node11" href="$classbackupvfs__localio__c.html" title="backupvfs_localio_c" alt="" coords="845,5,984,35"/>
-<area shape="rect" id="node15" href="$classbackupvfs__sshremote__c.html" title="backupvfs_sshremote_c" alt="" coords="833,59,996,88"/>
-<area shape="rect" id="node13" href="$classbackupvfs__localio__rotation__c.html" title="backupvfs_localio_rotation_c" alt="" coords="1059,5,1248,35"/>
-<area shape="rect" id="node17" href="$classbackupvfs__sshremote__rotation__c.html" title="backupvfs_sshremote_rotation_c" alt="" coords="1047,59,1260,88"/>
-<area shape="rect" id="node21" href="$classdummy__plugin__c.html" title="dummy_plugin_c" alt="" coords="652,85,772,115"/>
-<area shape="rect" id="node23" href="$classdumpusers__plugin__c.html" title="dumpusers_plugin_c" alt="" coords="641,139,783,168"/>
-<area shape="rect" id="node25" href="$classhomedirs__plugin__c.html" title="homedirs_plugin_c" alt="" coords="647,192,777,221"/>
-<area shape="rect" id="node29" href="$classmailman__plugin__c.html" title="mailman_plugin_c" alt="" coords="649,245,775,275"/>
-<area shape="rect" id="node31" href="$classmysql__plugin__c.html" title="mysql_plugin_c" alt="" coords="656,299,768,328"/>
-<area shape="rect" id="node33" href="$classpackagelist__plugin__c.html" title="packagelist_plugin_c" alt="" coords="641,352,783,381"/>
-<area shape="rect" id="node35" href="$classsysdirs__plugin__c.html" title="sysdirs_plugin_c" alt="" coords="653,405,771,435"/>
-<area shape="rect" id="node27" href="$classmaildirs__plugin__c.html" title="maildirs_plugin_c" alt="" coords="853,192,976,221"/>
+<area shape="rect" id="node1" href="$classmktarball__util__c.html" title="mktarball_util_c" alt="" coords="7,5,119,35"/>
 </map>

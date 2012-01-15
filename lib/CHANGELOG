@@ -2,6 +2,25 @@
 
 AFORMs library:
 
+   2012.01.14 SA:
+
+      * Added to general-plugins.inc the ability to handle a few
+        commandline options.
+
+      * Added the General Args class to handle a tree structure of
+        application arguments from various otherwise unrelated
+        software modules. At the moment the class is only able to
+        verify the count of parameters per arg - it does not
+        understand different types of parameters and is not able to
+        perform any arg checks yet. In addition the class will return
+        bare args without any kind of verification - so the
+        application must validate all args. That being said the class
+        is able to respect arg positions and send notifications for
+        args registered with a callback which should simplify the arg
+        validation process.
+
+   2012.01.12 SA:
+
       * Added the disk_usage() function which calls /usr/bin/du and
         returns the total number of bytes (apparent) used by a
         particular folder (or file - but filesize() is better for

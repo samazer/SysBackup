@@ -1,6 +1,14 @@
 -*- mode: text; coding: utf-8-unix; -*- 
 
 
+SysBackup v3.016alpha
+
+      * Added the quick-install utility that automatically installs
+        SysBackup. Some parameters, such as TimeZone, are not set
+        automatically yet. Many parameters, such as the Rotation
+        settings, contain default values that the administrator might
+        want to adjust.
+
 SysBackup v3.017alpha
 
    2012.01.12 SA:

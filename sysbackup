@@ -270,7 +270,7 @@
 
 
 define( "PLUGGABLEAPP_TITLE",      "System Backups"                   );
-define( "PLUGGABLEAPP_VERSION",    "3.01(alpha)"                      );
+define( "PLUGGABLEAPP_VERSION",    "3.017(alpha)"                     );
 define( "PLUGGABLEAPP_CONF",       "/etc/sysbackup/sysbackup.conf"    );
 define( "PLUGGABLEAPP_CONF_D",     "/etc/sysbackup/conf.d/"           );
 define( "PLUGGABLEAPP_PLUGIN_D",   "/usr/share/sysbackup/plugin.d/"   );

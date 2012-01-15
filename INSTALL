@@ -68,9 +68,19 @@ Overview
    one of the existing plugins and write a plugin to simplify the task you
    are trying to complete.
 
+Getting Started
+
+   The new Quick Installation script (in the distribution tarball) can be
+   used to quickly get SysBackup organized on your server or workstation.
+   You can find the manual [20]Basic Install procedure in the BASICINSTALL
+   document or on the AzerTech.net web site.
+
+   Follow the instructions in the REMOTESTORAGE document to setup [21]SSH
+   Remote Storage of your backups.
+
   Be Prepared!
 
-   [20][main-use-case.png] SysBackup can be configued to backup specific
+   [22][main-use-case.png] SysBackup can be configued to backup specific
    information and services. Installation and configuration is relatively
    simple. From there the generation of a backupset is a one-step
    automated process.
@@ -78,48 +88,50 @@ Overview
    Unfortunately keeping a simple set of backups does not mean that you
    are prepared for all the different information restore issues you might
    face over a period of years. For helpful hints on how to make sure you
-   are as prepared as possible please take a look at the [21]BE-PREPARED
+   are as prepared as possible please take a look at the [23]BE-PREPARED
    document.
 
-   You might also want to check out the [22]SysBackup Documentation and
-   FAQ pages on the [23]AzerTech.net web site.
+   You might also want to check out the [24]SysBackup Documentation and
+   FAQ pages on the [25]AzerTech.net web site.
      __________________________________________________________________
 
 
-                             [24][agpl-v3-logo.svg]   [25][gfdl-logo.svg]
+                             [26][agpl-v3-logo.svg]   [27][gfdl-logo.svg]
 
 
-    Copyright © 2011 by [26]Sam Azer<[27]sam@azertech.net>, All rights
+    Copyright © 2011 by [28]Sam Azer<[29]sam[at]azertech.net>, All rights
     reserved.
 
-   Last modified: Thu Jan 12 18:27:10 EST 2012
+   Last modified: Sat Jan 14 13:09:03 EST 2012
 
 References
 
    1. http://www.azertech.net/content/category/3/49/29/
    2. http://www.azertech.net/
-   3. file://localhost/projects/server-scripts/backupv3/doc/doxygen/html/
+   3. file://doc/doxygen/html/
    4. http://www.azertech.net/content/category/3/49/29/
-   5. http://azer.ca/sysbackup-sfd
-   6. http://azer.ca/sysbackup-sf
-   7. http://azer.ca/sysbackup-gh
-   8. http://azer.ca/sysbackup-oh
+   5. http://www.azertech.net/sysbackup-sfd
+   6. http://www.azertech.net/sysbackup-sf
+   7. http://www.azertech.net/sysbackup-gh
+   8. http://www.azertech.net/sysbackup-oh
    9. http://www.azertech.net/content/view/69/29/
   10. http://www.azertech.net/content/view/94/29/
   11. http://www.azertech.net/content/view/92/29/
   12. http://www.azertech.net/content/view/93/29/
   13. http://www.azertech.net/content/view/95/29/
   14. http://www.azertech.net/content/view/70/29/
-  15. file://localhost/projects/server-scripts/backupv3/doc/REQUIREMENTS.html
-  16. file://localhost/projects/server-scripts/backupv3/doc/BASICINSTALL.html
-  17. file://localhost/projects/server-scripts/backupv3/doc/REMOTESTORAGE.html
-  18. file://localhost/projects/server-scripts/backupv3/doc/BASICINSTALL.html
-  19. file://localhost/projects/server-scripts/backupv3/doc/REMOTESTORAGE.html
-  20. http://www.azertech.net/content/view/70/29/
-  21. file://localhost/projects/server-scripts/backupv3/doc/BE-PREPARED.html
-  22. http://www.azertech.net/content/category/3/49/29/
-  23. http://www.azertech.net/
-  24. http://www.gnu.org/licenses/agpl.html
-  25. http://www.gnu.org/copyleft/fdl.html
-  26. http://azertech.net/about
-  27. mailto:sam@azertech.net?subject=SysBackup
+  15. http://www.azertech.net/content/view/94/29/
+  16. http://www.azertech.net/content/view/92/29/
+  17. http://www.azertech.net/content/view/93/29/
+  18. http://www.azertech.net/content/view/92/29/
+  19. http://www.azertech.net/content/view/93/29/
+  20. http://www.azertech.net/content/view/92/29/
+  21. http://www.azertech.net/content/view/93/29/
+  22. http://www.azertech.net/content/view/70/29/
+  23. http://www.azertech.net/content/view/70/29/
+  24. http://www.azertech.net/content/category/3/49/29/
+  25. http://www.azertech.net/
+  26. http://www.gnu.org/licenses/agpl.html
+  27. http://www.gnu.org/copyleft/fdl.html
+  28. http://azertech.net/about
+  29. mailto:sam[at]azertech.net?subject=SysBackup

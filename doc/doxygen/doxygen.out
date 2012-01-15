@@ -13,6 +13,7 @@ Searching for files in directory /projects/server-scripts/backupv3/doc/images/wi
 Searching for files to process...
 Searching for files in directory /projects/server-scripts/backupv3/app
 Searching for files in directory /projects/server-scripts/backupv3/lib
+Searching for files in directory /projects/server-scripts/lib/tests
 Searching for files in directory /projects/server-scripts/backupv3/conf.d
 Searching for files in directory /projects/server-scripts/backupv3/plugin.d
 Reading and parsing tag files
@@ -48,6 +49,8 @@ Reading /projects/server-scripts/backupv3/app/sysbackup-vfs.inc...
 Parsing file /projects/server-scripts/backupv3/app/sysbackup-vfs.inc...
 Reading /projects/server-scripts/backupv3/app/sysbackup.inc...
 Parsing file /projects/server-scripts/backupv3/app/sysbackup.inc...
+Reading /projects/server-scripts/lib/general-args.inc...
+Parsing file /projects/server-scripts/lib/general-args.inc...
 Reading /projects/server-scripts/lib/general-log.inc...
 Parsing file /projects/server-scripts/lib/general-log.inc...
 Reading /projects/server-scripts/lib/general-namedparameters.inc...
@@ -199,6 +202,7 @@ Generating code for file plugin.d/sysdirs.plugin...
 Generating code for file remexec...
 Generating code for file sysbackup...
 Generating code for file sysbackup.conf...
+Generating code for file lib/general-args.inc...
 Generating code for file lib/general-log.inc...
 Generating code for file lib/general-namedparameters.inc...
 Generating code for file lib/general-net.inc...
@@ -214,15 +218,15 @@ Generating code for file lib/sys-packagelist.inc...
 Generating code for file lib/sys-remote-fileio.inc...
 Generating code for file lib/sys-remote-filesys.inc...
 Generating code for file lib/sys-tarballs.inc...
-Generating file documentation...
-Generating docs for file app/sysbackup-plugins.inc...
-Generating docs for file app/sysbackup-vfs-backupset.inc...
-Generating docs for file app/sysbackup-vfs-base.inc...
-Generating docs for file app/sysbac/projects/server-scripts/lib/general-utils.inc:139: warning: argument 'none' of command @param is not found in the argument list of capture_begin()
+G/projects/server-scripts/lib/general-utils.inc:139: warning: argument 'none' of command @param is not found in the argument list of capture_begin()
 /projects/server-scripts/lib/general-utils.inc:154: warning: argument 'none' of command @param is not found in the argument list of capture_end()
 /projects/server-scripts/lib/general-utils.inc:35: warning: The following parameters of single_chars($txt,$chr) are not documented:
   parameter 'chr'
-kup-vfs-hashlists.inc...
+enerating file documentation...
+Generating docs for file app/sysbackup-plugins.inc...
+Generating docs for file app/sysbackup-vfs-backupset.inc...
+Generating docs for file app/sysbackup-vfs-base.inc...
+Generating docs for file app/sysbackup-vfs-hashlists.inc...
 Generating docs for file app/sysbackup-vfs-io.inc...
 Generating docs for file app/sysbackup-vfs-localio-rotation.inc...
 Generating docs for file app/sysbackup-vfs-localio.inc...
@@ -253,6 +257,7 @@ Generating docs for file plugin.d/sysdirs.plugin...
 Generating docs for file remexec...
 Generating docs for file sysbackup...
 Generating docs for file sysbackup.conf...
+Generating docs for file lib/general-args.inc...
 Generating docs for file lib/general-log.inc...
 Generating caller graph for function backtrace
 Generating docs for file lib/general-namedparameters.inc...
@@ -297,17 +302,17 @@ Generating caller graph for function phpval2str
 Generating caller graph for function si_suffix
 Generating caller graph for function single_chars
 Generating call graph for function single_spaces
-Generating caller graph for function single_spaces
+Generating caller graph for function s/projects/server-scripts/lib/sys-tarballs.inc:206: warning: end of comment block while expecting command </pre>
+/projects/server-scripts/lib/sys-account-migration.inc:210: warning: argument 'id' of command @param is not found in the argument list of account_migration_c::migration_commands()
+/projects/server-scripts/backupv3/app/sysbackup-vfs-backupset.inc:227: warning: Unsupported xml/html tag <hostname> found
+/projects/server-scripts/backupv3/app/sysbackup-vfs-backupset.inc:229: warning: Unsupported xml/html tag <hostname> found
+ingle_spaces
 Generating docs for file lib/sys-account-info.inc...
 Generating docs for file lib/sys-account-migration.inc...
 Generating docs for file lib/sys-packagelist.inc...
 Generating call graph for function package_list
 Generating caller graph for function package_list
-Generating /projects/server-scripts/lib/sys-tarballs.inc:206: warning: end of comment block while expecting command </pre>
-/projects/server-scripts/lib/sys-account-migration.inc:210: warning: argument 'id' of command @param is not found in the argument list of account_migration_c::migration_commands()
-/projects/server-scripts/backupv3/app/sysbackup-vfs-backupset.inc:227: warning: Unsupported xml/html tag <hostname> found
-/projects/server-scripts/backupv3/app/sysbackup-vfs-backupset.inc:229: warning: Unsupported xml/html tag <hostname> found
-docs for file lib/sys-remote-fileio.inc...
+Generating docs for file lib/sys-remote-fileio.inc...
 Generating docs for file lib/sys-remote-filesys.inc...
 Generating docs for file lib/sys-tarballs.inc...
 Generating page documentation...
@@ -369,15 +374,15 @@ Generating call graph for function backupvfs_baseio_c::vfs_compress_file
 Generating call graph for function backupvfs_baseio_c::vfs_compress_string
 Generating call graph for function backupvfs_baseio_c::vfs_end
 Generating call graph for function backupvfs_baseio_c::vfs_init
-Generating call graph for function backupvfs_baseio_c::vfs_start
-Generating call graph for function backupvfs_baseio_c::vfs_tarball_folder
-Generating docs for compound backupvfs_fileio_c...
-Generating call graph for function backupvfs_fileio_c::_mark_backupset_incomplete
-Generating caller graph for function backupvfs_fileio_c::_mark_backupset_inco/projects/server-scripts/backupv3/app/sysbackup-vfs-io.inc:300: warning: Unsupported xml/html tag <temp> found
+Generating call graph for function backupvfs_baseio_c::vfs_start/projects/server-scripts/backupv3/app/sysbackup-vfs-io.inc:300: warning: Unsupported xml/html tag <temp> found
 /projects/server-scripts/backupv3/app/sysbackup-vfs-io.inc:300: warning: Unsupported xml/html tag <daily> found
 /projects/server-scripts/backupv3/app/sysbackup-vfs-io.inc:300: warning: Unsupported xml/html tag <weekly> found
 /projects/server-scripts/backupv3/app/sysbackup-vfs-io.inc:301: warning: Unsupported xml/html tag <monthly> found
-mplete
+
+Generating call graph for function backupvfs_baseio_c::vfs_tarball_folder
+Generating docs for compound backupvfs_fileio_c...
+Generating call graph for function backupvfs_fileio_c::_mark_backupset_incomplete
+Generating caller graph for function backupvfs_fileio_c::_mark_backupset_incomplete
 Generating call graph for function backupvfs_fileio_c::_unmark_backupset_incomplete
 Generating caller graph for function backupvfs_fileio_c::_unmark_backupset_incomplete
 Generating call graph for function backupvfs_fileio_c::_vfs_can_hardlink
@@ -515,6 +520,15 @@ Generating call graph for function dumpusers_plugin_c::plugin_help
 Generating docs for compound effective_user_c...
 Generating call graph for function effective_user_c::__construct
 Generating caller graph for function effective_user_c::refresh
+Generating docs for compound general_arg_groups_c...
+Generating docs for compound general_args_c...
+Generating caller graph for function general_args_c::_test_arg_valid
+Generating caller graph for function general_args_c::adjust_arg_value
+Generating caller graph for function general_args_c::display_errors
+Generating caller graph for function general_args_c::register
+Generating caller graph for function general_args_c::scan
+Generating caller graph for function general_args_c::set_callback
+Generating call graph for function general_args_c::test_arg_valid
 Generating docs for compound homedirs_plugin_c...
 Generating call graph for function homedirs_plugin_c::__construct
 Generating call graph for function homedirs_plugin_c::dir_backup
@@ -601,7 +615,10 @@ Generating caller graph for function named_parameters_base_c::_display_val
 Generating call graph for function named_parameters_base_c::_dump_paramvals
 Generating caller graph for function named_parameters_base_c::_dump_paramvals
 Generating call graph for function named_parameters_base_c::_dump_properties
-Generating caller graph for function named_parameters_base_c::_dump_properties
+Generating caller graph for fun/projects/server-scripts/lib/general-namedparameters.inc:134: warning: Unsupported xml/html tag <req> found
+/projects/server-scripts/lib/general-namedparameters.inc:134: warning: Unsupported xml/html tag <default> found
+/projects/server-scripts/lib/general-namedparameters.inc:134: warning: Unsupported xml/html tag <help> found
+ction named_parameters_base_c::_dump_properties
 Generating call graph for function named_parameters_base_c::_dump_val
 Generating caller graph for function named_parameters_base_c::_dump_val
 Generating caller graph for function named_parameters_base_c::_get_default
@@ -612,10 +629,7 @@ Generating caller graph for function named_parameters_base_c::_get_params
 Generating caller graph for function named_parameters_base_c::_get_required
 Generating caller graph for function named_parameters_base_c::_get_showhelp_flag
 Generating call graph for function named_parameters_base_c::_get_valid
-Generating caller graph for function named_parameters_base_c/projects/server-scripts/lib/general-namedparameters.inc:134: warning: Unsupported xml/html tag <req> found
-/projects/server-scripts/lib/general-namedparameters.inc:134: warning: Unsupported xml/html tag <default> found
-/projects/server-scripts/lib/general-namedparameters.inc:134: warning: Unsupported xml/html tag <help> found
-::_get_valid
+Generating caller graph for function named_parameters_base_c::_get_valid
 Generating caller graph for function named_parameters_base_c::_get_varname
 Generating call graph for function named_parameters_base_c::_register
 Generating caller graph for function named_parameters_base_c::_register
@@ -671,6 +685,7 @@ Generating call graph for function plugin_base_c::plugin_instance
 Generating caller graph for function plugin_base_c::plugin_title
 Generating call graph for function plugin_base_c::unload
 Generating docs for compound plugin_framework_c...
+Generating call graph for function plugin_framework_c::__construct
 Generating call graph for function plugin_framework_c::add_job
 Generating caller graph for function plugin_framework_c::add_job
 Generating call graph for function plugin_framework_c::add_plugin
@@ -785,127 +800,120 @@ Generating call graph for function system_backup_app_c::after_loading_jobs
 Generating call graph for function system_backup_app_c::app_after_events
 Generating call graph for function system_backup_app_c::app_after_init
 Generating call graph for function system_backup_app_c::app_after_job
-Generating call graph for function system_backup_app_c::app_before_events
-Generating call graph for function system_backup_app_c::app_before_init
-Generating call graph for function system_backup_app_c::app_before_job
-Generating call graph for function system_backup_app_c::app_title
-Generating call graph for function system_backup_app_c::approve_job
-Generating docs for compound teelog_c...
-Generating call graph for function teelog_c::fatal
-Generating caller graph for function teelog_c::fatal
-Generating caller graph for function teelog_c::not_quiet
-Generating call graph for function teelog_c::notquiet
-Generating caller graph for function teelog_c::notquiet
-Generating caller graph for function teelog_c::quiet
-Generating caller graph for function teelog_c::tee
-Generating caller graph for function teelog_c::teefn
-Generating call graph for function teelog_c::warning
-Generating caller graph for function teelog_c::warning
-Gener/projects/server-scripts/lib/sys-tarballs.inc:29: warning: Found unknown command `\subpackage'
-/projects/server-scripts/lib/sys-tarballs.inc:30: warning: Found unknown command `\license'
-/projects/server-scripts/lib/sys-tarballs.inc:31: warning: Found unknown command `\copyright'
-/projects/server-scripts/lib/sys-tarballs.inc:32: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/lib/sys-tarballs.inc:33: warning: Illegal command link as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:35: warning: Illegal command subpackage as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:101: warning: Unexpected xml/html command p found
-/projects/server-scripts/lib/sys-tarballs.inc:121: warning: Found unknown command `\subpackage'
-/projects/server-scripts/lib/sys-tarballs.inc:122: warning: Found unknown command `\license'
-/projects/server-scripts/lib/sys-tarballs.inc:123: warning: Found unknown command `\copyright'
-/projects/server-scripts/lib/sys-tarballs.inc:124: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/lib/sys-tarballs.inc:125: warning: Illegal command link as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:130: warning: Illegal command subpackage as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:134: warning: Unexpected xml/html command p found
-/projects/server-scripts/lib/sys-tarballs.inc:154: warning: Found unknown command `\subpackage'
-/projects/server-scripts/lib/sys-tarballs.inc:155: warning: Found unknown command `\license'
-/projects/server-scripts/lib/sys-tarballs.inc:156: warning: Found unknown command `\copyright'
-/projects/server-scripts/lib/sys-tarballs.inc:157: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/lib/sys-tarballs.inc:158: warning: Illegal command link as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:162: warning: Unexpected xml/html command p found
-/projects/server-scripts/lib/sys-tarballs.inc:227: warning: Found unknown command `\subpackage'
-/projects/server-scripts/lib/sys-tarballs.inc:228: warning: Found unknown command `\license'
-/projects/server-scripts/lib/sys-tarballs.inc:229: warning: Found unknown command `\copyright'
-/projects/server-scripts/lib/sys-tarballs.inc:230: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/lib/sys-tarballs.inc:231: warning: Illegal command link as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:237: warning: Unexpected xml/html command p found
-/projects/server-scripts/lib/sys-tarballs.inc:257: warning: Found unknown command `\subpackage'
-/projects/server-scripts/lib/sys-tarballs.inc:258: warning: Found unknown command `\license'
-/projects/server-scripts/lib/sys-tarballs.inc:259: warning: Found unknown command `\copyright'
-/projects/server-scripts/lib/sys-tarballs.inc:260: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/lib/sys-tarballs.inc:261: warning: Illegal command link as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:265: warning: Illegal command author as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:266: warning: Illegal command version as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:268: warning: Illegal command subpackage as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:269: warning: Illegal command license as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:270: warning: Illegal command copyright as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:271: warning: Illegal command link as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:272: warning: Illegal command link as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:300: warning: Unexpected xml/html command p found
+Generating call graph /projects/server-scripts/lib/sys-tarballs.inc:35: warning: Unsupported xml/html tag <name> found
+/projects/server-scripts/lib/sys-tarballs.inc:149: warning: explicit link request to 'bare_args' could not be resolved
+/projects/server-scripts/lib/sys-tarballs.inc:159: warning: Unsupported xml/html tag <something> found
+/projects/server-scripts/lib/sys-tarballs.inc:185: warning: Found unknown command `\subpackage'
+/projects/server-scripts/lib/sys-tarballs.inc:186: warning: Found unknown command `\license'
+/projects/server-scripts/lib/sys-tarballs.inc:187: warning: Found unknown command `\copyright'
+/projects/server-scripts/lib/sys-tarballs.inc:188: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/lib/sys-tarballs.inc:189: warning: Illegal command link as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:198: warning: Unexpected xml/html command p found
+/projects/server-scripts/lib/sys-tarballs.inc:218: warning: Found unknown command `\subpackage'
+/projects/server-scripts/lib/sys-tarballs.inc:219: warning: Found unknown command `\license'
+/projects/server-scripts/lib/sys-tarballs.inc:220: warning: Found unknown command `\copyright'
+/projects/server-scripts/lib/sys-tarballs.inc:221: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/lib/sys-tarballs.inc:222: warning: Illegal command link as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:224: warning: Illegal command subpackage as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:290: warning: Unexpected xml/html command p found
+/projects/server-scripts/lib/sys-tarballs.inc:310: warning: Found unknown command `\subpackage'
+/projects/server-scripts/lib/sys-tarballs.inc:311: warning: Found unknown command `\license'
+/projects/server-scripts/lib/sys-tarballs.inc:312: warning: Found unknown command `\copyright'
+/projects/server-scripts/lib/sys-tarballs.inc:313: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/lib/sys-tarballs.inc:314: warning: Illegal command link as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:319: warning: Illegal command subpackage as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:323: warning: Unexpected xml/html command p found
+/projects/server-scripts/lib/sys-tarballs.inc:343: warning: Found unknown command `\subpackage'
+/projects/server-scripts/lib/sys-tarballs.inc:344: warning: Found unknown command `\license'
+/projects/server-scripts/lib/sys-tarballs.inc:345: warning: Found unknown command `\copyright'
+/projects/server-scripts/lib/sys-tarballs.inc:346: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/lib/sys-tarballs.inc:347: warning: Illegal command link as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:351: warning: Unexpected xml/html command p found
 /projects/server-scripts/lib/sys-tarballs.inc:416: warning: Found unknown command `\subpackage'
 /projects/server-scripts/lib/sys-tarballs.inc:417: warning: Found unknown command `\license'
 /projects/server-scripts/lib/sys-tarballs.inc:418: warning: Found unknown command `\copyright'
 /projects/server-scripts/lib/sys-tarballs.inc:419: warning: unable to resolve link to `http://www.azertech.net/' for \link command
 /projects/server-scripts/lib/sys-tarballs.inc:420: warning: Illegal command link as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:424: warning: Unexpected xml/html command p found
-/projects/server-scripts/lib/sys-tarballs.inc:444: warning: Found unknown command `\subpackage'
-/projects/server-scripts/lib/sys-tarballs.inc:445: warning: Found unknown command `\license'
-/projects/server-scripts/lib/sys-tarballs.inc:446: warning: Found unknown command `\copyright'
-/projects/server-scripts/lib/sys-tarballs.inc:447: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/lib/sys-tarballs.inc:448: warning: Illegal command link as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:453: warning: Illegal command subpackage as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:460: warning: Illegal command subpackage as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:470: warning: Illegal command author as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:471: warning: Illegal command version as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:473: warning: Illegal command subpackage as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:474: warning: Illegal command license as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:475: warning: Illegal command copyright as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:476: warning: Illegal command link as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:477: warning: Illegal command link as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:481: warning: Unexpected xml/html command p found
-/projects/server-scripts/lib/sys-tarballs.inc:501: warning: Found unknown command `\subpackage'
-/projects/server-scripts/lib/sys-tarballs.inc:502: warning: Found unknown command `\license'
-/projects/server-scripts/lib/sys-tarballs.inc:503: warning: Found unknown command `\copyright'
-/projects/server-scripts/lib/sys-tarballs.inc:504: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/lib/sys-tarballs.inc:505: warning: Illegal command link as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:509: warning: Unexpected xml/html command p found
-/projects/server-scripts/lib/sys-tarballs.inc:529: warning: Found unknown command `\subpackage'
-/projects/server-scripts/lib/sys-tarballs.inc:530: warning: Found unknown command `\license'
-/projects/server-scripts/lib/sys-tarballs.inc:531: warning: Found unknown command `\copyright'
-/projects/server-scripts/lib/sys-tarballs.inc:532: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/lib/sys-tarballs.inc:533: warning: Illegal command link as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:546: warning: Illegal command subpackage as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:550: warning: Unexpected xml/html command p found
-/projects/server-scripts/lib/sys-tarballs.inc:570: warning: Found unknown command `\subpackage'
-/projects/server-scripts/lib/sys-tarballs.inc:571: warning: Found unknown command `\license'
-/projects/server-scripts/lib/sys-tarballs.inc:572: warning: Found unknown command `\copyright'
-/projects/server-scripts/lib/sys-tarballs.inc:573: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/lib/sys-tarballs.inc:574: warning: Illegal command link as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:588: warning: Illegal command subpackage as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:598: warning: Unexpected xml/html command p found
-/projects/server-scripts/lib/sys-tarballs.inc:618: warning: Found unknown command `\subpackage'
-/projects/server-scripts/lib/sys-tarballs.inc:619: warning: Found unknown command `\license'
-/projects/server-scripts/lib/sys-tarballs.inc:620: warning: Found unknown command `\copyright'
-/projects/server-scripts/lib/sys-tarballs.inc:621: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/lib/sys-tarballs.inc:622: warning: Illegal command link as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:626: warning: Unexpected xml/html command p found
-/projects/server-scripts/lib/sys-tarballs.inc:651: warning: Found unknown command `\subpackage'
-/projects/server-scripts/lib/sys-tarballs.inc:652: warning: Found unknown command `\license'
-/projects/server-scripts/lib/sys-tarballs.inc:653: warning: Found unknown command `\copyright'
-/projects/server-scripts/lib/sys-tarballs.inc:654: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/lib/sys-tarballs.inc:655: warning: Illegal command link as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:659: warning: Unexpected xml/html command p found
-/projects/server-scripts/lib/sys-tarballs.inc:686: warning: Found unknown command `\subpackage'
-/projects/server-scripts/lib/sys-tarballs.inc:687: warning: Found unknown command `\license'
-/projects/server-scripts/lib/sys-tarballs.inc:688: warning: Found unknown command `\copyright'
-/projects/server-scripts/lib/sys-tarballs.inc:689: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/lib/sys-tarballs.inc:690: warning: Illegal command link as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:711: warning: Illegal command xrefitem as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:713: warning: Unexpected xml/html command p found
-/projects/server-scripts/lib/sys-tarballs.inc:733: warning: Found unknown command `\subpackage'
-/projects/server-scripts/lib/sys-tarballs.inc:734: warning: Found unknown command `\license'
-/projects/server-scripts/lib/sys-tarballs.inc:735: warning: Found unknown command `\copyright'
-/projects/server-scripts/lib/sys-tarballs.inc:736: warning: unable to resolve link to `http://www.azertech.net/' for \link command
-/projects/server-scripts/lib/sys-tarballs.inc:737: warning: Illegal command link as part of a \link
-/projects/server-scripts/lib/sys-tarballs.inc:738: warning: Unexpected end of comment while inside link command
+/projects/server-scripts/lib/sys-tarballs.inc:426: warning: Unexpected xml/html command p found
+/projects/server-scripts/lib/sys-tarballs.inc:446: warning: Found unknown command `\subpackage'
+/projects/server-scripts/lib/sys-tarballs.inc:447: warning: Found unknown command `\license'
+/projects/server-scripts/lib/sys-tarballs.inc:448: warning: Found unknown command `\copyright'
+/projects/server-scripts/lib/sys-tarballs.inc:449: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/lib/sys-tarballs.inc:450: warning: Illegal command link as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:454: warning: Illegal command author as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:455: warning: Illegal command version as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:457: warning: Illegal command subpackage as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:458: warning: Illegal command license as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:459: warning: Illegal command copyright as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:460: warning: Illegal command link as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:461: warning: Illegal command link as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:489: warning: Unexpected xml/html command p found
+/projects/server-scripts/lib/sys-tarballs.inc:605: warning: Found unknown command `\subpackage'
+/projects/server-scripts/lib/sys-tarballs.inc:606: warning: Found unknown command `\license'
+/projects/server-scripts/lib/sys-tarballs.inc:607: warning: Found unknown command `\copyright'
+/projects/server-scripts/lib/sys-tarballs.inc:608: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/lib/sys-tarballs.inc:609: warning: Illegal command link as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:613: warning: Unexpected xml/html command p found
+/projects/server-scripts/lib/sys-tarballs.inc:633: warning: Found unknown command `\subpackage'
+/projects/server-scripts/lib/sys-tarballs.inc:634: warning: Found unknown command `\license'
+/projects/server-scripts/lib/sys-tarballs.inc:635: warning: Found unknown command `\copyright'
+/projects/server-scripts/lib/sys-tarballs.inc:636: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/lib/sys-tarballs.inc:637: warning: Illegal command link as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:642: warning: Illegal command subpackage as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:649: warning: Illegal command subpackage as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:659: warning: Illegal command author as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:660: warning: Illegal command version as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:662: warning: Illegal command subpackage as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:663: warning: Illegal command license as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:664: warning: Illegal command copyright as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:665: warning: Illegal command link as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:666: warning: Illegal command link as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:670: warning: Unexpected xml/html command p found
+/projects/server-scripts/lib/sys-tarballs.inc:690: warning: Found unknown command `\subpackage'
+/projects/server-scripts/lib/sys-tarballs.inc:691: warning: Found unknown command `\license'
+/projects/server-scripts/lib/sys-tarballs.inc:692: warning: Found unknown command `\copyright'
+/projects/server-scripts/lib/sys-tarballs.inc:693: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/lib/sys-tarballs.inc:694: warning: Illegal command link as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:698: warning: Unexpected xml/html command p found
+/projects/server-scripts/lib/sys-tarballs.inc:718: warning: Found unknown command `\subpackage'
+/projects/server-scripts/lib/sys-tarballs.inc:719: warning: Found unknown command `\license'
+/projects/server-scripts/lib/sys-tarballs.inc:720: warning: Found unknown command `\copyright'
+/projects/server-scripts/lib/sys-tarballs.inc:721: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/lib/sys-tarballs.inc:722: warning: Illegal command link as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:735: warning: Illegal command subpackage as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:739: warning: Unexpected xml/html command p found
+/projects/server-scripts/lib/sys-tarballs.inc:759: warning: Found unknown command `\subpackage'
+/projects/server-scripts/lib/sys-tarballs.inc:760: warning: Found unknown command `\license'
+/projects/server-scripts/lib/sys-tarballs.inc:761: warning: Found unknown command `\copyright'
+/projects/server-scripts/lib/sys-tarballs.inc:762: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/lib/sys-tarballs.inc:763: warning: Illegal command link as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:777: warning: Illegal command subpackage as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:787: warning: Unexpected xml/html command p found
+/projects/server-scripts/lib/sys-tarballs.inc:807: warning: Found unknown command `\subpackage'
+/projects/server-scripts/lib/sys-tarballs.inc:808: warning: Found unknown command `\license'
+/projects/server-scripts/lib/sys-tarballs.inc:809: warning: Found unknown command `\copyright'
+/projects/server-scripts/lib/sys-tarballs.inc:810: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/lib/sys-tarballs.inc:811: warning: Illegal command link as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:815: warning: Unexpected xml/html command p found
+/projects/server-scripts/lib/sys-tarballs.inc:840: warning: Found unknown command `\subpackage'
+/projects/server-scripts/lib/sys-tarballs.inc:841: warning: Found unknown command `\license'
+/projects/server-scripts/lib/sys-tarballs.inc:842: warning: Found unknown command `\copyright'
+/projects/server-scripts/lib/sys-tarballs.inc:843: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/lib/sys-tarballs.inc:844: warning: Illegal command link as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:848: warning: Unexpected xml/html command p found
+/projects/server-scripts/lib/sys-tarballs.inc:875: warning: Found unknown command `\subpackage'
+/projects/server-scripts/lib/sys-tarballs.inc:876: warning: Found unknown command `\license'
+/projects/server-scripts/lib/sys-tarballs.inc:877: warning: Found unknown command `\copyright'
+/projects/server-scripts/lib/sys-tarballs.inc:878: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/lib/sys-tarballs.inc:879: warning: Illegal command link as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:900: warning: Illegal command xrefitem as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:902: warning: Unexpected xml/html command p found
+/projects/server-scripts/lib/sys-tarballs.inc:922: warning: Found unknown command `\subpackage'
+/projects/server-scripts/lib/sys-tarballs.inc:923: warning: Found unknown command `\license'
+/projects/server-scripts/lib/sys-tarballs.inc:924: warning: Found unknown command `\copyright'
+/projects/server-scripts/lib/sys-tarballs.inc:925: warning: unable to resolve link to `http://www.azertech.net/' for \link command
+/projects/server-scripts/lib/sys-tarballs.inc:926: warning: Illegal command link as part of a \link
+/projects/server-scripts/lib/sys-tarballs.inc:927: warning: Unexpected end of comment while inside link command
 
 /projects/server-scripts/backupv3/sysbackup.conf:70: warning: Found unknown command `\subpackage'
 /projects/server-scripts/backupv3/sysbackup.conf:71: warning: Found unknown command `\license'
@@ -1125,7 +1133,23 @@ Gener/projects/server-scripts/lib/sys-tarballs.inc:29: warning: Found unknown co
 /projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1706: warning: Unexpected end of comment while inside link command
 
 /projects/server-scripts/backupv3/plugin.d/sysdirs.plugin:1706: warning: unexpected end of comment while inside <ul> block
-ating graphical class hierarchy...
+for function system_backup_app_c::app_before_events
+Generating call graph for function system_backup_app_c::app_before_init
+Generating call graph for function system_backup_app_c::app_before_job
+Generating call graph for function system_backup_app_c::app_title
+Generating call graph for function system_backup_app_c::approve_job
+Generating docs for compound teelog_c...
+Generating call graph for function teelog_c::fatal
+Generating caller graph for function teelog_c::fatal
+Generating caller graph for function teelog_c::not_quiet
+Generating call graph for function teelog_c::notquiet
+Generating caller graph for function teelog_c::notquiet
+Generating caller graph for function teelog_c::quiet
+Generating caller graph for function teelog_c::tee
+Generating caller graph for function teelog_c::teefn
+Generating call graph for function teelog_c::warning
+Generating caller graph for function teelog_c::warning
+Generating graphical class hierarchy...
 Generating namespace index...
 Generating docs for namespace aforms
 Generating docs for namespace server
@@ -1143,602 +1167,613 @@ Generating example index...
 Generating file member index...
 finalizing index lists...
 Generating dot graphs using 0 parallel threads...
-Running dot for graph 1/550
-Running dot for graph 2/550
-Running dot for graph 3/550
-Running dot for graph 4/550
-Running dot for graph 5/550
-Running dot for graph 6/550
-Running dot for graph 7/550
-Running dot for graph 8/550
-Running dot for graph 9/550
-Running dot for graph 10/550
-Running dot for graph 11/550
-Running dot for graph 12/550
-Running dot for graph 13/550
-Running dot for graph 14/550
-Running dot for graph 15/550
-Running dot for graph 16/550
-Running dot for graph 17/550
-Running dot for graph 18/550
-Running dot for graph 19/550
-Running dot for graph 20/550
-Running dot for graph 21/550
-Running dot for graph 22/550
-Running dot for graph 23/550
-Running dot for graph 24/550
-Running dot for graph 25/550
-Running dot for graph 26/550
-Running dot for graph 27/550
-Running dot for graph 28/550
-Running dot for graph 29/550
-Running dot for graph 30/550
-Running dot for graph 31/550
-Running dot for graph 32/550
-Running dot for graph 33/550
-Running dot for graph 34/550
-Running dot for graph 35/550
-Running dot for graph 36/550
-Running dot for graph 37/550
-Running dot for graph 38/550
-Running dot for graph 39/550
-Running dot for graph 40/550
-Running dot for graph 41/550
-Running dot for graph 42/550
-Running dot for graph 43/550
-Running dot for graph 44/550
-Running dot for graph 45/550
-Running dot for graph 46/550
-Running dot for graph 47/550
-Running dot for graph 48/550
-Running dot for graph 49/550
-Running dot for graph 50/550
-Running dot for graph 51/550
-Running dot for graph 52/550
-Running dot for graph 53/550
-Running dot for graph 54/550
-Running dot for graph 55/550
-Running dot for graph 56/550
-Running dot for graph 57/550
-Running dot for graph 58/550
-Running dot for graph 59/550
-Running dot for graph 60/550
-Running dot for graph 61/550
-Running dot for graph 62/550
-Running dot for graph 63/550
-Running dot for graph 64/550
-Running dot for graph 65/550
-Running dot for graph 66/550
-Running dot for graph 67/550
-Running dot for graph 68/550
-Running dot for graph 69/550
-Running dot for graph 70/550
-Running dot for graph 71/550
-Running dot for graph 72/550
-Running dot for graph 73/550
-Running dot for graph 74/550
-Running dot for graph 75/550
-Running dot for graph 76/550
-Running dot for graph 77/550
-Running dot for graph 78/550
-Running dot for graph 79/550
-Running dot for graph 80/550
-Running dot for graph 81/550
-Running dot for graph 82/550
-Running dot for graph 83/550
-Running dot for graph 84/550
-Running dot for graph 85/550
-Running dot for graph 86/550
-Running dot for graph 87/550
-Running dot for graph 88/550
-Running dot for graph 89/550
-Running dot for graph 90/550
-Running dot for graph 91/550
-Running dot for graph 92/550
-Running dot for graph 93/550
-Running dot for graph 94/550
-Running dot for graph 95/550
-Running dot for graph 96/550
-Running dot for graph 97/550
-Running dot for graph 98/550
-Running dot for graph 99/550
-Running dot for graph 100/550
-Running dot for graph 101/550
-Running dot for graph 102/550
-Running dot for graph 103/550
-Running dot for graph 104/550
-Running dot for graph 105/550
-Running dot for graph 106/550
-Running dot for graph 107/550
-Running dot for graph 108/550
-Running dot for graph 109/550
-Running dot for graph 110/550
-Running dot for graph 111/550
-Running dot for graph 112/550
-Running dot for graph 113/550
-Running dot for graph 114/550
-Running dot for graph 115/550
-Running dot for graph 116/550
-Running dot for graph 117/550
-Running dot for graph 118/550
-Running dot for graph 119/550
-Running dot for graph 120/550
-Running dot for graph 121/550
-Running dot for graph 122/550
-Running dot for graph 123/550
-Running dot for graph 124/550
-Running dot for graph 125/550
-Running dot for graph 126/550
-Running dot for graph 127/550
-Running dot for graph 128/550
-Running dot for graph 129/550
-Running dot for graph 130/550
-Running dot for graph 131/550
-Running dot for graph 132/550
-Running dot for graph 133/550
-Running dot for graph 134/550
-Running dot for graph 135/550
-Running dot for graph 136/550
-Running dot for graph 137/550
-Running dot for graph 138/550
-Running dot for graph 139/550
-Running dot for graph 140/550
-Running dot for graph 141/550
-Running dot for graph 142/550
-Running dot for graph 143/550
-Running dot for graph 144/550
-Running dot for graph 145/550
-Running dot for graph 146/550
-Running dot for graph 147/550
-Running dot for graph 148/550
-Running dot for graph 149/550
-Running dot for graph 150/550
-Running dot for graph 151/550
-Running dot for graph 152/550
-Running dot for graph 153/550
-Running dot for graph 154/550
-Running dot for graph 155/550
-Running dot for graph 156/550
-Running dot for graph 157/550
-Running dot for graph 158/550
-Running dot for graph 159/550
-Running dot for graph 160/550
-Running dot for graph 161/550
-Running dot for graph 162/550
-Running dot for graph 163/550
-Running dot for graph 164/550
-Running dot for graph 165/550
-Running dot for graph 166/550
-Running dot for graph 167/550
-Running dot for graph 168/550
-Running dot for graph 169/550
-Running dot for graph 170/550
-Running dot for graph 171/550
-Running dot for graph 172/550
-Running dot for graph 173/550
-Running dot for graph 174/550
-Running dot for graph 175/550
-Running dot for graph 176/550
-Running dot for graph 177/550
-Running dot for graph 178/550
-Running dot for graph 179/550
-Running dot for graph 180/550
-Running dot for graph 181/550
-Running dot for graph 182/550
-Running dot for graph 183/550
-Running dot for graph 184/550
-Running dot for graph 185/550
-Running dot for graph 186/550
-Running dot for graph 187/550
-Running dot for graph 188/550
-Running dot for graph 189/550
-Running dot for graph 190/550
-Running dot for graph 191/550
-Running dot for graph 192/550
-Running dot for graph 193/550
-Running dot for graph 194/550
-Running dot for graph 195/550
-Running dot for graph 196/550
-Running dot for graph 197/550
-Running dot for graph 198/550
-Running dot for graph 199/550
-Running dot for graph 200/550
-Running dot for graph 201/550
-Running dot for graph 202/550
-Running dot for graph 203/550
-Running dot for graph 204/550
-Running dot for graph 205/550
-Running dot for graph 206/550
-Running dot for graph 207/550
-Running dot for graph 208/550
-Running dot for graph 209/550
-Running dot for graph 210/550
-Running dot for graph 211/550
-Running dot for graph 212/550
-Running dot for graph 213/550
-Running dot for graph 214/550
-Running dot for graph 215/550
-Running dot for graph 216/550
-Running dot for graph 217/550
-Running dot for graph 218/550
-Running dot for graph 219/550
-Running dot for graph 220/550
-Running dot for graph 221/550
-Running dot for graph 222/550
-Running dot for graph 223/550
-Running dot for graph 224/550
-Running dot for graph 225/550
-Running dot for graph 226/550
-Running dot for graph 227/550
-Running dot for graph 228/550
-Running dot for graph 229/550
-Running dot for graph 230/550
-Running dot for graph 231/550
-Running dot for graph 232/550
-Running dot for graph 233/550
-Running dot for graph 234/550
-Running dot for graph 235/550
-Running dot for graph 236/550
-Running dot for graph 237/550
-Running dot for graph 238/550
-Running dot for graph 239/550
-Running dot for graph 240/550
-Running dot for graph 241/550
-Running dot for graph 242/550
-Running dot for graph 243/550
-Running dot for graph 244/550
-Running dot for graph 245/550
-Running dot for graph 246/550
-Running dot for graph 247/550
-Running dot for graph 248/550
-Running dot for graph 249/550
-Running dot for graph 250/550
-Running dot for graph 251/550
-Running dot for graph 252/550
-Running dot for graph 253/550
-Running dot for graph 254/550
-Running dot for graph 255/550
-Running dot for graph 256/550
-Running dot for graph 257/550
-Running dot for graph 258/550
-Running dot for graph 259/550
-Running dot for graph 260/550
-Running dot for graph 261/550
-Running dot for graph 262/550
-Running dot for graph 263/550
-Running dot for graph 264/550
-Running dot for graph 265/550
-Running dot for graph 266/550
-Running dot for graph 267/550
-Running dot for graph 268/550
-Running dot for graph 269/550
-Running dot for graph 270/550
-Running dot for graph 271/550
-Running dot for graph 272/550
-Running dot for graph 273/550
-Running dot for graph 274/550
-Running dot for graph 275/550
-Running dot for graph 276/550
-Running dot for graph 277/550
-Running dot for graph 278/550
-Running dot for graph 279/550
-Running dot for graph 280/550
-Running dot for graph 281/550
-Running dot for graph 282/550
-Running dot for graph 283/550
-Running dot for graph 284/550
-Running dot for graph 285/550
-Running dot for graph 286/550
-Running dot for graph 287/550
-Running dot for graph 288/550
-Running dot for graph 289/550
-Running dot for graph 290/550
-Running dot for graph 291/550
-Running dot for graph 292/550
-Running dot for graph 293/550
-Running dot for graph 294/550
-Running dot for graph 295/550
-Running dot for graph 296/550
-Running dot for graph 297/550
-Running dot for graph 298/550
-Running dot for graph 299/550
-Running dot for graph 300/550
-Running dot for graph 301/550
-Running dot for graph 302/550
-Running dot for graph 303/550
-Running dot for graph 304/550
-Running dot for graph 305/550
-Running dot for graph 306/550
-Running dot for graph 307/550
-Running dot for graph 308/550
-Running dot for graph 309/550
-Running dot for graph 310/550
-Running dot for graph 311/550
-Running dot for graph 312/550
-Running dot for graph 313/550
-Running dot for graph 314/550
-Running dot for graph 315/550
-Running dot for graph 316/550
-Running dot for graph 317/550
-Running dot for graph 318/550
-Running dot for graph 319/550
-Running dot for graph 320/550
-Running dot for graph 321/550
-Running dot for graph 322/550
-Running dot for graph 323/550
-Running dot for graph 324/550
-Running dot for graph 325/550
-Running dot for graph 326/550
-Running dot for graph 327/550
-Running dot for graph 328/550
-Running dot for graph 329/550
-Running dot for graph 330/550
-Running dot for graph 331/550
-Running dot for graph 332/550
-Running dot for graph 333/550
-Running dot for graph 334/550
-Running dot for graph 335/550
-Running dot for graph 336/550
-Running dot for graph 337/550
-Running dot for graph 338/550
-Running dot for graph 339/550
-Running dot for graph 340/550
-Running dot for graph 341/550
-Running dot for graph 342/550
-Running dot for graph 343/550
-Running dot for graph 344/550
-Running dot for graph 345/550
-Running dot for graph 346/550
-Running dot for graph 347/550
-Running dot for graph 348/550
-Running dot for graph 349/550
-Running dot for graph 350/550
-Running dot for graph 351/550
-Running dot for graph 352/550
-Running dot for graph 353/550
-Running dot for graph 354/550
-Running dot for graph 355/550
-Running dot for graph 356/550
-Running dot for graph 357/550
-Running dot for graph 358/550
-Running dot for graph 359/550
-Running dot for graph 360/550
-Running dot for graph 361/550
-Running dot for graph 362/550
-Running dot for graph 363/550
-Running dot for graph 364/550
-Running dot for graph 365/550
-Running dot for graph 366/550
-Running dot for graph 367/550
-Running dot for graph 368/550
-Running dot for graph 369/550
-Running dot for graph 370/550
-Running dot for graph 371/550
-Running dot for graph 372/550
-Running dot for graph 373/550
-Running dot for graph 374/550
-Running dot for graph 375/550
-Running dot for graph 376/550
-Running dot for graph 377/550
-Running dot for graph 378/550
-Running dot for graph 379/550
-Running dot for graph 380/550
-Running dot for graph 381/550
-Running dot for graph 382/550
-Running dot for graph 383/550
-Running dot for graph 384/550
-Running dot for graph 385/550
-Running dot for graph 386/550
-Running dot for graph 387/550
-Running dot for graph 388/550
-Running dot for graph 389/550
-Running dot for graph 390/550
-Running dot for graph 391/550
-Running dot for graph 392/550
-Running dot for graph 393/550
-Running dot for graph 394/550
-Running dot for graph 395/550
-Running dot for graph 396/550
-Running dot for graph 397/550
-Running dot for graph 398/550
-Running dot for graph 399/550
-Running dot for graph 400/550
-Running dot for graph 401/550
-Running dot for graph 402/550
-Running dot for graph 403/550
-Running dot for graph 404/550
-Running dot for graph 405/550
-Running dot for graph 406/550
-Running dot for graph 407/550
-Running dot for graph 408/550
-Running dot for graph 409/550
-Running dot for graph 410/550
-Running dot for graph 411/550
-Running dot for graph 412/550
-Running dot for graph 413/550
-Running dot for graph 414/550
-Running dot for graph 415/550
-Running dot for graph 416/550
-Running dot for graph 417/550
-Running dot for graph 418/550
-Running dot for graph 419/550
-Running dot for graph 420/550
-Running dot for graph 421/550
-Running dot for graph 422/550
-Running dot for graph 423/550
-Running dot for graph 424/550
-Running dot for graph 425/550
-Running dot for graph 426/550
-Running dot for graph 427/550
-Running dot for graph 428/550
-Running dot for graph 429/550
-Running dot for graph 430/550
-Running dot for graph 431/550
-Running dot for graph 432/550
-Running dot for graph 433/550
-Running dot for graph 434/550
-Running dot for graph 435/550
-Running dot for graph 436/550
-Running dot for graph 437/550
-Running dot for graph 438/550
-Running dot for graph 439/550
-Running dot for graph 440/550
-Running dot for graph 441/550
-Running dot for graph 442/550
-Running dot for graph 443/550
-Running dot for graph 444/550
-Running dot for graph 445/550
-Running dot for graph 446/550
-Running dot for graph 447/550
-Running dot for graph 448/550
-Running dot for graph 449/550
-Running dot for graph 450/550
-Running dot for graph 451/550
-Running dot for graph 452/550
-Running dot for graph 453/550
-Running dot for graph 454/550
-Running dot for graph 455/550
-Running dot for graph 456/550
-Running dot for graph 457/550
-Running dot for graph 458/550
-Running dot for graph 459/550
-Running dot for graph 460/550
-Running dot for graph 461/550
-Running dot for graph 462/550
-Running dot for graph 463/550
-Running dot for graph 464/550
-Running dot for graph 465/550
-Running dot for graph 466/550
-Running dot for graph 467/550
-Running dot for graph 468/550
-Running dot for graph 469/550
-Running dot for graph 470/550
-Running dot for graph 471/550
-Running dot for graph 472/550
-Running dot for graph 473/550
-Running dot for graph 474/550
-Running dot for graph 475/550
-Running dot for graph 476/550
-Running dot for graph 477/550
-Running dot for graph 478/550
-Running dot for graph 479/550
-Running dot for graph 480/550
-Running dot for graph 481/550
-Running dot for graph 482/550
-Running dot for graph 483/550
-Running dot for graph 484/550
-Running dot for graph 485/550
-Running dot for graph 486/550
-Running dot for graph 487/550
-Running dot for graph 488/550
-Running dot for graph 489/550
-Running dot for graph 490/550
-Running dot for graph 491/550
-Running dot for graph 492/550
-Running dot for graph 493/550
-Running dot for graph 494/550
-Running dot for graph 495/550
-Running dot for graph 496/550
-Running dot for graph 497/550
-Running dot for graph 498/550
-Running dot for graph 499/550
-Running dot for graph 500/550
-Running dot for graph 501/550
-Running dot for graph 502/550
-Running dot for graph 503/550
-Running dot for graph 504/550
-Running dot for graph 505/550
-Running dot for graph 506/550
-Running dot for graph 507/550
-Running dot for graph 508/550
-Running dot for graph 509/550
-Running dot for graph 510/550
-Running dot for graph 511/550
-Running dot for graph 512/550
-Running dot for graph 513/550
-Running dot for graph 514/550
-Running dot for graph 515/550
-Running dot for graph 516/550
-Running dot for graph 517/550
-Running dot for graph 518/550
-Running dot for graph 519/550
-Running dot for graph 520/550
-Running dot for graph 521/550
-Running dot for graph 522/550
-Running dot for graph 523/550
-Running dot for graph 524/550
-Running dot for graph 525/550
-Running dot for graph 526/550
-Running dot for graph 527/550
-Running dot for graph 528/550
-Running dot for graph 529/550
-Running dot for graph 530/550
-Running dot for graph 531/550
-Running dot for graph 532/550
-Running dot for graph 533/550
-Running dot for graph 534/550
-Running dot for graph 535/550
-Running dot for graph 536/550
-Running dot for graph 537/550
-Running dot for graph 538/550
-Running dot for graph 539/550
-Running dot for graph 540/550
-Running dot for graph 541/550
-Running dot for graph 542/550
-Running dot for graph 543/550
-Running dot for graph 544/550
-Running dot for graph 545/550
-Running dot for graph 546/550
-Running dot for graph 547/550
-Running dot for graph 548/550
-Running dot for graph 549/550
-Running dot for graph 550/550
-Patching output file 1/48
-Patching output file 2/48
-Patching output file 3/48
-Patching output file 4/48
-Patching output file 5/48
-Patching output file 6/48
-Patching output file 7/48
-Patching output file 8/48
-Patching output file 9/48
-Patching output file 10/48
-Patching output file 11/48
-Patching output file 12/48
-Patching output file 13/48
-Patching output file 14/48
-Patching output file 15/48
-Patching output file 16/48
-Patching output file 17/48
-Patching output file 18/48
-Patching output file 19/48
-Patching output file 20/48
-Patching output file 21/48
-Patching output file 22/48
-Patching output file 23/48
-Patching output file 24/48
-Patching output file 25/48
-Patching output file 26/48
-Patching output file 27/48
-Patching output file 28/48
-Patching output file 29/48
-Patching output file 30/48
-Patching output file 31/48
-Patching output file 32/48
-Patching output file 33/48
-Patching output file 34/48
-Patching output file 35/48
-Patching output file 36/48
-Patching output file 37/48
-Patching output file 38/48
-Patching output file 39/48
-Patching output file 40/48
-Patching output file 41/48
-Patching output file 42/48
-Patching output file 43/48
-Patching output file 44/48
-Patching output file 45/48
-Patching output file 46/48
-Patching output file 47/48
-Patching output file 48/48
+Running dot for graph 1/560
+Running dot for graph 2/560
+Running dot for graph 3/560
+Running dot for graph 4/560
+Running dot for graph 5/560
+Running dot for graph 6/560
+Running dot for graph 7/560
+Running dot for graph 8/560
+Running dot for graph 9/560
+Running dot for graph 10/560
+Running dot for graph 11/560
+Running dot for graph 12/560
+Running dot for graph 13/560
+Running dot for graph 14/560
+Running dot for graph 15/560
+Running dot for graph 16/560
+Running dot for graph 17/560
+Running dot for graph 18/560
+Running dot for graph 19/560
+Running dot for graph 20/560
+Running dot for graph 21/560
+Running dot for graph 22/560
+Running dot for graph 23/560
+Running dot for graph 24/560
+Running dot for graph 25/560
+Running dot for graph 26/560
+Running dot for graph 27/560
+Running dot for graph 28/560
+Running dot for graph 29/560
+Running dot for graph 30/560
+Running dot for graph 31/560
+Running dot for graph 32/560
+Running dot for graph 33/560
+Running dot for graph 34/560
+Running dot for graph 35/560
+Running dot for graph 36/560
+Running dot for graph 37/560
+Running dot for graph 38/560
+Running dot for graph 39/560
+Running dot for graph 40/560
+Running dot for graph 41/560
+Running dot for graph 42/560
+Running dot for graph 43/560
+Running dot for graph 44/560
+Running dot for graph 45/560
+Running dot for graph 46/560
+Running dot for graph 47/560
+Running dot for graph 48/560
+Running dot for graph 49/560
+Running dot for graph 50/560
+Running dot for graph 51/560
+Running dot for graph 52/560
+Running dot for graph 53/560
+Running dot for graph 54/560
+Running dot for graph 55/560
+Running dot for graph 56/560
+Running dot for graph 57/560
+Running dot for graph 58/560
+Running dot for graph 59/560
+Running dot for graph 60/560
+Running dot for graph 61/560
+Running dot for graph 62/560
+Running dot for graph 63/560
+Running dot for graph 64/560
+Running dot for graph 65/560
+Running dot for graph 66/560
+Running dot for graph 67/560
+Running dot for graph 68/560
+Running dot for graph 69/560
+Running dot for graph 70/560
+Running dot for graph 71/560
+Running dot for graph 72/560
+Running dot for graph 73/560
+Running dot for graph 74/560
+Running dot for graph 75/560
+Running dot for graph 76/560
+Running dot for graph 77/560
+Running dot for graph 78/560
+Running dot for graph 79/560
+Running dot for graph 80/560
+Running dot for graph 81/560
+Running dot for graph 82/560
+Running dot for graph 83/560
+Running dot for graph 84/560
+Running dot for graph 85/560
+Running dot for graph 86/560
+Running dot for graph 87/560
+Running dot for graph 88/560
+Running dot for graph 89/560
+Running dot for graph 90/560
+Running dot for graph 91/560
+Running dot for graph 92/560
+Running dot for graph 93/560
+Running dot for graph 94/560
+Running dot for graph 95/560
+Running dot for graph 96/560
+Running dot for graph 97/560
+Running dot for graph 98/560
+Running dot for graph 99/560
+Running dot for graph 100/560
+Running dot for graph 101/560
+Running dot for graph 102/560
+Running dot for graph 103/560
+Running dot for graph 104/560
+Running dot for graph 105/560
+Running dot for graph 106/560
+Running dot for graph 107/560
+Running dot for graph 108/560
+Running dot for graph 109/560
+Running dot for graph 110/560
+Running dot for graph 111/560
+Running dot for graph 112/560
+Running dot for graph 113/560
+Running dot for graph 114/560
+Running dot for graph 115/560
+Running dot for graph 116/560
+Running dot for graph 117/560
+Running dot for graph 118/560
+Running dot for graph 119/560
+Running dot for graph 120/560
+Running dot for graph 121/560
+Running dot for graph 122/560
+Running dot for graph 123/560
+Running dot for graph 124/560
+Running dot for graph 125/560
+Running dot for graph 126/560
+Running dot for graph 127/560
+Running dot for graph 128/560
+Running dot for graph 129/560
+Running dot for graph 130/560
+Running dot for graph 131/560
+Running dot for graph 132/560
+Running dot for graph 133/560
+Running dot for graph 134/560
+Running dot for graph 135/560
+Running dot for graph 136/560
+Running dot for graph 137/560
+Running dot for graph 138/560
+Running dot for graph 139/560
+Running dot for graph 140/560
+Running dot for graph 141/560
+Running dot for graph 142/560
+Running dot for graph 143/560
+Running dot for graph 144/560
+Running dot for graph 145/560
+Running dot for graph 146/560
+Running dot for graph 147/560
+Running dot for graph 148/560
+Running dot for graph 149/560
+Running dot for graph 150/560
+Running dot for graph 151/560
+Running dot for graph 152/560
+Running dot for graph 153/560
+Running dot for graph 154/560
+Running dot for graph 155/560
+Running dot for graph 156/560
+Running dot for graph 157/560
+Running dot for graph 158/560
+Running dot for graph 159/560
+Running dot for graph 160/560
+Running dot for graph 161/560
+Running dot for graph 162/560
+Running dot for graph 163/560
+Running dot for graph 164/560
+Running dot for graph 165/560
+Running dot for graph 166/560
+Running dot for graph 167/560
+Running dot for graph 168/560
+Running dot for graph 169/560
+Running dot for graph 170/560
+Running dot for graph 171/560
+Running dot for graph 172/560
+Running dot for graph 173/560
+Running dot for graph 174/560
+Running dot for graph 175/560
+Running dot for graph 176/560
+Running dot for graph 177/560
+Running dot for graph 178/560
+Running dot for graph 179/560
+Running dot for graph 180/560
+Running dot for graph 181/560
+Running dot for graph 182/560
+Running dot for graph 183/560
+Running dot for graph 184/560
+Running dot for graph 185/560
+Running dot for graph 186/560
+Running dot for graph 187/560
+Running dot for graph 188/560
+Running dot for graph 189/560
+Running dot for graph 190/560
+Running dot for graph 191/560
+Running dot for graph 192/560
+Running dot for graph 193/560
+Running dot for graph 194/560
+Running dot for graph 195/560
+Running dot for graph 196/560
+Running dot for graph 197/560
+Running dot for graph 198/560
+Running dot for graph 199/560
+Running dot for graph 200/560
+Running dot for graph 201/560
+Running dot for graph 202/560
+Running dot for graph 203/560
+Running dot for graph 204/560
+Running dot for graph 205/560
+Running dot for graph 206/560
+Running dot for graph 207/560
+Running dot for graph 208/560
+Running dot for graph 209/560
+Running dot for graph 210/560
+Running dot for graph 211/560
+Running dot for graph 212/560
+Running dot for graph 213/560
+Running dot for graph 214/560
+Running dot for graph 215/560
+Running dot for graph 216/560
+Running dot for graph 217/560
+Running dot for graph 218/560
+Running dot for graph 219/560
+Running dot for graph 220/560
+Running dot for graph 221/560
+Running dot for graph 222/560
+Running dot for graph 223/560
+Running dot for graph 224/560
+Running dot for graph 225/560
+Running dot for graph 226/560
+Running dot for graph 227/560
+Running dot for graph 228/560
+Running dot for graph 229/560
+Running dot for graph 230/560
+Running dot for graph 231/560
+Running dot for graph 232/560
+Running dot for graph 233/560
+Running dot for graph 234/560
+Running dot for graph 235/560
+Running dot for graph 236/560
+Running dot for graph 237/560
+Running dot for graph 238/560
+Running dot for graph 239/560
+Running dot for graph 240/560
+Running dot for graph 241/560
+Running dot for graph 242/560
+Running dot for graph 243/560
+Running dot for graph 244/560
+Running dot for graph 245/560
+Running dot for graph 246/560
+Running dot for graph 247/560
+Running dot for graph 248/560
+Running dot for graph 249/560
+Running dot for graph 250/560
+Running dot for graph 251/560
+Running dot for graph 252/560
+Running dot for graph 253/560
+Running dot for graph 254/560
+Running dot for graph 255/560
+Running dot for graph 256/560
+Running dot for graph 257/560
+Running dot for graph 258/560
+Running dot for graph 259/560
+Running dot for graph 260/560
+Running dot for graph 261/560
+Running dot for graph 262/560
+Running dot for graph 263/560
+Running dot for graph 264/560
+Running dot for graph 265/560
+Running dot for graph 266/560
+Running dot for graph 267/560
+Running dot for graph 268/560
+Running dot for graph 269/560
+Running dot for graph 270/560
+Running dot for graph 271/560
+Running dot for graph 272/560
+Running dot for graph 273/560
+Running dot for graph 274/560
+Running dot for graph 275/560
+Running dot for graph 276/560
+Running dot for graph 277/560
+Running dot for graph 278/560
+Running dot for graph 279/560
+Running dot for graph 280/560
+Running dot for graph 281/560
+Running dot for graph 282/560
+Running dot for graph 283/560
+Running dot for graph 284/560
+Running dot for graph 285/560
+Running dot for graph 286/560
+Running dot for graph 287/560
+Running dot for graph 288/560
+Running dot for graph 289/560
+Running dot for graph 290/560
+Running dot for graph 291/560
+Running dot for graph 292/560
+Running dot for graph 293/560
+Running dot for graph 294/560
+Running dot for graph 295/560
+Running dot for graph 296/560
+Running dot for graph 297/560
+Running dot for graph 298/560
+Running dot for graph 299/560
+Running dot for graph 300/560
+Running dot for graph 301/560
+Running dot for graph 302/560
+Running dot for graph 303/560
+Running dot for graph 304/560
+Running dot for graph 305/560
+Running dot for graph 306/560
+Running dot for graph 307/560
+Running dot for graph 308/560
+Running dot for graph 309/560
+Running dot for graph 310/560
+Running dot for graph 311/560
+Running dot for graph 312/560
+Running dot for graph 313/560
+Running dot for graph 314/560
+Running dot for graph 315/560
+Running dot for graph 316/560
+Running dot for graph 317/560
+Running dot for graph 318/560
+Running dot for graph 319/560
+Running dot for graph 320/560
+Running dot for graph 321/560
+Running dot for graph 322/560
+Running dot for graph 323/560
+Running dot for graph 324/560
+Running dot for graph 325/560
+Running dot for graph 326/560
+Running dot for graph 327/560
+Running dot for graph 328/560
+Running dot for graph 329/560
+Running dot for graph 330/560
+Running dot for graph 331/560
+Running dot for graph 332/560
+Running dot for graph 333/560
+Running dot for graph 334/560
+Running dot for graph 335/560
+Running dot for graph 336/560
+Running dot for graph 337/560
+Running dot for graph 338/560
+Running dot for graph 339/560
+Running dot for graph 340/560
+Running dot for graph 341/560
+Running dot for graph 342/560
+Running dot for graph 343/560
+Running dot for graph 344/560
+Running dot for graph 345/560
+Running dot for graph 346/560
+Running dot for graph 347/560
+Running dot for graph 348/560
+Running dot for graph 349/560
+Running dot for graph 350/560
+Running dot for graph 351/560
+Running dot for graph 352/560
+Running dot for graph 353/560
+Running dot for graph 354/560
+Running dot for graph 355/560
+Running dot for graph 356/560
+Running dot for graph 357/560
+Running dot for graph 358/560
+Running dot for graph 359/560
+Running dot for graph 360/560
+Running dot for graph 361/560
+Running dot for graph 362/560
+Running dot for graph 363/560
+Running dot for graph 364/560
+Running dot for graph 365/560
+Running dot for graph 366/560
+Running dot for graph 367/560
+Running dot for graph 368/560
+Running dot for graph 369/560
+Running dot for graph 370/560
+Running dot for graph 371/560
+Running dot for graph 372/560
+Running dot for graph 373/560
+Running dot for graph 374/560
+Running dot for graph 375/560
+Running dot for graph 376/560
+Running dot for graph 377/560
+Running dot for graph 378/560
+Running dot for graph 379/560
+Running dot for graph 380/560
+Running dot for graph 381/560
+Running dot for graph 382/560
+Running dot for graph 383/560
+Running dot for graph 384/560
+Running dot for graph 385/560
+Running dot for graph 386/560
+Running dot for graph 387/560
+Running dot for graph 388/560
+Running dot for graph 389/560
+Running dot for graph 390/560
+Running dot for graph 391/560
+Running dot for graph 392/560
+Running dot for graph 393/560
+Running dot for graph 394/560
+Running dot for graph 395/560
+Running dot for graph 396/560
+Running dot for graph 397/560
+Running dot for graph 398/560
+Running dot for graph 399/560
+Running dot for graph 400/560
+Running dot for graph 401/560
+Running dot for graph 402/560
+Running dot for graph 403/560
+Running dot for graph 404/560
+Running dot for graph 405/560
+Running dot for graph 406/560
+Running dot for graph 407/560
+Running dot for graph 408/560
+Running dot for graph 409/560
+Running dot for graph 410/560
+Running dot for graph 411/560
+Running dot for graph 412/560
+Running dot for graph 413/560
+Running dot for graph 414/560
+Running dot for graph 415/560
+Running dot for graph 416/560
+Running dot for graph 417/560
+Running dot for graph 418/560
+Running dot for graph 419/560
+Running dot for graph 420/560
+Running dot for graph 421/560
+Running dot for graph 422/560
+Running dot for graph 423/560
+Running dot for graph 424/560
+Running dot for graph 425/560
+Running dot for graph 426/560
+Running dot for graph 427/560
+Running dot for graph 428/560
+Running dot for graph 429/560
+Running dot for graph 430/560
+Running dot for graph 431/560
+Running dot for graph 432/560
+Running dot for graph 433/560
+Running dot for graph 434/560
+Running dot for graph 435/560
+Running dot for graph 436/560
+Running dot for graph 437/560
+Running dot for graph 438/560
+Running dot for graph 439/560
+Running dot for graph 440/560
+Running dot for graph 441/560
+Running dot for graph 442/560
+Running dot for graph 443/560
+Running dot for graph 444/560
+Running dot for graph 445/560
+Running dot for graph 446/560
+Running dot for graph 447/560
+Running dot for graph 448/560
+Running dot for graph 449/560
+Running dot for graph 450/560
+Running dot for graph 451/560
+Running dot for graph 452/560
+Running dot for graph 453/560
+Running dot for graph 454/560
+Running dot for graph 455/560
+Running dot for graph 456/560
+Running dot for graph 457/560
+Running dot for graph 458/560
+Running dot for graph 459/560
+Running dot for graph 460/560
+Running dot for graph 461/560
+Running dot for graph 462/560
+Running dot for graph 463/560
+Running dot for graph 464/560
+Running dot for graph 465/560
+Running dot for graph 466/560
+Running dot for graph 467/560
+Running dot for graph 468/560
+Running dot for graph 469/560
+Running dot for graph 470/560
+Running dot for graph 471/560
+Running dot for graph 472/560
+Running dot for graph 473/560
+Running dot for graph 474/560
+Running dot for graph 475/560
+Running dot for graph 476/560
+Running dot for graph 477/560
+Running dot for graph 478/560
+Running dot for graph 479/560
+Running dot for graph 480/560
+Running dot for graph 481/560
+Running dot for graph 482/560
+Running dot for graph 483/560
+Running dot for graph 484/560
+Running dot for graph 485/560
+Running dot for graph 486/560
+Running dot for graph 487/560
+Running dot for graph 488/560
+Running dot for graph 489/560
+Running dot for graph 490/560
+Running dot for graph 491/560
+Running dot for graph 492/560
+Running dot for graph 493/560
+Running dot for graph 494/560
+Running dot for graph 495/560
+Running dot for graph 496/560
+Running dot for graph 497/560
+Running dot for graph 498/560
+Running dot for graph 499/560
+Running dot for graph 500/560
+Running dot for graph 501/560
+Running dot for graph 502/560
+Running dot for graph 503/560
+Running dot for graph 504/560
+Running dot for graph 505/560
+Running dot for graph 506/560
+Running dot for graph 507/560
+Running dot for graph 508/560
+Running dot for graph 509/560
+Running dot for graph 510/560
+Running dot for graph 511/560
+Running dot for graph 512/560
+Running dot for graph 513/560
+Running dot for graph 514/560
+Running dot for graph 515/560
+Running dot for graph 516/560
+Running dot for graph 517/560
+Running dot for graph 518/560
+Running dot for graph 519/560
+Running dot for graph 520/560
+Running dot for graph 521/560
+Running dot for graph 522/560
+Running dot for graph 523/560
+Running dot for graph 524/560
+Running dot for graph 525/560
+Running dot for graph 526/560
+Running dot for graph 527/560
+Running dot for graph 528/560
+Running dot for graph 529/560
+Running dot for graph 530/560
+Running dot for graph 531/560
+Running dot for graph 532/560
+Running dot for graph 533/560
+Running dot for graph 534/560
+Running dot for graph 535/560
+Running dot for graph 536/560
+Running dot for graph 537/560
+Running dot for graph 538/560
+Running dot for graph 539/560
+Running dot for graph 540/560
+Running dot for graph 541/560
+Running dot for graph 542/560
+Running dot for graph 543/560
+Running dot for graph 544/560
+Running dot for graph 545/560
+Running dot for graph 546/560
+Running dot for graph 547/560
+Running dot for graph 548/560
+Running dot for graph 549/560
+Running dot for graph 550/560
+Running dot for graph 551/560
+Running dot for graph 552/560
+Running dot for graph 553/560
+Running dot for graph 554/560
+Running dot for graph 555/560
+Running dot for graph 556/560
+Running dot for graph 557/560
+Running dot for graph 558/560
+Running dot for graph 559/560
+Running dot for graph 560/560
+Patching output file 1/49
+Patching output file 2/49
+Patching output file 3/49
+Patching output file 4/49
+Patching output file 5/49
+Patching output file 6/49
+Patching output file 7/49
+Patching output file 8/49
+Patching output file 9/49
+Patching output file 10/49
+Patching output file 11/49
+Patching output file 12/49
+Patching output file 13/49
+Patching output file 14/49
+Patching output file 15/49
+Patching output file 16/49
+Patching output file 17/49
+Patching output file 18/49
+Patching output file 19/49
+Patching output file 20/49
+Patching output file 21/49
+Patching output file 22/49
+Patching output file 23/49
+Patching output file 24/49
+Patching output file 25/49
+Patching output file 26/49
+Patching output file 27/49
+Patching output file 28/49
+Patching output file 29/49
+Patching output file 30/49
+Patching output file 31/49
+Patching output file 32/49
+Patching output file 33/49
+Patching output file 34/49
+Patching output file 35/49
+Patching output file 36/49
+Patching output file 37/49
+Patching output file 38/49
+Patching output file 39/49
+Patching output file 40/49
+Patching output file 41/49
+Patching output file 42/49
+Patching output file 43/49
+Patching output file 44/49
+Patching output file 45/49
+Patching output file 46/49
+Patching output file 47/49
+Patching output file 48/49
+Patching output file 49/49
 finished...

@@ -305,7 +305,7 @@ Day-to-day Issues
                              [16][agpl-v3-logo.svg]   [17][gfdl-logo.svg]
 
 
-    Copyright © 2011 by [18]Sam Azer<[19]sam@azertech.net>, All rights
+    Copyright © 2011 by [18]Sam Azer<[19]sam[at]azertech.net>, All rights
     reserved.
 
    Last modified: Thu Jan 12 17:07:41 EST 2012
@@ -314,20 +314,20 @@ References
 
    1. http://www.azertech.net/content/category/3/49/29/
    2. http://www.azertech.net/
-   3. file://localhost/projects/server-scripts/backupv3/doc/doxygen/html/
+   3. file://doc/doxygen/html/
    4. http://www.azertech.net/content/category/3/49/29/
-   5. http://azer.ca/sysbackup-sfd
-   6. http://azer.ca/sysbackup-sf
-   7. http://azer.ca/sysbackup-gh
-   8. http://azer.ca/sysbackup-oh
+   5. http://www.azertech.net/sysbackup-sfd
+   6. http://www.azertech.net/sysbackup-sf
+   7. http://www.azertech.net/sysbackup-gh
+   8. http://www.azertech.net/sysbackup-oh
    9. http://www.azertech.net/content/view/69/29/
   10. http://www.azertech.net/content/view/94/29/
   11. http://www.azertech.net/content/view/92/29/
   12. http://www.azertech.net/content/view/93/29/
   13. http://www.azertech.net/content/view/95/29/
   14. http://www.azertech.net/content/view/70/29/
-  15. file://localhost/projects/server-scripts/backupv3/doc/images/stories/projects/sysbackup/image014.png
+  15. file://doc/images/image014.png
   16. http://www.gnu.org/licenses/agpl.html
   17. http://www.gnu.org/copyleft/fdl.html
   18. http://azertech.net/about
-  19. mailto:sam@azertech.net?subject=SysBackup
+  19. mailto:sam[at]azertech.net?subject=SysBackup

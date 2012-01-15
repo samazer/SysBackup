@@ -80,6 +80,19 @@ Basic Install
    detailed information about backup job configuration. See also the
    [4]JOB-CONF file more details.
 
+  Quick Install
+
+   In fact the following process is so simple that a script called
+   quick-install is available to do most of the work for you. Simply
+   unpack the distribution tarball in an appropriate location (the
+   examples here all use /opt/sysbackup/,) execute the
+   /opt/sysbackup/quick-install utility and follow the instructions.
+
+   If you execute quick-install as root it will perform the setup
+   described in this Basic Installation document. If you execute the
+   script as a system user it will setup SysBackup to run in
+   /home/<user>/sysbackup.
+
   Let's get started
 
                           [multi-function-tool.jpg]
@@ -175,30 +188,30 @@ $ sudo chmod 666 /var/log/sysbackup.log
                              [17][agpl-v3-logo.svg]   [18][gfdl-logo.svg]
 
 
-    Copyright © 2011 by [19]Sam Azer<[20]sam@azertech.net>, All rights
+    Copyright © 2011 by [19]Sam Azer<[20]sam[at]azertech.net>, All rights
     reserved.
 
-   Last modified: Thu Jan 12 17:37:40 EST 2012
+   Last modified: Sat Jan 14 13:16:23 EST 2012
 
 References
 
    1. http://www.azertech.net/content/category/3/49/29/
    2. http://www.azertech.net/
-   3. file://localhost/projects/server-scripts/backupv3/doc/doxygen/html/
-   4. file://localhost/projects/server-scripts/backupv3/doc/JOB-CONF.html
+   3. file://doc/doxygen/html/
+   4. http://www.azertech.net/content/view/75/29/
    5. http://www.azertech.net/content/category/3/49/29/
-   6. http://azer.ca/sysbackup-sfd
-   7. http://azer.ca/sysbackup-sf
-   8. http://azer.ca/sysbackup-gh
-   9. http://azer.ca/sysbackup-oh
+   6. http://www.azertech.net/sysbackup-sfd
+   7. http://www.azertech.net/sysbackup-sf
+   8. http://www.azertech.net/sysbackup-gh
+   9. http://www.azertech.net/sysbackup-oh
   10. http://www.azertech.net/content/view/69/29/
   11. http://www.azertech.net/content/view/94/29/
   12. http://www.azertech.net/content/view/92/29/
   13. http://www.azertech.net/content/view/93/29/
   14. http://www.azertech.net/content/view/95/29/
   15. http://www.azertech.net/content/view/70/29/
-  16. file://localhost/projects/server-scripts/backupv3/doc/JOB-CONF.html
+  16. http://www.azertech.net/content/view/75/29/
   17. http://www.gnu.org/licenses/agpl.html
   18. http://www.gnu.org/copyleft/fdl.html
   19. http://azertech.net/about
-  20. mailto:sam@azertech.net?subject=SysBackup
+  20. mailto:sam[at]azertech.net?subject=SysBackup

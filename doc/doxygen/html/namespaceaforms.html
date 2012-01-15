@@ -87,10 +87,97 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 </table>
 <hr/><a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>General logging class</p>
-<p>utility class to log messages to a log file</p>
-<p>extends stopwatch as that functionality is often used in simple server maintenance scripts</p>
+<div class="textblock"><p>Application Command Line Arguments handling</p>
+<p>The basic issue is that different classes handle different command line arguments. The classes are often in different modules and it is not possible, currently, to gather them all together for purposes such as reporting invalid args.</p>
+<p>This class will allow all the different modules to register the arguments that they recognize. The arguments will be registered with enough information that the class will be able to (at the very least) perform the most basic checks for validity.</p>
+<p>Arguments will be registered as arrays of argument specs that belong to a particular group of software modules. Each group will be allowed to register a callback function so that the arguments, when they are recognized, can trigger some appropriate behavior.</p>
+<p>The argument descriptions should also be complete enough that the class could even produce some help text.</p>
+<p>The information to be recorded per argument group will be:</p>
+<ul>
+<li>GroupID, Optional CallBack Object Reference and CallBackup Method Name, Array of arguments associated with this groupID.</li>
+</ul>
+<p>The information contained in an array of arguments includes the following items per argument:</p>
+<ul>
+<li>Argument ID: reference ID for this argument</li>
+</ul>
+<ul>
+<li>Array of arg texts to recognize, ie: -q and --quiet for 'quiet'</li>
+</ul>
+<ul>
+<li>Number of additional parameters that follow this arg, ie: --config &lt;name&gt; requires 1 additional parameter.</li>
+</ul>
+<ul>
+<li>Optional array of default values (1 value per parameter.) These values are for documentation purposes and represent the starting value for the property after initializatoin of the application but before the corresponding argument is processed.</li>
+</ul>
+<ul>
+<li>Optional value to set for this argument. This information is needed when setting flags that do not take any parameters.</li>
+</ul>
+<ul>
+<li>Optional array of property names for this option - to be passed to the callback function when getting and setting the option.</li>
+</ul>
+<ul>
+<li>Short example text for this argument and its parameters.</li>
+</ul>
+<ul>
+<li>Medium description text for this argument and its parameters.</li>
+</ul>
+<p>For convenience the code should accept individual values instead of arrays of values for cases where the number of parameters is zero or one.</p>
+<p>Example:</p>
+<p>$args = array( "config" =&gt; array( "args" =&gt; array( "-c", "--config" ), "params" =&gt; 1, "prop" =&gt; array( "app_config" ), "default" =&gt; array( "/etc/application/app.conf" ), "test" =&gt; array( "file-exists" ), "example" =&gt; "--config &lt;file&gt;", "desc" =&gt; "Set the path and file name of the application configuration file.", ),</p>
+<p>"quiet" =&gt; array( "args" =&gt; array( "-q", "--quiet" ), "params" =&gt; 0, "prop" =&gt; "quiet_flag", "default" =&gt; false, "value" =&gt; true, "example" =&gt; "--quiet", "desc" =&gt; "Force the application to run without issuing any messages to the console.", ), );</p>
+<p>Available Parameter Value tests for validity:</p>
+<ul>
+<li>file-not-exists: valid if the file does not exist</li>
+<li>file-exists: valid if the file exists</li>
+<li>dir-not-exists: valid if the folder does not exist</li>
+<li>dir-exists: valid if the folder exists</li>
+<li>email: valid if the string contains an @ followed by a .</li>
+<li>string: always valid</li>
+<li>date: valid if the PHP strtotime function can parse the value</li>
+<li>time: valid if the PHP strtotime function can parse the value</li>
+<li>stamp: valid if the PHP strtotime function can parse the value</li>
+<li>bool: valid if the</li>
+<li>truefalse: valid if the value is either true or false</li>
+<li>yesno: valid if the value is either yes or no</li>
+<li>onoff: valid if the value is either on or off</li>
+<li>int: valid if the integer value of the string is identical to the string</li>
+<li>float: valid if the float value of the string is identical to the string</li>
+</ul>
+<p>Callback handlers:</p>
+<p>Objects that need to be notified when a command line arg has been scanned can set a callback handler to receive the notification. The handler will look like this:</p>
+<p>function callback( $group_id, $arg_id, $param_count, $args, $arg_spec ) { echo "at callback( {$group_id}, {$arg_id}, {$param_count}, args, arg_spec )\n"; var_dump( $args ); }</p>
+<p>Where:</p>
+<ul>
+<li>$group_id is the group id that registered the matched argspec</li>
+</ul>
+<ul>
+<li>$arg_id is the id of the arg (from the argspec) that matches the scanned argument.</li>
+</ul>
+<ul>
+<li>$param_count is the number of parameters after the arg, ie: "--conf path/file" has one parameter, the path/file.</li>
+</ul>
+<ul>
+<li>$args is an array containing the items found, ie: $args = array( "--conf", "path/file" ) for a valid reference to a configuration file. Note that the first element of the array is always the argument that was matched and the subsequent elements contain the parameters to the argument.</li>
+</ul>
+<ul>
+<li>$arg_spec is the argument specification that was registered by the module.</li>
+</ul>
+<p><b>TODO: Help</b></p>
+<p>At this point there is enough information in the args array to make it possible to display all possible command line options - but more info is needed to produce a full help text. In particular a set of bare args specs would be needed along with a help text file.</p>
+<p>Once all the information is registered with the class it should be possible to execute a simply method call to produce a full help screen that is automatically maintained whenever any of the loaded software modules are updated.</p>
+<p><b>TODO: Bare Args</b></p>
+<p>Most command line or system applications are designed to interpret bare arguments in some way. One example would be a command oriented app which determines the meaning of the bare args according to the command option that was specified at the start of the command line.</p>
+<p>In any case the current software is able to list all the bare args that it finds in the ::bare_args array - but it is not able to validate the args or trigger a callback under any conditions to initiate any processing. It would be nice if there was some way to list all the possible combinations of bare args and command options so that the class could simply determine which combination to use and execute an appropriate callback by itself.</p>
+<p><b>(done): option validation</b></p>
+<p>It would be nice if each command line option could accept a "test" parameter, ie: "test" =&gt; "&lt;something&gt;" where &lt;something&gt; might be to test for a valid date/time/int/float/bool, etc. It would also be nice to be able to test for files that exist or do not exist or folders that exist or do not exist. This would probably simplify the coding of a great many system applications in the future.</p>
 <p><b>Copyright</b></p>
+<p>Copyright (c) 2001-2011 by Sam Azer, All Rights Reserved.</p>
+<p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU Affero General Public License along with this program. If not, see &lt;<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;</p>
+<dl class="author"><dt><b>Author:</b></dt><dd>Sam Azer &lt;<a href="mailto:sam@azertech.net">sam@azertech.net</a>&gt; </dd></dl>
+<dl class="version"><dt><b>Version:</b></dt><dd>0.01 (alpha)</dd></dl>
+<p>lib-sys  <a href="http://www.gnu.org/licenses/agpl.html">http://www.gnu.org/licenses/agpl.html</a> AGPL  2011 by Sam Azer, All rights reserved <a class="el" href=""><a href="http://www.samazer.net/about">http://www.samazer.net/about</a>  General logging class  utility class to log messages to a log file  extends stopwatch as that functionality is often used in simple server maintenance scripts  </a><b>Copyright</b></p>
 <p>Copyright (c) 2001-2011 by Sam Azer, All Rights Reserved.</p>
 <p>This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.</p>
 <p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
@@ -248,7 +335,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="namespaceaforms.html">aforms</a>      </li>
-      <li class="footer">Generated on Thu Jan 12 2012 18:28:07 for SysBackup by&#160;
+      <li class="footer">Generated on Sun Jan 15 2012 01:20:23 for SysBackup by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>
