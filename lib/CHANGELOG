@@ -15,6 +15,10 @@ AFORMs library:
         of recognized command line arguments as part of the default
         app. help text.
 
+      * Made a change to allow the code to complete the processing of
+        group accounts that were edited manually in /etc/group without
+        a corresponding update to the gshadow file.
+
    2012.01.14 SA:
 
       * Added to general-plugins.inc the ability to handle a few

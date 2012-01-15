@@ -114,15 +114,21 @@ class account_migration_c extends account_info_c
       if ( !isset($this->groups[$id]) )
          return;
 
-      if ( ( $this->groups[$id]["gid"] < SYSTEM_MINUSRGID )
-        || ( $this->groups[$id]["gid"] > SYSTEM_MAXUSRGID ) )
-         return;
+      if ( isset($this->groups[$id]["gid"]) )
+      {
+        if ( ( $this->groups[$id]["gid"] < SYSTEM_MINUSRGID )
+          || ( $this->groups[$id]["gid"] > SYSTEM_MAXUSRGID ) )
+           return;
 
-      if ( $this->groups[$id]["gid"] <= SYSTEM_MAXSYSGID )
-         return;
+        if ( $this->groups[$id]["gid"] <= SYSTEM_MAXSYSGID )
+           return;
+      }
 
       $info = $this->groups[$id];
-      $cmd = "groupadd --gid {$info['gid']} {$id}";
+
+      if ( isset($this->groups[$id]["gid"]) )
+         $cmd = "groupadd --gid {$info['gid']} {$id}";
+      else $cmd = "groupadd {$id}  ############### missing GID ##################";
 
       return $cmd;
    }

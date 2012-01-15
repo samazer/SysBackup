@@ -392,7 +392,7 @@ class account_info_c
          if ( $group_info > "" )
          {
             $info = explode( ":", $group_info );
-            $this->groups[$info[0]] = $this->groups[$info[0]]
+            $this->groups[$info[0]] = (isset($this->groups[$info[0]]) ? $this->groups[$info[0]] : array())
                                     + array( "passwd" => $info[1],  // encrypted password
                                              "admins" => $info[2],  // comma-separated list of group administrators
                                              "members" => $info[3], // comma-separated list of group members

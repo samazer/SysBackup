@@ -145,7 +145,7 @@ class backupvfs_localio_c extends backupvfs_baseio_c
       if ( strpos( $msg, SYS_TAR_FILECHANGED_TEXT ) !== false )
       {
          $t = str_replace( $this->tar->tarball_ext(), ".err", $target );
-         $rel_ref = dir_fn( $this->current_subfolder . "/" . $t );
+         $rel_ref = $t; // $target was redefined as a rel_ref a while ago
          $abs_ref = dir_fn( $this->path_backupset . "/" . $rel_ref );
 
          $msg = "tarball may contain errors; error message was:\n\n"

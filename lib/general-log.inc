@@ -68,6 +68,7 @@ class logfile_c
    var $disabled_flag = false; // true to disable the logger
 
    var $logfile       = false; // full path and file name of output log file
+   var $logfile_warning = ""; // contains the name of the logfile at time of warning about permissions
 
    // resource for the open log file or integer value indicating status:
    var $logfp         = -1;    // -1 = not used, -2 = closed
@@ -142,12 +143,6 @@ class logfile_c
    {
       if ( $fn )
       {
-         if ( !is_writable( $fn ) )
-         {
-            echo "\n", TEELOG_TXTWARNING, "Unable to write to '{$fn}'\n";
-            return false;
-         }
-
          $this->logfile = $fn;
       }
 
@@ -176,6 +171,17 @@ class logfile_c
       if ( $fn === false )
          $fn = $this->logfile;
       else $this->logfile = $fn;
+
+      if ( !is_writable( $fn ) && ($this->logfile_warning != $fn) )
+      {
+         if ( $this->logfile_warning != $fn )
+         {
+            echo "\n", TEELOG_TXTWARNING, "Unable to write to '{$fn}'\n";
+            $this->logfile_warning = $fn;
+         }
+
+         return false;
+      }
 
       if ( ($this->logfp = fopen( $fn, $mode )) === false )
       {
@@ -382,6 +388,9 @@ class logfile_c
       // try to open if it's never been opened
       if ( !is_resource($this->logfp) )
          $this->open();
+
+      if ( !is_resource($this->logfp) )
+         return 0; // can't log anything - probably a permissions error
 
       // obtain an exclusive write lock and write to the file
       if ( $this->lock(false) ) // false === don't wait too long for the lock
