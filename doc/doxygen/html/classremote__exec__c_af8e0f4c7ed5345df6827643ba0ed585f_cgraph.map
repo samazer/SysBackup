@@ -1,20 +1,21 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$classremote__exec__c.html#a9e252007d628b48ead9de2af19c59b39" title="__construct" alt="" coords="104,5,195,35"/>
 <area shape="rect" id="node5" href="$classremote__exec__c.html#ac72ad9f570c48e1d61faf54bb6067ffd" title="exec" alt="" coords="124,176,175,205"/>
-<area shape="rect" id="node43" href="$classremote__exec__c.html#a91482c4db18186b33acbaf1528a50ddc" title="help" alt="" coords="127,59,172,88"/>
+<area shape="rect" id="node45" href="$classremote__exec__c.html#a91482c4db18186b33acbaf1528a50ddc" title="help" alt="" coords="127,59,172,88"/>
 <area shape="rect" id="node7" href="$classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f" title="teelog_c::fatal" alt="" coords="432,281,536,311"/>
-<area shape="rect" id="node25" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="teelog_c::tee" alt="" coords="632,124,728,153"/>
-<area shape="rect" id="node27" href="$classremote__exec__c.html#abbbcdaf2575f762a7043928b8dab221c" title="fatal_file_error" alt="" coords="251,307,355,336"/>
-<area shape="rect" id="node30" href="$classremote__exec__c.html#a445893aec4a3cec2cbda047c6ac7ba6d" title="params_required" alt="" coords="244,149,361,179"/>
-<area shape="rect" id="node39" href="$classremote__exec__c.html#ab7b62c7a55f84e96f7a8bd2639cb0b2b" title="result" alt="" coords="276,203,329,232"/>
+<area shape="rect" id="node27" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="teelog_c::tee" alt="" coords="632,124,728,153"/>
+<area shape="rect" id="node29" href="$classremote__exec__c.html#abbbcdaf2575f762a7043928b8dab221c" title="fatal_file_error" alt="" coords="251,307,355,336"/>
+<area shape="rect" id="node32" href="$classremote__exec__c.html#a445893aec4a3cec2cbda047c6ac7ba6d" title="params_required" alt="" coords="244,149,361,179"/>
+<area shape="rect" id="node41" href="$classremote__exec__c.html#ab7b62c7a55f84e96f7a8bd2639cb0b2b" title="result" alt="" coords="276,203,329,232"/>
 <area shape="rect" id="node9" href="$classstopwatch__c.html#a9183c847d07c84c8ce85f1ddff07860c" title="stopwatch_c::all_time" alt="" coords="605,231,755,260"/>
 <area shape="rect" id="node15" href="$general-log_8inc.html#a17e043fbbec86750a0d43b4fc9520c16" title="backtrace" alt="" coords="641,284,719,313"/>
 <area shape="rect" id="node17" href="$general-utils_8inc.html#a77dd67e2e529e733ba6618dee1c1f09c" title="capture_begin" alt="" coords="629,337,731,367"/>
 <area shape="rect" id="node19" href="$general-utils_8inc.html#a67ba34c0b7537f53f68538230a6cb316" title="capture_end" alt="" coords="633,391,727,420"/>
 <area shape="rect" id="node21" href="$classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75" title="applog_c::log" alt="" coords="631,177,729,207"/>
-<area shape="rect" id="node11" href="$classstopwatch__c.html#a6a93ed38a9b39db92205c955936b17eb" title="stopwatch_c::all_start" alt="" coords="804,284,953,313"/>
-<area shape="rect" id="node13" href="$classstopwatch__c.html#a14fa9b6e7d9cba61c9dea86f727b84a2" title="stopwatch_c::all_stop" alt="" coords="804,231,953,260"/>
-<area shape="rect" id="node23" href="$classapplog__c.html#a5ab616f7683c2f3e63af6086ae3b70f9" title="applog_c::log_prefix" alt="" coords="809,177,948,207"/>
-<area shape="rect" id="node33" href="$classremote__exec__c.html#a06a8bc48c64a56939e05589ef3d940dc" title="params_show" alt="" coords="433,177,535,207"/>
-<area shape="rect" id="node36" href="$classremote__exec__c.html#ad398bbc85a78ed71088adb60cbb80fd3" title="params_showneeded" alt="" coords="412,124,556,153"/>
+<area shape="rect" id="node11" href="$classstopwatch__c.html#a6a93ed38a9b39db92205c955936b17eb" title="stopwatch_c::all_start" alt="" coords="804,231,953,260"/>
+<area shape="rect" id="node13" href="$classstopwatch__c.html#a14fa9b6e7d9cba61c9dea86f727b84a2" title="stopwatch_c::all_stop" alt="" coords="804,284,953,313"/>
+<area shape="rect" id="node23" href="$classapplog__c.html#a3acf8f3fe3b1116c9bc376f0e2854254" title="applog_c::log_is_open" alt="" coords="804,124,953,153"/>
+<area shape="rect" id="node25" href="$classapplog__c.html#a5ab616f7683c2f3e63af6086ae3b70f9" title="applog_c::log_prefix" alt="" coords="809,177,948,207"/>
+<area shape="rect" id="node35" href="$classremote__exec__c.html#a06a8bc48c64a56939e05589ef3d940dc" title="params_show" alt="" coords="433,177,535,207"/>
+<area shape="rect" id="node38" href="$classremote__exec__c.html#ad398bbc85a78ed71088adb60cbb80fd3" title="params_showneeded" alt="" coords="412,124,556,153"/>
 </map>

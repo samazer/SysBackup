@@ -621,6 +621,7 @@ WARN_LOGFILE           =
 # with spaces.
 
 INPUT                  = dumpusers \
+                         quick-install \
                          localexec \
                          remexec \
                          sysbackup \

@@ -1,3 +1,7 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="teelog_c::tee" alt="" coords="129,5,225,35"/>
+<area shape="rect" id="node3" href="$classplugin__framework__c.html#acaa52db5cef22a93cf7595307b0bbbf6" title="app_commandline_help" alt="" coords="129,112,287,141"/>
+<area shape="rect" id="node11" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="teelog_c::tee" alt="" coords="363,165,459,195"/>
+<area shape="rect" id="node5" href="$general-utils_8inc.html#a77dd67e2e529e733ba6618dee1c1f09c" title="capture_begin" alt="" coords="360,5,461,35"/>
+<area shape="rect" id="node7" href="$general-utils_8inc.html#a67ba34c0b7537f53f68538230a6cb316" title="capture_end" alt="" coords="364,59,457,88"/>
+<area shape="rect" id="node9" href="$classgeneral__args__c.html#a1054cd68968b4b96b596083e7dd3ff3e" title="general_args_c::show" alt="" coords="336,112,485,141"/>
 </map>

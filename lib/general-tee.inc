@@ -83,6 +83,15 @@ class teelog_c extends applog_c
 
    function teefn( $fn = false )
    {
+      if ( $fn )
+      {
+         if ( !is_writable( $fn ) )
+         {
+            $this->warning( "Unable to write to '{$fn}'" );
+            return false;
+         }
+      }
+
       $this->_check_teefile();
       return $this->teefile->name($fn);
    }

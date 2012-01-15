@@ -89,6 +89,30 @@ include "app/sysbackup-vfs.inc";
  */
 class system_backup_app_c extends backupvfs_main_c
 {
+   function app_help()
+   {
+      $helptext = <<< EOT
+
+SysBackup is a swiss-army-knife-type utility that helps 
+simplify and organize the nightly backup tasks. It allows 
+the system administrator to quickly and easily script jobs 
+that tarball folders and compress files into a backup set.
+
+Detailed information about SysBackup is available at:
+http://www.azertech.net/sysbackup
+
+Detailed documentation is available in the /doc/ folder of
+the distribution tarball.
+
+EOT;
+
+      $this->tee( explode( "\n", $helptext ) );
+      $this->app_commandline_help();
+
+      exit(0);
+   }
+
+
    function approve_job( $config_file, $job_info )
    {
       $required_options = array( 

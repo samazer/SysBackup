@@ -1,9 +1,14 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$classplugin__framework__c.html#aa53f549a824e262f7622538c100dc8bb" title="default_action" alt="" coords="191,136,292,165"/>
-<area shape="rect" id="node5" href="$classplugin__framework__c.html#a5323b07f4d20d0ff8e1b36999cc66e8a" title="app_help" alt="" coords="500,5,575,35"/>
-<area shape="rect" id="node7" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="teelog_c::tee" alt="" coords="788,133,884,163"/>
-<area shape="rect" id="node9" href="$classplugin__framework__c.html#a91a1483985f07ceb2a035ae78c4c8ea3" title="dump_config" alt="" coords="341,109,437,139"/>
-<area shape="rect" id="node11" href="$classplugin__framework__c.html#a7778f2ea2150da53f5f1e0d3c8315126" title="dump_plugins" alt="" coords="487,160,588,189"/>
-<area shape="rect" id="node13" href="$classplugin__framework__c.html#a73f080679608f11e076f91958085ccbd" title="dump_jobs" alt="" coords="645,211,731,240"/>
-<area shape="rect" id="node18" href="$classplugin__framework__c.html#ae1c7b44fcf553432de90d1ad156ff6f5" title="dump_events" alt="" coords="639,264,737,293"/>
+<area shape="rect" id="node3" href="$classplugin__framework__c.html#aa53f549a824e262f7622538c100dc8bb" title="default_action" alt="" coords="220,240,321,269"/>
+<area shape="rect" id="node33" href="$classgeneral__args__c.html#aa5fdb04a745070054cc1769388a3ee41" title="general_args_c::get_arg" alt="" coords="191,293,351,323"/>
+<area shape="rect" id="node5" href="$classplugin__framework__c.html#a5323b07f4d20d0ff8e1b36999cc66e8a" title="app_help" alt="" coords="564,109,639,139"/>
+<area shape="rect" id="node15" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="teelog_c::tee" alt="" coords="936,212,1032,241"/>
+<area shape="rect" id="node18" href="$classplugin__framework__c.html#a91a1483985f07ceb2a035ae78c4c8ea3" title="dump_config" alt="" coords="403,213,499,243"/>
+<area shape="rect" id="node20" href="$classplugin__framework__c.html#a7778f2ea2150da53f5f1e0d3c8315126" title="dump_plugins" alt="" coords="551,264,652,293"/>
+<area shape="rect" id="node22" href="$classplugin__framework__c.html#a73f080679608f11e076f91958085ccbd" title="dump_jobs" alt="" coords="739,315,824,344"/>
+<area shape="rect" id="node27" href="$classplugin__framework__c.html#ae1c7b44fcf553432de90d1ad156ff6f5" title="dump_events" alt="" coords="401,368,500,397"/>
+<area shape="rect" id="node7" href="$classplugin__framework__c.html#acaa52db5cef22a93cf7595307b0bbbf6" title="app_commandline_help" alt="" coords="703,59,860,88"/>
+<area shape="rect" id="node9" href="$general-utils_8inc.html#a77dd67e2e529e733ba6618dee1c1f09c" title="capture_begin" alt="" coords="933,5,1035,35"/>
+<area shape="rect" id="node11" href="$general-utils_8inc.html#a67ba34c0b7537f53f68538230a6cb316" title="capture_end" alt="" coords="937,59,1031,88"/>
+<area shape="rect" id="node13" href="$classgeneral__args__c.html#a1054cd68968b4b96b596083e7dd3ff3e" title="general_args_c::show" alt="" coords="909,112,1059,141"/>
 </map>

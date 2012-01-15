@@ -440,7 +440,9 @@ class general_args_c
          $default = isset( $spec["default"] ) 
                        ? $spec["default"]
                        : NULL;
-         $ex      = $spec["example"];
+         $ex      = isset($spec["example"]) 
+                       ? $spec["example"] 
+                       : "";
          $desc    = $spec["desc"];
 
          if ( is_array( $args ) )
@@ -450,7 +452,9 @@ class general_args_c
          }
            else echo "  {$args}\n";
 
-         echo "    Example: \"{$ex}\"\n";
+         if ( $ex > "" )
+            echo "    Example: \"{$ex}\"\n";
+
          echo "    {$desc}\n";
 
          echo "\n";

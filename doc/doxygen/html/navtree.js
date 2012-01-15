@@ -24,6 +24,7 @@ var NAVTREE =
       [ "general_arg_groups_c", "classgeneral__arg__groups__c.html", null ],
       [ "general_args_c", "classgeneral__args__c.html", null ],
       [ "homedirs_plugin_c", "classhomedirs__plugin__c.html", null ],
+      [ "keyboard_input_c", "classkeyboard__input__c.html", null ],
       [ "linux_distro_c", "classlinux__distro__c.html", null ],
       [ "localexec_c", "classlocalexec__c.html", null ],
       [ "logfile_c", "classlogfile__c.html", null ],
@@ -56,6 +57,7 @@ var NAVTREE =
       [ "effective_user_c", "classeffective__user__c.html", null ],
       [ "general_arg_groups_c", "classgeneral__arg__groups__c.html", null ],
       [ "general_args_c", "classgeneral__args__c.html", null ],
+      [ "keyboard_input_c", "classkeyboard__input__c.html", null ],
       [ "linux_distro_c", "classlinux__distro__c.html", null ],
       [ "logfile_c", "classlogfile__c.html", null ],
       [ "mktarball_util_c", "classmktarball__util__c.html", null ],
@@ -114,6 +116,7 @@ var NAVTREE =
     [ "File List", "files.html", [
       [ "dumpusers", "dumpusers.html", null ],
       [ "localexec", "localexec.html", null ],
+      [ "quick-install", "quick-install.html", null ],
       [ "remexec", "remexec.html", null ],
       [ "sysbackup", "sysbackup.html", null ],
       [ "sysbackup.conf", "sysbackup_8conf.html", null ],

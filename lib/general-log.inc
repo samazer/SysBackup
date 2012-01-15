@@ -141,7 +141,15 @@ class logfile_c
    function name( $fn = false )
    {
       if ( $fn )
+      {
+         if ( !is_writable( $fn ) )
+         {
+            echo "\n", TEELOG_TXTWARNING, "Unable to write to '{$fn}'\n";
+            return false;
+         }
+
          $this->logfile = $fn;
+      }
 
       return $this->logfile;
    }
@@ -529,7 +537,10 @@ class applog_c extends stopwatch_c
       if ( $this->logfile->disabled_flag )
          return 0;
 
-      return $this->logfile->append( $this->log_prefix() . $msg, $eol );
+      if ( $this->log_is_open() )
+         return $this->logfile->append( $this->log_prefix() . $msg, $eol );
+
+      return false;
    }
 }
 

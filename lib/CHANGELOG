@@ -2,6 +2,16 @@
 
 AFORMs library:
 
+   2012.01.15 SA:
+
+      * Changed quite a few previously fatal errors into
+        warnings. This allows users to run an app which is totally not
+        setup - and still see the help text.
+
+      * Fixed a bug in the general-plugins.inc file and added dumping
+        of recognized command line arguments as part of the default
+        app. help text.
+
    2012.01.14 SA:
 
       * Added to general-plugins.inc the ability to handle a few

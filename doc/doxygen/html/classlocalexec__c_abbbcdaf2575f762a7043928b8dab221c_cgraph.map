@@ -5,8 +5,9 @@
 <area shape="rect" id="node13" href="$general-utils_8inc.html#a77dd67e2e529e733ba6618dee1c1f09c" title="capture_begin" alt="" coords="333,139,435,168"/>
 <area shape="rect" id="node15" href="$general-utils_8inc.html#a67ba34c0b7537f53f68538230a6cb316" title="capture_end" alt="" coords="337,192,431,221"/>
 <area shape="rect" id="node17" href="$classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75" title="applog_c::log" alt="" coords="335,245,433,275"/>
-<area shape="rect" id="node21" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="teelog_c::tee" alt="" coords="336,299,432,328"/>
+<area shape="rect" id="node23" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="teelog_c::tee" alt="" coords="336,299,432,328"/>
 <area shape="rect" id="node7" href="$classstopwatch__c.html#a6a93ed38a9b39db92205c955936b17eb" title="stopwatch_c::all_start" alt="" coords="508,5,657,35"/>
 <area shape="rect" id="node9" href="$classstopwatch__c.html#a14fa9b6e7d9cba61c9dea86f727b84a2" title="stopwatch_c::all_stop" alt="" coords="508,59,657,88"/>
-<area shape="rect" id="node19" href="$classapplog__c.html#a5ab616f7683c2f3e63af6086ae3b70f9" title="applog_c::log_prefix" alt="" coords="513,245,652,275"/>
+<area shape="rect" id="node19" href="$classapplog__c.html#a3acf8f3fe3b1116c9bc376f0e2854254" title="applog_c::log_is_open" alt="" coords="508,219,657,248"/>
+<area shape="rect" id="node21" href="$classapplog__c.html#a5ab616f7683c2f3e63af6086ae3b70f9" title="applog_c::log_prefix" alt="" coords="513,272,652,301"/>
 </map>

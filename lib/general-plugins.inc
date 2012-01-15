@@ -437,9 +437,26 @@ class plugin_framework_c extends teelog_c
    }
 
 
+   function app_commandline_help()
+   {
+      $this->tee( "Recognized Command Line Args include:" );
+      $this->tee("");
+
+      capture_begin();
+      general_args_c::show();
+      $r = explode( "\n", capture_end() );
+
+      foreach ( $r as $t )
+         $this->tee( "   " . $t );
+   }
+
+
    function app_help()
    {
       $this->tee( "(help not available yet)" );
+      $this->tee("");
+      $this->app_commandline_help();
+
       exit(0);
    }
 
@@ -589,48 +606,6 @@ class plugin_framework_c extends teelog_c
 
 
 
-   function default_flag_action( $arg )
-   {
-      switch ( $arg )
-      {
-         case "-v":
-         case "--verbose":
-            $this->verbose(true);
-            return true;
-
-         case "-dx":
-         case "--debug-sysexec":
-            $this->set_debugsysexec(true);
-            return true;
-
-         case "--no-exec":
-            $this->set_appexec(false);
-            return true;
-
-         case "--exec":
-            $this->set_appexec(true);
-            return true;
-
-
-         default:
-            // something not found
-            return false;
-      }
-
-      return false;
-   }
-
-
-
-   function default_flag_args()
-   {
-      $arglist = $this->argv;
-      foreach ( $arglist as $idx => $arg )
-         $this->default_flag_action( $arg );
-   }
-
-
-
    function default_action( $arg )
    {
       switch ( $arg )
@@ -677,10 +652,10 @@ class plugin_framework_c extends teelog_c
 
    function default_action_args()
    {
-      $arglist = $this->argv;
-      foreach ( $arglist as $idx => $arg )
-         if ( $this->default_action( $arg ) ) 
-            unset( $this->argv[$idx] );
+      $arglist = general_args_c::get_arg( "general-plugins" );
+
+      foreach ( $arglist as $idx => $arg_info )
+         $this->default_action( $arg_info[3][0] );
    }
 
 
@@ -732,12 +707,17 @@ class plugin_framework_c extends teelog_c
 
 
       if ( $obj->plugin_enabled )
-      {
          if ( isset( $obj->plugin_rootreqd ) && $obj->plugin_rootreqd )
             if ( $this->sys_user->user() != "root" )
-               $this->fatal( "plugin '{$name}' requires root permissions" );
+            {
+               $this->warning( "plugin '{$name}' requires root permissions" );
+               $this->add_plugin_disabled( $obj );
+               return;
+            }
 
 
+      if ( $obj->plugin_enabled )
+      {
          if ( isset( $this->plugin[$name] ) )
          {
             $this->warning( "Trying to load plugin '{$name}'" );
@@ -870,63 +850,80 @@ class plugin_framework_c extends teelog_c
                }
          }
 
-      if ( $problems_found )
-         $this->fatal( "job id '{$job_info['id']}' configuration error; "
-                     . "please fix file '{$config_file}' and try again" );
-
-      if ( $job_info["enabled"] )
+      if ( $job_info["enabled"] 
+        && ($plugin != PLUGGABLEAPP_PLUGIN_INTERNAL) && !isset( $this->plugin[$plugin] ) )
       {
-         if ( ($plugin != PLUGGABLEAPP_PLUGIN_INTERNAL) && !isset( $this->plugin[$plugin] ) )
-            $this->fatal( "job id '{$id}' in '{$config_file}' refers to "
-                        . "plugin '{$plugin}' which is not loaded" );
-
-         if ( !isset( $this->events[$event] ) )
-            $this->fatal( "job id '{$id}' in '{$config_file}' refers to "
-                        . "event '{$event}' which is not defined" );
-
-         if ( ($job_approved = $this->approve_job( $config_file, $job_info )) != false )
-         {
-            // fix the job index in cases where there's a collision with another job
-            if ( isset( $this->events[$event][$jobindex] ) )
-            {
-               $ji = $jobindex;
-               if ( substr( $ji, -5 ) == ".0000" )
-                  $ji = substr( $jobindex, 0, -5 );
-
-               $counter = 0;
-               $job_str = $ji . ".0000";
-               while ( isset( $this->events[$event][$job_str] ) )
-               {
-                  $counter++;
-                  $job_str = $ji
-                           . ($counter ? ("." . substr( "0000" . $counter, -4 ))
-                                       : "")
-                           ;
-               } 
-
-               $jobindex = $job_str;
-            }
-
-            if ( isset( $this->events[$event][$jobindex] ) )
-               $this->fatal( "code error - unexpected job index collision" );
-
-            $this->events[$event][$jobindex] = $job_info;
-
-            if ( $this->verbose() )
-               $this->tee( "    Adding {$id} to {$event}:{$jobindex} running {$plugin}" );
-
-            return false;
-         }
+         $problems_found = true;
+         $this->warning( "job id '{$id}' in '{$config_file}' refers to "
+                       . "plugin '{$plugin}' which is not loaded" );
       }
 
-      $dis = "{$id} in '{$config_file}' "
-                  . ($job_approved ? "(disabled)" 
-                                   : "(disabled by run conditions)" );
+      if ( $job_info["enabled"] && !isset( $this->events[$event] ) )
+      {
+         $problems_found = true;
+         $this->warning( "job id '{$id}' in '{$config_file}' refers to "
+                       . "event '{$event}' which is not defined" );
+      }
 
-      $this->disabled_jobs[] = $dis;
+
+     /**
+      * TODO: the next three lines have no meaning because the
+      * approve_job() method is a stub and always approves a job. As a
+      * result the disabled message below needs to be re-written when
+      * the approve_job() stub is replaced with the real thing.
+      */
+      $job_approved = true;
+      if ( !$problems_found && $job_info["enabled"] )
+         $job_approved = $this->approve_job( $config_file, $job_info );
+
+
+      if ( $problems_found || !$job_info["enabled"] || !$job_approved )
+      {
+         if ( $problems_found )
+         {
+            $dis = "job id '{$job_info['id']}' (problem(s) found; disabled)";
+            $this->warning( $dis );
+         }
+           else $dis = "{$id} in '{$config_file}' "
+                     . ($job_approved ? "(disabled)" 
+                                      : "(disabled by run conditions)" );
+
+         $this->disabled_jobs[] = $dis;
+
+         if ( $this->verbose() )
+            $this->tee( "    Skipping job " . $dis );
+
+         return false;
+      }
+
+      // fix the job index in cases where there's a collision with another job
+      if ( isset( $this->events[$event][$jobindex] ) )
+      {
+         $ji = $jobindex;
+         if ( substr( $ji, -5 ) == ".0000" )
+            $ji = substr( $jobindex, 0, -5 );
+
+         $counter = 0;
+         $job_str = $ji . ".0000";
+         while ( isset( $this->events[$event][$job_str] ) )
+         {
+            $counter++;
+            $job_str = $ji
+                     . ($counter ? ("." . substr( "0000" . $counter, -4 ))
+                                 : "")
+                     ;
+         } 
+
+         $jobindex = $job_str;
+      }
+
+      if ( isset( $this->events[$event][$jobindex] ) )
+         $this->fatal( "code error - unexpected job index collision" );
+
+      $this->events[$event][$jobindex] = $job_info;
 
       if ( $this->verbose() )
-         $this->tee( "    Skipping job " . $dis );
+         $this->tee( "    Adding {$id} to {$event}:{$jobindex} running {$plugin}" );
 
       return false;
    }
@@ -996,8 +993,6 @@ class plugin_framework_c extends teelog_c
 
       $this->load_app_config();
       $this->app_before_init();
-
-      $this->default_flag_args();
 
       if ( $this->verbose() )
          $this->tee( "initializing..." );
@@ -1151,8 +1146,44 @@ class plugin_framework_c extends teelog_c
                                        $arg_spec
                                      )
    {
-      $p = $arg_spec["prop"][0];
-      $this->$p = $args[1];
+      switch( $arg_id )
+      {
+         case "config":
+         case "confdir":
+         case "plugindir":
+
+            $p = $arg_spec["prop"][0];
+            $this->$p = $args[1];
+            break;
+
+         case "verbose":
+            $this->verbose(true);
+            break;
+
+         case "debugsysexec":
+            $this->set_debugsysexec(true);
+            break;
+
+         case "no-exec":
+            $this->set_appexec(false);
+            break;
+
+         case "exec":
+            $this->set_appexec(true);
+            return true;
+
+         case "help":
+         case "dump-config":
+         case "dump-plugins":
+         case "dump-jobs":
+         case "dump-events":
+         case "dump-config-help":
+            break;
+
+         default:
+            $this->warning( "unknown arg id: {$arg_id}" );
+            break;
+      }
    }
 
 
@@ -1204,7 +1235,53 @@ class plugin_framework_c extends teelog_c
                             "example" => "--plugindir <path>",
                             "desc"    => "Specify the directory that holds the plugin scripts",
                           ),
+
+        "verbose" => array( "args"    => array( "-v", "--verbose" ),
+                            "params"  => 0,
+                            "desc"    => "Enable the display of detailed activity information",
+                          ),
+
+   "debugsysexec" => array( "args"    => array( "-dx", "--debug-sysexec" ),
+                            "params"  => 0,
+                            "desc"    => "Display system commands executed by the application",
+                          ),
+
+        "no-exec" => array( "args"    => array( "--no-exec", "--dry-run", "--sanity-check" ),
+                            "params"  => 0,
+                            "desc"    => "Perform various sanity checks and report any problems found - do not execute",
+                          ),
+
+           "exec" => array( "args"    => array( "--exec" ),
+                            "params"  => 0,
+                            "desc"    => "Instruct the application to execute fully",
+                          ),
+
+           "help" => array( "args"    => array( "-h", "--help" ),
+                            "params"  => 0,
+                            "desc"    => "Display the internal application help text",
+                          ),
+
+    "dump-config" => array( "args"    => array( "--dump-config" ),
+                            "params"  => 0,
+                            "desc"    => "Load the configuration and display it",
+                          ),
+
+"dump-config-help"=> array( "args"    => array( "--dump-config-help" ),
+                            "params"  => 0,
+                            "desc"    => "Load the configuration and display it - including any available help texts",
+                          ),
+
+   "dump-plugins" => array( "args"    => array( "--dump-plugins" ),
+                            "params"  => 0,
+                            "desc"    => "Load the configuration and display the plugin list",
+                          ),
+
+    "dump-events" => array( "args"    => array( "--dump-events" ),
+                            "params"  => 0,
+                            "desc"    => "Load the configuration and display the event list",
+                          ),
                                  );
+
 
       general_args_c::register( "general-plugins", 
                                 "Config", "Configuration options",

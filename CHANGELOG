@@ -1,7 +1,19 @@
 -*- mode: text; coding: utf-8-unix; -*- 
 
 
-SysBackup v3.016alpha
+SysBackup v3.017alpha
+
+   2012.01.15 SA:
+
+      * Added some help text and fixed an embarrasing bug in the
+        recently added command line argument handling code (forgot to
+        list the --dump-config and --exec options... was up too late
+        last night.) Fortunately nobody downloaded any copies so will
+        re-post the correction as the same v3.017a.
+
+SysBackup v3.017alpha
+
+   2012.01.14 SA:
 
       * Added the quick-install utility that automatically installs
         SysBackup. Some parameters, such as TimeZone, are not set

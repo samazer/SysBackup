@@ -1,7 +1,8 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$classbackupvfs__main__c.html#a70f9f93b30c404c76ac66e34612d0cc6" title="backupvfs_main_c::job_reset" alt="" coords="189,5,381,35"/>
 <area shape="rect" id="node5" href="$classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75" title="applog_c::log" alt="" coords="236,59,335,88"/>
-<area shape="rect" id="node9" href="$classbackupvfs__main__c.html#a995be90b7f2430568e61d0d27d5eec01" title="backupvfs_main_c::vfs_subfolder" alt="" coords="177,112,393,141"/>
-<area shape="rect" id="node11" href="$classbackupvfs__main__c.html#a24f5b92135362726d87d2862cde5f82a" title="backupvfs_main_c::warn_disk_space" alt="" coords="165,165,405,195"/>
-<area shape="rect" id="node7" href="$classapplog__c.html#a5ab616f7683c2f3e63af6086ae3b70f9" title="applog_c::log_prefix" alt="" coords="453,59,592,88"/>
+<area shape="rect" id="node11" href="$classbackupvfs__main__c.html#a995be90b7f2430568e61d0d27d5eec01" title="backupvfs_main_c::vfs_subfolder" alt="" coords="177,112,393,141"/>
+<area shape="rect" id="node13" href="$classbackupvfs__main__c.html#a24f5b92135362726d87d2862cde5f82a" title="backupvfs_main_c::warn_disk_space" alt="" coords="165,165,405,195"/>
+<area shape="rect" id="node7" href="$classapplog__c.html#a3acf8f3fe3b1116c9bc376f0e2854254" title="applog_c::log_is_open" alt="" coords="455,32,604,61"/>
+<area shape="rect" id="node9" href="$classapplog__c.html#a5ab616f7683c2f3e63af6086ae3b70f9" title="applog_c::log_prefix" alt="" coords="460,85,599,115"/>
 </map>
