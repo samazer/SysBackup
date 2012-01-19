@@ -49,7 +49,7 @@ define( "LOCALEXEC_TXTRESULT", "Result: " );
 
 
 require_once "lib/general-tee.inc";
-
+require_once "lib/general-sysexec.inc";
 
 
 /**
@@ -151,6 +151,19 @@ class localexec_c extends teelog_c
             $this->result( $r );
             break;
 
+
+         case "log":
+            $this->params_required( array( "msg" ) );
+
+            $ssh_client = getenv( "SSH_CLIENT" );
+            if ( ($p = strpos( $ssh_client, " " )) !== false )
+               $ssh_client = substr( $ssh_client, 0, $p );
+
+            // no need to actually do anything because the
+	    // command has already been logged.
+
+            $this->result( strlen( $this->params[0] ) );
+            break;
 
          case "realpath":
             $this->params_required( array( "path" ) );
@@ -274,6 +287,22 @@ class localexec_c extends teelog_c
             break;
 
 
+         case "getenv":
+            $this->params_required( array( "varname" ) );
+            return $this->result( getenv( $this->params[0] ));
+
+
+
+         case "getenvironment":
+            capture_begin();
+            phpinfo(INFO_ENVIRONMENT);
+            $r = capture_end();
+
+            $this->tee( LOCALEXEC_TXTRESULT . strlen( $r ) );
+            echo $r;
+            break;
+
+
 
          case "readfile":
          case "file_get_contents":
@@ -371,6 +400,25 @@ class localexec_c extends teelog_c
             $this->result( count( $r ) );
             foreach ( $r as $v )
                $this->tee( $v );
+
+            break;
+
+
+
+         case "sysexec":
+            $this->params_required( array( "cmd" ) );
+
+            $r = array();
+            if ( sysexec( $r, $this->params[0] ) !== false )
+               return $this->result( false );
+
+            $this->result( count( $r ) );
+            foreach ( $r as $key => $val )
+            {
+               $k = urlencode( $key );
+               $v = urlencode( $val );
+               $this->tee( "{$k}={$v}" );
+            }
 
             break;
 
@@ -610,7 +658,11 @@ EOT;
                 . ($ptext ? " " : "")
                 . $p;
 
-      $this->log( basename($this->progname) . " {$this->command} {$ptext}" );
+      $ssh_client = getenv( "SSH_CLIENT" );
+      if ( ($p = strpos( $ssh_client, " " )) !== false )
+         $ssh_client = substr( $ssh_client, 0, $p );
+
+      $this->log( $ssh_client . " {$this->command} {$ptext}" );
 
       if ( ($this->command == "help")
         || ($this->command == "-h")

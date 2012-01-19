@@ -132,7 +132,7 @@ The key's randomart image is:
        in the above example.
     7. Next, add the public keys to the authorized_keys2 file:
 
-$ echo 'command="/opt/sysbackup-v3.01a/localexec $SSH_ORIGINAL_COMMAND" ' \
+$ echo 'command="/opt/sysbackup/localexec $SSH_ORIGINAL_COMMAND" ' \
                `cat localexec.pub` >> ~sysbackup/.ssh/authorized_keys2
 $ cat filecopy.pub >> ~sysbackup/.ssh/authorized_keys2
 
@@ -178,7 +178,7 @@ $ sudo chmod 666 /var/log/remote-exec.log
        this:
 
 $ /opt/sysbackup/remexec /etc/sysbackup/keys/localexec \
-                            sysbackup@nas.azertech.net \
+                            sysbackup[at]nas.azertech.net \
                             readfile /etc/sysbackup-nas.conf
 path_temp=/home/sysbackup/temp/
 path_daily=/home/sysbackup/%HOST%/daily/
@@ -188,7 +188,7 @@ path_monthly=/home/sysbackup/%HOST%/daily/
    12. Edit /etc/sysbackup/sysbackup.conf on test.azertech.net to include
        the new sshremote server.
 
-$this->add_remote( "nas", new backupvfs_sshremote_c( $this, array(
+$this->add_sshremote( "nas", array(
    "enabled"               => true,
    "remote_server"         => "nas.azertech.net",
    "remconf_file"          => "/etc/sysbackup-nas.conf",
@@ -204,7 +204,7 @@ ly rotation
    "rotation_total_daily"  => 7, // total number of daily backups to keep
    "rotation_total_weekly" => 4, // total number of weekly backups to keep
    "rotation_total_monthly"=> 4, // total number of monthly backups to keep
-                                                                  )));
+                                                                  ));
 
    Finally, (again on the server that you want to backup - in this example
    it's test.azertech.net,) run SysBackup with the --dump-config option to
@@ -278,7 +278,7 @@ SSH Remote Fileio VFS Plugin
     Copyright © 2011 by [17]Sam Azer<[18]sam[at]azertech.net>, All rights
     reserved.
 
-   Last modified: Thu Jan 12 17:44:20 EST 2012
+   Last modified: Mon Jan 16 01:16:22 EST 2012
 
 References
 

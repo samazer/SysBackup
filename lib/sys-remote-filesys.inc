@@ -213,7 +213,7 @@ class remote_filesystem_c
       return $this->_result_val( $output["stdout"], $output["stderr"] );
    }
 
-   private function _exec_text( $func, $p1, $p2 = "", $p3 = "" )
+   private function _exec_text( $func, $p1 = "", $p2 = "", $p3 = "" )
    {
       $output = $this->_exec( $func, $p1, $p2, $p3 );
 
@@ -262,6 +262,11 @@ class remote_filesystem_c
    }
 
 
+
+   function log( $msg )
+   {
+      return $this->_exec_val( "log", $msg );
+   }
 
    function disk_free_space( $path )
    {
@@ -328,9 +333,19 @@ class remote_filesystem_c
       return $this->_exec_val( "fileowner", $filespec );
    }
 
+   function getenv( $varname )
+   {
+      return $this->_exec_val( "getenv", $varname );
+   }
+
    function readfile( $filespec )
    {
       return $this->_exec_text( "readfile", $filespec );
+   }
+
+   function getenvironment()
+   {
+      return $this->_exec_text( "getenvironment" );
    }
 
    function file_get_contents( $filespec )
@@ -405,6 +420,42 @@ class remote_filesystem_c
    function glob( $cwd, $pattern, $flags )
    {
       return $this->_exec_vallist( "glob", $cwd, $pattern, $flags );
+   }
+
+
+   function sysexec( &$output, $cmd )
+   {
+      $r = $this->_exec_vallist( "sysexec", $cmd );
+
+      foreach( $r as $keyval )
+         if ( ($p = strpos( $keyval, "=" )) !== false )
+         {
+            $k = urldecode(trim(substr( $keyval, 0, $p )));
+            $v = urldecode(trim(substr( $keyval, $p+1 )));
+            $i = (int)($v);
+
+            if ( $v == "{$i}" )
+               $output[$k] = $i;
+            else $output[$k] = $v;
+         } 
+           else 
+         {
+            capture_begin();
+            var_dump( $r );
+            $z = capture_end();
+
+            $msg = array( "localexec call "
+                        . "{$this->ssh_localexec_userid}@{$this->remote_server}:{$sysexec}"
+                        . "( ..., {$cmd} )",
+                          "unable to scan return value: {$z}",
+                          "NOTE: remember to check /var/log/secure on {$this->remote_server}",
+                        );
+
+            $this->teelog->fatal( $msg );
+         }
+
+      var_dump( $output );
+      exit();
    }
 
 

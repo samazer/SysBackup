@@ -474,7 +474,8 @@ class named_parameters_base_c
       foreach ( $required_options as $opt => $params )
       {
          $varname = $params[2];
-         $obj->$varname = $opt_list[$opt];
+         if ( isset( $opt_list[$opt] ) )
+            $obj->$varname = $opt_list[$opt];
       }
    }
 

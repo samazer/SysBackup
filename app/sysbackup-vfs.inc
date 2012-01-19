@@ -530,9 +530,6 @@ class backupvfs_main_c extends plugin_framework_c
 
    function vfs_init( $backupset_name  = false )
    {
-      if ( $this->appmode_sanitycheck() )
-         return; // no need to init the filesystems during a sanitycheck
-
       if ( $backupset_name === false )
       {
          $backupset_name = str_replace( "%HOST%", 
@@ -549,6 +546,14 @@ class backupvfs_main_c extends plugin_framework_c
       $this->sys_local->vfs_init($backupset_name);
       $this->sys_local_weekly->vfs_init($backupset_name);
       $this->sys_local_monthly->vfs_init($backupset_name);
+
+      if ( count( $this->sys_remotes ) )
+         foreach( $this->sys_remotes as $id )
+         {
+            $this->sys_remote[$id]->vfs_init( $backupset_name );
+            $this->sys_remote_weekly[$id]->vfs_init( $backupset_name );
+            $this->sys_remote_monthly[$id]->vfs_init( $backupset_name );
+         }
    }
 
 
@@ -697,13 +702,6 @@ class backupvfs_main_c extends plugin_framework_c
 
       if ( $this->sys_local_monthly->plugin_enabled )
          $this->sys_local_monthly->vfs_start();
-
-      foreach( $this->sys_remotes as $id )
-      {
-         $this->sys_remote[$id]->vfs_init( $this->get_backupset_name() );
-         $this->sys_remote_weekly[$id]->vfs_init( $this->get_backupset_name() );
-         $this->sys_remote_monthly[$id]->vfs_init( $this->get_backupset_name() );
-      }
 
       foreach( $this->sys_remotes as $id )
       {

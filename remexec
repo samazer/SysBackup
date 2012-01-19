@@ -128,6 +128,12 @@ class remote_exec_c extends teelog_c
    {
       switch ( $this->command )
       {
+         case "log":
+            $this->params_required( array( "msg" ) );
+            $this->result( $this->remsys->log( $this->params[0] ) );
+            break;
+
+
          case "disk_free_space":
             $this->params_required( array( "path" ) );
 
@@ -260,6 +266,11 @@ class remote_exec_c extends teelog_c
             $this->result( $r );
             break;
 
+         case "getenv":
+            $this->params_required( array( "varname" ) );
+            $this->result($this->remsys->getenv( $this->params[0] ));
+            break;
+
 
 
          case "readfile":
@@ -271,6 +282,10 @@ class remote_exec_c extends teelog_c
                $this->fatal_file_error();
 
             $this->tee( trim($r) );
+            break;
+
+         case "getenvironment":
+            $this->tee( trim($this->remsys->getenvironment()) );
             break;
 
 
@@ -351,6 +366,21 @@ class remote_exec_c extends teelog_c
             foreach ( $r as $v )
                $this->tee( $v );
 
+            break;
+
+
+
+         case "sysexec":
+            $this->params_required( array( "cmd" ) );
+
+            $r = array();
+            if ( $this->remsys->sysexec( $r, $this->params[0] ) !== false )
+            {
+               $this->tee( "true" );
+               break;
+            }
+
+            var_dump( $r );
             break;
 
 

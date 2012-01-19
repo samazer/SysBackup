@@ -178,12 +178,14 @@ class remote_fileio_c extends remote_filesystem_c
 
    function scp_to_remote( $source, $dest )
    {
+      $this->log( "scp ---> {$dest}" );
       return $this->_scp( "{$this->scp_cmd} '{$source}' '{$this->scp_filecopy_userid}@{$this->remote_server}:{$dest}'" );
    }
 
 
    function scp_from_remote( $source, $dest )
    {
+      $this->log( "scp <--- {$source}" );
       return $this->_scp( "{$this->scp_cmd} '{$this->scp_filecopy_userid}@{$this->remote_server}:{$source}' '{$dest}'" );
    }
 

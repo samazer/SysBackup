@@ -43,6 +43,10 @@ class backupvfs_baseio_c extends backupvfs_fileio_c
    var $hostname;               // long host name used for naming of backup sets
    var $hostid;                 // short host name used for naming of backup sets
 
+   var $named_parameters;
+   var $np_default_method;
+   var $np_default_index;
+
    var $path_temp;              // path to the temp. workspace on the virtual file system
    var $path_daily;             // path to the base backupset folder on the virtual file system
    var $path_weekly;            // path to the weekly rotation storage folder on the virtual file system
@@ -198,6 +202,55 @@ class backupvfs_baseio_c extends backupvfs_fileio_c
       $this->rotation_total_daily     =  7;    // total number of daily backups in the daily rotation
       $this->rotation_total_weekly    = 12;    // total number of weekly backups in the weekly rotation
       $this->rotation_total_monthly   = 36;    // total number of monthly backups in the monthly rotation
+
+      $this->named_parameters               = new named_parameters_c( "sysbackup", "vfs-base" );
+
+      $np_method = $this->np_default_method = "vfs-base";
+      $np_index  = $this->np_default_index  = "vfs-base";
+
+      $this->named_parameters->register( $np_method, $np_index, array( 
+          "enabled"                => array( 1, NPREQ, "plugin_enabled", "true if the plugin is enabled" ),
+
+          "hostname"               => array( 3, false, false, "Name of the target host for this object" ),
+          "hostid"                 => array( 3, false, false, "Short version of the host name" ),
+
+          "keeplocal"              => array( 3, false, false, "Flag true if saving a full backup on this filesystem" ),
+          "usehardlinks"           => array( 1, NPREQ, "usehardlinks",   "true if remote server supports hardlinks" ),
+
+          "path_temp"              => array( 3, false, false, "Path to the temp work space"                                 ),
+          "path_daily"             => array( 3, false, false, "Path to the backupsets on this filesystem"                   ),
+          "path_weekly"            => array( 3, false, false, "Path to the weekly backupset rotations on this filesystem"   ),
+          "path_monthly"           => array( 3, false, false, "Path to the monthly backupset rotations on this filesystem"  ),
+
+          "rotation_enabled"       => array( 3, false, false, "true if rotations are enabled on the remote system"          ),
+          "rotation_dayofweek"     => array( 3, false, false, "day of week on which the weekly rotation is generated"       ),
+          "rotation_dayofmonth"    => array( 3, false, false, "day of month on which the monthly rotation is generated"     ),
+          "rotation_total_daily"   => array( 3, false, false, "total number of backupsets that are in the daily rotaiton"   ),
+          "rotation_total_weekly"  => array( 3, false, false, "total number of backupsets that are in the weekly rotaiton"  ),
+          "rotation_total_monthly" => array( 3, false, false, "total number of backupsets that are in the monthly rotaiton" ),
+
+                                                 ));
+
+      $this->named_parameters->set_optional(   $this->np_default_method, 
+                                               $this->np_default_index, 
+                                               $options );
+
+      $this->named_parameters->check(          $this->np_default_method, 
+                                               $this->np_default_index, 
+                                               $options );
+
+      $this->named_parameters->set_properties( $this,
+                                               $this->np_default_method, 
+                                               $this->np_default_index, 
+                                               $options );
+   }
+
+
+   function dump_config()
+   {
+      $this->app->tee( $this->plugin_title );
+      $this->named_parameters->dump_properties( $this, $this->np_default_method, $this->np_default_index );
+      $this->app->tee("");
    }
 
 
@@ -241,30 +294,6 @@ class backupvfs_baseio_c extends backupvfs_fileio_c
       return $result;
    }
 
-
-
-   function dump_config()
-   {
-      $this->app->tee( $this->plugin_title );
-
-      $req = array( "hostname"      => array( 3, false, false, "Name of the target host for this object" ),
-                    "keeplocal"     => array( 3, false, false, "Flag true if saving a full backup on this filesystem" ),
-                    "path_temp"     => array( 3, false, false, "Path to the temp work space" ),
-                    "path_daily"    => array( 3, false, false, "Path to the backupsets on this filesystem" ),
-                    "path_weekly"   => array( 3, false, false, "Path to the weekly backupset rotations on this filesystem" ),
-                    "path_monthly"  => array( 3, false, false, "Path to the monthly backupset rotations on this filesystem" ),
-                    "rotation_enabled" => array( 3, false, false, "flag true if rotations are enabled for this vfs" ),
-
-                    "rotation_dayofweek"    => array( 3, false, false, "day of the week to rotate daily backups" ),
-                    "rotation_dayofmonth"   => array( 3, false, false, "day of the month to rotate monthly backups" ),
-                    "rotation_total_daily"  => array( 3, false, false, "total number of daily backups in the daily rotation" ),
-                    "rotation_total_weekly" => array( 3, false, false, "total number of weekly backups in the weekly rotation" ),
-                    "rotation_total_monthly"=> array( 3, false, false, "total number of monthly backups in the monthly rotation" ),
-                    );
-
-      $this->app->named_parameters->__dump_properties( $this, $req );
-      $this->app->tee("");
-   }
 
 
    function plugin_help()  
@@ -313,7 +342,10 @@ class backupvfs_baseio_c extends backupvfs_fileio_c
       if ( $this->vfs_warn_disk_space( true ) )
          $this->fatal( "problems found - please correct and try again" );
 
-      return $this->vfs_createbackupset_folder( $this->path_daily );
+      if ( $this->app->appmode_exec() )
+         return $this->app->vfs_createbackupset_folder( $this->path_daily );
+
+      return false;
    }
 
 
@@ -321,7 +353,20 @@ class backupvfs_baseio_c extends backupvfs_fileio_c
    {
       $this->_mark_backupset_incomplete();
 
-      return $this->backupset->get_last_hashlist( $this->path_daily );
+      if ( $this->backupset->get_last_hashlist( $this->path_daily ) )
+      {
+         $current_backupset  = $this->get_path_backupset();
+         $prev_backupset     = $this->backupset->get_prev_path();
+         $r                  = $this->_vfs_can_hardlink( $prev_backupset, $current_backupset );
+
+         if ( $this->usehardlinks != $r )
+         {
+            $this->warning( "Setting UseHardLinks to " . phpval2str( $r )
+                          . " (was set to " . phpval2str( $this->usehardlinks ) . ")" );
+
+            $this->usehardlinks = $r;
+         }
+      }
    }
 
 

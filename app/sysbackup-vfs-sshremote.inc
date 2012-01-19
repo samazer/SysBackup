@@ -47,21 +47,15 @@
 class backupvfs_sshremote_c extends backupvfs_baseio_c
 {
    var $remote;         // an object of type remote_fileio_c
-
    var $remconf_file;   // name of file that contains remote configuration info
-
-   var $named_parameters;
-   var $np_default_method;
-   var $np_default_index;
-
 
    function __construct( &$application_object, $options )
    {
       parent::__construct( $application_object );
 
-      $this->remote       = new remote_fileio_c( $this->app, $options );
-      $this->hostname     = $this->remote->remote_server;
-      $this->keeplocal    = true;
+      $this->remote             = new remote_fileio_c( $this->app, $options );
+      $this->hostname           = $this->remote->remote_server;
+      $this->keeplocal          = true;
 
       $this->plugin_enabled     = false;
 
@@ -73,34 +67,27 @@ class backupvfs_sshremote_c extends backupvfs_baseio_c
       $this->plugin_version     = "0.01a";
       $this->plugin_description = "Plugin to copy the backupset to a remote server via SSH/RemoteExec";
 
-      $this->named_parameters = new named_parameters_c( "systemlibs", "sys-remote-fileio" );
-
-      $np_method = $this->np_default_method = "remote-exec";
-      $np_index  = $this->np_default_index  = "remconf";
-
-      $this->named_parameters->register( $np_method, $np_index, array( 
-          "enabled"      => array( 1, NPREQ, "plugin_enabled", "true if the plugin is enabled" ),
-          "usehardlinks" => array( 1, NPREQ, "usehardlinks",   "true if remote server supports hardlinks" ),
-          "remconf_file" => array( 1, "path/name of the configuration file on remote system" ),
-          "rotation_enabled" => array( 1, "true if rotations are enabled on the remote system" ),
-          "rotation_dayofweek" => array( 1, "day of week on which the weekly rotation is generated" ),
-          "rotation_dayofmonth" => array( 1, "day of month on which the monthly rotation is generated" ),
-          "rotation_total_daily" => array( 1, "total number of backupsets that are in the daily rotaiton" ),
-          "rotation_total_weekly" => array( 1, "total number of backupsets that are in the weekly rotaiton" ),
-          "rotation_total_monthly" => array( 1, "total number of backupsets that are in the monthly rotaiton" ),
-                                                 ));
+      $np_idx = "vfs-sshremote";
+      $this->named_parameters->register( $this->np_default_method, $np_idx, array( 
+          "remconf_file"           => array( 1, "path/name of the configuration file on remote system" ),
+                                       ));
 
       $this->named_parameters->set_optional(   $this->np_default_method, 
-                                               $this->np_default_index, 
+                                               $np_idx,
                                                $options );
 
       $this->named_parameters->check(          $this->np_default_method, 
-                                               $this->np_default_index, 
+                                               $np_idx,
                                                $options );
 
       $this->named_parameters->set_properties( $this,
                                                $this->np_default_method, 
                                                $this->np_default_index, 
+                                               $options );
+
+      $this->named_parameters->set_properties( $this,
+                                               $this->np_default_method, 
+                                               $np_idx,
                                                $options );
    }
 
@@ -326,9 +313,7 @@ class backupvfs_sshremote_c extends backupvfs_baseio_c
    {
       parent::dump_config();
 
-      $this->named_parameters->display_properties( $this, 
-                                                   $this->np_default_method, 
-                                                   $this->np_default_index ); 
+      $this->named_parameters->dump_properties( $this, $this->np_default_method, "vfs-sshremote" );
 
       $this->remote->dump_config( $this );
       $this->app->tee("");
@@ -439,7 +424,10 @@ class backupvfs_sshremote_c extends backupvfs_baseio_c
       if ( !$this->app->get_keeplocal() && $problems_found )
          $this->fatal( "problems found - please correct and try again" );
 
-      return $this->vfs_createbackupset_folder( $this->path_daily );
+      if ( $this->app->appmode_exec() )
+         return $this->vfs_createbackupset_folder( $this->path_daily );
+
+      return false;
    }
 
 

@@ -171,8 +171,7 @@ EOT;
    function app_before_init()
    {
       // see: sysbackup-vfs.inc: vfs_init()
-      if ( $this->appmode_exec() )
-         $this->vfs_init();
+      $this->vfs_init();
 
       $argv = &$GLOBALS["argv"];
 

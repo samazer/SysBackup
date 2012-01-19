@@ -67,7 +67,7 @@ class logfile_c
 {
    var $disabled_flag = false; // true to disable the logger
 
-   var $logfile       = false; // full path and file name of output log file
+   var $logfile_name  = false; // full path and file name of output log file
    var $logfile_warning = ""; // contains the name of the logfile at time of warning about permissions
 
    // resource for the open log file or integer value indicating status:
@@ -108,7 +108,7 @@ class logfile_c
                          $errmsg  = TEELOG_TXTFATAL )
    {
       $this->disabled_flag    = false;
-      $this->logfile          = $fn;
+      $this->logfile_name     = $fn;
 
       $this->oops_i_threw_an_exception = false;
       $this->locked_flag      = false;
@@ -139,14 +139,21 @@ class logfile_c
    }
 
 
+   function enabled( $flg = -1 )
+   {
+      if ( $flg === -1 )
+         return !$this->disabled_flag;
+
+      return !($this->disabled_flag = $flg);
+   }
+
+
    function name( $fn = false )
    {
       if ( $fn )
-      {
-         $this->logfile = $fn;
-      }
+         $this->logfile_name = $fn;
 
-      return $this->logfile;
+      return $this->logfile_name;
    }
 
 
@@ -169,10 +176,23 @@ class logfile_c
    function open( $fn = false, $mode = "a+" )
    {
       if ( $fn === false )
-         $fn = $this->logfile;
-      else $this->logfile = $fn;
+         $fn = $this->logfile_name;
+      else $this->logfile_name = $fn;
 
-      if ( !is_writable( dirname($fn) ) && ($this->logfile_warning != $fn) )
+
+      if ( file_exists( $fn ) && !is_writable( $fn ) )
+      {
+         if ( $this->logfile_warning != $fn )
+         {
+            echo "\n", TEELOG_TXTWARNING, "Unable to write to {$fn}\n";
+            $this->logfile_warning = $fn;
+         }
+
+         return false;
+      }
+
+
+      if ( !file_exists( $fn ) && !is_writable( dirname($fn) ) )
       {
          if ( $this->logfile_warning != $fn )
          {
@@ -183,10 +203,11 @@ class logfile_c
          return false;
       }
 
+
       if ( ($this->logfp = fopen( $fn, $mode )) === false )
       {
          $this->oops_i_threw_an_exception = true;
-         throw new Exception($this->_err("unable to open {$this->logfile}"));
+         throw new Exception($this->_err("unable to open {$this->logfile_name}"));
       };
    }
 
@@ -203,7 +224,7 @@ class logfile_c
          if ( fclose( $this->logfp ) === false )
          {
             $this->oops_i_threw_an_exception = true;
-            throw new Exception($this->_err("unable to close {$this->logfile}"));
+            throw new Exception($this->_err("unable to close {$this->logfile_name}"));
          }
       }
 
@@ -250,7 +271,7 @@ class logfile_c
 
          if ( $this->lock_warning <= (microtime(true)-$warning) )
          {
-            echo "waiting ", $this->duration( microtime(true) - $start ), " for a lock on {$this->logfile}\n";
+            echo "waiting ", $this->duration( microtime(true) - $start ), " for a lock on {$this->logfile_name}\n";
             $warning = microtime(true);
          }
 
@@ -261,7 +282,7 @@ class logfile_c
       if ( !$lock_obtained && (count($this->buffer) >= $this->buf_maxlines) )
       {
          $this->oops_i_threw_an_exception = true;
-         throw new Exception($this->_err("unable to obtain a lock on {$this->logfile} in {$this->lock_timeout} seconds") );
+         throw new Exception($this->_err("unable to obtain a lock on {$this->logfile_name} in {$this->lock_timeout} seconds") );
       }
 
 
@@ -275,7 +296,7 @@ class logfile_c
       if ( flock( $this->logfp, LOCK_UN ) == false )
       {
          $this->oops_i_threw_an_exception = true;
-         throw new Exception($this->_err("unable to unlock {$this->logfile}"));
+         throw new Exception($this->_err("unable to unlock {$this->logfile_name}"));
       }
 
       $this->locked_flag = false;
@@ -289,7 +310,7 @@ class logfile_c
       {
          $this->oops_i_threw_an_exception = true;
          @flock( $this->logfp, LOCK_UN );
-         throw new Exception($this->_err("unable to seek on {$this->logfile}"));
+         throw new Exception($this->_err("unable to seek on {$this->logfile_name}"));
       }
    }
 
@@ -329,7 +350,7 @@ class logfile_c
       {
          $this->oops_i_threw_an_exception = true;
          @flock( $this->logfp, LOCK_UN );
-         throw new Exception($this->_err("unable to write to {$this->logfile}"));
+         throw new Exception($this->_err("unable to write to {$this->logfile_name}"));
       }
 
       // return the number of bytes written
@@ -379,7 +400,7 @@ class logfile_c
       }
 
       // don't try to write to the log file until the path/fn is set
-      if ( !$this->logfile )
+      if ( !$this->logfile_name )
          return $this->_save_to_buffer( $msg, $eol ); // not a real problem - no log file defined
 
       if ( $this->oops_i_threw_an_exception )
@@ -445,20 +466,33 @@ class applog_c extends stopwatch_c
    }
 
 
+   private function _check_logfile()
+   {
+      if ( is_object( $this->teefile ) )
+         return;
+
+      die( "\n\nobject of type teelog_c() not properly constructed;\n"
+         . "did you forget to call the parent constructor in your application?\n\n" );
+   }
+
+
    function logfile_disabled( $flg = -1 )
    {
+      $this->_check_logfile();
       return $this->logfile->disabled($flg);
    }
 
 
    function logfn( $fn = false )
    {
+      $this->_check_logfile();
       return $this->logfile->name($fn);
    }
 
 
    function log_is_open()
    {
+      $this->_check_logfile();
       return $this->logfile->is_open();
    }
 
@@ -543,13 +577,11 @@ class applog_c extends stopwatch_c
     */
    function log( $msg, $eol = "\n" )
    {
+      $this->_check_logfile();
       if ( $this->logfile->disabled_flag )
          return 0;
 
-      if ( $this->log_is_open() )
-         return $this->logfile->append( $this->log_prefix() . $msg, $eol );
-
-      return false;
+      return $this->logfile->append( $this->log_prefix() . $msg, $eol );
    }
 }
 

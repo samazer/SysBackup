@@ -2,6 +2,28 @@
 
 AFORMs library:
 
+   2012.01.18 SA:
+
+      * Fixed some bugs in the new logfile_c class - logging and
+        display output capture is now working again.
+
+      * Added new functions to the remote-filesystem module:
+        
+        - log("text") logs to /var/log/remote-exec.log
+        - getenv("var) returns the variable from the process environment
+        - getenvironment() returns all process environment variables
+        - sysexec( &$out, $cmd ) execs a command on the remote system
+
+        Also the localexec utility (which must be installed on the
+        remote filesystem for the remote-filesystem module to
+        function,) now logs the IP of the caller into the
+        /var/log/remote-exec.log file. The _scp() methods in the
+        remote_fileio module now log to the remote system before
+        trying to copy. This slows things down but helps whenever a
+        problem occurs.
+
+AFORMs library:
+
    2012.01.15 SA:
 
       * Added appmode_sanitycheck() and appmode_exec() to clarify the

@@ -330,6 +330,7 @@ class backupvfs_localio_rotation_c extends backupvfs_localio_c
       {
          $today_dayofweek = date("w");
          $this->plugin_enabled  =  $this->rotation_enabled 
+                               &&  $this->rotation_total_weekly
                                && ($this->rotation_dayofweek == $today_dayofweek);
       }
 
@@ -338,6 +339,7 @@ class backupvfs_localio_rotation_c extends backupvfs_localio_c
       {
          $today_dayofmonth = date("j");
          $this->plugin_enabled  =  $this->rotation_enabled 
+                               &&  $this->rotation_total_monthly
                                && ($this->rotation_dayofmonth == $today_dayofmonth);
       }
 
@@ -350,7 +352,8 @@ class backupvfs_localio_rotation_c extends backupvfs_localio_c
          if ( $this->vfs_warn_disk_space( true ) )
             $this->fatal( "problems found - please correct and try again" );
 
-         return $this->vfs_createbackupset_folder( $this->get_path_rotation() );
+         if ( $this->app->appmode_exec() )
+            return $this->vfs_createbackupset_folder( $this->get_path_rotation() );
       }
 
       // no problem but there's no work to be done today

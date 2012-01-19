@@ -1,6 +1,28 @@
 -*- mode: text; coding: utf-8-unix; -*- 
 
 
+SysBackup v3.018alpha
+
+   2012.01.18 SA:
+
+      * bug#475: Added code to call the can_hardlink() method during
+        the VFS startup procedure (after finding the prev. backupset.)
+        This allows the system to use brute-force to determine if
+        hardlinks can be used between the current and previous
+        backupsets. The resulting information is then compared against
+        the config info and, if the configured value is not the same
+        as the computed value, a warning is issued and the value is
+        set to the computed value. Note that the rotation plugins
+        perform a similar check on startup.
+
+      * Fixed some library bugs that had disabled the logger and the
+        display output capture to file.
+
+      * Added logging of the caller IP in the /var/log/remote-exec.log
+        file. Also added the log($msg), sysexec(&$out,$cmd),
+        getenv($var) and getenvironment() methods to the remote
+        filesystem code.
+
 SysBackup v3.017alpha
 
    2012.01.15 SA:
@@ -22,6 +44,10 @@ SysBackup v3.017alpha
 SysBackup v3.017alpha
 
    2012.01.14 SA:
+
+      * bug#485: Added the general-args.inc module to handle command
+        line argument handling - including some error checking
+        (bug#476)
 
       * Added the quick-install utility that automatically installs
         SysBackup. Some parameters, such as TimeZone, are not set

@@ -239,7 +239,7 @@ The key's randomart image is:
 <li>Next, add the public keys to the authorized_keys2 file:
 
 <blockquote><pre><small>
-$ <b>echo 'command="/opt/sysbackup-v3.01a/localexec $SSH_ORIGINAL_COMMAND" ' \
+$ <b>echo 'command="/opt/sysbackup/localexec $SSH_ORIGINAL_COMMAND" ' \
                `cat localexec.pub` >> ~sysbackup/.ssh/authorized_keys2</b>
 $ <b>cat filecopy.pub >> ~sysbackup/.ssh/authorized_keys2</b>
 </small></pre></blockquote>
@@ -295,7 +295,7 @@ for now if you need to change the log file location.
 
 <blockquote><pre><small>
 $ <b>/opt/sysbackup/remexec /etc/sysbackup/keys/localexec \
-                            sysbackup@nas.azertech.net \
+                            sysbackup[at]nas.azertech.net \
                             readfile /etc/sysbackup-nas.conf</b>
 path_temp=/home/sysbackup/temp/
 path_daily=/home/sysbackup/%HOST%/daily/
@@ -308,7 +308,7 @@ path_monthly=/home/sysbackup/%HOST%/daily/
 
 
 <blockquote><pre><small>
-$this->add_remote( "nas", new backupvfs_sshremote_c( $this, array(
+$this->add_sshremote( "nas", array(
    "enabled"               => true,
    "remote_server"         => "nas.azertech.net",
    "remconf_file"          => "/etc/sysbackup-nas.conf",
@@ -323,7 +323,7 @@ $this->add_remote( "nas", new backupvfs_sshremote_c( $this, array(
    "rotation_total_daily"  => 7, // total number of daily backups to keep
    "rotation_total_weekly" => 4, // total number of weekly backups to keep
    "rotation_total_monthly"=> 4, // total number of monthly backups to keep
-                                                                  )));
+                                                                  ));
 </small></pre></blockquote>
 
     </ol>
@@ -412,5 +412,5 @@ All rights reserved.<br>
 </address>
 
 
-<!-- hhmts start -->Last modified: Thu Jan 12 17:44:20 EST 2012 <!-- hhmts end -->
+<!-- hhmts start -->Last modified: Mon Jan 16 01:16:22 EST 2012 <!-- hhmts end -->
 </body> </html>
