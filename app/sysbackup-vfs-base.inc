@@ -343,7 +343,7 @@ class backupvfs_baseio_c extends backupvfs_fileio_c
          $this->fatal( "problems found - please correct and try again" );
 
       if ( $this->app->appmode_exec() )
-         return $this->app->vfs_createbackupset_folder( $this->path_daily );
+         return $this->vfs_createbackupset_folder( $this->path_daily );
 
       return false;
    }
