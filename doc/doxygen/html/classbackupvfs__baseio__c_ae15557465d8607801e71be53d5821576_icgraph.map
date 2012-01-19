@@ -1,4 +1,5 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$classbackupvfs__sshremote__rotation__c.html#a3effc87abdc933e425a3618cd384c8ad" title="backupvfs_sshremote_rotation_c::rotation_copyfile" alt="" coords="165,5,483,35"/>
 <area shape="rect" id="node5" href="$classbackupvfs__localio__rotation__c.html#a3effc87abdc933e425a3618cd384c8ad" title="backupvfs_localio_rotation_c::rotation_copyfile" alt="" coords="177,59,471,88"/>
+<area shape="rect" id="node7" href="$classbackupvfs__localio__c.html#a9be83ec6186cf96f66cff0ada6ec97f9" title="backupvfs_localio_c::vfs_tarball_folder" alt="" coords="201,112,447,141"/>
 </map>

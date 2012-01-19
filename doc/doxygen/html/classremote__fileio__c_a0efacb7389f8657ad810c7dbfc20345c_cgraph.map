@@ -1,6 +1,7 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$general-utils_8inc.html#a9581a616c717baa778b6cb2ef939cdb8" title="get_temp_filename" alt="" coords="204,5,335,35"/>
 <area shape="rect" id="node7" href="$classremote__fileio__c.html#ae98b3088d60255ea8d21ac3fb02bb9cc" title="scp_to_remote" alt="" coords="216,59,323,88"/>
-<area shape="rect" id="node9" href="$classremote__filesystem__c.html#a9c298be52fad6acfc81ea89afe08cfb8" title="remote_filesystem_c::unlink" alt="" coords="177,112,361,141"/>
-<area shape="rect" id="node5" href="$general-utils_8inc.html#ad76402af3ee93b6edeeb2703032deae0" title="get_temp_dir" alt="" coords="412,5,508,35"/>
+<area shape="rect" id="node11" href="$classremote__filesystem__c.html#a9c298be52fad6acfc81ea89afe08cfb8" title="remote_filesystem_c::unlink" alt="" coords="177,112,361,141"/>
+<area shape="rect" id="node5" href="$general-utils_8inc.html#ad76402af3ee93b6edeeb2703032deae0" title="get_temp_dir" alt="" coords="447,5,543,35"/>
+<area shape="rect" id="node9" href="$classremote__filesystem__c.html#a3e3c415ada57f553ac4a39a40051c94f" title="remote_filesystem_c::log" alt="" coords="411,59,579,88"/>
 </map>

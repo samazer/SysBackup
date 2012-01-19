@@ -1,6 +1,4 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$classbackupvfs__main__c.html#ab067ae4ee7259edf9c195d15dba85ba3" title="backupvfs_main_c::vfs_init" alt="" coords="211,5,392,35"/>
-<area shape="rect" id="node7" href="$classbackupvfs__main__c.html#a32cab912e6c1954794c5438c636a079d" title="backupvfs_main_c::vfs_start" alt="" coords="207,59,396,88"/>
-<area shape="rect" id="node5" href="$classsystem__backup__app__c.html#a00291c6ec6d9c4acd3a66717eb5d0458" title="system_backup_app_c::app_before_init" alt="" coords="457,5,708,35"/>
-<area shape="rect" id="node9" href="$classsystem__backup__app__c.html#a69cab8ae70a229c3b81b210003a00b25" title="system_backup_app_c::app_before_events" alt="" coords="445,59,720,88"/>
+<area shape="rect" id="node3" href="$classbackupvfs__main__c.html#a32cab912e6c1954794c5438c636a079d" title="backupvfs_main_c::vfs_start" alt="" coords="207,5,396,35"/>
+<area shape="rect" id="node5" href="$classsystem__backup__app__c.html#a69cab8ae70a229c3b81b210003a00b25" title="system_backup_app_c::app_before_events" alt="" coords="445,5,720,35"/>
 </map>

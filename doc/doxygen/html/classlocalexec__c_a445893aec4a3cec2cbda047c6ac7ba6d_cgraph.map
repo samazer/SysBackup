@@ -1,15 +1,14 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f" title="teelog_c::fatal" alt="" coords="195,192,299,221"/>
-<area shape="rect" id="node25" href="$classlocalexec__c.html#a06a8bc48c64a56939e05589ef3d940dc" title="params_show" alt="" coords="196,245,297,275"/>
-<area shape="rect" id="node28" href="$classlocalexec__c.html#ad398bbc85a78ed71088adb60cbb80fd3" title="params_showneeded" alt="" coords="175,299,319,328"/>
+<area shape="rect" id="node23" href="$classlocalexec__c.html#a06a8bc48c64a56939e05589ef3d940dc" title="params_show" alt="" coords="196,245,297,275"/>
+<area shape="rect" id="node26" href="$classlocalexec__c.html#ad398bbc85a78ed71088adb60cbb80fd3" title="params_showneeded" alt="" coords="175,299,319,328"/>
 <area shape="rect" id="node5" href="$classstopwatch__c.html#a9183c847d07c84c8ce85f1ddff07860c" title="stopwatch_c::all_time" alt="" coords="368,32,517,61"/>
 <area shape="rect" id="node11" href="$general-log_8inc.html#a17e043fbbec86750a0d43b4fc9520c16" title="backtrace" alt="" coords="404,85,481,115"/>
 <area shape="rect" id="node13" href="$general-utils_8inc.html#a77dd67e2e529e733ba6618dee1c1f09c" title="capture_begin" alt="" coords="392,139,493,168"/>
 <area shape="rect" id="node15" href="$general-utils_8inc.html#a67ba34c0b7537f53f68538230a6cb316" title="capture_end" alt="" coords="396,192,489,221"/>
 <area shape="rect" id="node17" href="$classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75" title="applog_c::log" alt="" coords="393,245,492,275"/>
-<area shape="rect" id="node23" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="teelog_c::tee" alt="" coords="395,299,491,328"/>
+<area shape="rect" id="node21" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="teelog_c::tee" alt="" coords="395,299,491,328"/>
 <area shape="rect" id="node7" href="$classstopwatch__c.html#a6a93ed38a9b39db92205c955936b17eb" title="stopwatch_c::all_start" alt="" coords="567,5,716,35"/>
 <area shape="rect" id="node9" href="$classstopwatch__c.html#a14fa9b6e7d9cba61c9dea86f727b84a2" title="stopwatch_c::all_stop" alt="" coords="567,59,716,88"/>
-<area shape="rect" id="node19" href="$classapplog__c.html#a3acf8f3fe3b1116c9bc376f0e2854254" title="applog_c::log_is_open" alt="" coords="567,219,716,248"/>
-<area shape="rect" id="node21" href="$classapplog__c.html#a5ab616f7683c2f3e63af6086ae3b70f9" title="applog_c::log_prefix" alt="" coords="572,272,711,301"/>
+<area shape="rect" id="node19" href="$classapplog__c.html#a5ab616f7683c2f3e63af6086ae3b70f9" title="applog_c::log_prefix" alt="" coords="572,245,711,275"/>
 </map>

@@ -1,8 +1,7 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$classbackupvfs__main__c.html#ab058a70778b93dd5bb3a1e417b845ba6" title="backupvfs_main_c::get_backupset_name" alt="" coords="156,5,417,35"/>
 <area shape="rect" id="node5" href="$classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75" title="applog_c::log" alt="" coords="237,59,336,88"/>
-<area shape="rect" id="node11" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="teelog_c::tee" alt="" coords="239,112,335,141"/>
-<area shape="rect" id="node13" href="$classplugin__framework__c.html#af9090086ab2ddab18780d7fa67c9d0c4" title="plugin_framework_c::verbose" alt="" coords="191,165,383,195"/>
-<area shape="rect" id="node7" href="$classapplog__c.html#a3acf8f3fe3b1116c9bc376f0e2854254" title="applog_c::log_is_open" alt="" coords="468,32,617,61"/>
-<area shape="rect" id="node9" href="$classapplog__c.html#a5ab616f7683c2f3e63af6086ae3b70f9" title="applog_c::log_prefix" alt="" coords="473,85,612,115"/>
+<area shape="rect" id="node9" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="teelog_c::tee" alt="" coords="239,112,335,141"/>
+<area shape="rect" id="node11" href="$classplugin__framework__c.html#af9090086ab2ddab18780d7fa67c9d0c4" title="plugin_framework_c::verbose" alt="" coords="191,165,383,195"/>
+<area shape="rect" id="node7" href="$classapplog__c.html#a5ab616f7683c2f3e63af6086ae3b70f9" title="applog_c::log_prefix" alt="" coords="467,59,605,88"/>
 </map>

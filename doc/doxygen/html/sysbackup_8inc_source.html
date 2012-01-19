@@ -258,133 +258,132 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00171"></a><a class="code" href="classsystem__backup__app__c.html#a00291c6ec6d9c4acd3a66717eb5d0458">00171</a>    function <a class="code" href="classsystem__backup__app__c.html#a00291c6ec6d9c4acd3a66717eb5d0458">app_before_init</a>()
 <a name="l00172"></a>00172    {
 <a name="l00173"></a>00173       <span class="comment">// see: sysbackup-vfs.inc: vfs_init()</span>
-<a name="l00174"></a>00174       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classplugin__framework__c.html#a0db70b0dc4c8e71d307367a42a9ee9df">appmode_exec</a>() )
-<a name="l00175"></a>00175          $this-&gt;<a class="code" href="classbackupvfs__main__c.html#ab067ae4ee7259edf9c195d15dba85ba3">vfs_init</a>();
-<a name="l00176"></a>00176 
-<a name="l00177"></a>00177       <a class="code" href="classplugin__framework__c.html#af4aba6237cb0d8d2720bc840728e1f3e">$argv</a> = &amp;$GLOBALS[<span class="stringliteral">&quot;argv&quot;</span>];
-<a name="l00178"></a>00178 
-<a name="l00179"></a>00179       $this-&gt;<a class="code" href="classapplog__c.html#a7b7e67341476ac1be42c9206a91f36da">hostname_short</a>( $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a9d90928eb00a6935fa1767f6404a0a7c">get_hostid</a>() );
-<a name="l00180"></a>00180       $this-&gt;<a class="code" href="classapplog__c.html#a6426cb6abec908a975379ea096c2116a">application_name</a>( basename( <a class="code" href="classplugin__framework__c.html#af4aba6237cb0d8d2720bc840728e1f3e">$argv</a>[0] ) );
-<a name="l00181"></a>00181 
-<a name="l00182"></a>00182       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classplugin__framework__c.html#a0db70b0dc4c8e71d307367a42a9ee9df">appmode_exec</a>() )
-<a name="l00183"></a>00183          $this-&gt;<a class="code" href="classteelog__c.html#ad859b847a5fc648d034cf1429374ac64">teefn</a>( <a class="code" href="general-utils_8inc.html#a6185d0c82f5be193802f7bd846fdd9f6">dir_fn</a>( $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a7679c332bdc81fbd35edb000c974be2f">get_path_backupset</a>(), 
-<a name="l00184"></a>00184                                $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a38980f2b9e4c06a156136d9e0de6b212">get_hostname</a>() . <a class="code" href="sysbackup.html#a771021a7ce07fb4a9db16c555d0681aa">EXT_OUTPUTCAPTURE</a> ) );
-<a name="l00185"></a>00185   
-<a name="l00186"></a>00186 
-<a name="l00187"></a>00187       $cmdl = <span class="stringliteral">&quot;&quot;</span>;
-<a name="l00188"></a>00188       <span class="keywordflow">foreach</span>( <a class="code" href="classplugin__framework__c.html#af4aba6237cb0d8d2720bc840728e1f3e">$argv</a> as $arg )
-<a name="l00189"></a>00189          $cmdl = $cmdl
-<a name="l00190"></a>00190                . ($cmdl ? <span class="stringliteral">&quot; &quot;</span> : <span class="stringliteral">&quot;&quot;</span>)
-<a name="l00191"></a>00191                . $arg
-<a name="l00192"></a>00192                ;
-<a name="l00193"></a>00193 
-<a name="l00194"></a>00194       $this-&gt;<a class="code" href="classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75">log</a>( <span class="stringliteral">&quot;[init] \&quot;{$cmdl}\&quot;&quot;</span> );
-<a name="l00195"></a>00195    }
+<a name="l00174"></a>00174       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#ab067ae4ee7259edf9c195d15dba85ba3">vfs_init</a>();
+<a name="l00175"></a>00175 
+<a name="l00176"></a>00176       <a class="code" href="classplugin__framework__c.html#af4aba6237cb0d8d2720bc840728e1f3e">$argv</a> = &amp;$GLOBALS[<span class="stringliteral">&quot;argv&quot;</span>];
+<a name="l00177"></a>00177 
+<a name="l00178"></a>00178       $this-&gt;<a class="code" href="classapplog__c.html#a7b7e67341476ac1be42c9206a91f36da">hostname_short</a>( $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a9d90928eb00a6935fa1767f6404a0a7c">get_hostid</a>() );
+<a name="l00179"></a>00179       $this-&gt;<a class="code" href="classapplog__c.html#a6426cb6abec908a975379ea096c2116a">application_name</a>( basename( <a class="code" href="classplugin__framework__c.html#af4aba6237cb0d8d2720bc840728e1f3e">$argv</a>[0] ) );
+<a name="l00180"></a>00180 
+<a name="l00181"></a>00181       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classplugin__framework__c.html#a0db70b0dc4c8e71d307367a42a9ee9df">appmode_exec</a>() )
+<a name="l00182"></a>00182          $this-&gt;<a class="code" href="classteelog__c.html#ad859b847a5fc648d034cf1429374ac64">teefn</a>( <a class="code" href="general-utils_8inc.html#a6185d0c82f5be193802f7bd846fdd9f6">dir_fn</a>( $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a7679c332bdc81fbd35edb000c974be2f">get_path_backupset</a>(), 
+<a name="l00183"></a>00183                                $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a38980f2b9e4c06a156136d9e0de6b212">get_hostname</a>() . <a class="code" href="sysbackup.html#a771021a7ce07fb4a9db16c555d0681aa">EXT_OUTPUTCAPTURE</a> ) );
+<a name="l00184"></a>00184   
+<a name="l00185"></a>00185 
+<a name="l00186"></a>00186       $cmdl = <span class="stringliteral">&quot;&quot;</span>;
+<a name="l00187"></a>00187       <span class="keywordflow">foreach</span>( <a class="code" href="classplugin__framework__c.html#af4aba6237cb0d8d2720bc840728e1f3e">$argv</a> as $arg )
+<a name="l00188"></a>00188          $cmdl = $cmdl
+<a name="l00189"></a>00189                . ($cmdl ? <span class="stringliteral">&quot; &quot;</span> : <span class="stringliteral">&quot;&quot;</span>)
+<a name="l00190"></a>00190                . $arg
+<a name="l00191"></a>00191                ;
+<a name="l00192"></a>00192 
+<a name="l00193"></a>00193       $this-&gt;<a class="code" href="classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75">log</a>( <span class="stringliteral">&quot;[init] \&quot;{$cmdl}\&quot;&quot;</span> );
+<a name="l00194"></a>00194    }
+<a name="l00195"></a>00195 
 <a name="l00196"></a>00196 
-<a name="l00197"></a>00197 
-<a name="l00198"></a><a class="code" href="classsystem__backup__app__c.html#a4a6ca7c0219cc4df298ca02fc873fa65">00198</a>    function <a class="code" href="classsystem__backup__app__c.html#a4a6ca7c0219cc4df298ca02fc873fa65">app_title</a>()
-<a name="l00199"></a>00199    {
-<a name="l00200"></a>00200       $t = $this-&gt;<a class="code" href="classsystem__backup__app__c.html#a4a6ca7c0219cc4df298ca02fc873fa65">app_title</a> . <span class="stringliteral">&quot; &quot;</span> . $this-&gt;app_version;
-<a name="l00201"></a>00201 
-<a name="l00202"></a>00202       $this-&gt;<a class="code" href="classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75">log</a>( $t );
-<a name="l00203"></a>00203       $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( $t );
-<a name="l00204"></a>00204    }
+<a name="l00197"></a><a class="code" href="classsystem__backup__app__c.html#a4a6ca7c0219cc4df298ca02fc873fa65">00197</a>    function <a class="code" href="classsystem__backup__app__c.html#a4a6ca7c0219cc4df298ca02fc873fa65">app_title</a>()
+<a name="l00198"></a>00198    {
+<a name="l00199"></a>00199       $t = $this-&gt;<a class="code" href="classsystem__backup__app__c.html#a4a6ca7c0219cc4df298ca02fc873fa65">app_title</a> . <span class="stringliteral">&quot; &quot;</span> . $this-&gt;app_version;
+<a name="l00200"></a>00200 
+<a name="l00201"></a>00201       $this-&gt;<a class="code" href="classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75">log</a>( $t );
+<a name="l00202"></a>00202       $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( $t );
+<a name="l00203"></a>00203    }
+<a name="l00204"></a>00204 
 <a name="l00205"></a>00205 
-<a name="l00206"></a>00206 
-<a name="l00207"></a><a class="code" href="classsystem__backup__app__c.html#a4e659dc9df5d9aea9c7914794e9b7bd3">00207</a>    function <a class="code" href="classsystem__backup__app__c.html#a4e659dc9df5d9aea9c7914794e9b7bd3">app_after_init</a>()
-<a name="l00208"></a>00208    {
-<a name="l00209"></a>00209       <a class="code" href="classsystem__backup__app__c.html#a4e659dc9df5d9aea9c7914794e9b7bd3">parent::app_after_init</a>();
-<a name="l00210"></a>00210 
-<a name="l00211"></a>00211       $t = <span class="stringliteral">&quot;Backupset Name is &quot;</span> . $this-&gt;<a class="code" href="classbackupvfs__main__c.html#ab058a70778b93dd5bb3a1e417b845ba6">get_backupset_name</a>();
-<a name="l00212"></a>00212       $this-&gt;<a class="code" href="classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75">log</a>( $t );
-<a name="l00213"></a>00213       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classplugin__framework__c.html#af9090086ab2ddab18780d7fa67c9d0c4">verbose</a>() )
-<a name="l00214"></a>00214          $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( $t );
-<a name="l00215"></a>00215    }
+<a name="l00206"></a><a class="code" href="classsystem__backup__app__c.html#a4e659dc9df5d9aea9c7914794e9b7bd3">00206</a>    function <a class="code" href="classsystem__backup__app__c.html#a4e659dc9df5d9aea9c7914794e9b7bd3">app_after_init</a>()
+<a name="l00207"></a>00207    {
+<a name="l00208"></a>00208       <a class="code" href="classsystem__backup__app__c.html#a4e659dc9df5d9aea9c7914794e9b7bd3">parent::app_after_init</a>();
+<a name="l00209"></a>00209 
+<a name="l00210"></a>00210       $t = <span class="stringliteral">&quot;Backupset Name is &quot;</span> . $this-&gt;<a class="code" href="classbackupvfs__main__c.html#ab058a70778b93dd5bb3a1e417b845ba6">get_backupset_name</a>();
+<a name="l00211"></a>00211       $this-&gt;<a class="code" href="classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75">log</a>( $t );
+<a name="l00212"></a>00212       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classplugin__framework__c.html#af9090086ab2ddab18780d7fa67c9d0c4">verbose</a>() )
+<a name="l00213"></a>00213          $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( $t );
+<a name="l00214"></a>00214    }
+<a name="l00215"></a>00215 
 <a name="l00216"></a>00216 
-<a name="l00217"></a>00217 
-<a name="l00218"></a><a class="code" href="classsystem__backup__app__c.html#adf31acb1b5029960ba976a48f60d3af7">00218</a>    function <a class="code" href="classsystem__backup__app__c.html#adf31acb1b5029960ba976a48f60d3af7">after_loading_jobs</a>()
-<a name="l00219"></a>00219    {
-<a name="l00220"></a>00220       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a16d29b017bd81585d3fa361bd7071df3">add_standard_internal_jobs</a>();
-<a name="l00221"></a>00221    }
+<a name="l00217"></a><a class="code" href="classsystem__backup__app__c.html#adf31acb1b5029960ba976a48f60d3af7">00217</a>    function <a class="code" href="classsystem__backup__app__c.html#adf31acb1b5029960ba976a48f60d3af7">after_loading_jobs</a>()
+<a name="l00218"></a>00218    {
+<a name="l00219"></a>00219       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a16d29b017bd81585d3fa361bd7071df3">add_standard_internal_jobs</a>();
+<a name="l00220"></a>00220    }
+<a name="l00221"></a>00221 
 <a name="l00222"></a>00222 
-<a name="l00223"></a>00223 
-<a name="l00224"></a><a class="code" href="classsystem__backup__app__c.html#a69cab8ae70a229c3b81b210003a00b25">00224</a>    function <a class="code" href="classsystem__backup__app__c.html#a69cab8ae70a229c3b81b210003a00b25">app_before_events</a>()
-<a name="l00225"></a>00225    {
-<a name="l00226"></a>00226       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a24f5b92135362726d87d2862cde5f82a">warn_disk_space</a>( <span class="keyword">true</span> );
-<a name="l00227"></a>00227 
-<a name="l00228"></a>00228       <span class="comment">// see: sysbackup-vfs.inc: vfs_start()</span>
-<a name="l00229"></a>00229       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classplugin__framework__c.html#a0db70b0dc4c8e71d307367a42a9ee9df">appmode_exec</a>() )
-<a name="l00230"></a>00230          $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a32cab912e6c1954794c5438c636a079d">vfs_start</a>();
-<a name="l00231"></a>00231 
-<a name="l00232"></a>00232       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#ab09a722f53f0271dda6c7643b04aeb86">_notquiet_report_header</a>(<span class="keyword">true</span>);
-<a name="l00233"></a>00233 
-<a name="l00234"></a>00234       $this-&gt;max_job_subfolder_width = 0;
-<a name="l00235"></a>00235       <span class="keywordflow">foreach</span> ( $this-&gt;events as $evt =&gt; $jobs )
-<a name="l00236"></a>00236          <span class="keywordflow">foreach</span> ( $jobs as $job =&gt; $info )
-<a name="l00237"></a>00237             <span class="keywordflow">if</span> ( isset( $info[<span class="stringliteral">&quot;subfolder&quot;</span>] ) )
-<a name="l00238"></a>00238                <span class="keywordflow">if</span> ( ($w = strlen($info[<span class="stringliteral">&quot;subfolder&quot;</span>])) &gt; $this-&gt;max_job_subfolder_width )
-<a name="l00239"></a>00239                   $this-&gt;max_job_subfolder_width = $w;
-<a name="l00240"></a>00240    }
+<a name="l00223"></a><a class="code" href="classsystem__backup__app__c.html#a69cab8ae70a229c3b81b210003a00b25">00223</a>    function <a class="code" href="classsystem__backup__app__c.html#a69cab8ae70a229c3b81b210003a00b25">app_before_events</a>()
+<a name="l00224"></a>00224    {
+<a name="l00225"></a>00225       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a24f5b92135362726d87d2862cde5f82a">warn_disk_space</a>( <span class="keyword">true</span> );
+<a name="l00226"></a>00226 
+<a name="l00227"></a>00227       <span class="comment">// see: sysbackup-vfs.inc: vfs_start()</span>
+<a name="l00228"></a>00228       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classplugin__framework__c.html#a0db70b0dc4c8e71d307367a42a9ee9df">appmode_exec</a>() )
+<a name="l00229"></a>00229          $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a32cab912e6c1954794c5438c636a079d">vfs_start</a>();
+<a name="l00230"></a>00230 
+<a name="l00231"></a>00231       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#ab09a722f53f0271dda6c7643b04aeb86">_notquiet_report_header</a>(<span class="keyword">true</span>);
+<a name="l00232"></a>00232 
+<a name="l00233"></a>00233       $this-&gt;max_job_subfolder_width = 0;
+<a name="l00234"></a>00234       <span class="keywordflow">foreach</span> ( $this-&gt;events as $evt =&gt; $jobs )
+<a name="l00235"></a>00235          <span class="keywordflow">foreach</span> ( $jobs as $job =&gt; $info )
+<a name="l00236"></a>00236             <span class="keywordflow">if</span> ( isset( $info[<span class="stringliteral">&quot;subfolder&quot;</span>] ) )
+<a name="l00237"></a>00237                <span class="keywordflow">if</span> ( ($w = strlen($info[<span class="stringliteral">&quot;subfolder&quot;</span>])) &gt; $this-&gt;max_job_subfolder_width )
+<a name="l00238"></a>00238                   $this-&gt;max_job_subfolder_width = $w;
+<a name="l00239"></a>00239    }
+<a name="l00240"></a>00240 
 <a name="l00241"></a>00241 
-<a name="l00242"></a>00242 
-<a name="l00243"></a><a class="code" href="classsystem__backup__app__c.html#aa242a7643866355933b7090dbb669dd6">00243</a>    function <a class="code" href="classsystem__backup__app__c.html#aa242a7643866355933b7090dbb669dd6">app_after_events</a>()
-<a name="l00244"></a>00244    {
-<a name="l00245"></a>00245       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a812adbc765506dbbde552028680a5e07">summary_stats</a>();
-<a name="l00246"></a>00246 
-<a name="l00247"></a>00247       <span class="comment">// see: sysbackup-vfs.inc: vfs_end()</span>
-<a name="l00248"></a>00248       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classplugin__framework__c.html#a0db70b0dc4c8e71d307367a42a9ee9df">appmode_exec</a>() )
-<a name="l00249"></a>00249          $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a3d126aa4e416b60c57f6036370f348cb">vfs_end</a>();
-<a name="l00250"></a>00250    }
+<a name="l00242"></a><a class="code" href="classsystem__backup__app__c.html#aa242a7643866355933b7090dbb669dd6">00242</a>    function <a class="code" href="classsystem__backup__app__c.html#aa242a7643866355933b7090dbb669dd6">app_after_events</a>()
+<a name="l00243"></a>00243    {
+<a name="l00244"></a>00244       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a812adbc765506dbbde552028680a5e07">summary_stats</a>();
+<a name="l00245"></a>00245 
+<a name="l00246"></a>00246       <span class="comment">// see: sysbackup-vfs.inc: vfs_end()</span>
+<a name="l00247"></a>00247       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classplugin__framework__c.html#a0db70b0dc4c8e71d307367a42a9ee9df">appmode_exec</a>() )
+<a name="l00248"></a>00248          $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a3d126aa4e416b60c57f6036370f348cb">vfs_end</a>();
+<a name="l00249"></a>00249    }
+<a name="l00250"></a>00250 
 <a name="l00251"></a>00251 
-<a name="l00252"></a>00252 
-<a name="l00253"></a><a class="code" href="classsystem__backup__app__c.html#a6a5cb636b101a0ff19cf51847f3a64a1">00253</a>    function <a class="code" href="classsystem__backup__app__c.html#a6a5cb636b101a0ff19cf51847f3a64a1">app_before_job</a>( $event, $job_info )
-<a name="l00254"></a>00254    {
-<a name="l00255"></a>00255       <span class="comment">// make sure we point to the main backupset folder</span>
-<a name="l00256"></a>00256       <span class="comment">// before each job to avoid having $targets going into</span>
-<a name="l00257"></a>00257       <span class="comment">// random subfolders.</span>
-<a name="l00258"></a>00258       <span class="comment">// see: sysbackup-vfs.inc: vfs_subfolder()</span>
-<a name="l00259"></a>00259       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classplugin__framework__c.html#a0db70b0dc4c8e71d307367a42a9ee9df">appmode_exec</a>() )
-<a name="l00260"></a>00260          $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a995be90b7f2430568e61d0d27d5eec01">vfs_subfolder</a>( <span class="stringliteral">&quot;&quot;</span> );
-<a name="l00261"></a>00261 
-<a name="l00262"></a>00262       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a24f5b92135362726d87d2862cde5f82a">warn_disk_space</a>( <span class="keyword">false</span> );
-<a name="l00263"></a>00263 
-<a name="l00264"></a>00264       $this-&gt;<a class="code" href="classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75">log</a>( <span class="stringliteral">&quot;@{$event}: {$job_info[&#39;jobindex&#39;]} {$job_info[&#39;plugin&#39;]}({$job_info[&#39;id&#39;]})&quot;</span> );
-<a name="l00265"></a>00265       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a70f9f93b30c404c76ac66e34612d0cc6">job_reset</a>();
-<a name="l00266"></a>00266    }
+<a name="l00252"></a><a class="code" href="classsystem__backup__app__c.html#a6a5cb636b101a0ff19cf51847f3a64a1">00252</a>    function <a class="code" href="classsystem__backup__app__c.html#a6a5cb636b101a0ff19cf51847f3a64a1">app_before_job</a>( $event, $job_info )
+<a name="l00253"></a>00253    {
+<a name="l00254"></a>00254       <span class="comment">// make sure we point to the main backupset folder</span>
+<a name="l00255"></a>00255       <span class="comment">// before each job to avoid having $targets going into</span>
+<a name="l00256"></a>00256       <span class="comment">// random subfolders.</span>
+<a name="l00257"></a>00257       <span class="comment">// see: sysbackup-vfs.inc: vfs_subfolder()</span>
+<a name="l00258"></a>00258       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classplugin__framework__c.html#a0db70b0dc4c8e71d307367a42a9ee9df">appmode_exec</a>() )
+<a name="l00259"></a>00259          $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a995be90b7f2430568e61d0d27d5eec01">vfs_subfolder</a>( <span class="stringliteral">&quot;&quot;</span> );
+<a name="l00260"></a>00260 
+<a name="l00261"></a>00261       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a24f5b92135362726d87d2862cde5f82a">warn_disk_space</a>( <span class="keyword">false</span> );
+<a name="l00262"></a>00262 
+<a name="l00263"></a>00263       $this-&gt;<a class="code" href="classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75">log</a>( <span class="stringliteral">&quot;@{$event}: {$job_info[&#39;jobindex&#39;]} {$job_info[&#39;plugin&#39;]}({$job_info[&#39;id&#39;]})&quot;</span> );
+<a name="l00264"></a>00264       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a70f9f93b30c404c76ac66e34612d0cc6">job_reset</a>();
+<a name="l00265"></a>00265    }
+<a name="l00266"></a>00266 
 <a name="l00267"></a>00267 
-<a name="l00268"></a>00268 
-<a name="l00269"></a><a class="code" href="classsystem__backup__app__c.html#a0d46d3ed0cde3a9c861a3cc6193dc1bf">00269</a>    function <a class="code" href="classsystem__backup__app__c.html#a0d46d3ed0cde3a9c861a3cc6193dc1bf">app_after_job</a>( $event, $job_info )
-<a name="l00270"></a>00270    {
-<a name="l00271"></a>00271       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classteelog__c.html#a851611e66979fe71d2932ef552d676ad">notquiet</a>() )
-<a name="l00272"></a>00272          $this-&gt;<a class="code" href="classbackupvfs__main__c.html#aaab7cc7dc706b0c47a22c643afe529a4">show_stats</a>( <span class="stringliteral">&quot;job&quot;</span> );
-<a name="l00273"></a>00273 
-<a name="l00274"></a>00274       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#acf53494481c2ad91a88c94d5f40772ef">log_stats</a>( <span class="stringliteral">&quot;job&quot;</span> );
-<a name="l00275"></a>00275    }
+<a name="l00268"></a><a class="code" href="classsystem__backup__app__c.html#a0d46d3ed0cde3a9c861a3cc6193dc1bf">00268</a>    function <a class="code" href="classsystem__backup__app__c.html#a0d46d3ed0cde3a9c861a3cc6193dc1bf">app_after_job</a>( $event, $job_info )
+<a name="l00269"></a>00269    {
+<a name="l00270"></a>00270       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classteelog__c.html#a851611e66979fe71d2932ef552d676ad">notquiet</a>() )
+<a name="l00271"></a>00271          $this-&gt;<a class="code" href="classbackupvfs__main__c.html#aaab7cc7dc706b0c47a22c643afe529a4">show_stats</a>( <span class="stringliteral">&quot;job&quot;</span> );
+<a name="l00272"></a>00272 
+<a name="l00273"></a>00273       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#acf53494481c2ad91a88c94d5f40772ef">log_stats</a>( <span class="stringliteral">&quot;job&quot;</span> );
+<a name="l00274"></a>00274    }
+<a name="l00275"></a>00275 
 <a name="l00276"></a>00276 
-<a name="l00277"></a>00277 
-<a name="l00278"></a><a class="code" href="classsystem__backup__app__c.html#a69a16c3db534892d5338920bea9ed5d6">00278</a>    function <a class="code" href="classsystem__backup__app__c.html#a69a16c3db534892d5338920bea9ed5d6">__construct</a>( $opts = <span class="keyword">false</span> )
-<a name="l00279"></a>00279    {
-<a name="l00280"></a>00280       $this-&gt;event_descriptions = array( <span class="stringliteral">&quot;sysreports&quot;</span>    =&gt; <span class="stringliteral">&quot;Generate System Reports&quot;</span>,
-<a name="l00281"></a>00281                                          <span class="stringliteral">&quot;daemonsdown&quot;</span>   =&gt; <span class="stringliteral">&quot;Shutdown System Daemons&quot;</span>,
-<a name="l00282"></a>00282                                          <span class="stringliteral">&quot;snapshotsup&quot;</span>   =&gt; <span class="stringliteral">&quot;Create LVM Snapshots&quot;</span>,
-<a name="l00283"></a>00283                                          <span class="stringliteral">&quot;daemonsup&quot;</span>     =&gt; <span class="stringliteral">&quot;Restart System Daemons&quot;</span>,
-<a name="l00284"></a>00284                                          <span class="stringliteral">&quot;genbackups&quot;</span>    =&gt; <span class="stringliteral">&quot;Generate the Backup Set&quot;</span>,
-<a name="l00285"></a>00285                                          <span class="stringliteral">&quot;snapshotsdown&quot;</span> =&gt; <span class="stringliteral">&quot;Flush and destroy LVM Snapshots&quot;</span>,
-<a name="l00286"></a>00286                                          <span class="stringliteral">&quot;auxops&quot;</span>        =&gt; <span class="stringliteral">&quot;Auxiliary Operations (ie: copy to NAS)&quot;</span>,
-<a name="l00287"></a>00287                                          <span class="stringliteral">&quot;summary&quot;</span>       =&gt; <span class="stringliteral">&quot;Generate Summary Reports&quot;</span>,
-<a name="l00288"></a>00288                                        );
-<a name="l00289"></a>00289 
-<a name="l00290"></a>00290       <a class="code" href="classsystem__backup__app__c.html#a69a16c3db534892d5338920bea9ed5d6">parent::__construct</a>( $opts );
-<a name="l00291"></a>00291    }
-<a name="l00292"></a>00292 }
+<a name="l00277"></a><a class="code" href="classsystem__backup__app__c.html#a69a16c3db534892d5338920bea9ed5d6">00277</a>    function <a class="code" href="classsystem__backup__app__c.html#a69a16c3db534892d5338920bea9ed5d6">__construct</a>( $opts = <span class="keyword">false</span> )
+<a name="l00278"></a>00278    {
+<a name="l00279"></a>00279       $this-&gt;event_descriptions = array( <span class="stringliteral">&quot;sysreports&quot;</span>    =&gt; <span class="stringliteral">&quot;Generate System Reports&quot;</span>,
+<a name="l00280"></a>00280                                          <span class="stringliteral">&quot;daemonsdown&quot;</span>   =&gt; <span class="stringliteral">&quot;Shutdown System Daemons&quot;</span>,
+<a name="l00281"></a>00281                                          <span class="stringliteral">&quot;snapshotsup&quot;</span>   =&gt; <span class="stringliteral">&quot;Create LVM Snapshots&quot;</span>,
+<a name="l00282"></a>00282                                          <span class="stringliteral">&quot;daemonsup&quot;</span>     =&gt; <span class="stringliteral">&quot;Restart System Daemons&quot;</span>,
+<a name="l00283"></a>00283                                          <span class="stringliteral">&quot;genbackups&quot;</span>    =&gt; <span class="stringliteral">&quot;Generate the Backup Set&quot;</span>,
+<a name="l00284"></a>00284                                          <span class="stringliteral">&quot;snapshotsdown&quot;</span> =&gt; <span class="stringliteral">&quot;Flush and destroy LVM Snapshots&quot;</span>,
+<a name="l00285"></a>00285                                          <span class="stringliteral">&quot;auxops&quot;</span>        =&gt; <span class="stringliteral">&quot;Auxiliary Operations (ie: copy to NAS)&quot;</span>,
+<a name="l00286"></a>00286                                          <span class="stringliteral">&quot;summary&quot;</span>       =&gt; <span class="stringliteral">&quot;Generate Summary Reports&quot;</span>,
+<a name="l00287"></a>00287                                        );
+<a name="l00288"></a>00288 
+<a name="l00289"></a>00289       <a class="code" href="classsystem__backup__app__c.html#a69a16c3db534892d5338920bea9ed5d6">parent::__construct</a>( $opts );
+<a name="l00290"></a>00290    }
+<a name="l00291"></a>00291 }
+<a name="l00292"></a>00292 
 <a name="l00293"></a>00293 
-<a name="l00294"></a>00294 
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="sysbackup_8inc.html">sysbackup.inc</a>      </li>
-      <li class="footer">Generated on Sun Jan 15 2012 15:11:23 for SysBackup by&#160;
+      <li class="footer">Generated on Thu Jan 19 2012 00:38:40 for SysBackup by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

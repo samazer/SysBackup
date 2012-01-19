@@ -1,6 +1,7 @@
 <map id="G" name="G">
 <area shape="rect" id="node3" href="$classbackupvfs__fileio__c.html#a1809a0aad898b2addc9c00785e0e64d2" title="backupvfs_fileio_c::_vfs_can_hardlink" alt="" coords="149,5,392,35"/>
-<area shape="rect" id="node5" href="$classlocalexec__c.html#ac72ad9f570c48e1d61faf54bb6067ffd" title="localexec_c::exec" alt="" coords="208,59,333,88"/>
-<area shape="rect" id="node9" href="$classbackupvfs__localio__rotation__c.html#a6187bbcd771dd6107b31f2193e6c3537" title="backupvfs_localio_rotation_c::vfs_init" alt="" coords="151,112,391,141"/>
-<area shape="rect" id="node7" href="$classlocalexec__c.html#a3222532b78daa37e60441c2c04f64546" title="localexec_c::__construct" alt="" coords="441,59,607,88"/>
+<area shape="rect" id="node7" href="$classlocalexec__c.html#ac72ad9f570c48e1d61faf54bb6067ffd" title="localexec_c::exec" alt="" coords="208,59,333,88"/>
+<area shape="rect" id="node11" href="$classbackupvfs__localio__rotation__c.html#a6187bbcd771dd6107b31f2193e6c3537" title="backupvfs_localio_rotation_c::vfs_init" alt="" coords="151,112,391,141"/>
+<area shape="rect" id="node5" href="$classbackupvfs__baseio__c.html#a32cab912e6c1954794c5438c636a079d" title="backupvfs_baseio_c::vfs_start" alt="" coords="440,5,640,35"/>
+<area shape="rect" id="node9" href="$classlocalexec__c.html#a3222532b78daa37e60441c2c04f64546" title="localexec_c::__construct" alt="" coords="457,59,623,88"/>
 </map>

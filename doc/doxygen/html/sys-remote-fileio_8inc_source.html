@@ -246,7 +246,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00159"></a>00159    {
 <a name="l00160"></a>00160       $r   = array();
 <a name="l00161"></a>00161 
-<a name="l00162"></a>00162       <span class="keywordflow">if</span> ( <a class="code" href="general-sysexec_8inc.html#ae6efbf28782d7bf198e599ea0a0c121a">sysexec</a>( $r, $cmd ) === <span class="keyword">true</span> )
+<a name="l00162"></a>00162       <span class="keywordflow">if</span> ( <a class="code" href="classremote__filesystem__c.html#aa5c2e33d75889d6f9d936ae07110e994">sysexec</a>( $r, $cmd ) === <span class="keyword">true</span> )
 <a name="l00163"></a>00163          $this-&gt;teelog-&gt;fatal( <span class="stringliteral">&quot;unable to exec command: &#39;{$cmd}&#39;&quot;</span> );
 <a name="l00164"></a>00164 
 <a name="l00165"></a>00165       <span class="keywordflow">if</span> ( $this-&gt;debug_sysexec )
@@ -265,46 +265,48 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00178"></a>00178 
 <a name="l00179"></a><a class="code" href="classremote__fileio__c.html#ae98b3088d60255ea8d21ac3fb02bb9cc">00179</a>    function <a class="code" href="classremote__fileio__c.html#ae98b3088d60255ea8d21ac3fb02bb9cc">scp_to_remote</a>( $source, $dest )
 <a name="l00180"></a>00180    {
-<a name="l00181"></a>00181       <span class="keywordflow">return</span> $this-&gt;_scp( <span class="stringliteral">&quot;{$this-&gt;scp_cmd} &#39;{$source}&#39; &#39;{$this-&gt;scp_filecopy_userid}@{$this-&gt;remote_server}:{$dest}&#39;&quot;</span> );
-<a name="l00182"></a>00182    }
-<a name="l00183"></a>00183 
+<a name="l00181"></a>00181       $this-&gt;<a class="code" href="classremote__filesystem__c.html#a3e3c415ada57f553ac4a39a40051c94f">log</a>( <span class="stringliteral">&quot;scp ---&gt; {$dest}&quot;</span> );
+<a name="l00182"></a>00182       <span class="keywordflow">return</span> $this-&gt;_scp( <span class="stringliteral">&quot;{$this-&gt;scp_cmd} &#39;{$source}&#39; &#39;{$this-&gt;scp_filecopy_userid}@{$this-&gt;remote_server}:{$dest}&#39;&quot;</span> );
+<a name="l00183"></a>00183    }
 <a name="l00184"></a>00184 
-<a name="l00185"></a><a class="code" href="classremote__fileio__c.html#af42cc43cc3f33c431b07a6bcdd5eec7a">00185</a>    function <a class="code" href="classremote__fileio__c.html#af42cc43cc3f33c431b07a6bcdd5eec7a">scp_from_remote</a>( $source, $dest )
-<a name="l00186"></a>00186    {
-<a name="l00187"></a>00187       <span class="keywordflow">return</span> $this-&gt;_scp( <span class="stringliteral">&quot;{$this-&gt;scp_cmd} &#39;{$this-&gt;scp_filecopy_userid}@{$this-&gt;remote_server}:{$source}&#39; &#39;{$dest}&#39;&quot;</span> );
-<a name="l00188"></a>00188    }
-<a name="l00189"></a>00189 
-<a name="l00190"></a>00190 
-<a name="l00191"></a><a class="code" href="classremote__fileio__c.html#a0efacb7389f8657ad810c7dbfc20345c">00191</a>    function <a class="code" href="classremote__fileio__c.html#a0efacb7389f8657ad810c7dbfc20345c">file_put_contents</a>( $fn, $content )
-<a name="l00192"></a>00192    {
-<a name="l00193"></a>00193       <span class="keywordflow">if</span> ( ($t = <a class="code" href="general-utils_8inc.html#a9581a616c717baa778b6cb2ef939cdb8">get_temp_filename</a>( <span class="stringliteral">&quot;remote-&quot;</span> )) === <span class="keyword">false</span> )
-<a name="l00194"></a>00194          $this-&gt;teelog-&gt;fatal( <span class="stringliteral">&quot;unable to get a temp file name&quot;</span> );
-<a name="l00195"></a>00195 
-<a name="l00196"></a>00196       <span class="keywordflow">if</span> ( <a class="code" href="classremote__fileio__c.html#a0efacb7389f8657ad810c7dbfc20345c">file_put_contents</a>( $t, $content ) === <span class="keyword">false</span> )
-<a name="l00197"></a>00197          $this-&gt;teelog-&gt;fatal( <span class="stringliteral">&quot;unable to write content to temp file ({$t})&quot;</span> );
-<a name="l00198"></a>00198 
-<a name="l00199"></a>00199       $r = $this-&gt;<a class="code" href="classremote__fileio__c.html#ae98b3088d60255ea8d21ac3fb02bb9cc">scp_to_remote</a>( $t, $fn );
+<a name="l00185"></a>00185 
+<a name="l00186"></a><a class="code" href="classremote__fileio__c.html#af42cc43cc3f33c431b07a6bcdd5eec7a">00186</a>    function <a class="code" href="classremote__fileio__c.html#af42cc43cc3f33c431b07a6bcdd5eec7a">scp_from_remote</a>( $source, $dest )
+<a name="l00187"></a>00187    {
+<a name="l00188"></a>00188       $this-&gt;<a class="code" href="classremote__filesystem__c.html#a3e3c415ada57f553ac4a39a40051c94f">log</a>( <span class="stringliteral">&quot;scp &lt;--- {$source}&quot;</span> );
+<a name="l00189"></a>00189       <span class="keywordflow">return</span> $this-&gt;_scp( <span class="stringliteral">&quot;{$this-&gt;scp_cmd} &#39;{$this-&gt;scp_filecopy_userid}@{$this-&gt;remote_server}:{$source}&#39; &#39;{$dest}&#39;&quot;</span> );
+<a name="l00190"></a>00190    }
+<a name="l00191"></a>00191 
+<a name="l00192"></a>00192 
+<a name="l00193"></a><a class="code" href="classremote__fileio__c.html#a0efacb7389f8657ad810c7dbfc20345c">00193</a>    function <a class="code" href="classremote__fileio__c.html#a0efacb7389f8657ad810c7dbfc20345c">file_put_contents</a>( $fn, $content )
+<a name="l00194"></a>00194    {
+<a name="l00195"></a>00195       <span class="keywordflow">if</span> ( ($t = <a class="code" href="general-utils_8inc.html#a9581a616c717baa778b6cb2ef939cdb8">get_temp_filename</a>( <span class="stringliteral">&quot;remote-&quot;</span> )) === <span class="keyword">false</span> )
+<a name="l00196"></a>00196          $this-&gt;teelog-&gt;fatal( <span class="stringliteral">&quot;unable to get a temp file name&quot;</span> );
+<a name="l00197"></a>00197 
+<a name="l00198"></a>00198       <span class="keywordflow">if</span> ( <a class="code" href="classremote__fileio__c.html#a0efacb7389f8657ad810c7dbfc20345c">file_put_contents</a>( $t, $content ) === <span class="keyword">false</span> )
+<a name="l00199"></a>00199          $this-&gt;teelog-&gt;fatal( <span class="stringliteral">&quot;unable to write content to temp file ({$t})&quot;</span> );
 <a name="l00200"></a>00200 
-<a name="l00201"></a>00201       <span class="keywordflow">if</span> ( <a class="code" href="classremote__filesystem__c.html#a9c298be52fad6acfc81ea89afe08cfb8">unlink</a>( $t ) === <span class="keyword">false</span> )
-<a name="l00202"></a>00202          $this-&gt;teelog-&gt;fatal( <span class="stringliteral">&quot;unable to unlink temp file ({$t})&quot;</span> );
-<a name="l00203"></a>00203 
-<a name="l00204"></a>00204       <span class="comment">// scp return false on success, file_put_contents() returns #bytes written</span>
-<a name="l00205"></a>00205       <span class="keywordflow">if</span> ( $r == <span class="keyword">false</span> )
-<a name="l00206"></a>00206          <span class="keywordflow">return</span> strlen( $content );
-<a name="l00207"></a>00207 
-<a name="l00208"></a>00208       <span class="comment">// file_put_contents() returns false on failure</span>
-<a name="l00209"></a>00209       <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00210"></a>00210    }
-<a name="l00211"></a>00211 }
-<a name="l00212"></a>00212 
-<a name="l00213"></a>00213 
+<a name="l00201"></a>00201       $r = $this-&gt;<a class="code" href="classremote__fileio__c.html#ae98b3088d60255ea8d21ac3fb02bb9cc">scp_to_remote</a>( $t, $fn );
+<a name="l00202"></a>00202 
+<a name="l00203"></a>00203       <span class="keywordflow">if</span> ( <a class="code" href="classremote__filesystem__c.html#a9c298be52fad6acfc81ea89afe08cfb8">unlink</a>( $t ) === <span class="keyword">false</span> )
+<a name="l00204"></a>00204          $this-&gt;teelog-&gt;fatal( <span class="stringliteral">&quot;unable to unlink temp file ({$t})&quot;</span> );
+<a name="l00205"></a>00205 
+<a name="l00206"></a>00206       <span class="comment">// scp return false on success, file_put_contents() returns #bytes written</span>
+<a name="l00207"></a>00207       <span class="keywordflow">if</span> ( $r == <span class="keyword">false</span> )
+<a name="l00208"></a>00208          <span class="keywordflow">return</span> strlen( $content );
+<a name="l00209"></a>00209 
+<a name="l00210"></a>00210       <span class="comment">// file_put_contents() returns false on failure</span>
+<a name="l00211"></a>00211       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00212"></a>00212    }
+<a name="l00213"></a>00213 }
 <a name="l00214"></a>00214 
+<a name="l00215"></a>00215 
+<a name="l00216"></a>00216 
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="sys-remote-fileio_8inc.html">sys-remote-fileio.inc</a>      </li>
-      <li class="footer">Generated on Sun Jan 15 2012 15:11:24 for SysBackup by&#160;
+      <li class="footer">Generated on Thu Jan 19 2012 00:38:40 for SysBackup by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

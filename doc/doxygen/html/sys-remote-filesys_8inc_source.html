@@ -284,7 +284,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00197"></a>00197 
 <a name="l00198"></a>00198       $output = array();
 <a name="l00199"></a>00199       $cmd    = $this-&gt;ssh_cmd . <span class="stringliteral">&quot;{$func} {$p1} {$p2} {$p3}&quot;</span>;
-<a name="l00200"></a>00200       <span class="keywordflow">if</span> ( ($r = <a class="code" href="general-sysexec_8inc.html#ae6efbf28782d7bf198e599ea0a0c121a">sysexec</a>( $output, trim($cmd) )) === <span class="keyword">true</span> )
+<a name="l00200"></a>00200       <span class="keywordflow">if</span> ( ($r = <a class="code" href="classremote__filesystem__c.html#aa5c2e33d75889d6f9d936ae07110e994">sysexec</a>( $output, trim($cmd) )) === <span class="keyword">true</span> )
 <a name="l00201"></a>00201          $this-&gt;teelog-&gt;tee( <span class="stringliteral">&quot;unable to exec &#39;{$cmd}&#39;&quot;</span> );
 <a name="l00202"></a>00202 
 <a name="l00203"></a>00203       <span class="keywordflow">if</span> ( $this-&gt;debug_sysexec )
@@ -300,7 +300,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00213"></a>00213       <span class="keywordflow">return</span> $this-&gt;_result_val( $output[<span class="stringliteral">&quot;stdout&quot;</span>], $output[<span class="stringliteral">&quot;stderr&quot;</span>] );
 <a name="l00214"></a>00214    }
 <a name="l00215"></a>00215 
-<a name="l00216"></a>00216    <span class="keyword">private</span> function _exec_text( $func, $p1, $p2 = <span class="stringliteral">&quot;&quot;</span>, $p3 = <span class="stringliteral">&quot;&quot;</span> )
+<a name="l00216"></a>00216    <span class="keyword">private</span> function _exec_text( $func, $p1 = <span class="stringliteral">&quot;&quot;</span>, $p2 = <span class="stringliteral">&quot;&quot;</span>, $p3 = <span class="stringliteral">&quot;&quot;</span> )
 <a name="l00217"></a>00217    {
 <a name="l00218"></a>00218       $output = $this-&gt;_exec( $func, $p1, $p2, $p3 );
 <a name="l00219"></a>00219 
@@ -350,250 +350,301 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00263"></a>00263 
 <a name="l00264"></a>00264 
 <a name="l00265"></a>00265 
-<a name="l00266"></a><a class="code" href="classremote__filesystem__c.html#a6164dfa40b20a595405b368186dbb995">00266</a>    function <a class="code" href="classremote__filesystem__c.html#a6164dfa40b20a595405b368186dbb995">disk_free_space</a>( $path )
+<a name="l00266"></a><a class="code" href="classremote__filesystem__c.html#a3e3c415ada57f553ac4a39a40051c94f">00266</a>    function <a class="code" href="classremote__filesystem__c.html#a3e3c415ada57f553ac4a39a40051c94f">log</a>( $msg )
 <a name="l00267"></a>00267    {
-<a name="l00268"></a>00268       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;disk_free_space&quot;</span>, $path );
+<a name="l00268"></a>00268       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;log&quot;</span>, $msg );
 <a name="l00269"></a>00269    }
 <a name="l00270"></a>00270 
-<a name="l00271"></a><a class="code" href="classremote__filesystem__c.html#a4a32e5711e144e21b8c3ade7b1ec0dd1">00271</a>    function <a class="code" href="classremote__filesystem__c.html#a4a32e5711e144e21b8c3ade7b1ec0dd1">disk_total_space</a>( $path )
+<a name="l00271"></a><a class="code" href="classremote__filesystem__c.html#a6164dfa40b20a595405b368186dbb995">00271</a>    function <a class="code" href="classremote__filesystem__c.html#a6164dfa40b20a595405b368186dbb995">disk_free_space</a>( $path )
 <a name="l00272"></a>00272    {
-<a name="l00273"></a>00273       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;disk_total_space&quot;</span>, $path );
+<a name="l00273"></a>00273       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;disk_free_space&quot;</span>, $path );
 <a name="l00274"></a>00274    }
 <a name="l00275"></a>00275 
-<a name="l00276"></a><a class="code" href="classremote__filesystem__c.html#a8d72a3f8e929f935fe69606f691c873a">00276</a>    function <a class="code" href="classremote__filesystem__c.html#a8d72a3f8e929f935fe69606f691c873a">realpath</a>( $path )
+<a name="l00276"></a><a class="code" href="classremote__filesystem__c.html#a4a32e5711e144e21b8c3ade7b1ec0dd1">00276</a>    function <a class="code" href="classremote__filesystem__c.html#a4a32e5711e144e21b8c3ade7b1ec0dd1">disk_total_space</a>( $path )
 <a name="l00277"></a>00277    {
-<a name="l00278"></a>00278       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;realpath&quot;</span>, $path );
+<a name="l00278"></a>00278       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;disk_total_space&quot;</span>, $path );
 <a name="l00279"></a>00279    }
 <a name="l00280"></a>00280 
-<a name="l00281"></a><a class="code" href="classremote__filesystem__c.html#ad4200f9b786b96bab841ff1de0cf7d72">00281</a>    function <a class="code" href="classremote__filesystem__c.html#ad4200f9b786b96bab841ff1de0cf7d72">readlink</a>( $path )
+<a name="l00281"></a><a class="code" href="classremote__filesystem__c.html#a8d72a3f8e929f935fe69606f691c873a">00281</a>    function <a class="code" href="classremote__filesystem__c.html#a8d72a3f8e929f935fe69606f691c873a">realpath</a>( $path )
 <a name="l00282"></a>00282    {
-<a name="l00283"></a>00283       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;readlink&quot;</span>, $path );
+<a name="l00283"></a>00283       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;realpath&quot;</span>, $path );
 <a name="l00284"></a>00284    }
 <a name="l00285"></a>00285 
-<a name="l00286"></a><a class="code" href="classremote__filesystem__c.html#a4f55a72e16ad19d42769c5f000d38aa1">00286</a>    function <a class="code" href="classremote__filesystem__c.html#a4f55a72e16ad19d42769c5f000d38aa1">filesize</a>( $filespec )
+<a name="l00286"></a><a class="code" href="classremote__filesystem__c.html#ad4200f9b786b96bab841ff1de0cf7d72">00286</a>    function <a class="code" href="classremote__filesystem__c.html#ad4200f9b786b96bab841ff1de0cf7d72">readlink</a>( $path )
 <a name="l00287"></a>00287    {
-<a name="l00288"></a>00288       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;filesize&quot;</span>, $filespec );
+<a name="l00288"></a>00288       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;readlink&quot;</span>, $path );
 <a name="l00289"></a>00289    }
 <a name="l00290"></a>00290 
-<a name="l00291"></a><a class="code" href="classremote__filesystem__c.html#a16d092600a3e851279e647a88ae2cb1c">00291</a>    function <a class="code" href="classremote__filesystem__c.html#a16d092600a3e851279e647a88ae2cb1c">filetype</a>( $filespec )
+<a name="l00291"></a><a class="code" href="classremote__filesystem__c.html#a4f55a72e16ad19d42769c5f000d38aa1">00291</a>    function <a class="code" href="classremote__filesystem__c.html#a4f55a72e16ad19d42769c5f000d38aa1">filesize</a>( $filespec )
 <a name="l00292"></a>00292    {
-<a name="l00293"></a>00293       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;filetype&quot;</span>, $filespec );
+<a name="l00293"></a>00293       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;filesize&quot;</span>, $filespec );
 <a name="l00294"></a>00294    }
 <a name="l00295"></a>00295 
-<a name="l00296"></a><a class="code" href="classremote__filesystem__c.html#a8e2f6da4bdb1a89e050ea23c4aa7729a">00296</a>    function <a class="code" href="classremote__filesystem__c.html#a8e2f6da4bdb1a89e050ea23c4aa7729a">fileatime</a>( $filespec )
+<a name="l00296"></a><a class="code" href="classremote__filesystem__c.html#a16d092600a3e851279e647a88ae2cb1c">00296</a>    function <a class="code" href="classremote__filesystem__c.html#a16d092600a3e851279e647a88ae2cb1c">filetype</a>( $filespec )
 <a name="l00297"></a>00297    {
-<a name="l00298"></a>00298       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;fileatime&quot;</span>, $filespec );
+<a name="l00298"></a>00298       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;filetype&quot;</span>, $filespec );
 <a name="l00299"></a>00299    }
 <a name="l00300"></a>00300 
-<a name="l00301"></a><a class="code" href="classremote__filesystem__c.html#ae6ac0f6ac5b82f5e60c7d26f0c80199b">00301</a>    function <a class="code" href="classremote__filesystem__c.html#ae6ac0f6ac5b82f5e60c7d26f0c80199b">filectime</a>( $filespec )
+<a name="l00301"></a><a class="code" href="classremote__filesystem__c.html#a8e2f6da4bdb1a89e050ea23c4aa7729a">00301</a>    function <a class="code" href="classremote__filesystem__c.html#a8e2f6da4bdb1a89e050ea23c4aa7729a">fileatime</a>( $filespec )
 <a name="l00302"></a>00302    {
-<a name="l00303"></a>00303       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;filectime&quot;</span>, $filespec );
+<a name="l00303"></a>00303       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;fileatime&quot;</span>, $filespec );
 <a name="l00304"></a>00304    }
 <a name="l00305"></a>00305 
-<a name="l00306"></a><a class="code" href="classremote__filesystem__c.html#aafa8e217fca78d86e9bf3dbf90959bd7">00306</a>    function <a class="code" href="classremote__filesystem__c.html#aafa8e217fca78d86e9bf3dbf90959bd7">filemtime</a>( $filespec )
+<a name="l00306"></a><a class="code" href="classremote__filesystem__c.html#ae6ac0f6ac5b82f5e60c7d26f0c80199b">00306</a>    function <a class="code" href="classremote__filesystem__c.html#ae6ac0f6ac5b82f5e60c7d26f0c80199b">filectime</a>( $filespec )
 <a name="l00307"></a>00307    {
-<a name="l00308"></a>00308       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;filemtime&quot;</span>, $filespec );
+<a name="l00308"></a>00308       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;filectime&quot;</span>, $filespec );
 <a name="l00309"></a>00309    }
 <a name="l00310"></a>00310 
-<a name="l00311"></a><a class="code" href="classremote__filesystem__c.html#a73b2d8af058b295297d9cbb96aa68607">00311</a>    function <a class="code" href="classremote__filesystem__c.html#a73b2d8af058b295297d9cbb96aa68607">fileperms</a>( $filespec )
+<a name="l00311"></a><a class="code" href="classremote__filesystem__c.html#aafa8e217fca78d86e9bf3dbf90959bd7">00311</a>    function <a class="code" href="classremote__filesystem__c.html#aafa8e217fca78d86e9bf3dbf90959bd7">filemtime</a>( $filespec )
 <a name="l00312"></a>00312    {
-<a name="l00313"></a>00313       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;fileperms&quot;</span>, $filespec );
+<a name="l00313"></a>00313       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;filemtime&quot;</span>, $filespec );
 <a name="l00314"></a>00314    }
 <a name="l00315"></a>00315 
-<a name="l00316"></a><a class="code" href="classremote__filesystem__c.html#a3a3252a8bc7aab9ce575ead7dbe27bf4">00316</a>    function <a class="code" href="classremote__filesystem__c.html#a3a3252a8bc7aab9ce575ead7dbe27bf4">linkinfo</a>( $filespec )
+<a name="l00316"></a><a class="code" href="classremote__filesystem__c.html#a73b2d8af058b295297d9cbb96aa68607">00316</a>    function <a class="code" href="classremote__filesystem__c.html#a73b2d8af058b295297d9cbb96aa68607">fileperms</a>( $filespec )
 <a name="l00317"></a>00317    {
-<a name="l00318"></a>00318       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;linkinfo&quot;</span>, $filespec );
+<a name="l00318"></a>00318       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;fileperms&quot;</span>, $filespec );
 <a name="l00319"></a>00319    }
 <a name="l00320"></a>00320 
-<a name="l00321"></a><a class="code" href="classremote__filesystem__c.html#a7b8e1ebe2ae9511154b5976519855198">00321</a>    function <a class="code" href="classremote__filesystem__c.html#a7b8e1ebe2ae9511154b5976519855198">filegroup</a>( $filespec )
+<a name="l00321"></a><a class="code" href="classremote__filesystem__c.html#a3a3252a8bc7aab9ce575ead7dbe27bf4">00321</a>    function <a class="code" href="classremote__filesystem__c.html#a3a3252a8bc7aab9ce575ead7dbe27bf4">linkinfo</a>( $filespec )
 <a name="l00322"></a>00322    {
-<a name="l00323"></a>00323       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;filegroup&quot;</span>, $filespec );
+<a name="l00323"></a>00323       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;linkinfo&quot;</span>, $filespec );
 <a name="l00324"></a>00324    }
 <a name="l00325"></a>00325 
-<a name="l00326"></a><a class="code" href="classremote__filesystem__c.html#aff2fa7beda0c3dbef416eba5b76d0d98">00326</a>    function <a class="code" href="classremote__filesystem__c.html#aff2fa7beda0c3dbef416eba5b76d0d98">fileowner</a>( $filespec )
+<a name="l00326"></a><a class="code" href="classremote__filesystem__c.html#a7b8e1ebe2ae9511154b5976519855198">00326</a>    function <a class="code" href="classremote__filesystem__c.html#a7b8e1ebe2ae9511154b5976519855198">filegroup</a>( $filespec )
 <a name="l00327"></a>00327    {
-<a name="l00328"></a>00328       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;fileowner&quot;</span>, $filespec );
+<a name="l00328"></a>00328       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;filegroup&quot;</span>, $filespec );
 <a name="l00329"></a>00329    }
 <a name="l00330"></a>00330 
-<a name="l00331"></a><a class="code" href="classremote__filesystem__c.html#a1fe11792aaa3a1f53a7e250c91d8d37b">00331</a>    function <a class="code" href="classremote__filesystem__c.html#a1fe11792aaa3a1f53a7e250c91d8d37b">readfile</a>( $filespec )
+<a name="l00331"></a><a class="code" href="classremote__filesystem__c.html#aff2fa7beda0c3dbef416eba5b76d0d98">00331</a>    function <a class="code" href="classremote__filesystem__c.html#aff2fa7beda0c3dbef416eba5b76d0d98">fileowner</a>( $filespec )
 <a name="l00332"></a>00332    {
-<a name="l00333"></a>00333       <span class="keywordflow">return</span> $this-&gt;_exec_text( <span class="stringliteral">&quot;readfile&quot;</span>, $filespec );
+<a name="l00333"></a>00333       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;fileowner&quot;</span>, $filespec );
 <a name="l00334"></a>00334    }
 <a name="l00335"></a>00335 
-<a name="l00336"></a><a class="code" href="classremote__filesystem__c.html#ad478a1ba8aa690239d5647cc0ce999a0">00336</a>    function <a class="code" href="classremote__filesystem__c.html#ad478a1ba8aa690239d5647cc0ce999a0">file_get_contents</a>( $filespec )
+<a name="l00336"></a><a class="code" href="classremote__filesystem__c.html#af3283be9f66cf6c08c52290a90f6cf72">00336</a>    function <a class="code" href="classremote__filesystem__c.html#af3283be9f66cf6c08c52290a90f6cf72">getenv</a>( $varname )
 <a name="l00337"></a>00337    {
-<a name="l00338"></a>00338       <span class="keywordflow">return</span> $this-&gt;_exec_text( <span class="stringliteral">&quot;readfile&quot;</span>, $filespec );
+<a name="l00338"></a>00338       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;getenv&quot;</span>, $varname );
 <a name="l00339"></a>00339    }
 <a name="l00340"></a>00340 
-<a name="l00341"></a>00341 
-<a name="l00342"></a><a class="code" href="classremote__filesystem__c.html#a873fe6207d013f4b73780de366235e69">00342</a>    function <a class="code" href="classremote__filesystem__c.html#a873fe6207d013f4b73780de366235e69">file_exists</a>( $filespec )
-<a name="l00343"></a>00343    {
-<a name="l00344"></a>00344       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;file_exists&quot;</span>, $filespec );
-<a name="l00345"></a>00345    }
-<a name="l00346"></a>00346 
-<a name="l00347"></a><a class="code" href="classremote__filesystem__c.html#ad1cb317c5e80f22f0c933e75b800c3eb">00347</a>    function <a class="code" href="classremote__filesystem__c.html#ad1cb317c5e80f22f0c933e75b800c3eb">is_dir</a>( $filespec )
-<a name="l00348"></a>00348    {
-<a name="l00349"></a>00349       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;is_dir&quot;</span>, $filespec );
-<a name="l00350"></a>00350    }
-<a name="l00351"></a>00351 
-<a name="l00352"></a><a class="code" href="classremote__filesystem__c.html#adb1601851eda5a870ce2fc1a855dea47">00352</a>    function <a class="code" href="classremote__filesystem__c.html#adb1601851eda5a870ce2fc1a855dea47">is_file</a>( $filespec )
-<a name="l00353"></a>00353    {
-<a name="l00354"></a>00354       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;is_file&quot;</span>, $filespec );
-<a name="l00355"></a>00355    }
+<a name="l00341"></a><a class="code" href="classremote__filesystem__c.html#a1fe11792aaa3a1f53a7e250c91d8d37b">00341</a>    function <a class="code" href="classremote__filesystem__c.html#a1fe11792aaa3a1f53a7e250c91d8d37b">readfile</a>( $filespec )
+<a name="l00342"></a>00342    {
+<a name="l00343"></a>00343       <span class="keywordflow">return</span> $this-&gt;_exec_text( <span class="stringliteral">&quot;readfile&quot;</span>, $filespec );
+<a name="l00344"></a>00344    }
+<a name="l00345"></a>00345 
+<a name="l00346"></a><a class="code" href="classremote__filesystem__c.html#a98b600f15f5adbeca938101775fd751f">00346</a>    function <a class="code" href="classremote__filesystem__c.html#a98b600f15f5adbeca938101775fd751f">getenvironment</a>()
+<a name="l00347"></a>00347    {
+<a name="l00348"></a>00348       <span class="keywordflow">return</span> $this-&gt;_exec_text( <span class="stringliteral">&quot;getenvironment&quot;</span> );
+<a name="l00349"></a>00349    }
+<a name="l00350"></a>00350 
+<a name="l00351"></a><a class="code" href="classremote__filesystem__c.html#ad478a1ba8aa690239d5647cc0ce999a0">00351</a>    function <a class="code" href="classremote__filesystem__c.html#ad478a1ba8aa690239d5647cc0ce999a0">file_get_contents</a>( $filespec )
+<a name="l00352"></a>00352    {
+<a name="l00353"></a>00353       <span class="keywordflow">return</span> $this-&gt;_exec_text( <span class="stringliteral">&quot;readfile&quot;</span>, $filespec );
+<a name="l00354"></a>00354    }
+<a name="l00355"></a>00355 
 <a name="l00356"></a>00356 
-<a name="l00357"></a><a class="code" href="classremote__filesystem__c.html#a49911d59cd71f6f57cf051f28a7030b4">00357</a>    function <a class="code" href="classremote__filesystem__c.html#a49911d59cd71f6f57cf051f28a7030b4">is_link</a>( $filespec )
+<a name="l00357"></a><a class="code" href="classremote__filesystem__c.html#a873fe6207d013f4b73780de366235e69">00357</a>    function <a class="code" href="classremote__filesystem__c.html#a873fe6207d013f4b73780de366235e69">file_exists</a>( $filespec )
 <a name="l00358"></a>00358    {
-<a name="l00359"></a>00359       <span class="keywordflow">return</span> $this-&gt;_exec1p1bool( <span class="stringliteral">&quot;is_link&quot;</span>, $filespec );
+<a name="l00359"></a>00359       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;file_exists&quot;</span>, $filespec );
 <a name="l00360"></a>00360    }
 <a name="l00361"></a>00361 
-<a name="l00362"></a><a class="code" href="classremote__filesystem__c.html#a5866c28a5932c2a8f1187b8ce216429e">00362</a>    function <a class="code" href="classremote__filesystem__c.html#a5866c28a5932c2a8f1187b8ce216429e">is_readable</a>( $filespec )
+<a name="l00362"></a><a class="code" href="classremote__filesystem__c.html#ad1cb317c5e80f22f0c933e75b800c3eb">00362</a>    function <a class="code" href="classremote__filesystem__c.html#ad1cb317c5e80f22f0c933e75b800c3eb">is_dir</a>( $filespec )
 <a name="l00363"></a>00363    {
-<a name="l00364"></a>00364       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;is_readable&quot;</span>, $filespec );
+<a name="l00364"></a>00364       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;is_dir&quot;</span>, $filespec );
 <a name="l00365"></a>00365    }
 <a name="l00366"></a>00366 
-<a name="l00367"></a><a class="code" href="classremote__filesystem__c.html#a5f38e1b199afa7e65a4641e9c4e55c61">00367</a>    function <a class="code" href="classremote__filesystem__c.html#a5f38e1b199afa7e65a4641e9c4e55c61">is_writable</a>( $filespec )
+<a name="l00367"></a><a class="code" href="classremote__filesystem__c.html#adb1601851eda5a870ce2fc1a855dea47">00367</a>    function <a class="code" href="classremote__filesystem__c.html#adb1601851eda5a870ce2fc1a855dea47">is_file</a>( $filespec )
 <a name="l00368"></a>00368    {
-<a name="l00369"></a>00369       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;is_writable&quot;</span>, $filespec );
+<a name="l00369"></a>00369       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;is_file&quot;</span>, $filespec );
 <a name="l00370"></a>00370    }
 <a name="l00371"></a>00371 
-<a name="l00372"></a><a class="code" href="classremote__filesystem__c.html#a987578b310116f4d7374e13a423cb4ed">00372</a>    function <a class="code" href="classremote__filesystem__c.html#a987578b310116f4d7374e13a423cb4ed">is_executable</a>( $filespec )
+<a name="l00372"></a><a class="code" href="classremote__filesystem__c.html#a49911d59cd71f6f57cf051f28a7030b4">00372</a>    function <a class="code" href="classremote__filesystem__c.html#a49911d59cd71f6f57cf051f28a7030b4">is_link</a>( $filespec )
 <a name="l00373"></a>00373    {
-<a name="l00374"></a>00374       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;is_executable&quot;</span>, $filespec );
+<a name="l00374"></a>00374       <span class="keywordflow">return</span> $this-&gt;_exec1p1bool( <span class="stringliteral">&quot;is_link&quot;</span>, $filespec );
 <a name="l00375"></a>00375    }
 <a name="l00376"></a>00376 
-<a name="l00377"></a>00377 
-<a name="l00378"></a>00378 
-<a name="l00379"></a><a class="code" href="classremote__filesystem__c.html#aeae6f350994a7da93395a06bdcbdec5a">00379</a>    function <a class="code" href="classremote__filesystem__c.html#aeae6f350994a7da93395a06bdcbdec5a">chgrp</a>( $filename, $group )
-<a name="l00380"></a>00380    {
-<a name="l00381"></a>00381       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;chgrp&quot;</span>, $filename, $group );
-<a name="l00382"></a>00382    }
-<a name="l00383"></a>00383 
-<a name="l00384"></a><a class="code" href="classremote__filesystem__c.html#a11b9e11862a7fedee4d8642134376ff0">00384</a>    function <a class="code" href="classremote__filesystem__c.html#a11b9e11862a7fedee4d8642134376ff0">chmod</a>( $filename, $mode )
-<a name="l00385"></a>00385    {
-<a name="l00386"></a>00386       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;chmod&quot;</span>, $filename, $mode );
-<a name="l00387"></a>00387    }
-<a name="l00388"></a>00388 
-<a name="l00389"></a><a class="code" href="classremote__filesystem__c.html#a5a48e245889a4f01b20c3c4b489b22a5">00389</a>    function <a class="code" href="classremote__filesystem__c.html#a5a48e245889a4f01b20c3c4b489b22a5">chown</a>( $filename, $user )
-<a name="l00390"></a>00390    {
-<a name="l00391"></a>00391       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;chown&quot;</span>, $filename, $user );
-<a name="l00392"></a>00392    }
+<a name="l00377"></a><a class="code" href="classremote__filesystem__c.html#a5866c28a5932c2a8f1187b8ce216429e">00377</a>    function <a class="code" href="classremote__filesystem__c.html#a5866c28a5932c2a8f1187b8ce216429e">is_readable</a>( $filespec )
+<a name="l00378"></a>00378    {
+<a name="l00379"></a>00379       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;is_readable&quot;</span>, $filespec );
+<a name="l00380"></a>00380    }
+<a name="l00381"></a>00381 
+<a name="l00382"></a><a class="code" href="classremote__filesystem__c.html#a5f38e1b199afa7e65a4641e9c4e55c61">00382</a>    function <a class="code" href="classremote__filesystem__c.html#a5f38e1b199afa7e65a4641e9c4e55c61">is_writable</a>( $filespec )
+<a name="l00383"></a>00383    {
+<a name="l00384"></a>00384       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;is_writable&quot;</span>, $filespec );
+<a name="l00385"></a>00385    }
+<a name="l00386"></a>00386 
+<a name="l00387"></a><a class="code" href="classremote__filesystem__c.html#a987578b310116f4d7374e13a423cb4ed">00387</a>    function <a class="code" href="classremote__filesystem__c.html#a987578b310116f4d7374e13a423cb4ed">is_executable</a>( $filespec )
+<a name="l00388"></a>00388    {
+<a name="l00389"></a>00389       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;is_executable&quot;</span>, $filespec );
+<a name="l00390"></a>00390    }
+<a name="l00391"></a>00391 
+<a name="l00392"></a>00392 
 <a name="l00393"></a>00393 
-<a name="l00394"></a><a class="code" href="classremote__filesystem__c.html#aca04731c7bebfde9bf5e2fa6a07cb631">00394</a>    function <a class="code" href="classremote__filesystem__c.html#aca04731c7bebfde9bf5e2fa6a07cb631">lchgrp</a>( $filename, $group )
+<a name="l00394"></a><a class="code" href="classremote__filesystem__c.html#aeae6f350994a7da93395a06bdcbdec5a">00394</a>    function <a class="code" href="classremote__filesystem__c.html#aeae6f350994a7da93395a06bdcbdec5a">chgrp</a>( $filename, $group )
 <a name="l00395"></a>00395    {
-<a name="l00396"></a>00396       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;lchgrp&quot;</span>, $filename, $group );
+<a name="l00396"></a>00396       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;chgrp&quot;</span>, $filename, $group );
 <a name="l00397"></a>00397    }
 <a name="l00398"></a>00398 
-<a name="l00399"></a><a class="code" href="classremote__filesystem__c.html#a65f75dc6fde8706f08c22dbb6b9068dd">00399</a>    function <a class="code" href="classremote__filesystem__c.html#a65f75dc6fde8706f08c22dbb6b9068dd">lchown</a>( $filename, $user )
+<a name="l00399"></a><a class="code" href="classremote__filesystem__c.html#a11b9e11862a7fedee4d8642134376ff0">00399</a>    function <a class="code" href="classremote__filesystem__c.html#a11b9e11862a7fedee4d8642134376ff0">chmod</a>( $filename, $mode )
 <a name="l00400"></a>00400    {
-<a name="l00401"></a>00401       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;lchown&quot;</span>, $filename, $user );
+<a name="l00401"></a>00401       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;chmod&quot;</span>, $filename, $mode );
 <a name="l00402"></a>00402    }
 <a name="l00403"></a>00403 
-<a name="l00404"></a>00404 
-<a name="l00405"></a><a class="code" href="classremote__filesystem__c.html#a690d0187eefea78613bb66008e730e64">00405</a>    function <a class="code" href="classremote__filesystem__c.html#a690d0187eefea78613bb66008e730e64">glob</a>( $cwd, $pattern, $flags )
-<a name="l00406"></a>00406    {
-<a name="l00407"></a>00407       <span class="keywordflow">return</span> $this-&gt;_exec_vallist( <span class="stringliteral">&quot;glob&quot;</span>, $cwd, $pattern, $flags );
-<a name="l00408"></a>00408    }
-<a name="l00409"></a>00409 
-<a name="l00410"></a>00410 
-<a name="l00411"></a><a class="code" href="classremote__filesystem__c.html#a5e7e6d5882e21c2d8abe980ba6cabb30">00411</a>    function <a class="code" href="classremote__filesystem__c.html#a5e7e6d5882e21c2d8abe980ba6cabb30">stat</a>( $filespec )
-<a name="l00412"></a>00412    {
-<a name="l00413"></a>00413       <span class="keywordflow">return</span> $this-&gt;_exec_valarray( <span class="stringliteral">&quot;stat&quot;</span>, $filespec );
-<a name="l00414"></a>00414    }
-<a name="l00415"></a>00415 
-<a name="l00416"></a>00416 
-<a name="l00417"></a><a class="code" href="classremote__filesystem__c.html#aad6243b5e16621a9a65c6d803cbd1a74">00417</a>    function <a class="code" href="classremote__filesystem__c.html#aad6243b5e16621a9a65c6d803cbd1a74">lstat</a>( $filespec )
-<a name="l00418"></a>00418    {
-<a name="l00419"></a>00419       <span class="keywordflow">return</span> $this-&gt;_exec_valarray( <span class="stringliteral">&quot;lstat&quot;</span>, $filespec );
-<a name="l00420"></a>00420    }
-<a name="l00421"></a>00421 
-<a name="l00422"></a>00422 
-<a name="l00423"></a><a class="code" href="classremote__filesystem__c.html#a56d2717a034caa260190a5c738367e2a">00423</a>    function <a class="code" href="classremote__filesystem__c.html#a56d2717a034caa260190a5c738367e2a">copy</a>( $source, $dest )
-<a name="l00424"></a>00424    {
-<a name="l00425"></a>00425       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;copy&quot;</span>, $source, $dest );
-<a name="l00426"></a>00426    }
-<a name="l00427"></a>00427 
-<a name="l00428"></a>00428 
-<a name="l00429"></a><a class="code" href="classremote__filesystem__c.html#adfbe2052c4511877dc676b0361bf9782">00429</a>    function <a class="code" href="classremote__filesystem__c.html#adfbe2052c4511877dc676b0361bf9782">rename</a>( $source, $dest )
-<a name="l00430"></a>00430    {
-<a name="l00431"></a>00431       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;rename&quot;</span>, $source, $dest );
-<a name="l00432"></a>00432    }
-<a name="l00433"></a>00433 
-<a name="l00434"></a>00434 
-<a name="l00435"></a><a class="code" href="classremote__filesystem__c.html#a1493f9ebf9a58d43c864323b7ea7c36a">00435</a>    function <a class="code" href="classremote__filesystem__c.html#a1493f9ebf9a58d43c864323b7ea7c36a">link</a>( $target, $link )
-<a name="l00436"></a>00436    {
-<a name="l00437"></a>00437       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;link&quot;</span>, $target, $link );
-<a name="l00438"></a>00438    }
-<a name="l00439"></a>00439 
-<a name="l00440"></a>00440 
-<a name="l00441"></a><a class="code" href="classremote__filesystem__c.html#a7f0c8a067f88ab5f8f197ba3f8083e60">00441</a>    function <a class="code" href="classremote__filesystem__c.html#a7f0c8a067f88ab5f8f197ba3f8083e60">symlink</a>( $target, $link )
-<a name="l00442"></a>00442    {
-<a name="l00443"></a>00443       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;symlink&quot;</span>, $target, $link );
-<a name="l00444"></a>00444    }
-<a name="l00445"></a>00445 
+<a name="l00404"></a><a class="code" href="classremote__filesystem__c.html#a5a48e245889a4f01b20c3c4b489b22a5">00404</a>    function <a class="code" href="classremote__filesystem__c.html#a5a48e245889a4f01b20c3c4b489b22a5">chown</a>( $filename, $user )
+<a name="l00405"></a>00405    {
+<a name="l00406"></a>00406       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;chown&quot;</span>, $filename, $user );
+<a name="l00407"></a>00407    }
+<a name="l00408"></a>00408 
+<a name="l00409"></a><a class="code" href="classremote__filesystem__c.html#aca04731c7bebfde9bf5e2fa6a07cb631">00409</a>    function <a class="code" href="classremote__filesystem__c.html#aca04731c7bebfde9bf5e2fa6a07cb631">lchgrp</a>( $filename, $group )
+<a name="l00410"></a>00410    {
+<a name="l00411"></a>00411       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;lchgrp&quot;</span>, $filename, $group );
+<a name="l00412"></a>00412    }
+<a name="l00413"></a>00413 
+<a name="l00414"></a><a class="code" href="classremote__filesystem__c.html#a65f75dc6fde8706f08c22dbb6b9068dd">00414</a>    function <a class="code" href="classremote__filesystem__c.html#a65f75dc6fde8706f08c22dbb6b9068dd">lchown</a>( $filename, $user )
+<a name="l00415"></a>00415    {
+<a name="l00416"></a>00416       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;lchown&quot;</span>, $filename, $user );
+<a name="l00417"></a>00417    }
+<a name="l00418"></a>00418 
+<a name="l00419"></a>00419 
+<a name="l00420"></a><a class="code" href="classremote__filesystem__c.html#a690d0187eefea78613bb66008e730e64">00420</a>    function <a class="code" href="classremote__filesystem__c.html#a690d0187eefea78613bb66008e730e64">glob</a>( $cwd, $pattern, $flags )
+<a name="l00421"></a>00421    {
+<a name="l00422"></a>00422       <span class="keywordflow">return</span> $this-&gt;_exec_vallist( <span class="stringliteral">&quot;glob&quot;</span>, $cwd, $pattern, $flags );
+<a name="l00423"></a>00423    }
+<a name="l00424"></a>00424 
+<a name="l00425"></a>00425 
+<a name="l00426"></a><a class="code" href="classremote__filesystem__c.html#aa5c2e33d75889d6f9d936ae07110e994">00426</a>    function <a class="code" href="classremote__filesystem__c.html#aa5c2e33d75889d6f9d936ae07110e994">sysexec</a>( &amp;$output, $cmd )
+<a name="l00427"></a>00427    {
+<a name="l00428"></a>00428       $r = $this-&gt;_exec_vallist( <span class="stringliteral">&quot;sysexec&quot;</span>, $cmd );
+<a name="l00429"></a>00429 
+<a name="l00430"></a>00430       <span class="keywordflow">foreach</span>( $r as $keyval )
+<a name="l00431"></a>00431          <span class="keywordflow">if</span> ( ($p = strpos( $keyval, <span class="stringliteral">&quot;=&quot;</span> )) !== <span class="keyword">false</span> )
+<a name="l00432"></a>00432          {
+<a name="l00433"></a>00433             $k = urldecode(trim(substr( $keyval, 0, $p )));
+<a name="l00434"></a>00434             $v = urldecode(trim(substr( $keyval, $p+1 )));
+<a name="l00435"></a>00435             $i = (int)($v);
+<a name="l00436"></a>00436 
+<a name="l00437"></a>00437             <span class="keywordflow">if</span> ( $v == <span class="stringliteral">&quot;{$i}&quot;</span> )
+<a name="l00438"></a>00438                $output[$k] = $i;
+<a name="l00439"></a>00439             <span class="keywordflow">else</span> $output[$k] = $v;
+<a name="l00440"></a>00440          } 
+<a name="l00441"></a>00441            <span class="keywordflow">else</span> 
+<a name="l00442"></a>00442          {
+<a name="l00443"></a>00443             <a class="code" href="general-utils_8inc.html#a77dd67e2e529e733ba6618dee1c1f09c">capture_begin</a>();
+<a name="l00444"></a>00444             var_dump( $r );
+<a name="l00445"></a>00445             $z = <a class="code" href="general-utils_8inc.html#a67ba34c0b7537f53f68538230a6cb316">capture_end</a>();
 <a name="l00446"></a>00446 
-<a name="l00447"></a><a class="code" href="classremote__filesystem__c.html#a5358c87adb0853da054f14dee38434d6">00447</a>    function <a class="code" href="classremote__filesystem__c.html#a5358c87adb0853da054f14dee38434d6">mkdir</a>( $path )
-<a name="l00448"></a>00448    {
-<a name="l00449"></a>00449       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;mkdir&quot;</span>, $path );
-<a name="l00450"></a>00450    }
-<a name="l00451"></a>00451 
-<a name="l00452"></a>00452 
-<a name="l00453"></a><a class="code" href="classremote__filesystem__c.html#a5c2fb19d078f1905ecd5988d7add2c9b">00453</a>    function <a class="code" href="classremote__filesystem__c.html#a5c2fb19d078f1905ecd5988d7add2c9b">rmdir</a>( $path )
-<a name="l00454"></a>00454    {
-<a name="l00455"></a>00455       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;rmdir&quot;</span>, $path );
-<a name="l00456"></a>00456    }
-<a name="l00457"></a>00457 
-<a name="l00458"></a>00458 
-<a name="l00459"></a><a class="code" href="classremote__filesystem__c.html#a9c298be52fad6acfc81ea89afe08cfb8">00459</a>    function <a class="code" href="classremote__filesystem__c.html#a9c298be52fad6acfc81ea89afe08cfb8">unlink</a>( $filespec )
-<a name="l00460"></a>00460    {
-<a name="l00461"></a>00461       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;unlink&quot;</span>, $filespec );
-<a name="l00462"></a>00462    }
-<a name="l00463"></a>00463 
-<a name="l00464"></a>00464 
-<a name="l00465"></a><a class="code" href="classremote__filesystem__c.html#a6565850041cc9d07ed112d9b94fa0bea">00465</a>    function <a class="code" href="classremote__filesystem__c.html#a6565850041cc9d07ed112d9b94fa0bea">sha1_file</a>( $filespec )
-<a name="l00466"></a>00466    {
-<a name="l00467"></a>00467       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;sha1_file&quot;</span>, $filespec );
-<a name="l00468"></a>00468    }
-<a name="l00469"></a>00469 
-<a name="l00470"></a>00470 
-<a name="l00471"></a><a class="code" href="classremote__filesystem__c.html#af33e32d2375a9bf38d59c2ee2bd99c8c">00471</a>    function <a class="code" href="classremote__filesystem__c.html#af33e32d2375a9bf38d59c2ee2bd99c8c">can_hardlink</a>( $target, $source )
-<a name="l00472"></a>00472    {
-<a name="l00473"></a>00473       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;can_hardlink&quot;</span>, $target, $source );
-<a name="l00474"></a>00474    }
-<a name="l00475"></a>00475 
-<a name="l00476"></a>00476 
-<a name="l00477"></a><a class="code" href="classremote__filesystem__c.html#a107183e8918a40cd72f5cd2d14b19722">00477</a>    function <a class="code" href="classremote__filesystem__c.html#a107183e8918a40cd72f5cd2d14b19722">list_expired_items</a>( $path, $max_items )
-<a name="l00478"></a>00478    {
-<a name="l00479"></a>00479       <span class="keywordflow">if</span> ( ($r = $this-&gt;_exec_text( <span class="stringliteral">&quot;list_expired_items&quot;</span>, $path, $max_items )) == <span class="stringliteral">&quot;&quot;</span> )
-<a name="l00480"></a>00480          <span class="keywordflow">return</span> array();
-<a name="l00481"></a>00481 
-<a name="l00482"></a>00482       $work = explode( <span class="stringliteral">&quot;\n&quot;</span>, $r );
-<a name="l00483"></a>00483       $r = array();
-<a name="l00484"></a>00484       <span class="keywordflow">foreach</span>( $work as $t )
-<a name="l00485"></a>00485       {
-<a name="l00486"></a>00486          $i = explode( <span class="stringliteral">&quot;,&quot;</span>, $t );
-<a name="l00487"></a>00487          $r[trim(urldecode($i[0]))] = array( (<span class="keywordtype">int</span>)trim($i[1]), (<span class="keywordtype">int</span>)trim($i[2]) );
-<a name="l00488"></a>00488       }
-<a name="l00489"></a>00489 
-<a name="l00490"></a>00490       <span class="keywordflow">return</span> $r;
-<a name="l00491"></a>00491    }
-<a name="l00492"></a>00492 
-<a name="l00493"></a>00493 
-<a name="l00494"></a><a class="code" href="classremote__filesystem__c.html#a0df64c2ddd216b8288e7488ea7d3fe40">00494</a>    function <a class="code" href="classremote__filesystem__c.html#a0df64c2ddd216b8288e7488ea7d3fe40">remove_expired_items</a>( $path, $max_items, $debug = <span class="keyword">true</span> )
-<a name="l00495"></a>00495    {
-<a name="l00496"></a>00496       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;remove_expired_items&quot;</span>, $path, $max_items, $debug );
-<a name="l00497"></a>00497    }
-<a name="l00498"></a>00498 
-<a name="l00499"></a>00499 
-<a name="l00500"></a>00500 }
-<a name="l00501"></a>00501 
+<a name="l00447"></a>00447             $msg = array( <span class="stringliteral">&quot;localexec call &quot;</span>
+<a name="l00448"></a>00448                         . <span class="stringliteral">&quot;{$this-&gt;ssh_localexec_userid}@{$this-&gt;remote_server}:{$sysexec}&quot;</span>
+<a name="l00449"></a>00449                         . <span class="stringliteral">&quot;( ..., {$cmd} )&quot;</span>,
+<a name="l00450"></a>00450                           <span class="stringliteral">&quot;unable to scan return value: {$z}&quot;</span>,
+<a name="l00451"></a>00451                           <span class="stringliteral">&quot;NOTE: remember to check /var/log/secure on {$this-&gt;remote_server}&quot;</span>,
+<a name="l00452"></a>00452                         );
+<a name="l00453"></a>00453 
+<a name="l00454"></a>00454             $this-&gt;teelog-&gt;fatal( $msg );
+<a name="l00455"></a>00455          }
+<a name="l00456"></a>00456 
+<a name="l00457"></a>00457       var_dump( $output );
+<a name="l00458"></a>00458       exit();
+<a name="l00459"></a>00459    }
+<a name="l00460"></a>00460 
+<a name="l00461"></a>00461 
+<a name="l00462"></a><a class="code" href="classremote__filesystem__c.html#a5e7e6d5882e21c2d8abe980ba6cabb30">00462</a>    function <a class="code" href="classremote__filesystem__c.html#a5e7e6d5882e21c2d8abe980ba6cabb30">stat</a>( $filespec )
+<a name="l00463"></a>00463    {
+<a name="l00464"></a>00464       <span class="keywordflow">return</span> $this-&gt;_exec_valarray( <span class="stringliteral">&quot;stat&quot;</span>, $filespec );
+<a name="l00465"></a>00465    }
+<a name="l00466"></a>00466 
+<a name="l00467"></a>00467 
+<a name="l00468"></a><a class="code" href="classremote__filesystem__c.html#aad6243b5e16621a9a65c6d803cbd1a74">00468</a>    function <a class="code" href="classremote__filesystem__c.html#aad6243b5e16621a9a65c6d803cbd1a74">lstat</a>( $filespec )
+<a name="l00469"></a>00469    {
+<a name="l00470"></a>00470       <span class="keywordflow">return</span> $this-&gt;_exec_valarray( <span class="stringliteral">&quot;lstat&quot;</span>, $filespec );
+<a name="l00471"></a>00471    }
+<a name="l00472"></a>00472 
+<a name="l00473"></a>00473 
+<a name="l00474"></a><a class="code" href="classremote__filesystem__c.html#a56d2717a034caa260190a5c738367e2a">00474</a>    function <a class="code" href="classremote__filesystem__c.html#a56d2717a034caa260190a5c738367e2a">copy</a>( $source, $dest )
+<a name="l00475"></a>00475    {
+<a name="l00476"></a>00476       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;copy&quot;</span>, $source, $dest );
+<a name="l00477"></a>00477    }
+<a name="l00478"></a>00478 
+<a name="l00479"></a>00479 
+<a name="l00480"></a><a class="code" href="classremote__filesystem__c.html#adfbe2052c4511877dc676b0361bf9782">00480</a>    function <a class="code" href="classremote__filesystem__c.html#adfbe2052c4511877dc676b0361bf9782">rename</a>( $source, $dest )
+<a name="l00481"></a>00481    {
+<a name="l00482"></a>00482       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;rename&quot;</span>, $source, $dest );
+<a name="l00483"></a>00483    }
+<a name="l00484"></a>00484 
+<a name="l00485"></a>00485 
+<a name="l00486"></a><a class="code" href="classremote__filesystem__c.html#a1493f9ebf9a58d43c864323b7ea7c36a">00486</a>    function <a class="code" href="classremote__filesystem__c.html#a1493f9ebf9a58d43c864323b7ea7c36a">link</a>( $target, $link )
+<a name="l00487"></a>00487    {
+<a name="l00488"></a>00488       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;link&quot;</span>, $target, $link );
+<a name="l00489"></a>00489    }
+<a name="l00490"></a>00490 
+<a name="l00491"></a>00491 
+<a name="l00492"></a><a class="code" href="classremote__filesystem__c.html#a7f0c8a067f88ab5f8f197ba3f8083e60">00492</a>    function <a class="code" href="classremote__filesystem__c.html#a7f0c8a067f88ab5f8f197ba3f8083e60">symlink</a>( $target, $link )
+<a name="l00493"></a>00493    {
+<a name="l00494"></a>00494       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;symlink&quot;</span>, $target, $link );
+<a name="l00495"></a>00495    }
+<a name="l00496"></a>00496 
+<a name="l00497"></a>00497 
+<a name="l00498"></a><a class="code" href="classremote__filesystem__c.html#a5358c87adb0853da054f14dee38434d6">00498</a>    function <a class="code" href="classremote__filesystem__c.html#a5358c87adb0853da054f14dee38434d6">mkdir</a>( $path )
+<a name="l00499"></a>00499    {
+<a name="l00500"></a>00500       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;mkdir&quot;</span>, $path );
+<a name="l00501"></a>00501    }
 <a name="l00502"></a>00502 
 <a name="l00503"></a>00503 
+<a name="l00504"></a><a class="code" href="classremote__filesystem__c.html#a5c2fb19d078f1905ecd5988d7add2c9b">00504</a>    function <a class="code" href="classremote__filesystem__c.html#a5c2fb19d078f1905ecd5988d7add2c9b">rmdir</a>( $path )
+<a name="l00505"></a>00505    {
+<a name="l00506"></a>00506       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;rmdir&quot;</span>, $path );
+<a name="l00507"></a>00507    }
+<a name="l00508"></a>00508 
+<a name="l00509"></a>00509 
+<a name="l00510"></a><a class="code" href="classremote__filesystem__c.html#a9c298be52fad6acfc81ea89afe08cfb8">00510</a>    function <a class="code" href="classremote__filesystem__c.html#a9c298be52fad6acfc81ea89afe08cfb8">unlink</a>( $filespec )
+<a name="l00511"></a>00511    {
+<a name="l00512"></a>00512       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;unlink&quot;</span>, $filespec );
+<a name="l00513"></a>00513    }
+<a name="l00514"></a>00514 
+<a name="l00515"></a>00515 
+<a name="l00516"></a><a class="code" href="classremote__filesystem__c.html#a6565850041cc9d07ed112d9b94fa0bea">00516</a>    function <a class="code" href="classremote__filesystem__c.html#a6565850041cc9d07ed112d9b94fa0bea">sha1_file</a>( $filespec )
+<a name="l00517"></a>00517    {
+<a name="l00518"></a>00518       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;sha1_file&quot;</span>, $filespec );
+<a name="l00519"></a>00519    }
+<a name="l00520"></a>00520 
+<a name="l00521"></a>00521 
+<a name="l00522"></a><a class="code" href="classremote__filesystem__c.html#af33e32d2375a9bf38d59c2ee2bd99c8c">00522</a>    function <a class="code" href="classremote__filesystem__c.html#af33e32d2375a9bf38d59c2ee2bd99c8c">can_hardlink</a>( $target, $source )
+<a name="l00523"></a>00523    {
+<a name="l00524"></a>00524       <span class="keywordflow">return</span> $this-&gt;_exec_bool( <span class="stringliteral">&quot;can_hardlink&quot;</span>, $target, $source );
+<a name="l00525"></a>00525    }
+<a name="l00526"></a>00526 
+<a name="l00527"></a>00527 
+<a name="l00528"></a><a class="code" href="classremote__filesystem__c.html#a107183e8918a40cd72f5cd2d14b19722">00528</a>    function <a class="code" href="classremote__filesystem__c.html#a107183e8918a40cd72f5cd2d14b19722">list_expired_items</a>( $path, $max_items )
+<a name="l00529"></a>00529    {
+<a name="l00530"></a>00530       <span class="keywordflow">if</span> ( ($r = $this-&gt;_exec_text( <span class="stringliteral">&quot;list_expired_items&quot;</span>, $path, $max_items )) == <span class="stringliteral">&quot;&quot;</span> )
+<a name="l00531"></a>00531          <span class="keywordflow">return</span> array();
+<a name="l00532"></a>00532 
+<a name="l00533"></a>00533       $work = explode( <span class="stringliteral">&quot;\n&quot;</span>, $r );
+<a name="l00534"></a>00534       $r = array();
+<a name="l00535"></a>00535       <span class="keywordflow">foreach</span>( $work as $t )
+<a name="l00536"></a>00536       {
+<a name="l00537"></a>00537          $i = explode( <span class="stringliteral">&quot;,&quot;</span>, $t );
+<a name="l00538"></a>00538          $r[trim(urldecode($i[0]))] = array( (<span class="keywordtype">int</span>)trim($i[1]), (<span class="keywordtype">int</span>)trim($i[2]) );
+<a name="l00539"></a>00539       }
+<a name="l00540"></a>00540 
+<a name="l00541"></a>00541       <span class="keywordflow">return</span> $r;
+<a name="l00542"></a>00542    }
+<a name="l00543"></a>00543 
+<a name="l00544"></a>00544 
+<a name="l00545"></a><a class="code" href="classremote__filesystem__c.html#a0df64c2ddd216b8288e7488ea7d3fe40">00545</a>    function <a class="code" href="classremote__filesystem__c.html#a0df64c2ddd216b8288e7488ea7d3fe40">remove_expired_items</a>( $path, $max_items, $debug = <span class="keyword">true</span> )
+<a name="l00546"></a>00546    {
+<a name="l00547"></a>00547       <span class="keywordflow">return</span> $this-&gt;_exec_val( <span class="stringliteral">&quot;remove_expired_items&quot;</span>, $path, $max_items, $debug );
+<a name="l00548"></a>00548    }
+<a name="l00549"></a>00549 
+<a name="l00550"></a>00550 
+<a name="l00551"></a>00551 }
+<a name="l00552"></a>00552 
+<a name="l00553"></a>00553 
+<a name="l00554"></a>00554 
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="sys-remote-filesys_8inc.html">sys-remote-filesys.inc</a>      </li>
-      <li class="footer">Generated on Sun Jan 15 2012 15:11:24 for SysBackup by&#160;
+      <li class="footer">Generated on Thu Jan 19 2012 00:38:40 for SysBackup by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

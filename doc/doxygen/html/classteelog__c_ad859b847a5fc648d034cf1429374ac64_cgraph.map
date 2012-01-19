@@ -1,7 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" id="node3" href="$classteelog__c.html#aab64680d0a39449c7b28d78550694f0d" title="warning" alt="" coords="104,59,171,88"/>
-<area shape="rect" id="node5" href="$classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75" title="applog_c::log" alt="" coords="219,32,317,61"/>
-<area shape="rect" id="node11" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="tee" alt="" coords="248,85,288,115"/>
-<area shape="rect" id="node7" href="$classapplog__c.html#a3acf8f3fe3b1116c9bc376f0e2854254" title="applog_c::log_is_open" alt="" coords="367,5,516,35"/>
-<area shape="rect" id="node9" href="$classapplog__c.html#a5ab616f7683c2f3e63af6086ae3b70f9" title="applog_c::log_prefix" alt="" coords="372,59,511,88"/>
-</map>

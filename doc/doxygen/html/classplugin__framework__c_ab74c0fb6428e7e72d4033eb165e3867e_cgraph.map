@@ -4,7 +4,6 @@
 <area shape="rect" id="node7" href="$classplugin__framework__c.html#af9090086ab2ddab18780d7fa67c9d0c4" title="verbose" alt="" coords="272,112,339,141"/>
 <area shape="rect" id="node9" href="$classteelog__c.html#aab64680d0a39449c7b28d78550694f0d" title="teelog_c::warning" alt="" coords="244,165,367,195"/>
 <area shape="rect" id="node11" href="$classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75" title="applog_c::log" alt="" coords="419,139,517,168"/>
-<area shape="rect" id="node17" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="teelog_c::tee" alt="" coords="420,192,516,221"/>
-<area shape="rect" id="node13" href="$classapplog__c.html#a3acf8f3fe3b1116c9bc376f0e2854254" title="applog_c::log_is_open" alt="" coords="567,112,716,141"/>
-<area shape="rect" id="node15" href="$classapplog__c.html#a5ab616f7683c2f3e63af6086ae3b70f9" title="applog_c::log_prefix" alt="" coords="572,165,711,195"/>
+<area shape="rect" id="node15" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="teelog_c::tee" alt="" coords="420,192,516,221"/>
+<area shape="rect" id="node13" href="$classapplog__c.html#a5ab616f7683c2f3e63af6086ae3b70f9" title="applog_c::log_prefix" alt="" coords="565,139,704,168"/>
 </map>

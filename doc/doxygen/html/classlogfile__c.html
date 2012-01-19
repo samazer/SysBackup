@@ -95,6 +95,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 Public Member Functions</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogfile__c.html#af7f832478c7a8c05d531041407ba3680">__construct</a> ($fn=&quot;&quot;, $timeout=<a class="el" href="general-log_8inc.html#a46d0b6c01149dd70f124729353bc8d48">APPLOG_LOCK_MAXTIME</a>, $warning=15, $bufmin=<a class="el" href="general-log_8inc.html#abcdfba7e5eb49de83028554c95c45cf7">APPLOG_BUFFER_MINLINES</a>, $bufmax=<a class="el" href="general-log_8inc.html#a8e48ba9e4f67aa69b755c4771c512b59">APPLOG_BUFFER_MAXLINES</a>, $errmsg=<a class="el" href="general-log_8inc.html#a151da409b6dfe03c874dedcd76f68b2e">TEELOG_TXTFATAL</a>)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogfile__c.html#a57623ff5445a72905b0542213ac7f8b4">disabled</a> ($flg=-1)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogfile__c.html#af99ebe65e6b457bc44fc700c819de624">enabled</a> ($flg=-1)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogfile__c.html#ae5ed7e56c50cb4d8beef23694920c61f">name</a> ($fn=false)</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogfile__c.html#ab5a3ffebc15bcd93c8db76a58f7adf17">reset_fatal_error</a> ()</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogfile__c.html#a793d98ef7b7724d713be3c2e9f68c100">open</a> ($fn=false, $mode=&quot;a+&quot;)</td></tr>
@@ -111,7 +112,7 @@ Public Member Functions</h2></td></tr>
 <tr><td colspan="2"><h2><a name="pub-attribs"></a>
 Data Fields</h2></td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogfile__c.html#a005a55874b7501b0e4dc4fabb9d45b5d">$disabled_flag</a> = false</td></tr>
-<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogfile__c.html#a0429fbd6922c5557226bb0866bceda90">$logfile</a> = false</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogfile__c.html#a2857381c313173c12780f70b1bbf3c96">$logfile_name</a> = false</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogfile__c.html#af276b182b6e331891e1d7b49b3d73896">$logfile_warning</a> = &quot;&quot;</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogfile__c.html#acbb2a135ef0fe16d8b19b31817ec7f2f">$logfp</a> = -1</td></tr>
 <tr><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogfile__c.html#a3a7c05442091c540c9bed79b26d5dc9a">$locked_flag</a> = false</td></tr>
@@ -206,7 +207,7 @@ Data Fields</h2></td></tr>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00352">352</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
+<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00373">373</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -245,7 +246,7 @@ Here is the caller graph for this function:</div>
 <div class="memdoc">
 <p>append text to the log file </p>
 
-<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00372">372</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
+<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00393">393</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
 
 <p><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -272,7 +273,7 @@ Here is the call graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00194">194</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
+<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00215">215</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -304,6 +305,25 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
+<a class="anchor" id="af99ebe65e6b457bc44fc700c819de624"></a><!-- doxytag: member="logfile_c::enabled" ref="af99ebe65e6b457bc44fc700c819de624" args="($flg=&#45;1)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enabled </td>
+          <td>(</td>
+          <td class="paramtype">$&#160;</td>
+          <td class="paramname"><em>flg</em> = <code>-1</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00142">142</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a7751f77b5263bcf940ece6e824a05b38"></a><!-- doxytag: member="logfile_c::flush" ref="a7751f77b5263bcf940ece6e824a05b38" args="()" -->
 <div class="memitem">
 <div class="memproto">
@@ -318,7 +338,7 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00340">340</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
+<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00361">361</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -345,7 +365,7 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00223">223</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
+<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00244">244</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
 
 </div>
 </div>
@@ -363,7 +383,7 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00217">217</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
+<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00238">238</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
 
 </div>
 </div>
@@ -382,7 +402,7 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00230">230</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
+<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00251">251</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -410,7 +430,7 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00142">142</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
+<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00151">151</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
 
 </div>
 </div>
@@ -439,7 +459,7 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00169">169</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
+<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00176">176</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -468,7 +488,7 @@ Here is the caller graph for this function:</div>
 <p>Reset the oops_i_threw_an_exception flag.</p>
 <p>Most likely this will never be used - there is little that can be done in such cases as the filesystem is either full or corrupted. </p>
 
-<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00162">162</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
+<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00169">169</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
 
 </div>
 </div>
@@ -497,7 +517,7 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00286">286</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
+<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00307">307</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -524,7 +544,7 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00273">273</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
+<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00294">294</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -562,7 +582,7 @@ Here is the caller graph for this function:</div>
 </div>
 <div class="memdoc">
 
-<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00297">297</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
+<p>Definition at line <a class="el" href="general-log_8inc_source.html#l00318">318</a> of file <a class="el" href="general-log_8inc_source.html">general-log.inc</a>.</p>
 
 <p><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -696,12 +716,12 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a class="anchor" id="a0429fbd6922c5557226bb0866bceda90"></a><!-- doxytag: member="logfile_c::$logfile" ref="a0429fbd6922c5557226bb0866bceda90" args="" -->
+<a class="anchor" id="a2857381c313173c12780f70b1bbf3c96"></a><!-- doxytag: member="logfile_c::$logfile_name" ref="a2857381c313173c12780f70b1bbf3c96" args="" -->
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">$logfile = false</td>
+          <td class="memname">$logfile_name = false</td>
         </tr>
       </table>
 </div>
@@ -766,7 +786,7 @@ Here is the caller graph for this function:</div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="classlogfile__c.html">logfile_c</a>      </li>
-      <li class="footer">Generated on Sun Jan 15 2012 15:11:24 for SysBackup by&#160;
+      <li class="footer">Generated on Thu Jan 19 2012 00:38:41 for SysBackup by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

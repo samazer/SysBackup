@@ -4,10 +4,8 @@
 <area shape="rect" id="node11" href="$classsystem__backup__app__c.html#ab98b7b7c22f79e3029c2ef0aff57d4f2" title="system_backup_app_c::approve_job" alt="" coords="159,112,393,141"/>
 <area shape="rect" id="node13" href="$classplugin__framework__c.html#ab74c0fb6428e7e72d4033eb165e3867e" title="plugin_framework_c::commandline_args_callback" alt="" coords="121,165,431,195"/>
 <area shape="rect" id="node15" href="$classplugin__framework__c.html#a5517f5b644d22307dc22a51dfd113b42" title="plugin_framework_c::load_plugins" alt="" coords="167,219,385,248"/>
-<area shape="rect" id="node21" href="$classteelog__c.html#ad859b847a5fc648d034cf1429374ac64" title="teefn" alt="" coords="251,272,301,301"/>
 <area shape="rect" id="node5" href="$classbackupvfs__main__c.html#a16d29b017bd81585d3fa361bd7071df3" title="backupvfs_main_c::add_standard_internal_jobs" alt="" coords="481,5,777,35"/>
 <area shape="rect" id="node7" href="$classsystem__backup__app__c.html#adf31acb1b5029960ba976a48f60d3af7" title="system_backup_app_c::after_loading_jobs" alt="" coords="827,5,1096,35"/>
 <area shape="rect" id="node17" href="$classplugin__framework__c.html#a7d53d4d9eebfbc03444a76d29c6f1068" title="plugin_framework_c::app_init" alt="" coords="535,219,724,248"/>
 <area shape="rect" id="node19" href="$classplugin__framework__c.html#a51af30a60f9f02777c6396b8247e356f" title="plugin_framework_c::main" alt="" coords="875,219,1048,248"/>
-<area shape="rect" id="node23" href="$classsystem__backup__app__c.html#a00291c6ec6d9c4acd3a66717eb5d0458" title="system_backup_app_c::app_before_init" alt="" coords="504,272,755,301"/>
 </map>

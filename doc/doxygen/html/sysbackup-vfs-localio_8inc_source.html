@@ -242,7 +242,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00155"></a>00155          <span class="keywordflow">if</span> ( file_put_contents( $abs_ref, $msg ) === <span class="keyword">false</span> )
 <a name="l00156"></a>00156             $this-&gt;<a class="code" href="classplugin__appreference__c.html#a0824c910c5d7b7949a8d983ea0b34c1f">fatal</a>( <span class="stringliteral">&quot;unable to write error message file: {$rel_ref}&quot;</span> );
 <a name="l00157"></a>00157 
-<a name="l00158"></a>00158          <span class="keywordflow">if</span> ( chmod( $abs_ref, $this-&gt;sys_umaskfiles ) === <span class="keyword">false</span> )
+<a name="l00158"></a>00158          <span class="keywordflow">if</span> ( chmod( $abs_ref, $this-&gt;<a class="code" href="classbackupvfs__baseio__c.html#ae15557465d8607801e71be53d5821576">get_umaskfiles</a>() ) === <span class="keyword">false</span> )
 <a name="l00159"></a>00159             $this-&gt;<a class="code" href="classplugin__appreference__c.html#a0824c910c5d7b7949a8d983ea0b34c1f">fatal</a>( <span class="stringliteral">&quot;unable to change mode on file: {$rel_ref}&quot;</span> );
 <a name="l00160"></a>00160       }
 <a name="l00161"></a>00161 
@@ -257,7 +257,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="sysbackup-vfs-localio_8inc.html">sysbackup-vfs-localio.inc</a>      </li>
-      <li class="footer">Generated on Sun Jan 15 2012 15:11:23 for SysBackup by&#160;
+      <li class="footer">Generated on Thu Jan 19 2012 00:38:40 for SysBackup by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

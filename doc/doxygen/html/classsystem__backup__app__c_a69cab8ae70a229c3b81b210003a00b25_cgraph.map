@@ -2,9 +2,8 @@
 <area shape="rect" id="node3" href="$classbackupvfs__main__c.html#ab09a722f53f0271dda6c7643b04aeb86" title="backupvfs_main_c::_notquiet_report_header" alt="" coords="188,32,465,61"/>
 <area shape="rect" id="node9" href="$classplugin__framework__c.html#a0db70b0dc4c8e71d307367a42a9ee9df" title="plugin_framework_c::appmode_exec" alt="" coords="209,85,444,115"/>
 <area shape="rect" id="node11" href="$classbackupvfs__main__c.html#a32cab912e6c1954794c5438c636a079d" title="backupvfs_main_c::vfs_start" alt="" coords="232,139,421,168"/>
-<area shape="rect" id="node17" href="$classbackupvfs__main__c.html#a24f5b92135362726d87d2862cde5f82a" title="backupvfs_main_c::warn_disk_space" alt="" coords="207,192,447,221"/>
+<area shape="rect" id="node15" href="$classbackupvfs__main__c.html#a24f5b92135362726d87d2862cde5f82a" title="backupvfs_main_c::warn_disk_space" alt="" coords="207,192,447,221"/>
 <area shape="rect" id="node5" href="$classteelog__c.html#afc7d95abfdeda09f4e9a17749e9b6039" title="teelog_c::quiet" alt="" coords="600,5,707,35"/>
 <area shape="rect" id="node7" href="$classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4" title="teelog_c::tee" alt="" coords="605,59,701,88"/>
-<area shape="rect" id="node13" href="$classplugin__framework__c.html#a06d1f51c6ebd2a499fa41734212f8353" title="plugin_framework_c::appmode_sanitycheck" alt="" coords="516,112,791,141"/>
-<area shape="rect" id="node15" href="$classbackupvfs__main__c.html#ab058a70778b93dd5bb3a1e417b845ba6" title="backupvfs_main_c::get_backupset_name" alt="" coords="523,165,784,195"/>
+<area shape="rect" id="node13" href="$classplugin__framework__c.html#a06d1f51c6ebd2a499fa41734212f8353" title="plugin_framework_c::appmode_sanitycheck" alt="" coords="516,139,791,168"/>
 </map>

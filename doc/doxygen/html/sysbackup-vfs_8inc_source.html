@@ -617,428 +617,426 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <a name="l00530"></a>00530 
 <a name="l00531"></a><a class="code" href="classbackupvfs__main__c.html#ab067ae4ee7259edf9c195d15dba85ba3">00531</a>    function <a class="code" href="classbackupvfs__main__c.html#ab067ae4ee7259edf9c195d15dba85ba3">vfs_init</a>( $backupset_name  = <span class="keyword">false</span> )
 <a name="l00532"></a>00532    {
-<a name="l00533"></a>00533       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classplugin__framework__c.html#a06d1f51c6ebd2a499fa41734212f8353">appmode_sanitycheck</a>() )
-<a name="l00534"></a>00534          <span class="keywordflow">return</span>; <span class="comment">// no need to init the filesystems during a sanitycheck</span>
-<a name="l00535"></a>00535 
-<a name="l00536"></a>00536       <span class="keywordflow">if</span> ( $backupset_name === <span class="keyword">false</span> )
-<a name="l00537"></a>00537       {
-<a name="l00538"></a>00538          $backupset_name = str_replace( <span class="stringliteral">&quot;%HOST%&quot;</span>, 
-<a name="l00539"></a>00539                                         $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a38980f2b9e4c06a156136d9e0de6b212">get_hostname</a>(),
-<a name="l00540"></a>00540                                         date($this-&gt;backupset_namefmt) );
-<a name="l00541"></a>00541 
-<a name="l00542"></a>00542          $backupset_name = str_replace( <span class="stringliteral">&quot;%HOSTID%&quot;</span>, 
-<a name="l00543"></a>00543                                         $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a9d90928eb00a6935fa1767f6404a0a7c">get_hostid</a>(),
-<a name="l00544"></a>00544                                         $backupset_name );
-<a name="l00545"></a>00545       }
-<a name="l00546"></a>00546 
-<a name="l00547"></a>00547       $this-&gt;backupset_name = $backupset_name;
-<a name="l00548"></a>00548 
-<a name="l00549"></a>00549       $this-&gt;sys_local-&gt;vfs_init($backupset_name);
-<a name="l00550"></a>00550       $this-&gt;sys_local_weekly-&gt;vfs_init($backupset_name);
-<a name="l00551"></a>00551       $this-&gt;sys_local_monthly-&gt;vfs_init($backupset_name);
-<a name="l00552"></a>00552    }
-<a name="l00553"></a>00553 
-<a name="l00554"></a>00554 
-<a name="l00555"></a><a class="code" href="classbackupvfs__main__c.html#acf53494481c2ad91a88c94d5f40772ef">00555</a>    function <a class="code" href="classbackupvfs__main__c.html#acf53494481c2ad91a88c94d5f40772ef">log_stats</a>( $type )
-<a name="l00556"></a>00556    {
-<a name="l00557"></a>00557       $tot = 0;
-<a name="l00558"></a>00558       $counter = <span class="stringliteral">&quot;{$type}_tarball_count&quot;</span>;
-<a name="l00559"></a>00559       $stats = array();
-<a name="l00560"></a>00560       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
-<a name="l00561"></a>00561          $stats[$id] = $this-&gt;sys_remote[$id]-&gt;get_stats();
-<a name="l00562"></a>00562 
-<a name="l00563"></a>00563       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
-<a name="l00564"></a>00564          $tot += $stats[$id][$counter];
-<a name="l00565"></a>00565 
-<a name="l00566"></a>00566       $this-&gt;<a class="code" href="classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75">log</a>( <span class="stringliteral">&quot;{$type}: &quot;</span> 
-<a name="l00567"></a>00567                 . $this-&gt;sys_local-&gt;plugin_shortref()
-<a name="l00568"></a>00568                 . <span class="stringliteral">&quot; &quot;</span> 
-<a name="l00569"></a>00569                 . $this-&gt;sys_local-&gt;stat_str( $type )
-<a name="l00570"></a>00570                 );
-<a name="l00571"></a>00571 
-<a name="l00572"></a>00572       <span class="keywordflow">if</span> ( !$tot )
-<a name="l00573"></a>00573          <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00574"></a>00574 
-<a name="l00575"></a>00575       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
-<a name="l00576"></a>00576          $this-&gt;<a class="code" href="classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75">log</a>( <span class="stringliteral">&quot;{$type}: &quot;</span>
-<a name="l00577"></a>00577                    . $this-&gt;sys_remote[$id]-&gt;plugin_shortref()
-<a name="l00578"></a>00578                    . <span class="stringliteral">&quot; &quot;</span> 
-<a name="l00579"></a>00579                    . $this-&gt;sys_remote[$id]-&gt;stat_str( $type )
-<a name="l00580"></a>00580                    );
-<a name="l00581"></a>00581 
-<a name="l00582"></a>00582       <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00583"></a>00583    }
-<a name="l00584"></a>00584 
-<a name="l00585"></a>00585 
-<a name="l00586"></a><a class="code" href="classbackupvfs__main__c.html#aaab7cc7dc706b0c47a22c643afe529a4">00586</a>    function <a class="code" href="classbackupvfs__main__c.html#aaab7cc7dc706b0c47a22c643afe529a4">show_stats</a>( $type )
-<a name="l00587"></a>00587    {
-<a name="l00588"></a>00588       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classteelog__c.html#afc7d95abfdeda09f4e9a17749e9b6039">quiet</a>() )
-<a name="l00589"></a>00589          <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00533"></a>00533       <span class="keywordflow">if</span> ( $backupset_name === <span class="keyword">false</span> )
+<a name="l00534"></a>00534       {
+<a name="l00535"></a>00535          $backupset_name = str_replace( <span class="stringliteral">&quot;%HOST%&quot;</span>, 
+<a name="l00536"></a>00536                                         $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a38980f2b9e4c06a156136d9e0de6b212">get_hostname</a>(),
+<a name="l00537"></a>00537                                         date($this-&gt;backupset_namefmt) );
+<a name="l00538"></a>00538 
+<a name="l00539"></a>00539          $backupset_name = str_replace( <span class="stringliteral">&quot;%HOSTID%&quot;</span>, 
+<a name="l00540"></a>00540                                         $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a9d90928eb00a6935fa1767f6404a0a7c">get_hostid</a>(),
+<a name="l00541"></a>00541                                         $backupset_name );
+<a name="l00542"></a>00542       }
+<a name="l00543"></a>00543 
+<a name="l00544"></a>00544       $this-&gt;backupset_name = $backupset_name;
+<a name="l00545"></a>00545 
+<a name="l00546"></a>00546       $this-&gt;sys_local-&gt;vfs_init($backupset_name);
+<a name="l00547"></a>00547       $this-&gt;sys_local_weekly-&gt;vfs_init($backupset_name);
+<a name="l00548"></a>00548       $this-&gt;sys_local_monthly-&gt;vfs_init($backupset_name);
+<a name="l00549"></a>00549 
+<a name="l00550"></a>00550       <span class="keywordflow">if</span> ( count( $this-&gt;sys_remotes ) )
+<a name="l00551"></a>00551          <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
+<a name="l00552"></a>00552          {
+<a name="l00553"></a>00553             $this-&gt;sys_remote[$id]-&gt;vfs_init( $backupset_name );
+<a name="l00554"></a>00554             $this-&gt;sys_remote_weekly[$id]-&gt;vfs_init( $backupset_name );
+<a name="l00555"></a>00555             $this-&gt;sys_remote_monthly[$id]-&gt;vfs_init( $backupset_name );
+<a name="l00556"></a>00556          }
+<a name="l00557"></a>00557    }
+<a name="l00558"></a>00558 
+<a name="l00559"></a>00559 
+<a name="l00560"></a><a class="code" href="classbackupvfs__main__c.html#acf53494481c2ad91a88c94d5f40772ef">00560</a>    function <a class="code" href="classbackupvfs__main__c.html#acf53494481c2ad91a88c94d5f40772ef">log_stats</a>( $type )
+<a name="l00561"></a>00561    {
+<a name="l00562"></a>00562       $tot = 0;
+<a name="l00563"></a>00563       $counter = <span class="stringliteral">&quot;{$type}_tarball_count&quot;</span>;
+<a name="l00564"></a>00564       $stats = array();
+<a name="l00565"></a>00565       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
+<a name="l00566"></a>00566          $stats[$id] = $this-&gt;sys_remote[$id]-&gt;get_stats();
+<a name="l00567"></a>00567 
+<a name="l00568"></a>00568       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
+<a name="l00569"></a>00569          $tot += $stats[$id][$counter];
+<a name="l00570"></a>00570 
+<a name="l00571"></a>00571       $this-&gt;<a class="code" href="classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75">log</a>( <span class="stringliteral">&quot;{$type}: &quot;</span> 
+<a name="l00572"></a>00572                 . $this-&gt;sys_local-&gt;plugin_shortref()
+<a name="l00573"></a>00573                 . <span class="stringliteral">&quot; &quot;</span> 
+<a name="l00574"></a>00574                 . $this-&gt;sys_local-&gt;stat_str( $type )
+<a name="l00575"></a>00575                 );
+<a name="l00576"></a>00576 
+<a name="l00577"></a>00577       <span class="keywordflow">if</span> ( !$tot )
+<a name="l00578"></a>00578          <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00579"></a>00579 
+<a name="l00580"></a>00580       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
+<a name="l00581"></a>00581          $this-&gt;<a class="code" href="classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75">log</a>( <span class="stringliteral">&quot;{$type}: &quot;</span>
+<a name="l00582"></a>00582                    . $this-&gt;sys_remote[$id]-&gt;plugin_shortref()
+<a name="l00583"></a>00583                    . <span class="stringliteral">&quot; &quot;</span> 
+<a name="l00584"></a>00584                    . $this-&gt;sys_remote[$id]-&gt;stat_str( $type )
+<a name="l00585"></a>00585                    );
+<a name="l00586"></a>00586 
+<a name="l00587"></a>00587       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00588"></a>00588    }
+<a name="l00589"></a>00589 
 <a name="l00590"></a>00590 
-<a name="l00591"></a>00591       $width = 0;
-<a name="l00592"></a>00592       $labels = array();
-<a name="l00593"></a>00593 
-<a name="l00594"></a>00594       $index = 0;
-<a name="l00595"></a>00595       <span class="keywordflow">if</span> ( ($w = strlen($labels[$index++] = $this-&gt;sys_local-&gt;plugin_shortref())) &gt; $width ) 
-<a name="l00596"></a>00596          $width = $w;
-<a name="l00597"></a>00597 
-<a name="l00598"></a>00598       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
-<a name="l00599"></a>00599          <span class="keywordflow">if</span> ( ($w = strlen($labels[$index++] = $this-&gt;sys_remote[$id]-&gt;plugin_shortref())) &gt; $width )
-<a name="l00600"></a>00600             $width = $w;
-<a name="l00601"></a>00601 
-<a name="l00602"></a>00602       $index = 0;
-<a name="l00603"></a>00603       $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;  -&quot;</span>
-<a name="l00604"></a>00604                 . str_pad( $labels[$index++], $width, <span class="stringliteral">&quot;-&quot;</span>, STR_PAD_LEFT ) 
-<a name="l00605"></a>00605                 . <span class="stringliteral">&quot;: &quot;</span> 
-<a name="l00606"></a>00606                 . $this-&gt;sys_local-&gt;stat_str( $type ) );
-<a name="l00607"></a>00607 
-<a name="l00608"></a>00608       $stats = array();
-<a name="l00609"></a>00609       $tot = 0;
-<a name="l00610"></a>00610       $counter = <span class="stringliteral">&quot;{$type}_tarball_count&quot;</span>;
-<a name="l00611"></a>00611       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
-<a name="l00612"></a>00612          $stats[$id] = $this-&gt;sys_remote[$id]-&gt;get_stats();
-<a name="l00613"></a>00613 
-<a name="l00614"></a>00614       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
-<a name="l00615"></a>00615          $tot += $stats[$id][$counter];
-<a name="l00616"></a>00616 
-<a name="l00617"></a>00617       <span class="keywordflow">if</span> ( !$tot )
-<a name="l00618"></a>00618          <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00619"></a>00619 
-<a name="l00620"></a>00620       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
-<a name="l00621"></a>00621          $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;  -&quot;</span>
-<a name="l00622"></a>00622                    . str_pad( $labels[$index++], $width, <span class="stringliteral">&quot;-&quot;</span>, STR_PAD_LEFT ) 
-<a name="l00623"></a>00623                    . <span class="stringliteral">&quot;: &quot;</span> 
-<a name="l00624"></a>00624                    . $this-&gt;sys_remote[$id]-&gt;stat_str( $type ) );
-<a name="l00625"></a>00625 
-<a name="l00626"></a>00626       <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00627"></a>00627    }
-<a name="l00628"></a>00628 
-<a name="l00629"></a>00629 
-<a name="l00630"></a><a class="code" href="classbackupvfs__main__c.html#a812adbc765506dbbde552028680a5e07">00630</a>    function <a class="code" href="classbackupvfs__main__c.html#a812adbc765506dbbde552028680a5e07">summary_stats</a>()
-<a name="l00631"></a>00631    {
-<a name="l00632"></a>00632       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classteelog__c.html#afc7d95abfdeda09f4e9a17749e9b6039">quiet</a>() )
-<a name="l00633"></a>00633          <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00591"></a><a class="code" href="classbackupvfs__main__c.html#aaab7cc7dc706b0c47a22c643afe529a4">00591</a>    function <a class="code" href="classbackupvfs__main__c.html#aaab7cc7dc706b0c47a22c643afe529a4">show_stats</a>( $type )
+<a name="l00592"></a>00592    {
+<a name="l00593"></a>00593       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classteelog__c.html#afc7d95abfdeda09f4e9a17749e9b6039">quiet</a>() )
+<a name="l00594"></a>00594          <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00595"></a>00595 
+<a name="l00596"></a>00596       $width = 0;
+<a name="l00597"></a>00597       $labels = array();
+<a name="l00598"></a>00598 
+<a name="l00599"></a>00599       $index = 0;
+<a name="l00600"></a>00600       <span class="keywordflow">if</span> ( ($w = strlen($labels[$index++] = $this-&gt;sys_local-&gt;plugin_shortref())) &gt; $width ) 
+<a name="l00601"></a>00601          $width = $w;
+<a name="l00602"></a>00602 
+<a name="l00603"></a>00603       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
+<a name="l00604"></a>00604          <span class="keywordflow">if</span> ( ($w = strlen($labels[$index++] = $this-&gt;sys_remote[$id]-&gt;plugin_shortref())) &gt; $width )
+<a name="l00605"></a>00605             $width = $w;
+<a name="l00606"></a>00606 
+<a name="l00607"></a>00607       $index = 0;
+<a name="l00608"></a>00608       $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;  -&quot;</span>
+<a name="l00609"></a>00609                 . str_pad( $labels[$index++], $width, <span class="stringliteral">&quot;-&quot;</span>, STR_PAD_LEFT ) 
+<a name="l00610"></a>00610                 . <span class="stringliteral">&quot;: &quot;</span> 
+<a name="l00611"></a>00611                 . $this-&gt;sys_local-&gt;stat_str( $type ) );
+<a name="l00612"></a>00612 
+<a name="l00613"></a>00613       $stats = array();
+<a name="l00614"></a>00614       $tot = 0;
+<a name="l00615"></a>00615       $counter = <span class="stringliteral">&quot;{$type}_tarball_count&quot;</span>;
+<a name="l00616"></a>00616       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
+<a name="l00617"></a>00617          $stats[$id] = $this-&gt;sys_remote[$id]-&gt;get_stats();
+<a name="l00618"></a>00618 
+<a name="l00619"></a>00619       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
+<a name="l00620"></a>00620          $tot += $stats[$id][$counter];
+<a name="l00621"></a>00621 
+<a name="l00622"></a>00622       <span class="keywordflow">if</span> ( !$tot )
+<a name="l00623"></a>00623          <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00624"></a>00624 
+<a name="l00625"></a>00625       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
+<a name="l00626"></a>00626          $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;  -&quot;</span>
+<a name="l00627"></a>00627                    . str_pad( $labels[$index++], $width, <span class="stringliteral">&quot;-&quot;</span>, STR_PAD_LEFT ) 
+<a name="l00628"></a>00628                    . <span class="stringliteral">&quot;: &quot;</span> 
+<a name="l00629"></a>00629                    . $this-&gt;sys_remote[$id]-&gt;stat_str( $type ) );
+<a name="l00630"></a>00630 
+<a name="l00631"></a>00631       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00632"></a>00632    }
+<a name="l00633"></a>00633 
 <a name="l00634"></a>00634 
-<a name="l00635"></a>00635       $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;&quot;</span> );
-<a name="l00636"></a>00636       $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;Summary Stats&quot;</span> );
-<a name="l00637"></a>00637       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#aaab7cc7dc706b0c47a22c643afe529a4">show_stats</a>( <span class="stringliteral">&quot;current&quot;</span> );
-<a name="l00638"></a>00638       $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;&quot;</span> );
+<a name="l00635"></a><a class="code" href="classbackupvfs__main__c.html#a812adbc765506dbbde552028680a5e07">00635</a>    function <a class="code" href="classbackupvfs__main__c.html#a812adbc765506dbbde552028680a5e07">summary_stats</a>()
+<a name="l00636"></a>00636    {
+<a name="l00637"></a>00637       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classteelog__c.html#afc7d95abfdeda09f4e9a17749e9b6039">quiet</a>() )
+<a name="l00638"></a>00638          <span class="keywordflow">return</span> <span class="keyword">false</span>;
 <a name="l00639"></a>00639 
-<a name="l00640"></a>00640       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#acf53494481c2ad91a88c94d5f40772ef">log_stats</a>( <span class="stringliteral">&quot;current&quot;</span> );
-<a name="l00641"></a>00641 
-<a name="l00642"></a>00642       <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00643"></a>00643    }
+<a name="l00640"></a>00640       $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;&quot;</span> );
+<a name="l00641"></a>00641       $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;Summary Stats&quot;</span> );
+<a name="l00642"></a>00642       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#aaab7cc7dc706b0c47a22c643afe529a4">show_stats</a>( <span class="stringliteral">&quot;current&quot;</span> );
+<a name="l00643"></a>00643       $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;&quot;</span> );
 <a name="l00644"></a>00644 
-<a name="l00645"></a>00645 
-<a name="l00646"></a><a class="code" href="classbackupvfs__main__c.html#a70f9f93b30c404c76ac66e34612d0cc6">00646</a>    function <a class="code" href="classbackupvfs__main__c.html#a70f9f93b30c404c76ac66e34612d0cc6">job_reset</a>()
-<a name="l00647"></a>00647    {
-<a name="l00648"></a>00648       $this-&gt;sys_local-&gt;job_reset();
-<a name="l00649"></a>00649       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
-<a name="l00650"></a>00650          $this-&gt;sys_remote[$id]-&gt;job_reset();
-<a name="l00651"></a>00651    }
-<a name="l00652"></a>00652 
-<a name="l00653"></a>00653 
-<a name="l00654"></a><a class="code" href="classbackupvfs__main__c.html#aa2d6a625bdbc117968099a549a0547cc">00654</a>    function <a class="code" href="classbackupvfs__main__c.html#aa2d6a625bdbc117968099a549a0547cc">step_reset</a>()
-<a name="l00655"></a>00655    {
-<a name="l00656"></a>00656       $this-&gt;sys_local-&gt;step_reset();
-<a name="l00657"></a>00657       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
-<a name="l00658"></a>00658          $this-&gt;sys_remote[$id]-&gt;step_reset();
-<a name="l00659"></a>00659    }
-<a name="l00660"></a>00660 
-<a name="l00661"></a>00661 
-<a name="l00662"></a>00662    <span class="comment">//TODO: great idea but it can&#39;t work - remove this!!</span>
-<a name="l00663"></a><a class="code" href="classbackupvfs__main__c.html#a28608dced5aadea601e8a29bdc77cf23">00663</a>    function <a class="code" href="classbackupvfs__main__c.html#a28608dced5aadea601e8a29bdc77cf23">vfs_displayref</a>( $ref )
-<a name="l00664"></a>00664    {
-<a name="l00665"></a>00665       $ref = $this-&gt;sys_local-&gt;vfs_displayref( $ref );
+<a name="l00645"></a>00645       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#acf53494481c2ad91a88c94d5f40772ef">log_stats</a>( <span class="stringliteral">&quot;current&quot;</span> );
+<a name="l00646"></a>00646 
+<a name="l00647"></a>00647       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00648"></a>00648    }
+<a name="l00649"></a>00649 
+<a name="l00650"></a>00650 
+<a name="l00651"></a><a class="code" href="classbackupvfs__main__c.html#a70f9f93b30c404c76ac66e34612d0cc6">00651</a>    function <a class="code" href="classbackupvfs__main__c.html#a70f9f93b30c404c76ac66e34612d0cc6">job_reset</a>()
+<a name="l00652"></a>00652    {
+<a name="l00653"></a>00653       $this-&gt;sys_local-&gt;job_reset();
+<a name="l00654"></a>00654       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
+<a name="l00655"></a>00655          $this-&gt;sys_remote[$id]-&gt;job_reset();
+<a name="l00656"></a>00656    }
+<a name="l00657"></a>00657 
+<a name="l00658"></a>00658 
+<a name="l00659"></a><a class="code" href="classbackupvfs__main__c.html#aa2d6a625bdbc117968099a549a0547cc">00659</a>    function <a class="code" href="classbackupvfs__main__c.html#aa2d6a625bdbc117968099a549a0547cc">step_reset</a>()
+<a name="l00660"></a>00660    {
+<a name="l00661"></a>00661       $this-&gt;sys_local-&gt;step_reset();
+<a name="l00662"></a>00662       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
+<a name="l00663"></a>00663          $this-&gt;sys_remote[$id]-&gt;step_reset();
+<a name="l00664"></a>00664    }
+<a name="l00665"></a>00665 
 <a name="l00666"></a>00666 
-<a name="l00667"></a>00667       <span class="keywordflow">if</span> ( $this-&gt;sys_local_weekly-&gt;plugin_enabled )
-<a name="l00668"></a>00668          $ref = $this-&gt;sys_local_weekly-&gt;vfs_displayref( $ref );
-<a name="l00669"></a>00669 
-<a name="l00670"></a>00670       <span class="keywordflow">if</span> ( $this-&gt;sys_local_monthly-&gt;plugin_enabled )
-<a name="l00671"></a>00671          $ref = $this-&gt;sys_local_monthly-&gt;vfs_displayref( $ref );
-<a name="l00672"></a>00672 
-<a name="l00673"></a>00673       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
-<a name="l00674"></a>00674       {
-<a name="l00675"></a>00675          $ref = $this-&gt;sys_remote[$id]-&gt;vfs_displayref( $ref );
-<a name="l00676"></a>00676 
-<a name="l00677"></a>00677          <span class="keywordflow">if</span> ( $this-&gt;sys_remote_weekly[$id]-&gt;plugin_enabled )
-<a name="l00678"></a>00678             $ref = $this-&gt;sys_remote_weekly[$id]-&gt;vfs_displayref( $ref );
-<a name="l00679"></a>00679 
-<a name="l00680"></a>00680          <span class="keywordflow">if</span> ( $this-&gt;sys_remote_monthly[$id]-&gt;plugin_enabled )
-<a name="l00681"></a>00681             $ref = $this-&gt;sys_remote_monthly[$id]-&gt;vfs_displayref( $ref );
-<a name="l00682"></a>00682       }
-<a name="l00683"></a>00683 
-<a name="l00684"></a>00684       <span class="keywordflow">return</span> $ref;
-<a name="l00685"></a>00685    }
-<a name="l00686"></a>00686 
-<a name="l00687"></a>00687 
-<a name="l00688"></a><a class="code" href="classbackupvfs__main__c.html#a32cab912e6c1954794c5438c636a079d">00688</a>    function <a class="code" href="classbackupvfs__main__c.html#a32cab912e6c1954794c5438c636a079d">vfs_start</a>()
-<a name="l00689"></a>00689    {
-<a name="l00690"></a>00690       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classplugin__framework__c.html#a06d1f51c6ebd2a499fa41734212f8353">appmode_sanitycheck</a>() )
-<a name="l00691"></a>00691          <span class="keywordflow">return</span>; <span class="comment">// no need to init the filesystems during a sanitycheck</span>
+<a name="l00667"></a>00667    <span class="comment">//TODO: great idea but it can&#39;t work - remove this!!</span>
+<a name="l00668"></a><a class="code" href="classbackupvfs__main__c.html#a28608dced5aadea601e8a29bdc77cf23">00668</a>    function <a class="code" href="classbackupvfs__main__c.html#a28608dced5aadea601e8a29bdc77cf23">vfs_displayref</a>( $ref )
+<a name="l00669"></a>00669    {
+<a name="l00670"></a>00670       $ref = $this-&gt;sys_local-&gt;vfs_displayref( $ref );
+<a name="l00671"></a>00671 
+<a name="l00672"></a>00672       <span class="keywordflow">if</span> ( $this-&gt;sys_local_weekly-&gt;plugin_enabled )
+<a name="l00673"></a>00673          $ref = $this-&gt;sys_local_weekly-&gt;vfs_displayref( $ref );
+<a name="l00674"></a>00674 
+<a name="l00675"></a>00675       <span class="keywordflow">if</span> ( $this-&gt;sys_local_monthly-&gt;plugin_enabled )
+<a name="l00676"></a>00676          $ref = $this-&gt;sys_local_monthly-&gt;vfs_displayref( $ref );
+<a name="l00677"></a>00677 
+<a name="l00678"></a>00678       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
+<a name="l00679"></a>00679       {
+<a name="l00680"></a>00680          $ref = $this-&gt;sys_remote[$id]-&gt;vfs_displayref( $ref );
+<a name="l00681"></a>00681 
+<a name="l00682"></a>00682          <span class="keywordflow">if</span> ( $this-&gt;sys_remote_weekly[$id]-&gt;plugin_enabled )
+<a name="l00683"></a>00683             $ref = $this-&gt;sys_remote_weekly[$id]-&gt;vfs_displayref( $ref );
+<a name="l00684"></a>00684 
+<a name="l00685"></a>00685          <span class="keywordflow">if</span> ( $this-&gt;sys_remote_monthly[$id]-&gt;plugin_enabled )
+<a name="l00686"></a>00686             $ref = $this-&gt;sys_remote_monthly[$id]-&gt;vfs_displayref( $ref );
+<a name="l00687"></a>00687       }
+<a name="l00688"></a>00688 
+<a name="l00689"></a>00689       <span class="keywordflow">return</span> $ref;
+<a name="l00690"></a>00690    }
+<a name="l00691"></a>00691 
 <a name="l00692"></a>00692 
-<a name="l00693"></a>00693       $this-&gt;sys_local-&gt;vfs_start();
-<a name="l00694"></a>00694 
-<a name="l00695"></a>00695       <span class="keywordflow">if</span> ( $this-&gt;sys_local_weekly-&gt;plugin_enabled )
-<a name="l00696"></a>00696          $this-&gt;sys_local_weekly-&gt;vfs_start();
+<a name="l00693"></a><a class="code" href="classbackupvfs__main__c.html#a32cab912e6c1954794c5438c636a079d">00693</a>    function <a class="code" href="classbackupvfs__main__c.html#a32cab912e6c1954794c5438c636a079d">vfs_start</a>()
+<a name="l00694"></a>00694    {
+<a name="l00695"></a>00695       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classplugin__framework__c.html#a06d1f51c6ebd2a499fa41734212f8353">appmode_sanitycheck</a>() )
+<a name="l00696"></a>00696          <span class="keywordflow">return</span>; <span class="comment">// no need to init the filesystems during a sanitycheck</span>
 <a name="l00697"></a>00697 
-<a name="l00698"></a>00698       <span class="keywordflow">if</span> ( $this-&gt;sys_local_monthly-&gt;plugin_enabled )
-<a name="l00699"></a>00699          $this-&gt;sys_local_monthly-&gt;vfs_start();
-<a name="l00700"></a>00700 
-<a name="l00701"></a>00701       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
-<a name="l00702"></a>00702       {
-<a name="l00703"></a>00703          $this-&gt;sys_remote[$id]-&gt;vfs_init( $this-&gt;<a class="code" href="classbackupvfs__main__c.html#ab058a70778b93dd5bb3a1e417b845ba6">get_backupset_name</a>() );
-<a name="l00704"></a>00704          $this-&gt;sys_remote_weekly[$id]-&gt;vfs_init( $this-&gt;<a class="code" href="classbackupvfs__main__c.html#ab058a70778b93dd5bb3a1e417b845ba6">get_backupset_name</a>() );
-<a name="l00705"></a>00705          $this-&gt;sys_remote_monthly[$id]-&gt;vfs_init( $this-&gt;<a class="code" href="classbackupvfs__main__c.html#ab058a70778b93dd5bb3a1e417b845ba6">get_backupset_name</a>() );
-<a name="l00706"></a>00706       }
-<a name="l00707"></a>00707 
-<a name="l00708"></a>00708       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
-<a name="l00709"></a>00709       {
-<a name="l00710"></a>00710          $this-&gt;sys_remote[$id]-&gt;vfs_start();
-<a name="l00711"></a>00711 
-<a name="l00712"></a>00712          <span class="keywordflow">if</span> ( $this-&gt;sys_remote_weekly[$id]-&gt;plugin_enabled )
-<a name="l00713"></a>00713             $this-&gt;sys_remote_weekly[$id]-&gt;vfs_start();
-<a name="l00714"></a>00714 
-<a name="l00715"></a>00715          <span class="keywordflow">if</span> ( $this-&gt;sys_remote_monthly[$id]-&gt;plugin_enabled )
-<a name="l00716"></a>00716             $this-&gt;sys_remote_monthly[$id]-&gt;vfs_start();
-<a name="l00717"></a>00717       }
-<a name="l00718"></a>00718    }
-<a name="l00719"></a>00719 
-<a name="l00720"></a>00720 
-<a name="l00721"></a><a class="code" href="classbackupvfs__main__c.html#a3d126aa4e416b60c57f6036370f348cb">00721</a>    function <a class="code" href="classbackupvfs__main__c.html#a3d126aa4e416b60c57f6036370f348cb">vfs_end</a>()
-<a name="l00722"></a>00722    {
-<a name="l00723"></a>00723       $this-&gt;sys_local-&gt;vfs_end();
-<a name="l00724"></a>00724 
-<a name="l00725"></a>00725       <span class="keywordflow">if</span> ( $this-&gt;sys_local_weekly-&gt;plugin_enabled )
-<a name="l00726"></a>00726          $this-&gt;sys_local_weekly-&gt;vfs_end();
-<a name="l00727"></a>00727 
-<a name="l00728"></a>00728       <span class="keywordflow">if</span> ( $this-&gt;sys_local_monthly-&gt;plugin_enabled )
-<a name="l00729"></a>00729          $this-&gt;sys_local_monthly-&gt;vfs_end();
-<a name="l00730"></a>00730 
-<a name="l00731"></a>00731       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
-<a name="l00732"></a>00732       {
-<a name="l00733"></a>00733          $this-&gt;sys_remote[$id]-&gt;vfs_end();
-<a name="l00734"></a>00734 
-<a name="l00735"></a>00735          <span class="keywordflow">if</span> ( $this-&gt;sys_remote_weekly[$id]-&gt;plugin_enabled )
-<a name="l00736"></a>00736             $this-&gt;sys_remote_weekly[$id]-&gt;vfs_end();
-<a name="l00737"></a>00737 
-<a name="l00738"></a>00738          <span class="keywordflow">if</span> ( $this-&gt;sys_remote_monthly[$id]-&gt;plugin_enabled )
-<a name="l00739"></a>00739             $this-&gt;sys_remote_monthly[$id]-&gt;vfs_end();
-<a name="l00740"></a>00740       }
-<a name="l00741"></a>00741    }
-<a name="l00742"></a>00742 
-<a name="l00743"></a>00743 
-<a name="l00744"></a><a class="code" href="classbackupvfs__main__c.html#a995be90b7f2430568e61d0d27d5eec01">00744</a>    function <a class="code" href="classbackupvfs__main__c.html#a995be90b7f2430568e61d0d27d5eec01">vfs_subfolder</a>( $folder_name )
-<a name="l00745"></a>00745    {
-<a name="l00746"></a>00746       $this-&gt;current_subfolder = $folder_name;
+<a name="l00698"></a>00698       $this-&gt;sys_local-&gt;vfs_start();
+<a name="l00699"></a>00699 
+<a name="l00700"></a>00700       <span class="keywordflow">if</span> ( $this-&gt;sys_local_weekly-&gt;plugin_enabled )
+<a name="l00701"></a>00701          $this-&gt;sys_local_weekly-&gt;vfs_start();
+<a name="l00702"></a>00702 
+<a name="l00703"></a>00703       <span class="keywordflow">if</span> ( $this-&gt;sys_local_monthly-&gt;plugin_enabled )
+<a name="l00704"></a>00704          $this-&gt;sys_local_monthly-&gt;vfs_start();
+<a name="l00705"></a>00705 
+<a name="l00706"></a>00706       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
+<a name="l00707"></a>00707       {
+<a name="l00708"></a>00708          $this-&gt;sys_remote[$id]-&gt;vfs_start();
+<a name="l00709"></a>00709 
+<a name="l00710"></a>00710          <span class="keywordflow">if</span> ( $this-&gt;sys_remote_weekly[$id]-&gt;plugin_enabled )
+<a name="l00711"></a>00711             $this-&gt;sys_remote_weekly[$id]-&gt;vfs_start();
+<a name="l00712"></a>00712 
+<a name="l00713"></a>00713          <span class="keywordflow">if</span> ( $this-&gt;sys_remote_monthly[$id]-&gt;plugin_enabled )
+<a name="l00714"></a>00714             $this-&gt;sys_remote_monthly[$id]-&gt;vfs_start();
+<a name="l00715"></a>00715       }
+<a name="l00716"></a>00716    }
+<a name="l00717"></a>00717 
+<a name="l00718"></a>00718 
+<a name="l00719"></a><a class="code" href="classbackupvfs__main__c.html#a3d126aa4e416b60c57f6036370f348cb">00719</a>    function <a class="code" href="classbackupvfs__main__c.html#a3d126aa4e416b60c57f6036370f348cb">vfs_end</a>()
+<a name="l00720"></a>00720    {
+<a name="l00721"></a>00721       $this-&gt;sys_local-&gt;vfs_end();
+<a name="l00722"></a>00722 
+<a name="l00723"></a>00723       <span class="keywordflow">if</span> ( $this-&gt;sys_local_weekly-&gt;plugin_enabled )
+<a name="l00724"></a>00724          $this-&gt;sys_local_weekly-&gt;vfs_end();
+<a name="l00725"></a>00725 
+<a name="l00726"></a>00726       <span class="keywordflow">if</span> ( $this-&gt;sys_local_monthly-&gt;plugin_enabled )
+<a name="l00727"></a>00727          $this-&gt;sys_local_monthly-&gt;vfs_end();
+<a name="l00728"></a>00728 
+<a name="l00729"></a>00729       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
+<a name="l00730"></a>00730       {
+<a name="l00731"></a>00731          $this-&gt;sys_remote[$id]-&gt;vfs_end();
+<a name="l00732"></a>00732 
+<a name="l00733"></a>00733          <span class="keywordflow">if</span> ( $this-&gt;sys_remote_weekly[$id]-&gt;plugin_enabled )
+<a name="l00734"></a>00734             $this-&gt;sys_remote_weekly[$id]-&gt;vfs_end();
+<a name="l00735"></a>00735 
+<a name="l00736"></a>00736          <span class="keywordflow">if</span> ( $this-&gt;sys_remote_monthly[$id]-&gt;plugin_enabled )
+<a name="l00737"></a>00737             $this-&gt;sys_remote_monthly[$id]-&gt;vfs_end();
+<a name="l00738"></a>00738       }
+<a name="l00739"></a>00739    }
+<a name="l00740"></a>00740 
+<a name="l00741"></a>00741 
+<a name="l00742"></a><a class="code" href="classbackupvfs__main__c.html#a995be90b7f2430568e61d0d27d5eec01">00742</a>    function <a class="code" href="classbackupvfs__main__c.html#a995be90b7f2430568e61d0d27d5eec01">vfs_subfolder</a>( $folder_name )
+<a name="l00743"></a>00743    {
+<a name="l00744"></a>00744       $this-&gt;current_subfolder = $folder_name;
+<a name="l00745"></a>00745 
+<a name="l00746"></a>00746       $this-&gt;sys_local-&gt;vfs_subfolder( $folder_name );
 <a name="l00747"></a>00747 
-<a name="l00748"></a>00748       $this-&gt;sys_local-&gt;vfs_subfolder( $folder_name );
-<a name="l00749"></a>00749 
-<a name="l00750"></a>00750       <span class="keywordflow">if</span> ( $this-&gt;sys_local_weekly-&gt;plugin_enabled )
-<a name="l00751"></a>00751          $this-&gt;sys_local_weekly-&gt;vfs_subfolder( $folder_name );
-<a name="l00752"></a>00752 
-<a name="l00753"></a>00753       <span class="keywordflow">if</span> ( $this-&gt;sys_local_monthly-&gt;plugin_enabled )
-<a name="l00754"></a>00754          $this-&gt;sys_local_monthly-&gt;vfs_subfolder( $folder_name );
-<a name="l00755"></a>00755 
-<a name="l00756"></a>00756       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
-<a name="l00757"></a>00757       {
-<a name="l00758"></a>00758          $this-&gt;sys_remote[$id]-&gt;vfs_subfolder( $folder_name );
-<a name="l00759"></a>00759 
-<a name="l00760"></a>00760          <span class="keywordflow">if</span> ( $this-&gt;sys_remote_weekly[$id]-&gt;plugin_enabled )
-<a name="l00761"></a>00761             $this-&gt;sys_remote_weekly[$id]-&gt;vfs_subfolder( $folder_name );
-<a name="l00762"></a>00762 
-<a name="l00763"></a>00763          <span class="keywordflow">if</span> ( $this-&gt;sys_remote_monthly[$id]-&gt;plugin_enabled )
-<a name="l00764"></a>00764             $this-&gt;sys_remote_monthly[$id]-&gt;vfs_subfolder( $folder_name );
-<a name="l00765"></a>00765       }
-<a name="l00766"></a>00766    }
-<a name="l00767"></a>00767 
-<a name="l00768"></a>00768 
-<a name="l00769"></a><a class="code" href="classbackupvfs__main__c.html#a96a5024d255cc5604d8933aa16b9e82d">00769</a>    function <a class="code" href="classbackupvfs__main__c.html#a96a5024d255cc5604d8933aa16b9e82d">_vfs_local_cleanup</a>( $rel_ref )
-<a name="l00770"></a>00770    {
-<a name="l00771"></a>00771       <span class="comment">// are we keeping this file?</span>
-<a name="l00772"></a>00772       <span class="keywordflow">if</span> ( $this-&gt;sys_local-&gt;get_keeplocal() )
-<a name="l00773"></a>00773          <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// yes, return okay</span>
-<a name="l00774"></a>00774 
-<a name="l00775"></a>00775       <span class="comment">// no, delete it.</span>
-<a name="l00776"></a>00776       $abs_ref = <a class="code" href="general-utils_8inc.html#a6185d0c82f5be193802f7bd846fdd9f6">dir_fn</a>( $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a7679c332bdc81fbd35edb000c974be2f">get_path_backupset</a>(), $rel_ref );
-<a name="l00777"></a>00777 
-<a name="l00778"></a>00778       <span class="comment">// sanity check</span>
-<a name="l00779"></a>00779       <span class="keywordflow">if</span> ( !file_exists( $abs_ref ) ) <span class="comment">// unexpected condition (programming error?)</span>
-<a name="l00780"></a>00780          $this-&gt;<a class="code" href="classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f">fatal</a>( <span class="stringliteral">&quot;expired file not found {$abs_ref}&quot;</span> );
-<a name="l00781"></a>00781 
-<a name="l00782"></a>00782       <span class="keywordflow">if</span> ( unlink( $abs_ref ) === <span class="keyword">false</span> )
-<a name="l00783"></a>00783          $this-&gt;<a class="code" href="classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f">fatal</a>( <span class="stringliteral">&quot;unable to remove expired file {$abs_ref}&quot;</span> );
-<a name="l00784"></a>00784 
-<a name="l00785"></a>00785       <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00786"></a>00786    }
-<a name="l00787"></a>00787 
-<a name="l00788"></a>00788 
-<a name="l00789"></a><a class="code" href="classbackupvfs__main__c.html#a64e895a87cdacf6fdc6ec7bedefdad2b">00789</a>    function <a class="code" href="classbackupvfs__main__c.html#a64e895a87cdacf6fdc6ec7bedefdad2b">_verbose_report</a>( $target, $type = <span class="stringliteral">&quot;file&quot;</span> )
-<a name="l00790"></a>00790    {
-<a name="l00791"></a>00791       $sub = $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a12f97e2e68b1c7d0fda82dfe3b0585ec">get_current_subfolder</a>() 
-<a name="l00792"></a>00792                 ? $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a12f97e2e68b1c7d0fda82dfe3b0585ec">get_current_subfolder</a>() 
-<a name="l00793"></a>00793                 : <span class="stringliteral">&quot;/&quot;</span>;
-<a name="l00794"></a>00794 
-<a name="l00795"></a>00795       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classplugin__framework__c.html#af9090086ab2ddab18780d7fa67c9d0c4">verbose</a>() )
-<a name="l00796"></a>00796          $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;    {$sub} {$type} {$target}&quot;</span> );
-<a name="l00797"></a>00797    }
-<a name="l00798"></a>00798 
-<a name="l00799"></a>00799 
-<a name="l00800"></a><a class="code" href="classbackupvfs__main__c.html#ab09a722f53f0271dda6c7643b04aeb86">00800</a>    function <a class="code" href="classbackupvfs__main__c.html#ab09a722f53f0271dda6c7643b04aeb86">_notquiet_report_header</a>( $reset = <span class="keyword">false</span> )
-<a name="l00801"></a>00801    {
-<a name="l00802"></a>00802       <span class="keyword">static</span> $last_event;
-<a name="l00803"></a>00803       <span class="keyword">static</span> $last_jobindex;
-<a name="l00804"></a>00804 
-<a name="l00805"></a>00805       <span class="keywordflow">if</span> ( $reset )
-<a name="l00806"></a>00806       {
-<a name="l00807"></a>00807          $last_event = -1;
-<a name="l00808"></a>00808          $last_jobindex = -1;
-<a name="l00809"></a>00809          <span class="keywordflow">return</span>;
-<a name="l00810"></a>00810       }
-<a name="l00811"></a>00811 
-<a name="l00812"></a>00812       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classteelog__c.html#afc7d95abfdeda09f4e9a17749e9b6039">quiet</a>() )
-<a name="l00813"></a>00813          <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00814"></a>00814 
-<a name="l00815"></a>00815       $event_changed = <span class="keyword">false</span>;
-<a name="l00816"></a>00816       <span class="keywordflow">if</span> ( $last_event != $this-&gt;current_event )
-<a name="l00817"></a>00817       {
-<a name="l00818"></a>00818          <span class="keywordflow">if</span> ( $last_event !== -1 )
-<a name="l00819"></a>00819             $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;&quot;</span> );
-<a name="l00820"></a>00820 
-<a name="l00821"></a>00821          $last_event = $this-&gt;current_event;
-<a name="l00822"></a>00822          $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;{$last_event}: {$this-&gt;event_descriptions[$last_event]}&quot;</span> );
-<a name="l00823"></a>00823          $event_changed = <span class="keyword">true</span>;
-<a name="l00824"></a>00824       }
-<a name="l00825"></a>00825 
-<a name="l00826"></a>00826       <span class="keywordflow">if</span> ( $last_jobindex != $this-&gt;current_jobindex )
-<a name="l00827"></a>00827       {
-<a name="l00828"></a>00828          $last_jobindex = $this-&gt;current_jobindex;
-<a name="l00829"></a>00829 
-<a name="l00830"></a>00830          <span class="keywordflow">if</span> ( !$event_changed ) 
-<a name="l00831"></a>00831             $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;&quot;</span> );
-<a name="l00832"></a>00832 
-<a name="l00833"></a>00833          $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;  {$last_jobindex}: {$this-&gt;current_job[&#39;plugin&#39;]}({$this-&gt;current_job[&#39;id&#39;]})&quot;</span> );
-<a name="l00834"></a>00834       }
-<a name="l00835"></a>00835    }
-<a name="l00836"></a>00836 
-<a name="l00837"></a>00837 
-<a name="l00838"></a><a class="code" href="classbackupvfs__main__c.html#ad7512a32c48ceca778f621d335620091">00838</a>    function <a class="code" href="classbackupvfs__main__c.html#ad7512a32c48ceca778f621d335620091">_notquiet_report</a>( $target, $eol = <span class="stringliteral">&quot;\n&quot;</span> )
-<a name="l00839"></a>00839    {
-<a name="l00840"></a>00840       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classteelog__c.html#afc7d95abfdeda09f4e9a17749e9b6039">quiet</a>() )
-<a name="l00841"></a>00841          <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00748"></a>00748       <span class="keywordflow">if</span> ( $this-&gt;sys_local_weekly-&gt;plugin_enabled )
+<a name="l00749"></a>00749          $this-&gt;sys_local_weekly-&gt;vfs_subfolder( $folder_name );
+<a name="l00750"></a>00750 
+<a name="l00751"></a>00751       <span class="keywordflow">if</span> ( $this-&gt;sys_local_monthly-&gt;plugin_enabled )
+<a name="l00752"></a>00752          $this-&gt;sys_local_monthly-&gt;vfs_subfolder( $folder_name );
+<a name="l00753"></a>00753 
+<a name="l00754"></a>00754       <span class="keywordflow">foreach</span>( $this-&gt;sys_remotes as $id )
+<a name="l00755"></a>00755       {
+<a name="l00756"></a>00756          $this-&gt;sys_remote[$id]-&gt;vfs_subfolder( $folder_name );
+<a name="l00757"></a>00757 
+<a name="l00758"></a>00758          <span class="keywordflow">if</span> ( $this-&gt;sys_remote_weekly[$id]-&gt;plugin_enabled )
+<a name="l00759"></a>00759             $this-&gt;sys_remote_weekly[$id]-&gt;vfs_subfolder( $folder_name );
+<a name="l00760"></a>00760 
+<a name="l00761"></a>00761          <span class="keywordflow">if</span> ( $this-&gt;sys_remote_monthly[$id]-&gt;plugin_enabled )
+<a name="l00762"></a>00762             $this-&gt;sys_remote_monthly[$id]-&gt;vfs_subfolder( $folder_name );
+<a name="l00763"></a>00763       }
+<a name="l00764"></a>00764    }
+<a name="l00765"></a>00765 
+<a name="l00766"></a>00766 
+<a name="l00767"></a><a class="code" href="classbackupvfs__main__c.html#a96a5024d255cc5604d8933aa16b9e82d">00767</a>    function <a class="code" href="classbackupvfs__main__c.html#a96a5024d255cc5604d8933aa16b9e82d">_vfs_local_cleanup</a>( $rel_ref )
+<a name="l00768"></a>00768    {
+<a name="l00769"></a>00769       <span class="comment">// are we keeping this file?</span>
+<a name="l00770"></a>00770       <span class="keywordflow">if</span> ( $this-&gt;sys_local-&gt;get_keeplocal() )
+<a name="l00771"></a>00771          <span class="keywordflow">return</span> <span class="keyword">false</span>; <span class="comment">// yes, return okay</span>
+<a name="l00772"></a>00772 
+<a name="l00773"></a>00773       <span class="comment">// no, delete it.</span>
+<a name="l00774"></a>00774       $abs_ref = <a class="code" href="general-utils_8inc.html#a6185d0c82f5be193802f7bd846fdd9f6">dir_fn</a>( $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a7679c332bdc81fbd35edb000c974be2f">get_path_backupset</a>(), $rel_ref );
+<a name="l00775"></a>00775 
+<a name="l00776"></a>00776       <span class="comment">// sanity check</span>
+<a name="l00777"></a>00777       <span class="keywordflow">if</span> ( !file_exists( $abs_ref ) ) <span class="comment">// unexpected condition (programming error?)</span>
+<a name="l00778"></a>00778          $this-&gt;<a class="code" href="classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f">fatal</a>( <span class="stringliteral">&quot;expired file not found {$abs_ref}&quot;</span> );
+<a name="l00779"></a>00779 
+<a name="l00780"></a>00780       <span class="keywordflow">if</span> ( unlink( $abs_ref ) === <span class="keyword">false</span> )
+<a name="l00781"></a>00781          $this-&gt;<a class="code" href="classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f">fatal</a>( <span class="stringliteral">&quot;unable to remove expired file {$abs_ref}&quot;</span> );
+<a name="l00782"></a>00782 
+<a name="l00783"></a>00783       <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00784"></a>00784    }
+<a name="l00785"></a>00785 
+<a name="l00786"></a>00786 
+<a name="l00787"></a><a class="code" href="classbackupvfs__main__c.html#a64e895a87cdacf6fdc6ec7bedefdad2b">00787</a>    function <a class="code" href="classbackupvfs__main__c.html#a64e895a87cdacf6fdc6ec7bedefdad2b">_verbose_report</a>( $target, $type = <span class="stringliteral">&quot;file&quot;</span> )
+<a name="l00788"></a>00788    {
+<a name="l00789"></a>00789       $sub = $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a12f97e2e68b1c7d0fda82dfe3b0585ec">get_current_subfolder</a>() 
+<a name="l00790"></a>00790                 ? $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a12f97e2e68b1c7d0fda82dfe3b0585ec">get_current_subfolder</a>() 
+<a name="l00791"></a>00791                 : <span class="stringliteral">&quot;/&quot;</span>;
+<a name="l00792"></a>00792 
+<a name="l00793"></a>00793       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classplugin__framework__c.html#af9090086ab2ddab18780d7fa67c9d0c4">verbose</a>() )
+<a name="l00794"></a>00794          $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;    {$sub} {$type} {$target}&quot;</span> );
+<a name="l00795"></a>00795    }
+<a name="l00796"></a>00796 
+<a name="l00797"></a>00797 
+<a name="l00798"></a><a class="code" href="classbackupvfs__main__c.html#ab09a722f53f0271dda6c7643b04aeb86">00798</a>    function <a class="code" href="classbackupvfs__main__c.html#ab09a722f53f0271dda6c7643b04aeb86">_notquiet_report_header</a>( $reset = <span class="keyword">false</span> )
+<a name="l00799"></a>00799    {
+<a name="l00800"></a>00800       <span class="keyword">static</span> $last_event;
+<a name="l00801"></a>00801       <span class="keyword">static</span> $last_jobindex;
+<a name="l00802"></a>00802 
+<a name="l00803"></a>00803       <span class="keywordflow">if</span> ( $reset )
+<a name="l00804"></a>00804       {
+<a name="l00805"></a>00805          $last_event = -1;
+<a name="l00806"></a>00806          $last_jobindex = -1;
+<a name="l00807"></a>00807          <span class="keywordflow">return</span>;
+<a name="l00808"></a>00808       }
+<a name="l00809"></a>00809 
+<a name="l00810"></a>00810       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classteelog__c.html#afc7d95abfdeda09f4e9a17749e9b6039">quiet</a>() )
+<a name="l00811"></a>00811          <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00812"></a>00812 
+<a name="l00813"></a>00813       $event_changed = <span class="keyword">false</span>;
+<a name="l00814"></a>00814       <span class="keywordflow">if</span> ( $last_event != $this-&gt;current_event )
+<a name="l00815"></a>00815       {
+<a name="l00816"></a>00816          <span class="keywordflow">if</span> ( $last_event !== -1 )
+<a name="l00817"></a>00817             $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;&quot;</span> );
+<a name="l00818"></a>00818 
+<a name="l00819"></a>00819          $last_event = $this-&gt;current_event;
+<a name="l00820"></a>00820          $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;{$last_event}: {$this-&gt;event_descriptions[$last_event]}&quot;</span> );
+<a name="l00821"></a>00821          $event_changed = <span class="keyword">true</span>;
+<a name="l00822"></a>00822       }
+<a name="l00823"></a>00823 
+<a name="l00824"></a>00824       <span class="keywordflow">if</span> ( $last_jobindex != $this-&gt;current_jobindex )
+<a name="l00825"></a>00825       {
+<a name="l00826"></a>00826          $last_jobindex = $this-&gt;current_jobindex;
+<a name="l00827"></a>00827 
+<a name="l00828"></a>00828          <span class="keywordflow">if</span> ( !$event_changed ) 
+<a name="l00829"></a>00829             $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;&quot;</span> );
+<a name="l00830"></a>00830 
+<a name="l00831"></a>00831          $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;  {$last_jobindex}: {$this-&gt;current_job[&#39;plugin&#39;]}({$this-&gt;current_job[&#39;id&#39;]})&quot;</span> );
+<a name="l00832"></a>00832       }
+<a name="l00833"></a>00833    }
+<a name="l00834"></a>00834 
+<a name="l00835"></a>00835 
+<a name="l00836"></a><a class="code" href="classbackupvfs__main__c.html#ad7512a32c48ceca778f621d335620091">00836</a>    function <a class="code" href="classbackupvfs__main__c.html#ad7512a32c48ceca778f621d335620091">_notquiet_report</a>( $target, $eol = <span class="stringliteral">&quot;\n&quot;</span> )
+<a name="l00837"></a>00837    {
+<a name="l00838"></a>00838       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classteelog__c.html#afc7d95abfdeda09f4e9a17749e9b6039">quiet</a>() )
+<a name="l00839"></a>00839          <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00840"></a>00840 
+<a name="l00841"></a>00841       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#ab09a722f53f0271dda6c7643b04aeb86">_notquiet_report_header</a>();
 <a name="l00842"></a>00842 
-<a name="l00843"></a>00843       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#ab09a722f53f0271dda6c7643b04aeb86">_notquiet_report_header</a>();
-<a name="l00844"></a>00844 
-<a name="l00845"></a>00845       $sub        = str_pad( $this-&gt;current_subfolder 
-<a name="l00846"></a>00846                              ? $this-&gt;current_subfolder 
-<a name="l00847"></a>00847                              : <span class="stringliteral">&quot;/&quot;</span>, 
-<a name="l00848"></a>00848                              $this-&gt;max_job_subfolder_width );
-<a name="l00849"></a>00849 
-<a name="l00850"></a>00850       $size       = str_pad( <a class="code" href="general-utils_8inc.html#a239b0432db7572e8872b92fd9690532c">si_suffix</a>($this-&gt;sys_local-&gt;filesize( $target ), <span class="stringliteral">&quot;B&quot;</span>), 
-<a name="l00851"></a>00851                                 10, <span class="stringliteral">&quot; &quot;</span>, STR_PAD_LEFT );
+<a name="l00843"></a>00843       $sub        = str_pad( $this-&gt;current_subfolder 
+<a name="l00844"></a>00844                              ? $this-&gt;current_subfolder 
+<a name="l00845"></a>00845                              : <span class="stringliteral">&quot;/&quot;</span>, 
+<a name="l00846"></a>00846                              $this-&gt;max_job_subfolder_width );
+<a name="l00847"></a>00847 
+<a name="l00848"></a>00848       $size       = str_pad( <a class="code" href="general-utils_8inc.html#a239b0432db7572e8872b92fd9690532c">si_suffix</a>($this-&gt;sys_local-&gt;filesize( $target ), <span class="stringliteral">&quot;B&quot;</span>), 
+<a name="l00849"></a>00849                                 10, <span class="stringliteral">&quot; &quot;</span>, STR_PAD_LEFT );
+<a name="l00850"></a>00850 
+<a name="l00851"></a>00851       $hardlinked = $this-&gt;sys_local-&gt;is_hardlinked( $target ) ? <span class="stringliteral">&quot;*&quot;</span> : <span class="stringliteral">&quot;&quot;</span>;
 <a name="l00852"></a>00852 
-<a name="l00853"></a>00853       $hardlinked = $this-&gt;sys_local-&gt;is_hardlinked( $target ) ? <span class="stringliteral">&quot;*&quot;</span> : <span class="stringliteral">&quot;&quot;</span>;
-<a name="l00854"></a>00854 
-<a name="l00855"></a>00855       $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;    {$sub} {$size} {$hardlinked}{$target}&quot;</span>, $eol );
-<a name="l00856"></a>00856    }
-<a name="l00857"></a>00857 
-<a name="l00858"></a>00858 
-<a name="l00859"></a>00859    <span class="keyword">private</span> function vfs_addremote( $rel_ref )
-<a name="l00860"></a>00860    {
-<a name="l00861"></a>00861       $hash = $this-&gt;sys_local-&gt;filehash( $rel_ref );
-<a name="l00862"></a>00862       $size = $this-&gt;sys_local-&gt;filesize( $rel_ref );
+<a name="l00853"></a>00853       $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;    {$sub} {$size} {$hardlinked}{$target}&quot;</span>, $eol );
+<a name="l00854"></a>00854    }
+<a name="l00855"></a>00855 
+<a name="l00856"></a>00856 
+<a name="l00857"></a>00857    <span class="keyword">private</span> function vfs_addremote( $rel_ref )
+<a name="l00858"></a>00858    {
+<a name="l00859"></a>00859       $hash = $this-&gt;sys_local-&gt;filehash( $rel_ref );
+<a name="l00860"></a>00860       $size = $this-&gt;sys_local-&gt;filesize( $rel_ref );
+<a name="l00861"></a>00861 
+<a name="l00862"></a>00862       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#ad7512a32c48ceca778f621d335620091">_notquiet_report</a>( $rel_ref, <span class="stringliteral">&quot;&quot;</span> );
 <a name="l00863"></a>00863 
-<a name="l00864"></a>00864       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#ad7512a32c48ceca778f621d335620091">_notquiet_report</a>( $rel_ref, <span class="stringliteral">&quot;&quot;</span> );
-<a name="l00865"></a>00865 
-<a name="l00866"></a>00866       <span class="keywordflow">if</span> ( $this-&gt;sys_local_weekly-&gt;plugin_enabled )
-<a name="l00867"></a>00867          $this-&gt;sys_local_weekly-&gt;rotation_copyfile( $rel_ref, $hash, $size );
-<a name="l00868"></a>00868 
-<a name="l00869"></a>00869       <span class="keywordflow">if</span> ( $this-&gt;sys_local_monthly-&gt;plugin_enabled )
-<a name="l00870"></a>00870          $this-&gt;sys_local_monthly-&gt;rotation_copyfile( $rel_ref, $hash, $size );
-<a name="l00871"></a>00871 
-<a name="l00872"></a>00872       <span class="keywordflow">if</span> ( $this-&gt;sys_local-&gt;get_keeplocal() )
-<a name="l00873"></a>00873       {
-<a name="l00874"></a>00874          <span class="keywordflow">if</span> ( count($this-&gt;sys_remotes) )
-<a name="l00875"></a>00875             $this-&gt;xfer_queue[] = array( $rel_ref, $hash, $size );
-<a name="l00876"></a>00876 
-<a name="l00877"></a>00877          <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classteelog__c.html#a851611e66979fe71d2932ef552d676ad">notquiet</a>() )
-<a name="l00878"></a>00878             $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;\n&quot;</span> );
-<a name="l00879"></a>00879 
-<a name="l00880"></a>00880          <span class="keywordflow">return</span> <span class="keyword">false</span>;
-<a name="l00881"></a>00881       }
+<a name="l00864"></a>00864       <span class="keywordflow">if</span> ( $this-&gt;sys_local_weekly-&gt;plugin_enabled )
+<a name="l00865"></a>00865          $this-&gt;sys_local_weekly-&gt;rotation_copyfile( $rel_ref, $hash, $size );
+<a name="l00866"></a>00866 
+<a name="l00867"></a>00867       <span class="keywordflow">if</span> ( $this-&gt;sys_local_monthly-&gt;plugin_enabled )
+<a name="l00868"></a>00868          $this-&gt;sys_local_monthly-&gt;rotation_copyfile( $rel_ref, $hash, $size );
+<a name="l00869"></a>00869 
+<a name="l00870"></a>00870       <span class="keywordflow">if</span> ( $this-&gt;sys_local-&gt;get_keeplocal() )
+<a name="l00871"></a>00871       {
+<a name="l00872"></a>00872          <span class="keywordflow">if</span> ( count($this-&gt;sys_remotes) )
+<a name="l00873"></a>00873             $this-&gt;xfer_queue[] = array( $rel_ref, $hash, $size );
+<a name="l00874"></a>00874 
+<a name="l00875"></a>00875          <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classteelog__c.html#a851611e66979fe71d2932ef552d676ad">notquiet</a>() )
+<a name="l00876"></a>00876             $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;\n&quot;</span> );
+<a name="l00877"></a>00877 
+<a name="l00878"></a>00878          <span class="keywordflow">return</span> <span class="keyword">false</span>;
+<a name="l00879"></a>00879       }
+<a name="l00880"></a>00880 
+<a name="l00881"></a>00881       $this-&gt;_remote_xferfile( $rel_ref, $hash, $size );
 <a name="l00882"></a>00882 
-<a name="l00883"></a>00883       $this-&gt;_remote_xferfile( $rel_ref, $hash, $size );
-<a name="l00884"></a>00884 
-<a name="l00885"></a>00885       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classteelog__c.html#a851611e66979fe71d2932ef552d676ad">notquiet</a>() )
-<a name="l00886"></a>00886          $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;\n&quot;</span> );
-<a name="l00887"></a>00887 
-<a name="l00888"></a>00888       <span class="keywordflow">return</span> $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a96a5024d255cc5604d8933aa16b9e82d">_vfs_local_cleanup</a>( $rel_ref );
-<a name="l00889"></a>00889    }
-<a name="l00890"></a>00890 
-<a name="l00891"></a>00891 
-<a name="l00892"></a><a class="code" href="classbackupvfs__main__c.html#a017b3d6c2541988bcd244effa00574cd">00892</a>    function <a class="code" href="classbackupvfs__main__c.html#a017b3d6c2541988bcd244effa00574cd">vfs_addfile</a>( $target, $source )
-<a name="l00893"></a>00893    {
-<a name="l00894"></a>00894       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a64e895a87cdacf6fdc6ec7bedefdad2b">_verbose_report</a>( $target );
-<a name="l00895"></a>00895 
-<a name="l00896"></a>00896       <span class="keywordflow">if</span> ( $this-&gt;sys_local-&gt;vfs_addfile( $target, $source ) )
-<a name="l00897"></a>00897          $this-&gt;<a class="code" href="classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f">fatal</a>( <span class="stringliteral">&quot;unable to add {$target} to the local backupset&quot;</span> );
-<a name="l00898"></a>00898 
-<a name="l00899"></a>00899       <span class="keywordflow">return</span> $this-&gt;vfs_addremote( $target );
-<a name="l00900"></a>00900    }
-<a name="l00901"></a>00901 
-<a name="l00902"></a>00902 
-<a name="l00903"></a><a class="code" href="classbackupvfs__main__c.html#aab6fa0f7aed7c9a2546553f1dc68626e">00903</a>    function <a class="code" href="classbackupvfs__main__c.html#aab6fa0f7aed7c9a2546553f1dc68626e">vfs_compress_string</a>( $target, $source_str )
-<a name="l00904"></a>00904    {
-<a name="l00905"></a>00905       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a64e895a87cdacf6fdc6ec7bedefdad2b">_verbose_report</a>( $target );
-<a name="l00906"></a>00906 
-<a name="l00907"></a>00907       <span class="keywordflow">if</span> ( $this-&gt;sys_local-&gt;vfs_compress_string( $target, $source_str ) )
-<a name="l00908"></a>00908          $this-&gt;<a class="code" href="classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f">fatal</a>( <span class="stringliteral">&quot;unable to add {$target} to the local backupset&quot;</span> );
-<a name="l00909"></a>00909 
-<a name="l00910"></a>00910       <span class="keywordflow">return</span> $this-&gt;vfs_addremote( $target );
-<a name="l00911"></a>00911    }
-<a name="l00912"></a>00912 
-<a name="l00913"></a>00913 
-<a name="l00914"></a><a class="code" href="classbackupvfs__main__c.html#a41cbb4af0889bb6af5f2e2dca14b2609">00914</a>    function <a class="code" href="classbackupvfs__main__c.html#a41cbb4af0889bb6af5f2e2dca14b2609">vfs_compress_command</a>( $cmd, $target )
-<a name="l00915"></a>00915    {
-<a name="l00916"></a>00916       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a64e895a87cdacf6fdc6ec7bedefdad2b">_verbose_report</a>( $target );
-<a name="l00917"></a>00917 
-<a name="l00918"></a>00918       <span class="keywordflow">if</span> ( $this-&gt;sys_local-&gt;vfs_compress_command( $cmd, $target ) )
-<a name="l00919"></a>00919          $this-&gt;<a class="code" href="classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f">fatal</a>( <span class="stringliteral">&quot;unable to add {$target} to the local backupset&quot;</span> );
-<a name="l00920"></a>00920 
-<a name="l00921"></a>00921       <span class="keywordflow">return</span> $this-&gt;vfs_addremote( $target );
-<a name="l00922"></a>00922    }
-<a name="l00923"></a>00923 
-<a name="l00924"></a>00924 
-<a name="l00925"></a><a class="code" href="classbackupvfs__main__c.html#a058e62de541a69b7e2ac4593c2f534a5">00925</a>    function <a class="code" href="classbackupvfs__main__c.html#a058e62de541a69b7e2ac4593c2f534a5">vfs_compress_file</a>( $target, $source )
-<a name="l00926"></a>00926    {
-<a name="l00927"></a>00927       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a64e895a87cdacf6fdc6ec7bedefdad2b">_verbose_report</a>( $target );
-<a name="l00928"></a>00928 
-<a name="l00929"></a>00929       <span class="keywordflow">if</span> ( $this-&gt;sys_local-&gt;vfs_compress_file( $target, $source ) )
-<a name="l00930"></a>00930          $this-&gt;<a class="code" href="classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f">fatal</a>( <span class="stringliteral">&quot;unable to add {$target} to the local backupset&quot;</span> );
-<a name="l00931"></a>00931 
-<a name="l00932"></a>00932       <span class="keywordflow">return</span> $this-&gt;vfs_addremote( $target );
-<a name="l00933"></a>00933    }
-<a name="l00934"></a>00934 
-<a name="l00935"></a>00935 
-<a name="l00936"></a><a class="code" href="classbackupvfs__main__c.html#a9be83ec6186cf96f66cff0ada6ec97f9">00936</a>    function <a class="code" href="classbackupvfs__main__c.html#a9be83ec6186cf96f66cff0ada6ec97f9">vfs_tarball_folder</a>( $target, $source, <a class="code" href="remexec.html#a011800c63ece4cbbfa77136a20607023">$options</a> = array() )
-<a name="l00937"></a>00937    {
-<a name="l00938"></a>00938       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a64e895a87cdacf6fdc6ec7bedefdad2b">_verbose_report</a>( $target, <span class="stringliteral">&quot;folder&quot;</span> );
-<a name="l00939"></a>00939 
-<a name="l00940"></a>00940       <span class="keywordflow">if</span> ( $this-&gt;sys_local-&gt;vfs_tarball_folder( $target, $source, <a class="code" href="remexec.html#a011800c63ece4cbbfa77136a20607023">$options</a> ) )
-<a name="l00941"></a>00941          $this-&gt;<a class="code" href="classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f">fatal</a>( <span class="stringliteral">&quot;unable to add {$target} to the local backupset&quot;</span> );
-<a name="l00942"></a>00942 
-<a name="l00943"></a>00943       <span class="keywordflow">return</span> $this-&gt;vfs_addremote( $target );
-<a name="l00944"></a>00944    }
-<a name="l00945"></a>00945 }
+<a name="l00883"></a>00883       <span class="keywordflow">if</span> ( $this-&gt;<a class="code" href="classteelog__c.html#a851611e66979fe71d2932ef552d676ad">notquiet</a>() )
+<a name="l00884"></a>00884          $this-&gt;<a class="code" href="classteelog__c.html#a7fec2bec2eca72aaacd111343337b4c4">tee</a>( <span class="stringliteral">&quot;&quot;</span>, <span class="stringliteral">&quot;\n&quot;</span> );
+<a name="l00885"></a>00885 
+<a name="l00886"></a>00886       <span class="keywordflow">return</span> $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a96a5024d255cc5604d8933aa16b9e82d">_vfs_local_cleanup</a>( $rel_ref );
+<a name="l00887"></a>00887    }
+<a name="l00888"></a>00888 
+<a name="l00889"></a>00889 
+<a name="l00890"></a><a class="code" href="classbackupvfs__main__c.html#a017b3d6c2541988bcd244effa00574cd">00890</a>    function <a class="code" href="classbackupvfs__main__c.html#a017b3d6c2541988bcd244effa00574cd">vfs_addfile</a>( $target, $source )
+<a name="l00891"></a>00891    {
+<a name="l00892"></a>00892       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a64e895a87cdacf6fdc6ec7bedefdad2b">_verbose_report</a>( $target );
+<a name="l00893"></a>00893 
+<a name="l00894"></a>00894       <span class="keywordflow">if</span> ( $this-&gt;sys_local-&gt;vfs_addfile( $target, $source ) )
+<a name="l00895"></a>00895          $this-&gt;<a class="code" href="classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f">fatal</a>( <span class="stringliteral">&quot;unable to add {$target} to the local backupset&quot;</span> );
+<a name="l00896"></a>00896 
+<a name="l00897"></a>00897       <span class="keywordflow">return</span> $this-&gt;vfs_addremote( $target );
+<a name="l00898"></a>00898    }
+<a name="l00899"></a>00899 
+<a name="l00900"></a>00900 
+<a name="l00901"></a><a class="code" href="classbackupvfs__main__c.html#aab6fa0f7aed7c9a2546553f1dc68626e">00901</a>    function <a class="code" href="classbackupvfs__main__c.html#aab6fa0f7aed7c9a2546553f1dc68626e">vfs_compress_string</a>( $target, $source_str )
+<a name="l00902"></a>00902    {
+<a name="l00903"></a>00903       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a64e895a87cdacf6fdc6ec7bedefdad2b">_verbose_report</a>( $target );
+<a name="l00904"></a>00904 
+<a name="l00905"></a>00905       <span class="keywordflow">if</span> ( $this-&gt;sys_local-&gt;vfs_compress_string( $target, $source_str ) )
+<a name="l00906"></a>00906          $this-&gt;<a class="code" href="classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f">fatal</a>( <span class="stringliteral">&quot;unable to add {$target} to the local backupset&quot;</span> );
+<a name="l00907"></a>00907 
+<a name="l00908"></a>00908       <span class="keywordflow">return</span> $this-&gt;vfs_addremote( $target );
+<a name="l00909"></a>00909    }
+<a name="l00910"></a>00910 
+<a name="l00911"></a>00911 
+<a name="l00912"></a><a class="code" href="classbackupvfs__main__c.html#a41cbb4af0889bb6af5f2e2dca14b2609">00912</a>    function <a class="code" href="classbackupvfs__main__c.html#a41cbb4af0889bb6af5f2e2dca14b2609">vfs_compress_command</a>( $cmd, $target )
+<a name="l00913"></a>00913    {
+<a name="l00914"></a>00914       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a64e895a87cdacf6fdc6ec7bedefdad2b">_verbose_report</a>( $target );
+<a name="l00915"></a>00915 
+<a name="l00916"></a>00916       <span class="keywordflow">if</span> ( $this-&gt;sys_local-&gt;vfs_compress_command( $cmd, $target ) )
+<a name="l00917"></a>00917          $this-&gt;<a class="code" href="classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f">fatal</a>( <span class="stringliteral">&quot;unable to add {$target} to the local backupset&quot;</span> );
+<a name="l00918"></a>00918 
+<a name="l00919"></a>00919       <span class="keywordflow">return</span> $this-&gt;vfs_addremote( $target );
+<a name="l00920"></a>00920    }
+<a name="l00921"></a>00921 
+<a name="l00922"></a>00922 
+<a name="l00923"></a><a class="code" href="classbackupvfs__main__c.html#a058e62de541a69b7e2ac4593c2f534a5">00923</a>    function <a class="code" href="classbackupvfs__main__c.html#a058e62de541a69b7e2ac4593c2f534a5">vfs_compress_file</a>( $target, $source )
+<a name="l00924"></a>00924    {
+<a name="l00925"></a>00925       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a64e895a87cdacf6fdc6ec7bedefdad2b">_verbose_report</a>( $target );
+<a name="l00926"></a>00926 
+<a name="l00927"></a>00927       <span class="keywordflow">if</span> ( $this-&gt;sys_local-&gt;vfs_compress_file( $target, $source ) )
+<a name="l00928"></a>00928          $this-&gt;<a class="code" href="classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f">fatal</a>( <span class="stringliteral">&quot;unable to add {$target} to the local backupset&quot;</span> );
+<a name="l00929"></a>00929 
+<a name="l00930"></a>00930       <span class="keywordflow">return</span> $this-&gt;vfs_addremote( $target );
+<a name="l00931"></a>00931    }
+<a name="l00932"></a>00932 
+<a name="l00933"></a>00933 
+<a name="l00934"></a><a class="code" href="classbackupvfs__main__c.html#a9be83ec6186cf96f66cff0ada6ec97f9">00934</a>    function <a class="code" href="classbackupvfs__main__c.html#a9be83ec6186cf96f66cff0ada6ec97f9">vfs_tarball_folder</a>( $target, $source, <a class="code" href="remexec.html#a011800c63ece4cbbfa77136a20607023">$options</a> = array() )
+<a name="l00935"></a>00935    {
+<a name="l00936"></a>00936       $this-&gt;<a class="code" href="classbackupvfs__main__c.html#a64e895a87cdacf6fdc6ec7bedefdad2b">_verbose_report</a>( $target, <span class="stringliteral">&quot;folder&quot;</span> );
+<a name="l00937"></a>00937 
+<a name="l00938"></a>00938       <span class="keywordflow">if</span> ( $this-&gt;sys_local-&gt;vfs_tarball_folder( $target, $source, <a class="code" href="remexec.html#a011800c63ece4cbbfa77136a20607023">$options</a> ) )
+<a name="l00939"></a>00939          $this-&gt;<a class="code" href="classteelog__c.html#a0824c910c5d7b7949a8d983ea0b34c1f">fatal</a>( <span class="stringliteral">&quot;unable to add {$target} to the local backupset&quot;</span> );
+<a name="l00940"></a>00940 
+<a name="l00941"></a>00941       <span class="keywordflow">return</span> $this-&gt;vfs_addremote( $target );
+<a name="l00942"></a>00942    }
+<a name="l00943"></a>00943 }
+<a name="l00944"></a>00944 
+<a name="l00945"></a>00945 
 <a name="l00946"></a>00946 
-<a name="l00947"></a>00947 
-<a name="l00948"></a>00948 
 </pre></div></div>
 </div>
   <div id="nav-path" class="navpath">
     <ul>
       <li class="navelem"><a class="el" href="sysbackup-vfs_8inc.html">sysbackup-vfs.inc</a>      </li>
-      <li class="footer">Generated on Sun Jan 15 2012 15:11:23 for SysBackup by&#160;
+      <li class="footer">Generated on Thu Jan 19 2012 00:38:40 for SysBackup by&#160;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.7.4 </li>
     </ul>

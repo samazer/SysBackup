@@ -11,6 +11,5 @@
 <area shape="rect" id="node25" href="$classapplog__c.html#a38473bfb0fe809964d5b026cc325eb75" title="applog_c::log" alt="" coords="431,379,529,408"/>
 <area shape="rect" id="node15" href="$classstopwatch__c.html#a6a93ed38a9b39db92205c955936b17eb" title="stopwatch_c::all_start" alt="" coords="625,139,775,168"/>
 <area shape="rect" id="node17" href="$classstopwatch__c.html#a14fa9b6e7d9cba61c9dea86f727b84a2" title="stopwatch_c::all_stop" alt="" coords="625,192,775,221"/>
-<area shape="rect" id="node27" href="$classapplog__c.html#a3acf8f3fe3b1116c9bc376f0e2854254" title="applog_c::log_is_open" alt="" coords="625,352,775,381"/>
-<area shape="rect" id="node29" href="$classapplog__c.html#a5ab616f7683c2f3e63af6086ae3b70f9" title="applog_c::log_prefix" alt="" coords="631,405,769,435"/>
+<area shape="rect" id="node27" href="$classapplog__c.html#a5ab616f7683c2f3e63af6086ae3b70f9" title="applog_c::log_prefix" alt="" coords="631,379,769,408"/>
 </map>
