@@ -1,11 +1,16 @@
 <map id="G" name="G">
-<area shape="rect" id="node3" href="$classplugin__appreference__c.html#a0824c910c5d7b7949a8d983ea0b34c1f" title="plugin_appreference_c::fatal" alt="" coords="456,14,640,43"/>
-<area shape="rect" id="node7" href="$classbackupvfs__fileio__c.html#aa4e02ee1e4a3c8434f93123ff1ca4cfc" title="backupvfs_fileio_c::vfs_warn_disk_space" alt="" coords="117,119,381,148"/>
-<area shape="rect" id="node5" href="$classplugin__appreference__c.html#aa0d6ac531d747c3b05553e6cd57a74d9" title="plugin_appreference_c::_message_prefix_text" alt="" coords="1029,120,1317,150"/>
-<area shape="rect" id="node9" href="$classbackupvfs__fileio__c.html#a9d254b8cee4c39b10fb241cd1016a585" title="backupvfs_fileio_c::vfs_folder_check" alt="" coords="429,119,667,148"/>
-<area shape="rect" id="node11" href="$classbackupvfs__fileio__c.html#ae99c86e7f04d104791a7f955345f5c32" title="backupvfs_fileio_c::_vfs_disk_free_space" alt="" coords="716,39,980,68"/>
-<area shape="rect" id="node13" href="$classbackupvfs__fileio__c.html#aa8cf81192f8af85912ee1b86a7c90724" title="backupvfs_fileio_c::_vfs_file_exists" alt="" coords="733,92,963,122"/>
-<area shape="rect" id="node15" href="$classbackupvfs__fileio__c.html#ad57a6488ef7a282906e3cdfa2ef72d08" title="backupvfs_fileio_c::_vfs_is_writable" alt="" coords="732,146,964,175"/>
-<area shape="rect" id="node17" href="$general-utils_8inc.html#a239b0432db7572e8872b92fd9690532c" title="si_suffix" alt="" coords="813,199,883,228"/>
-<area shape="rect" id="node19" href="$classplugin__appreference__c.html#aab64680d0a39449c7b28d78550694f0d" title="plugin_appreference_c::warning" alt="" coords="745,252,951,282"/>
+<area shape="rect" id="node3" href="$classplugin__appreference__c.html#a0824c910c5d7b7949a8d983ea0b34c1f" title="plugin_appreference_c::fatal" alt="" coords="491,5,675,35"/>
+<area shape="rect" id="node7" href="$classbackupvfs__fileio__c.html#a5ba330c154cf449ad1e4e21defbafe36" title="backupvfs_fileio_c::vfs_createbackupset_folder" alt="" coords="117,112,416,141"/>
+<area shape="rect" id="node20" href="$classbackupvfs__fileio__c.html#aa4e02ee1e4a3c8434f93123ff1ca4cfc" title="backupvfs_fileio_c::vfs_warn_disk_space" alt="" coords="135,217,399,247"/>
+<area shape="rect" id="node5" href="$classplugin__appreference__c.html#aa0d6ac531d747c3b05553e6cd57a74d9" title="plugin_appreference_c::_message_prefix_text" alt="" coords="1064,179,1352,208"/>
+<area shape="rect" id="node9" href="$classbackupvfs__fileio__c.html#a70fef1353659d85dea15516e3a523711" title="backupvfs_fileio_c::_vfs_chmod" alt="" coords="479,165,687,195"/>
+<area shape="rect" id="node11" href="$classbackupvfs__fileio__c.html#aa8cf81192f8af85912ee1b86a7c90724" title="backupvfs_fileio_c::_vfs_file_exists" alt="" coords="768,164,997,193"/>
+<area shape="rect" id="node13" href="$classbackupvfs__fileio__c.html#a18ea14ebf60c8c5ae396ff14a46cf318" title="backupvfs_fileio_c::_vfs_mkdir" alt="" coords="481,59,684,88"/>
+<area shape="rect" id="node15" href="$general-utils_8inc.html#a6185d0c82f5be193802f7bd846fdd9f6" title="dir_fn" alt="" coords="556,112,609,141"/>
+<area shape="rect" id="node17" href="$general-utils_8inc.html#a0055ef7f48b70fd8f1c75cc5304b34bb" title="single_chars" alt="" coords="836,111,929,140"/>
+<area shape="rect" id="node22" href="$classbackupvfs__fileio__c.html#a9d254b8cee4c39b10fb241cd1016a585" title="backupvfs_fileio_c::vfs_folder_check" alt="" coords="464,271,701,300"/>
+<area shape="rect" id="node24" href="$classbackupvfs__fileio__c.html#ae99c86e7f04d104791a7f955345f5c32" title="backupvfs_fileio_c::_vfs_disk_free_space" alt="" coords="751,377,1015,407"/>
+<area shape="rect" id="node27" href="$classbackupvfs__fileio__c.html#ad57a6488ef7a282906e3cdfa2ef72d08" title="backupvfs_fileio_c::_vfs_is_writable" alt="" coords="767,217,999,247"/>
+<area shape="rect" id="node29" href="$general-utils_8inc.html#a239b0432db7572e8872b92fd9690532c" title="si_suffix" alt="" coords="848,271,917,300"/>
+<area shape="rect" id="node31" href="$classplugin__appreference__c.html#aab64680d0a39449c7b28d78550694f0d" title="plugin_appreference_c::warning" alt="" coords="780,324,985,353"/>
 </map>
